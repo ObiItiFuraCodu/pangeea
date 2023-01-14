@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216450631611",
+    "project_id": "pangeea-835fb",
+    "storage_bucket": "pangeea-835fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216450631611:android:f32c51c32c87e99de2a69e",
+        "android_client_info": {
+          "package_name": "com.example.pangeea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216450631611-e0jji7pf23gal79pkviu2v97f5rgtoec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjRukZJQzuOj1H_6hWWfhZ3MgAXeyhe7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216450631611-e0jji7pf23gal79pkviu2v97f5rgtoec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
