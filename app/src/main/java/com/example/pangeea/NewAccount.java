@@ -30,10 +30,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NewAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    DatabaseConnector conn = new DatabaseConnector(this);
 
 
     @Override
@@ -50,66 +52,29 @@ public class NewAccount extends AppCompatActivity {
         Map<String,Object> userdat = new HashMap<>();
         LinearLayout linear = findViewById(R.id.linearl);
         final String[] hstext = {""};
+        List<String> highschools= conn.geths();
+        while(!highschools.isEmpty()){
+            String text = highschools.get(highschools.size());
+            TextView view = new TextView(this);
+            view.setText(text);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    hstext[0] = text;
+                }
+            });
+            linear.addView(view);
+            highschools.remove(highschools.size());
+        }
 
-        db.collection("highschools")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                TextView view2 = new TextView(NewAccount.this);
-                                String s = document.getData().get("Name").toString();
-                                view2.setText(s);
-                                view2.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        hstext[0] = view2.getText().toString();
-                                    }
-                                });
-                                try{
-                                    linear.addView(view2);
 
-                                }catch(Exception e){
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                            .setDisplayName(name.getText().toString())
-                                            .build();
+                conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),hstext[0]);
 
-                                    userdat.put("Username",name.getText().toString());
-                                    userdat.put("Hs",hstext[0]);
-                                    db.collection("users")
-                                            .add(userdat);
-
-
-
-                                }else{
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(NewAccount.this,task.getException().getMessage(),
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
             }
         });
 

@@ -24,20 +24,12 @@ public class Login extends AppCompatActivity {
         EditText email = findViewById(R.id.email2);
         EditText password = findViewById(R.id.password2);
         mAuth = FirebaseAuth.getInstance();
+        DatabaseConnector conn = new DatabaseConnector(this);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
+                conn.login(email.getText().toString(),password.getText().toString());
 
-                                }else{
-
-                                }
-                            }
-                        });
             }
         });
     }
