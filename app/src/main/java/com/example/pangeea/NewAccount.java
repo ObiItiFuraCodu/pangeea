@@ -49,6 +49,7 @@ public class NewAccount extends AppCompatActivity {
         EditText name = findViewById(R.id.fullname);
         Map<String,Object> userdat = new HashMap<>();
         LinearLayout linear = findViewById(R.id.linearl);
+        final String[] hstext = {""};
 
         db.collection("highschools")
                 .get()
@@ -61,6 +62,12 @@ public class NewAccount extends AppCompatActivity {
                                 TextView view2 = new TextView(NewAccount.this);
                                 String s = document.getData().get("Name").toString();
                                 view2.setText(s);
+                                view2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        hstext[0] = view2.getText().toString();
+                                    }
+                                });
                                 try{
                                     linear.addView(view2);
 
@@ -90,7 +97,9 @@ public class NewAccount extends AppCompatActivity {
                                             .build();
 
                                     userdat.put("Username",name.getText().toString());
-                                    userdat.put("Hs","nimicmomentan");
+                                    userdat.put("Hs",hstext[0]);
+                                    db.collection("users")
+                                            .add(userdat);
 
 
 
@@ -104,5 +113,15 @@ public class NewAccount extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent i = new Intent(NewAccount.this,MainActivity.class);
+            startActivity(i);
+        }
     }
 }
