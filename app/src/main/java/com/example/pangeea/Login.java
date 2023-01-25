@@ -3,10 +3,12 @@ package com.example.pangeea;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +30,12 @@ public class Login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                conn.login(email.getText().toString(),password.getText().toString());
+
+                if(conn.login(email.getText().toString(),password.getText().toString())){
+                    startActivity(new Intent(v.getContext(),MainActivity.class));
+                }else{
+                    Toast.makeText(v.getContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

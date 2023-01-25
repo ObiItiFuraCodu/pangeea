@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,8 @@ import java.util.Map;
 public class NewAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseConnector conn = new DatabaseConnector(this);
-
+    final String[] hstext = {""};
+    LinearLayout linearl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +51,8 @@ public class NewAccount extends AppCompatActivity {
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
         EditText name = findViewById(R.id.fullname);
-        Map<String,Object> userdat = new HashMap<>();
-        LinearLayout linear = findViewById(R.id.linearl);
-        final String[] hstext = {""};
-        List<String> highschools= conn.geths();
-        while(!highschools.isEmpty()){
-            String text = highschools.get(highschools.size());
-            TextView view = new TextView(this);
-            view.setText(text);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hstext[0] = text;
-                }
-            });
-            linear.addView(view);
-            highschools.remove(highschools.size());
-        }
+
+
 
 
 
@@ -73,7 +60,13 @@ public class NewAccount extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),hstext[0]);
+               conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),hstext[0]);
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                if(currentUser != null){
+                    Intent i = new Intent(NewAccount.this,MainActivity.class);
+                    startActivity(i);
+                }
+
 
             }
         });
@@ -83,10 +76,15 @@ public class NewAccount extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseFirestore store = FirebaseFirestore.getInstance();
+
+      FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent i = new Intent(NewAccount.this,MainActivity.class);
+           Intent i = new Intent(NewAccount.this,MainActivity.class);
             startActivity(i);
         }
+
+        linearl = findViewById(R.id.linearl);
+        conn.imporths(linearl,hstext);
     }
 }
