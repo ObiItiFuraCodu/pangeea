@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,8 @@ public class NewAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseConnector conn = new DatabaseConnector(this);
     final String[] hstext = {""};
-    LinearLayout linearl;
+
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class NewAccount extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),hstext[0]);
+               conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),hstext[0],hstext[1]);
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 if(currentUser != null){
                     Intent i = new Intent(NewAccount.this,MainActivity.class);
@@ -69,6 +71,7 @@ public class NewAccount extends AppCompatActivity {
 
 
             }
+
         });
 
     }
@@ -84,7 +87,7 @@ public class NewAccount extends AppCompatActivity {
             startActivity(i);
         }
 
-        linearl = findViewById(R.id.linearl);
-        conn.imporths(linearl,hstext);
+
+        conn.imporths(findViewById(R.id.lista_licee),hstext,findViewById(R.id.lista_clase));
     }
 }

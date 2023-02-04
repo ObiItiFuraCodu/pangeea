@@ -7,15 +7,21 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+    DatabaseConnector connector = new DatabaseConnector(this);
+    FirebaseFirestore store = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+
 
 
     @Override
@@ -24,15 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView username = findViewById(R.id.Username);
         TextView hs = findViewById(R.id.hs);
+        String highschool;
         LinearLayout linear = findViewById(R.id.liner);
-        DatabaseReference ref = dbb.getReference("hourss");
-        ref.setValue("yey");
+        connector.import_hours(linear);
 
 
 
-        Button butt = new Button(MainActivity.this);
-        butt.setWidth(100);
-        linear.addView(butt);
+
+
 
 
     }
