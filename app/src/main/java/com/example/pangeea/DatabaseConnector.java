@@ -67,8 +67,8 @@ public class DatabaseConnector {
                                     .build();
 
                             userdat.put("Username",username);
-                            userdat.put("Hs",highschool);
-                            userdat.put("clas",classs);
+                            userdat.put("user_highschool",highschool);
+                            userdat.put("user_class",classs);
                             store.collection("users").document(username)
                                     .set(userdat);
                             Toast.makeText(context,"User created successfully",Toast.LENGTH_SHORT).show();
@@ -154,7 +154,7 @@ public class DatabaseConnector {
                     }
                 });
     }
-    public String[] getuserdata(String hourss, LinearLayout linear){
+    public String[] getuserdata(){
         String[] userdata = new String[3];
         FirebaseUser user = auth.getCurrentUser();
         userdata[0] = user.getDisplayName();
@@ -164,7 +164,8 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        userdata[1] = (String)documentSnapshot.get("Hs");
+                        userdata[1] = (String)documentSnapshot.get("user_highschool");
+                        userdata[2] = (String)documentSnapshot.get("user_class");
 
                     }
                 });
@@ -231,8 +232,26 @@ public class DatabaseConnector {
 
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference(dbref);
-        ref.child(liceu).child(materie).child(classs).setValue(orams);
+        ref.child(liceu).child(classs).child(materie).setValue(orams);
 
+
+    }
+    public void retrieve_hour_data(String class_subject,TextView class_status){
+        String[] userdata = getuserdata();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        DatabaseReference database_reference = database.getReference("hourss").child(userdata[1]).child(userdata[2]).child(class_subject);
+        database_reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int time_in_millis = snapshot.getValue(Integer.class);
+                if(time_in_millis < System.currentTimeMillis())class_status.setText("status : active");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
