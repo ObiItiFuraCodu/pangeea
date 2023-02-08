@@ -33,13 +33,6 @@ public class MainActivity extends AppCompatActivity {
         String highschool;
         LinearLayout linear = findViewById(R.id.liner);
         connector.import_hours(linear);
-
-
-
-
-
-
-
     }
 
     @Override

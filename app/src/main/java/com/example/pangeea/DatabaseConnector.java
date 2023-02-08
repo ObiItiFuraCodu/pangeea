@@ -42,7 +42,7 @@ import java.util.List;
 
 public class DatabaseConnector {
     Context context;
-    String hs,clas;
+    String user_highschool,user_class;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
 
@@ -51,8 +51,8 @@ public class DatabaseConnector {
         this.context = context;
     }
 
-    public void createuser(String username,String password,String email,String highschool,String classs){
-        HashMap<String,String>userdat = new HashMap<>();
+    public void createuser(String username,String password,String email,String highschool,String selected_class){
+        HashMap<String,String>user_data = new HashMap<>();
         final boolean[] logged = {false};
 
 
@@ -66,11 +66,11 @@ public class DatabaseConnector {
                                     .setDisplayName(username)
                                     .build();
 
-                            userdat.put("Username",username);
-                            userdat.put("user_highschool",highschool);
-                            userdat.put("user_class",classs);
+                            user_data.put("Username",username);
+                            user_data.put("user_highschool",highschool);
+                            user_data.put("user_class",selected_class);
                             store.collection("users").document(username)
-                                    .set(userdat);
+                                    .set(user_data);
                             Toast.makeText(context,"User created successfully",Toast.LENGTH_SHORT).show();
 
                             System.out.println(logged[0]);
@@ -106,8 +106,8 @@ public class DatabaseConnector {
                 });
         return log[0];
     }
-    public void imporths(Spinner spinner,String[] hstext,Spinner spinner2){
-         ArrayList<String> hs = new ArrayList<String>();
+    public void import_highschools_and_classes(Spinner highschool_list,String[] highschool_text,Spinner class_list){
+         ArrayList<String> highschool = new ArrayList<String>();
 
         store.collection("highschools")
                 .get()
@@ -120,22 +120,22 @@ public class DatabaseConnector {
                                // TextView view2 = new TextView(NewAccount.this);
                                 String text = document.getData().get("Name").toString();
                                 ArrayList<String> classlist =(ArrayList<String>)document.getData().get("Classes");
-                                hs.add(text);
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,hs);
+                                highschool.add(text);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,highschool);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner.setAdapter(adapter);
-                                spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                highschool_list.setAdapter(adapter);
+                                highschool_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         TextView viewe = (TextView)parent.getItemAtPosition(position);
-                                        hstext[0] = viewe.getText().toString();
+                                        highschool_text[0] = viewe.getText().toString();
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,classlist);
-                                        spinner2.setAdapter(adapter2);
-                                        spinner2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        class_list.setAdapter(adapter2);
+                                        class_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 TextView view2 = (TextView)parent.getItemAtPosition(position);
-                                                hstext[1] = view2.getText().toString();
+                                                highschool_text[1] = view2.getText().toString();
                                             }
                                         });
                                     }
@@ -180,13 +180,13 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        hs = documentSnapshot.get("Hs",String.class);
-                        clas = documentSnapshot.get("clas",String.class);
+                        user_highschool = documentSnapshot.get("Hs",String.class);
+                        user_class = documentSnapshot.get("clas",String.class);
                     }
                 });
 
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
-        DatabaseReference ref = dbb.getReference("hourss").child(hs).child(clas);
+        DatabaseReference ref = dbb.getReference("hourss").child(user_highschool).child(user_class);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

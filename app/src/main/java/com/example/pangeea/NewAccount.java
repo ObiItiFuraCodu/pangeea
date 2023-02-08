@@ -38,7 +38,7 @@ import java.util.Map;
 public class NewAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseConnector conn = new DatabaseConnector(this);
-    final String[] hstext = {""};
+    final String[] highschool_text = {""};
 
     Spinner spinner;
 
@@ -62,7 +62,7 @@ public class NewAccount extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),hstext[0],hstext[1]);
+               conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString(),highschool_text[0],highschool_text[1]);
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 if(currentUser != null){
                     Intent i = new Intent(NewAccount.this,MainActivity.class);
@@ -79,7 +79,6 @@ public class NewAccount extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseFirestore store = FirebaseFirestore.getInstance();
 
       FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
@@ -88,6 +87,6 @@ public class NewAccount extends AppCompatActivity {
         }
 
 
-        conn.imporths(findViewById(R.id.lista_licee),hstext,findViewById(R.id.lista_clase));
+        conn.import_highschools_and_classes(findViewById(R.id.lista_licee),highschool_text,findViewById(R.id.lista_clase));
     }
 }
