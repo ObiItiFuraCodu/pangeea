@@ -51,9 +51,8 @@ public class DatabaseConnector {
         this.context = context;
     }
 
-    public void createuser(String username,String password,String email,String highschool,String selected_class){
-        HashMap<String,String>user_data = new HashMap<>();
-        final boolean[] logged = {false};
+    public void createuser(String username,String password,String email){
+
 
 
         auth.createUserWithEmailAndPassword(email, password)
@@ -65,16 +64,7 @@ public class DatabaseConnector {
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(username)
                                     .build();
-
-                            user_data.put("Username",username);
-                            user_data.put("user_highschool",highschool);
-                            user_data.put("user_class",selected_class);
-                            store.collection("users").document(username)
-                                    .set(user_data);
-                            Toast.makeText(context,"User created successfully",Toast.LENGTH_SHORT).show();
-
-                            System.out.println(logged[0]);
-
+                            user.updateProfile(profileUpdates);
 
 
                         }else{
@@ -88,6 +78,16 @@ public class DatabaseConnector {
 
 
 
+    }
+    public void upload_highschool_and_class(String user_highschool,String user_class){
+        HashMap<String,String>user_data = new HashMap<>();
+        FirebaseUser user = auth.getCurrentUser();
+        user_data.put("Username",user.getDisplayName());
+        user_data.put("user_highschool",user_highschool);
+        user_data.put("user_class",user_class);
+        store.collection("users").document("iuzarnou")
+                .set(user_data);
+        Toast.makeText(context,"User created successfully",Toast.LENGTH_SHORT).show();
     }
     public boolean login(String email,String password){
         final boolean[] log = new boolean[1];
@@ -105,54 +105,6 @@ public class DatabaseConnector {
                     }
                 });
         return log[0];
-    }
-    public void import_highschools_and_classes(Spinner highschool_list,String[] highschool_text,Spinner class_list){
-         ArrayList<String> highschool = new ArrayList<String>();
-
-        store.collection("highschools")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                               // TextView view2 = new TextView(NewAccount.this);
-                                String text = document.getData().get("Name").toString();
-                                ArrayList<String> classlist =(ArrayList<String>)document.getData().get("Classes");
-                                highschool.add(text);
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,highschool);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                highschool_list.setAdapter(adapter);
-                                highschool_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        TextView viewe = (TextView)parent.getItemAtPosition(position);
-                                        highschool_text[0] = viewe.getText().toString();
-                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,classlist);
-                                        class_list.setAdapter(adapter2);
-                                        class_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                TextView view2 = (TextView)parent.getItemAtPosition(position);
-                                                highschool_text[1] = view2.getText().toString();
-                                            }
-                                        });
-                                    }
-                                });
-
-
-
-
-
-
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
     }
     public String[] getuserdata(){
         String[] userdata = new String[3];

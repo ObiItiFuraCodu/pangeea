@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pangeea.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -28,6 +30,8 @@ public class NFC_detection extends AppCompatActivity {
     String[][] mTechLists;
     PendingIntent mPendingIntent;
     LinearLayout linear;
+    DatabaseConnector connector = new DatabaseConnector(this);
+    FirebaseAuth authenticator = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,30 +52,25 @@ public class NFC_detection extends AppCompatActivity {
                 ndef,
         };
 
-        // Setup a tech list for all NfcF tags
         mTechLists = new String[][] { new String[] { MifareClassic.class.getName() } };
 
 
     }
 
-    void readNFC(Intent intent) {
-        // 1) Parse the intent and get the action that triggered this intent
+    String[] readNFC(Intent intent) {
+        String nfc_data[] = new String[3];
         String action = intent.getAction();
-        // 2) Check if it was triggered by a tag discovered interruption.
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-            //  3) Get an instance of the TAG from the NfcAdapter
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            // 4) Get an instance of the Mifare classic card from this TAG intent
             MifareClassic mfc = MifareClassic.get(tagFromIntent);
             byte[] data;
 
-            try {       //  5.1) Connect to card
+            try {
                 mfc.connect();
                 boolean auth = false;
                 String cardData = null;
-                // 5.2) and get the number of sectors this card has..and loop thru these sectors
 
-                Log.i(TAG,new String("TE DUC IN ASIA EXPRES"));
+                //Log.i(TAG,new String("TE DUC IN ASIA EXPRES"));
 
 
 
@@ -81,16 +80,31 @@ public class NFC_detection extends AppCompatActivity {
 
 
 
-                    // 6.2) In each sector - get the block count
 
                     byte[] bRead = mfc.readBlock(8);
                     String str = new String(bRead, StandardCharsets.US_ASCII);
-                    Log.i("hey", "read bytes : " + Arrays.toString(bRead));
-                    Log.i("hey", "read string : " + str);
+                   // Log.i("hey", "read bytes : " + Arrays.toString(bRead));
+                    //Log.i("hey", "read string : " + str);
+                    nfc_data[0] = new String(mfc.readBlock(8),StandardCharsets.UTF_8);
+                    nfc_data[1] = new String(mfc.readBlock(9),StandardCharsets.UTF_8);
+                    nfc_data[2] = new String(mfc.readBlock(10),StandardCharsets.UTF_8);
+                    if(true){
+
+
+                        connector.upload_highschool_and_class(nfc_data[1],nfc_data[0]);
+
+                        mfc.writeBlock(10,"yes".getBytes(StandardCharsets.UTF_8));
+                        TextView view = findViewById(R.id.textView);
+                        view.setText(nfc_data[0]);
+                    }
+
+
+
 
                     Toast.makeText(this, "read : " + str, Toast.LENGTH_SHORT).show();
 
                 } else { Log.i("MUIE","GHICI CE (NU MERE AYHAHAHHAHA)");
+                    nfc_data[1] = "auth error";
 
                 }
 
@@ -98,8 +112,11 @@ public class NFC_detection extends AppCompatActivity {
                 Log.e(TAG, e.getLocalizedMessage());
 
             }
-        }// End of method
+        }
+        return nfc_data;
     }
+
+
 
     @Override
     public void onResume() {
@@ -117,7 +134,8 @@ public class NFC_detection extends AppCompatActivity {
 
 
         try{
-            readNFC(intent);}catch(Exception e){
+            readNFC(intent);
+        }catch(Exception e){
             e.printStackTrace();
         }
 
