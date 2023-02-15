@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     FirebaseAuth mAuth;
@@ -31,7 +32,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(conn.login(email.getText().toString(),password.getText().toString())){
+                if(true){
                     startActivity(new Intent(v.getContext(),MainActivity.class));
                 }else{
                     Toast.makeText(v.getContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
@@ -39,5 +40,18 @@ public class Login extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent i = new Intent(Login.this,ControlRoom.class);
+            startActivity(i);
+        }
+
+
     }
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.service.controls.Control;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -82,8 +83,8 @@ public class NewAccount extends AppCompatActivity {
 
       FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-           Intent i = new Intent(NewAccount.this,MainActivity.class);
-         //   startActivity(i);
+           Intent i = new Intent(NewAccount.this,ControlRoom.class);
+          startActivity(i);
         }
 
 

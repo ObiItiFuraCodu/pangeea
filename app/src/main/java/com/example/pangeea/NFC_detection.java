@@ -88,10 +88,17 @@ public class NFC_detection extends AppCompatActivity {
                     nfc_data[0] = new String(mfc.readBlock(8),StandardCharsets.UTF_8);
                     nfc_data[1] = new String(mfc.readBlock(9),StandardCharsets.UTF_8);
                     nfc_data[2] = new String(mfc.readBlock(10),StandardCharsets.UTF_8);
+                    nfc_data[3] = new String(mfc.readBlock(11),StandardCharsets.UTF_8);
                     if(true){
+                        if(nfc_data[3].equals("1")){
+                            Intent i = new Intent(NFC_detection.this,CSList.class);
+                            i.putExtra("user_highschool",nfc_data[1]);
+
+                            startActivity(i);
+                        }
 
 
-                        connector.upload_highschool_and_class(nfc_data[1],nfc_data[0]);
+                        connector.upload_highschool_class_and_category(nfc_data[1],nfc_data[0],"0","");
 
                         mfc.writeBlock(10,"yes".getBytes(StandardCharsets.UTF_8));
                         TextView view = findViewById(R.id.textView);
