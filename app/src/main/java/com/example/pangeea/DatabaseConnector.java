@@ -200,14 +200,14 @@ public class DatabaseConnector {
                 }
                 );
     }
-    public void add_hour(String class_subject,int hour_ms,String class_name){
+    public void add_hour(int hour_ms,String class_name){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("hourss");
         String user_data[] = getuserdata();
 
-        ref.child(user_data[1]).child("classes").child(class_name).child(class_subject).setValue(hour_ms);
-        ref.child(user_data[1]).child(user.getDisplayName()).child(class_name).setValue(hour_ms);
+        ref.child(user_data[1]).child("classes").child(class_name).child(user_data[4]).setValue(hour_ms);
+        ref.child(user_data[1]).child("teachers").child(user.getDisplayName()).child(class_name).setValue(hour_ms);
 
 
     }

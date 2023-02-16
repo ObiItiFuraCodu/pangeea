@@ -31,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
         TextView username = findViewById(R.id.Username);
         TextView hs = findViewById(R.id.hs);
         String highschool;
-        LinearLayout linear = findViewById(R.id.liner);
-        connector.import_hours(linear);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        LinearLayout linear = findViewById(R.id.liner);
+
+        connector.import_hours(linear);
 
     }
 }

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".add_hour"
+            android:exported="false" />
+        <activity
             android:name=".CSList"
             android:exported="false" />
         <activity
@@ -48,7 +51,7 @@
         </activity>
         <activity
             android:name=".Login"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
