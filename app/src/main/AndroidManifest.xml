@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".Hour_info"
+            android:exported="false" />
+        <activity
             android:name=".add_hour"
             android:exported="false" />
         <activity
