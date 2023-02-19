@@ -68,29 +68,31 @@ public class NFC_detection extends AppCompatActivity {
             try {
                 mfc.connect();
                 boolean auth = false;
+                boolean auth2 = false;
                 String cardData = null;
 
-                //Log.i(TAG,new String("TE DUC IN ASIA EXPRES"));
+                Log.i(TAG,new String("TE DUC IN ASIA EXPRES"));
 
 
 
-                auth = mfc.authenticateSectorWithKeyA(2, MifareClassic.KEY_DEFAULT);
+                auth = mfc.authenticateSectorWithKeyA(5, MifareClassic.KEY_DEFAULT);
+                auth2 = mfc.authenticateSectorWithKeyA(6 , MifareClassic.KEY_DEFAULT);
                 if (auth) {
 
 
 
 
 
-                    byte[] bRead = mfc.readBlock(8);
+                    byte[] bRead = mfc.readBlock(21);
                     String str = new String(bRead, StandardCharsets.US_ASCII);
                    // Log.i("hey", "read bytes : " + Arrays.toString(bRead));
                     //Log.i("hey", "read string : " + str);
-                    nfc_data[0] = new String(mfc.readBlock(8),StandardCharsets.UTF_8);
-                    nfc_data[1] = new String(mfc.readBlock(9),StandardCharsets.UTF_8);
-                    nfc_data[2] = new String(mfc.readBlock(10),StandardCharsets.UTF_8);
-                    nfc_data[3] = new String(mfc.readBlock(11),StandardCharsets.UTF_8);
+                    nfc_data[0] = new String(mfc.readBlock(20),StandardCharsets.UTF_8);
+                    nfc_data[1] = new String(mfc.readBlock(21),StandardCharsets.UTF_8);
+                    nfc_data[2] = new String(mfc.readBlock(22),StandardCharsets.UTF_8);
+                 //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     if(true){
-                        if(nfc_data[3].equals("1")){
+                        if(nfc_data[2].equals("1")){
                             Intent i = new Intent(NFC_detection.this,CSList.class);
                             i.putExtra("user_highschool",nfc_data[1]);
 
@@ -100,7 +102,7 @@ public class NFC_detection extends AppCompatActivity {
 
                         connector.upload_highschool_class_and_category(nfc_data[1],nfc_data[0],"0","");
 
-                        mfc.writeBlock(10,"yes".getBytes(StandardCharsets.UTF_8));
+                      //  mfc.writeBlock(25,"yes".getBytes(StandardCharsets.UTF_8));
                         TextView view = findViewById(R.id.textView);
                         view.setText(nfc_data[0]);
                     }

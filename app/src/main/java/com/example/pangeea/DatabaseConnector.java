@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -266,6 +267,32 @@ public class DatabaseConnector {
                 });
 
     }
+    public void retrieve_class_info(String class_selected,LinearLayout pupil_list){
+        FirebaseUser user = auth.getCurrentUser();
+
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_selected).collection("pupils")
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        for(int i = 0;i< queryDocumentSnapshots.size();i++){
+                                            Button button = new Button(context);
+                                            button.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
+                                            pupil_list.addView(button);
+                                        }
+                                    }
+                                });
+
+                    }
+                });
+
+
+    }
     public void retrieveclasses(Spinner spinner){
         List<String> list = new ArrayList<String>();
         FirebaseUser user = auth.getCurrentUser();
@@ -275,7 +302,7 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                        store.collection("highsschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes")
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes")
                                         .get()
                                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                     @Override
