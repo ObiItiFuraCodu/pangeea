@@ -98,7 +98,7 @@ public class NFC_detection extends AppCompatActivity {
 
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     if(true){
-                        if(nfc_data[2].equals("1")){
+                        if(nfc_data[2].toCharArray()[0] == '1'){
                             Intent i = new Intent(NFC_detection.this,CSList.class);
                             i.putExtra("user_highschool",nfc_data[1]);
 
