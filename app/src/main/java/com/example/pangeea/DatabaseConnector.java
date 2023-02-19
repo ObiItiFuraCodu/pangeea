@@ -79,21 +79,30 @@ public class DatabaseConnector {
     }
     public void upload_highschool_class_and_category(String user_highschool,String user_class,String category,String class_subject){
         HashMap<String,String>user_data = new HashMap<>();
+        HashMap<String,String>filler_data = new HashMap<>();
+
         FirebaseUser user = auth.getCurrentUser();
         user_data.put("Username",user.getDisplayName());
         user_data.put("user_highschool",user_highschool.replaceAll("[^A-Za-z0-9]", ""));
         user_data.put("user_class",user_class.replaceAll("[^A-Za-z0-9]", ""));
         user_data.put("user_category",category.replaceAll("[^A-Za-z0-9]", ""));
         user_data.put("user_subject",class_subject.replaceAll("[^A-Za-z0-9]", ""));
+        filler_data.put("data",user_highschool.replaceAll("[^A-Za-z0-9]", ""));
+
 
         store.collection("users").document(user.getDisplayName())
                 .set(user_data);
+        store.collection("highschools").document(user_highschool.replaceAll("[^A-Za-z0-9]", ""))
+                .set(filler_data);
         if(category.replaceAll("[^A-Za-z0-9]", "").equals("1")){
             store.collection("highschools").document(user_highschool.replaceAll("[^A-Za-z0-9]", "")).collection("teachers").document(user.getDisplayName())
                     .set(user_data);
         }else{
             store.collection("highschools").document(user_highschool.replaceAll("[^A-Za-z0-9]", "")).collection("classes").document(user_class.replaceAll("[^A-Za-z0-9]", "")).collection("pupils").document(user.getDisplayName())
                     .set(user_data);
+            store.collection("highschools").document(user_highschool.replaceAll("[^A-Za-z0-9]", "")).collection("classes").document(user_class.replaceAll("[^A-Za-z0-9]", ""))
+                    .set(filler_data);
+
 
         }
         Toast.makeText(context,"User created successfully",Toast.LENGTH_SHORT).show();
@@ -303,14 +312,19 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Log.i("USER_HIGHSCHOOL",documentSnapshot.get("user_highschool",String.class));
 
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes")
                                         .get()
                                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                        Log.i("QUERY SIZE",Integer.toString(queryDocumentSnapshots.size()));
+
                                                         for(int i = 0;i < queryDocumentSnapshots.size();i++){
+
                                                             list.add(queryDocumentSnapshots.getDocuments().get(i).getId());
+                                                            Log.i("CLASE",queryDocumentSnapshots.getDocuments().get(i).getId());
                                                         }
                                                     }
                                                 });
