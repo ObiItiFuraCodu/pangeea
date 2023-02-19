@@ -71,25 +71,31 @@ public class NFC_detection extends AppCompatActivity {
                 boolean auth2 = false;
                 String cardData = null;
 
-                Log.i(TAG,new String("TE DUC IN ASIA EXPRES"));
 
 
 
                 auth = mfc.authenticateSectorWithKeyA(5, MifareClassic.KEY_DEFAULT);
-                auth2 = mfc.authenticateSectorWithKeyA(6 , MifareClassic.KEY_DEFAULT);
-                if (auth) {
+                auth2 = mfc.authenticateSectorWithKeyA(5,MifareClassic.KEY_DEFAULT);
+                if (auth2) {
 
 
 
 
+                    Log.i(TAG,new String("TE DUC IN ASIA EXPRES"));
+                    try{
 
-                    byte[] bRead = mfc.readBlock(21);
-                    String str = new String(bRead, StandardCharsets.US_ASCII);
-                   // Log.i("hey", "read bytes : " + Arrays.toString(bRead));
-                    //Log.i("hey", "read string : " + str);
-                    nfc_data[0] = new String(mfc.readBlock(20),StandardCharsets.UTF_8);
-                    nfc_data[1] = new String(mfc.readBlock(21),StandardCharsets.UTF_8);
-                    nfc_data[2] = new String(mfc.readBlock(22),StandardCharsets.UTF_8);
+                        byte[] bRead = mfc.readBlock(21);
+                        String str = new String(bRead, StandardCharsets.US_ASCII);
+                        // Log.i("hey", "read bytes : " + Arrays.toString(bRead));
+                        //Log.i("hey", "read string : " + str);
+                        nfc_data[0] = new String(mfc.readBlock(20),StandardCharsets.UTF_8);
+                        nfc_data[1] = new String(mfc.readBlock(21),StandardCharsets.UTF_8);
+                        nfc_data[2] = new String(mfc.readBlock(22),StandardCharsets.UTF_8);
+
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     if(true){
                         if(nfc_data[2].equals("1")){
@@ -97,10 +103,14 @@ public class NFC_detection extends AppCompatActivity {
                             i.putExtra("user_highschool",nfc_data[1]);
 
                             startActivity(i);
+                        }else{
+                            connector.upload_highschool_class_and_category(nfc_data[1],nfc_data[0],"0","");
+                            startActivity(new Intent(NFC_detection.this,MainActivity.class));
+
+
                         }
 
 
-                        connector.upload_highschool_class_and_category(nfc_data[1],nfc_data[0],"0","");
 
                       //  mfc.writeBlock(25,"yes".getBytes(StandardCharsets.UTF_8));
                         TextView view = findViewById(R.id.textView);
@@ -110,7 +120,7 @@ public class NFC_detection extends AppCompatActivity {
 
 
 
-                    Toast.makeText(this, "read : " + str, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "read : " + str, Toast.LENGTH_SHORT).show();
 
                 } else { Log.i("MUIE","GHICI CE (NU MERE AYHAHAHHAHA)");
                     nfc_data[1] = "auth error";

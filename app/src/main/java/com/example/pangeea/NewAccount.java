@@ -63,12 +63,11 @@ public class NewAccount extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString());
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                if(currentUser != null){
-                    Intent i = new Intent(v.getContext(),NFC_detection.class);
-                    startActivity(i);
-                }
+               if(conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString())){
+                   Intent i = new Intent(v.getContext(),NFC_detection.class);
+                   startActivity(i);
+               }
+
 
 
             }

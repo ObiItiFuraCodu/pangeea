@@ -47,7 +47,8 @@ public class DatabaseConnector {
         this.context = context;
     }
 
-    public void createuser(String username,String password,String email){
+    public boolean createuser(String username,String password,String email){
+        final boolean[] created = {true};
 
 
 
@@ -66,13 +67,14 @@ public class DatabaseConnector {
                         }else{
                            // Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(context,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            created[0] = false;
 
 
                         }
                     }
                 });
 
-
+     return created[0];
 
     }
     public void upload_highschool_class_and_category(String user_highschool,String user_class,String category,String class_subject){
