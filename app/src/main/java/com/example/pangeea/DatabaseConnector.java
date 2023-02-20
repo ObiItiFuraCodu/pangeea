@@ -33,6 +33,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -306,6 +308,7 @@ public class DatabaseConnector {
     }
     public void retrieveclasses(Spinner spinner){
         List<String> list = new ArrayList<String>();
+        list.add("");
         FirebaseUser user = auth.getCurrentUser();
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -313,38 +316,52 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Log.i("USER_HIGHSCHOOL",documentSnapshot.get("user_highschool",String.class));
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes")
+                                    .get()
+                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                            Log.i("QUERY SIZE",Integer.toString(queryDocumentSnapshots.size()));
 
-                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes")
-                                        .get()
-                                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                        Log.i("QUERY SIZE",Integer.toString(queryDocumentSnapshots.size()));
+                                            for(int i = 0;i < queryDocumentSnapshots.size();i++){
 
-                                                        for(int i = 0;i < queryDocumentSnapshots.size();i++){
+                                                list.add(queryDocumentSnapshots.getDocuments().get(i).getId());
+                                                Log.i("CLASE",queryDocumentSnapshots.getDocuments().get(i).getId());
+                                            }
+                                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_dropdown_item,list);
 
-                                                            list.add(queryDocumentSnapshots.getDocuments().get(i).getId());
-                                                            Log.i("CLASE",queryDocumentSnapshots.getDocuments().get(i).getId());
-                                                        }
+                                            spinner.setAdapter(dataAdapter);
+                                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                @Override
+                                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                    Intent i = new Intent(context,Class_info.class);
+                                                    i.putExtra("class_selected",parent.getItemAtPosition(position).toString());
+                                                    if(!parent.getItemAtPosition(position).toString().equals("")){
+                                                        context.startActivity(i);
+
                                                     }
-                                                });
 
-                        spinner.setAdapter(new ArrayAdapter<String>(context,android.R.layout.simple_spinner_dropdown_item,list));
-                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                Intent i = new Intent(context,Class_info.class);
-                                i.putExtra("class_selected",list.get(position));
-                                context.startActivity(i);
-                            }
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-                            }
-                        });
+                                                }
+                                                @Override
+                                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                                }
+                                            });
+
+                                        }
+                                    });
+
+
+                           // spinner.setVisibility(View.INVISIBLE);
+                           // spinner.setEnabled(false);
+
+
+
 
                     }
                 });
 
 
     }
+
 }

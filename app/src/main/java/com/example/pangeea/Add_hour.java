@@ -11,7 +11,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class add_hour extends AppCompatActivity {
+public class Add_hour extends AppCompatActivity {
 int time;
 DatabaseConnector connector = new DatabaseConnector(this);
     @Override

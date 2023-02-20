@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             case R.id.nav_add_hour: {
 
+
             }
         }
 

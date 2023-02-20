@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="8dp"
 
-    tools:context=".add_hour">
+    tools:context=".Add_hour">
 
     <DatePicker
         android:id="@+id/date_picker"

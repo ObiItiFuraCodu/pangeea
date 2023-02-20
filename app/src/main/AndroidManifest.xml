@@ -21,7 +21,7 @@
             android:name=".Hour_info"
             android:exported="false" />
         <activity
-            android:name=".add_hour"
+            android:name=".Add_hour"
             android:exported="false" />
         <activity
             android:name=".CSList"
