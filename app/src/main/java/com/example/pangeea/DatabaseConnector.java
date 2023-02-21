@@ -241,8 +241,8 @@ public class DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
 
-                        ref.child("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child((String)documentSnapshot.get("user_subject")).child(Integer.toString(hour_ms)).setValue(hour_ms);
-                        ref.child("hourss").child( (String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(class_name).child(Integer.toString(hour_ms)).setValue(hour_ms);
+                        ref.child("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue((String)documentSnapshot.get("user_subject"));
+                        ref.child("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(class_name);
                     }
                 });
 
