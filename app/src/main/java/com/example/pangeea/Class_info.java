@@ -1,21 +1,32 @@
 package com.example.pangeea;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Calendar;
 
 public class Class_info extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+    Calendar date;
+    int dateinmillis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,13 +69,18 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
         switch (item.getItemId()) {
 
             case R.id.nav_add_test: {
-
+                Intent i = new Intent(Class_info.this,Add_hour.class);
+                i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
+                i.putExtra("hour/task","task");
+                startActivity(i);
                 break;
             }
             case R.id.nav_add_hour: {
                 Intent i = new Intent(Class_info.this,Add_hour.class);
                 i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
+                i.putExtra("hour/task","hour");
                 startActivity(i);
+                break;
 
 
             }
@@ -72,7 +88,6 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
 
         return true;
     }
-
 
 
 

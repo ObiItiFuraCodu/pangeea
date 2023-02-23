@@ -1,9 +1,15 @@
 package com.example.pangeea;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
@@ -12,8 +18,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Add_hour extends AppCompatActivity {
-int time;
-DatabaseConnector connector = new DatabaseConnector(this);
+    int time;
+    Calendar date;
+    //int dateinmillis;
+    DatabaseConnector connector = new DatabaseConnector(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,26 +30,38 @@ DatabaseConnector connector = new DatabaseConnector(this);
         Bundle e = getIntent().getExtras();
         final View dialogView = View.inflate(this, R.layout.activity_add_hour, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        showDateTimePicker();
 
-        dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
+
+
+    }
+    public void showDateTimePicker() {
+        final Calendar currentDate = Calendar.getInstance();
+        date = Calendar.getInstance();
+        Bundle e = getIntent().getExtras();
+        new DatePickerDialog(Add_hour.this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onClick(View view) {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                date.set(year, monthOfYear, dayOfMonth);
+                new TimePickerDialog(Add_hour.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        date.set(Calendar.MINUTE, minute);
+                        Log.v(TAG, "The choosen one " + date.getTime());
+                        if(e.getString("test/hour").equals("hour")){
+                            connector.add_hour((int) date.getTimeInMillis(), (String) e.get("class_selected"));
 
-                DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
-                TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.time_picker);
+                        }else{
+                            connector.add_task((int) date.getTimeInMillis(), (String) e.get("class_selected"));
+                        }
+                        startActivity(new Intent(Add_hour.this,MainActivity.class));
 
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(),
-                        datePicker.getMonth(),
-                        datePicker.getDayOfMonth(),
-                        timePicker.getCurrentHour(),
-                        timePicker.getCurrentMinute());
-
-                time = (int)calendar.getTimeInMillis();
-                connector.add_hour(time, (String) e.get("class_selected"));
-
-            }});
-        alertDialog.setView(dialogView);
-        alertDialog.show();
+                    }
+                }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+            }
+        }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE)).show();
     }
 
 }
+

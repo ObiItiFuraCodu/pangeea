@@ -38,6 +38,7 @@ import org.checkerframework.checker.units.qual.A;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseConnector {
     Context context;
@@ -183,25 +184,41 @@ public class DatabaseConnector {
                         ref.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Button v = new Button(context);
-                                v.setText(snapshot.getValue(String.class));
-                                int hour_milisecs = 10;
-                                v.setWidth(100);
-                                v.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View c) {
-                                        Intent i = new Intent(c.getContext(),Class_info.class);
-                                        if(user_category.equals("1"))
-                                            i.putExtra("classname",v.getText().toString());
+
+                               Map<String,String> map =  (Map<String,String>)snapshot.getValue();
+                               if(map != null){
+                                   for(Map.Entry<String,String> set :
+                                           map.entrySet()){
+                                       Button v = new Button(context);
+
+                                       v.setText(set.getValue().toString());
+                                       v.setWidth(100);
+                                       int hour_milisecs =  Integer.parseInt(set.getKey().toString());
+                                       Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
+                                       Log.i("HOURMILIS",Integer.toString(hour_milisecs));
+                                       v.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View c) {
+                                               Intent i = new Intent(c.getContext(),Class_info.class);
+                                               if(user_category.equals("1"))
+                                                   i.putExtra("classname",v.getText().toString());
 
 
-                                        context.startActivity(i);
-                                    }
-                                });
-                                if(hour_milisecs < System.currentTimeMillis()){
-                                    layout.addView(v);
+                                               context.startActivity(i);
+                                           }
+                                       });
+                                      // if(hour_milisecs > System.currentTimeMillis()){
+                                           layout.addView(v);
 
-                                }
+                                      // }else{
+                                          // snapshot.getRef().removeValue();
+                                      // }
+                                   }
+
+
+                               }
+
+
 
 
 
@@ -241,8 +258,8 @@ public class DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
 
-                        ref.child("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue((String)documentSnapshot.get("user_subject"));
-                        ref.child("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(class_name);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue((String)documentSnapshot.get("user_subject"));
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(class_name);
                     }
                 });
 
@@ -250,9 +267,10 @@ public class DatabaseConnector {
 
 
     }
-    public void retrieve_hour_data(String class_subject,TextView class_status){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+    public void add_task(int test_ms,String class_name){
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        DatabaseReference ref = dbb.getReference("tasks");
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -260,8 +278,164 @@ public class DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
 
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue((String)documentSnapshot.get("user_subject"));
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(class_name);
+                    }
+                });
 
-                        DatabaseReference database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child((String)documentSnapshot.get("user_class")).child(class_subject);
+
+
+
+    }
+    public void import_tasks(LinearLayout layout){
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+
+        Log.i("ATENTIE FRAIERE",user.getDisplayName());
+
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //e.printStackTrace();
+                    }
+                })
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                          @Override
+                                          public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                              Log.i("ATENTIE FRAIERE O MERS",user.getDisplayName());
+                                              DatabaseReference ref;
+
+                                              String user_highschool = documentSnapshot.get("user_highschool",String.class);
+                                              String  user_class = documentSnapshot.get("user_class",String.class);
+                                              String user_category = documentSnapshot.get("user_category",String.class);
+                                              // Log.i("ATENTIE FRAIERE : ",user_highschool.replaceAll("[^A-Za-z0-9]", ""));
+                                              // Log.i("ATENTIE FRAIERE : ",user_class.replaceAll("[^A-Za-z0-9]", ""));
+                                              if(user_category.equals("1")){
+                                                  ref = dbb.getReference("tasks").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
+
+                                              }else{
+                                                  ref = dbb.getReference("tasks").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
+
+                                              }
+                                              ref.addValueEventListener(new ValueEventListener() {
+                                                  @Override
+                                                  public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                      Map<String,String> map =  (Map<String,String>)snapshot.getValue();
+                                                      if(map != null){
+                                                          for(Map.Entry<String,String> set :
+                                                                  map.entrySet()){
+                                                              Button v = new Button(context);
+
+                                                              v.setText(set.getValue().toString());
+                                                              v.setWidth(100);
+                                                              int hour_milisecs =  Integer.parseInt(set.getKey().toString());
+                                                              Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
+                                                              Log.i("HOURMILIS",Integer.toString(hour_milisecs));
+                                                              v.setOnClickListener(new View.OnClickListener() {
+                                                                  @Override
+                                                                  public void onClick(View c) {
+                                                                      Intent i = new Intent(c.getContext(),Class_info.class);
+                                                                      if(user_category.equals("1"))
+                                                                          i.putExtra("classname",v.getText().toString());
+
+
+                                                                      context.startActivity(i);
+                                                                  }
+                                                              });
+                                                              // if(hour_milisecs > System.currentTimeMillis()){
+                                                              layout.addView(v);
+
+                                                              // }else{
+                                                              // snapshot.getRef().removeValue();
+                                                              // }
+                                                          }
+
+
+                                                      }
+
+
+
+
+
+                                                  }
+
+                                                  @Override
+                                                  public void onCancelled(@NonNull DatabaseError error) {
+
+                                                  }
+                                              });
+                      /*  ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int hour = snapshot.getValue(Integer.class);
+                                if(hour < System.currentTimeMillis()){snapshot.getRef().removeValue();}
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });*/
+
+
+                                          }
+                                      }
+                );
+    }
+
+    public void retrieve_hour_data(String hour_milis,TextView class_status){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        DatabaseReference database_reference;
+
+                            if(documentSnapshot.get("category",String.class).equals("1")){
+                                database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(hour_milis);
+                            }else{
+                                database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_milis);
+
+                            }
+                        database_reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int time_in_millis = snapshot.getValue(Integer.class);
+                                if(time_in_millis < System.currentTimeMillis())class_status.setText("status : active");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }
+                });
+
+    }
+    public void retrieve_task_data(String hour_milis,TextView class_status){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        DatabaseReference database_reference;
+
+                        if(documentSnapshot.get("category",String.class).equals("1")){
+                            database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(hour_milis);
+                        }else{
+                            database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_milis);
+
+                        }
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -306,6 +480,7 @@ public class DatabaseConnector {
 
 
     }
+
     public void retrieveclasses(Spinner spinner){
         List<String> list = new ArrayList<String>();
         list.add("");
