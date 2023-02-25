@@ -37,7 +37,9 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class DatabaseConnector {
@@ -182,16 +184,20 @@ public class DatabaseConnector {
 
                         }
                         ref.addValueEventListener(new ValueEventListener() {
+                            private Object String;
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                               Map<String,String> map =  (Map<String,String>)snapshot.getValue();
+                               Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
                                if(map != null){
-                                   for(Map.Entry<String,String> set :
+
+                                   for(Map.Entry<String,Map<String,String>> set :
                                            map.entrySet()){
                                        Button v = new Button(context);
+                                      Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
-                                       v.setText(set.getValue().toString());
+                                       v.setText(value.get("class_name"));
                                        v.setWidth(100);
                                        int hour_milisecs =  Integer.parseInt(set.getKey().toString());
                                        Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
@@ -202,6 +208,7 @@ public class DatabaseConnector {
                                                Intent i = new Intent(c.getContext(),Class_info.class);
                                                if(user_category.equals("1"))
                                                    i.putExtra("classname",v.getText().toString());
+                                                   i.putExtra("hour_milis",set.getKey().toString());
 
 
                                                context.startActivity(i);
@@ -247,7 +254,7 @@ public class DatabaseConnector {
                 }
                 );
     }
-    public void add_hour(int hour_ms,String class_name){
+    public void add_hour(int hour_ms,String class_name,String details){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("hourss");
@@ -256,10 +263,15 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map<String,String> map = new HashMap<>();
+                        map.put("details",details);
+                        map.put("user_subject",(String)documentSnapshot.get("user_subject"));
+                        Map<String,String> map2 = new HashMap<>();
+                        map2.put("details",details);
+                        map2.put("class_name",class_name);
 
-
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue((String)documentSnapshot.get("user_subject"));
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(class_name);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(map2);
                     }
                 });
 
@@ -267,7 +279,7 @@ public class DatabaseConnector {
 
 
     }
-    public void add_task(int test_ms,String class_name){
+    public void add_task(int test_ms,String class_name,String details){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tasks");
@@ -276,10 +288,15 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map<String,String> map = new HashMap<>();
+                        map.put("details",details);
+                        map.put("user_subject",(String)documentSnapshot.get("user_subject"));
+                        Map<String,String> map2 = new HashMap<>();
+                        map2.put("details",details);
+                        map2.put("class_name",class_name);
 
-
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue((String)documentSnapshot.get("user_subject"));
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(class_name);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(map2);
                     }
                 });
 
@@ -323,13 +340,15 @@ public class DatabaseConnector {
                                                   @Override
                                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                                      Map<String,String> map =  (Map<String,String>)snapshot.getValue();
+                                                      Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
                                                       if(map != null){
-                                                          for(Map.Entry<String,String> set :
+
+                                                          for(Map.Entry<String,Map<String,String>> set :
                                                                   map.entrySet()){
                                                               Button v = new Button(context);
+                                                              Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
-                                                              v.setText(set.getValue().toString());
+                                                              v.setText(value.get("class_name"));
                                                               v.setWidth(100);
                                                               int hour_milisecs =  Integer.parseInt(set.getKey().toString());
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
@@ -337,9 +356,10 @@ public class DatabaseConnector {
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View c) {
-                                                                      Intent i = new Intent(c.getContext(),Class_info.class);
+                                                                      Intent i = new Intent(c.getContext(),Task_info.class);
                                                                       if(user_category.equals("1"))
                                                                           i.putExtra("classname",v.getText().toString());
+                                                                          i.putExtra("hour_milis",set.getKey().toString());
 
 
                                                                       context.startActivity(i);
@@ -386,7 +406,7 @@ public class DatabaseConnector {
                 );
     }
 
-    public void retrieve_hour_data(String hour_milis,TextView class_status){
+    public void retrieve_hour_data(String hour_milis,TextView class_info){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -405,8 +425,28 @@ public class DatabaseConnector {
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                int time_in_millis = snapshot.getValue(Integer.class);
-                                if(time_in_millis < System.currentTimeMillis())class_status.setText("status : active");
+
+                                Map<String,String> map =  (Map<String,String>)snapshot.getValue();
+                                if(map != null){
+
+
+
+                                        Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
+
+
+                                        // if(hour_milisecs > System.currentTimeMillis()){
+
+
+                                        // }else{
+                                        // snapshot.getRef().removeValue();
+                                        // }
+                                    class_info.setText(map.get("details"));
+                                }
+
+
+
+
+
                             }
 
                             @Override

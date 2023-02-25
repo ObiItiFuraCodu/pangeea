@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".Task_info"
+            android:exported="false" />
+        <activity
             android:name=".Hour_info"
             android:exported="false" />
         <activity
@@ -45,19 +48,16 @@
             android:exported="false" />
         <activity
             android:name=".NewAccount"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Login"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="true" />

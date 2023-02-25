@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(true){
+                if(conn.login(email.getText().toString(),password.getText().toString())){
                     startActivity(new Intent(v.getContext(),MainActivity.class));
                 }else{
                     Toast.makeText(v.getContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
