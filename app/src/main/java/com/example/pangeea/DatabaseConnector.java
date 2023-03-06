@@ -3,6 +3,7 @@ package com.example.pangeea;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -254,7 +255,7 @@ public class DatabaseConnector {
                 }
                 );
     }
-    public void add_hour(int hour_ms,String class_name,String details){
+    public void add_hour(int hour_ms, String class_name, String details, List<Uri> files){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("hourss");
@@ -263,12 +264,14 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Map<String,String> map = new HashMap<>();
+                        Map<String,Object> map = new HashMap<>();
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
-                        Map<String,String> map2 = new HashMap<>();
+                        map.put("files",files);
+                        Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
+                        map2.put("files",files);
 
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(map2);
@@ -279,7 +282,7 @@ public class DatabaseConnector {
 
 
     }
-    public void add_task(int test_ms,String class_name,String details){
+    public void add_task(int test_ms,String class_name,String details, List<Uri> files){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tasks");
@@ -288,13 +291,14 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Map<String,String> map = new HashMap<>();
+                        Map<String,Object> map = new HashMap<>();
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
-                        Map<String,String> map2 = new HashMap<>();
+                        map.put("files",files);
+                        Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
-
+                        map2.put("files",files);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(map2);
                     }
