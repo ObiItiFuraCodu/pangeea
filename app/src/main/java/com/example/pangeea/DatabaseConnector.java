@@ -33,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.units.qual.A;
 
@@ -257,13 +259,29 @@ public class DatabaseConnector {
     }
     public void add_hour(int hour_ms, String class_name, String details, List<Uri> files){
         FirebaseUser user = auth.getCurrentUser();
+        List<String> filenames  = new ArrayList<>();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
         DatabaseReference ref = dbb.getReference("hourss");
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        for(int i = 1;i<=files.size();i++){
+                            storage_ref.child("lessons/" + files.get(i).getLastPathSegment())
+                                    .putFile(files.get(i))
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.i("TAG","n-a mers fra");
+                                        }
+                                    });
+                            filenames.add(files.get(i).getLastPathSegment());
+
+
+                        }
                         Map<String,Object> map = new HashMap<>();
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
@@ -271,8 +289,10 @@ public class DatabaseConnector {
                         Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
-                        map2.put("files",files);
 
+
+
+                        map2.put("files",filenames);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(map2);
                     }
@@ -286,12 +306,28 @@ public class DatabaseConnector {
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tasks");
+        List<String> filenames  = new ArrayList<>();
+        StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Map<String,Object> map = new HashMap<>();
+                        for(int i = 1;i<=files.size();i++){
+                            storage_ref.child("lessons/" + files.get(i).getLastPathSegment())
+                                    .putFile(files.get(i))
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.i("TAG","n-a mers fra");
+                                        }
+                                    });
+                            filenames.add(files.get(i).getLastPathSegment());
+
+
+                        }
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",files);
@@ -299,6 +335,7 @@ public class DatabaseConnector {
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",files);
+
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(map2);
                     }
