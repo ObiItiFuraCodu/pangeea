@@ -478,7 +478,7 @@ public class DatabaseConnector {
                                         List<String> questions = new ArrayList<>();
                                         questions = (List<String>)map.get("questions");
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
-                                        pupil_present.setAdapter(adapter2);
+                                        question.setAdapter(adapter2);
                                     }
 
                                 }
@@ -499,6 +499,48 @@ public class DatabaseConnector {
                     }
                 });
 
+    }
+    public void retrieve_hour_data_elev(int hour_ms,ListView lv){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        DatabaseReference database_reference;
+
+                        database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(Integer.toString(hour_ms));
+
+                        database_reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
+                                if(map != null){
+                                    List<String> lessons_list = (List<String>)map.get("files");
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                    lv.setAdapter(adapter);
+
+
+
+                                }
+
+
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }
+                });
     }
     public void retrieve_task_data(String hour_milis,TextView class_status){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -521,6 +563,61 @@ public class DatabaseConnector {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int time_in_millis = snapshot.getValue(Integer.class);
                                 if(time_in_millis < System.currentTimeMillis())class_status.setText("status : active");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }
+                });
+
+    }
+    public void retrieve_task_data_proffesor(String deadline,TextView class_info,ListView submissions,ListView lessons_sent,ListView question){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        DatabaseReference database_reference;
+
+                        database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(deadline);
+
+                        database_reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
+                                if(map != null){
+                                    List<String> lessons_list = (List<String>)map.get("files");
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                    lessons_sent.setAdapter(adapter);
+                                    if(map.get("submissions") != null){
+                                        List<String> presence_list = new ArrayList<>();
+                                        presence_list = (List<String>)map.get("presence");
+                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
+                                        submissions.setAdapter(adapter2);
+
+
+                                    }
+                                    if(map.get("questions") != null){
+                                        List<String> questions = new ArrayList<>();
+                                        questions = (List<String>)map.get("questions");
+                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
+                                        question.setAdapter(adapter2);
+                                    }
+
+                                }
+
+
+
+
+
                             }
 
                             @Override
@@ -633,8 +730,7 @@ public class DatabaseConnector {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
-                                            .setValue("present");
+
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
                                     .setValue("present");
                         }
@@ -657,8 +753,7 @@ public class DatabaseConnector {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("questions").child(documentSnapshot.getString("Username"))
-                                    .setValue("present");
+
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("questions").child(documentSnapshot.getString("Username"))
                                     .setValue("present");
                         }
@@ -666,5 +761,28 @@ public class DatabaseConnector {
 
         }
     }
+    public void submit_work(Uri work,String lesson_class,int hour_ms,String teacher){
 
+
+            FirebaseUser user = auth.getCurrentUser();
+            List<String> filenames  = new ArrayList<>();
+            FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+            StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
+            DatabaseReference ref = dbb.getReference("hourss");
+            store.collection("users").document(user.getDisplayName())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
+                                    .setValue(work.getLastPathSegment());
+                            storage_ref.child("lessons/" + work.getLastPathSegment())
+                                    .putFile(work);
+                        }
+                    });
+
+
+    }
 }
