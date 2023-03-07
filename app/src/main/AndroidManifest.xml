@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".Task_info_proffesor"
+            android:exported="false" />
+        <activity
             android:name=".Hour_info_profesor"
             android:exported="false" />
         <activity
