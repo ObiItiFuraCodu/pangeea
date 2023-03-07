@@ -209,13 +209,19 @@ public class DatabaseConnector {
                                        v.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View c) {
-                                               Intent i = new Intent(c.getContext(),Class_info.class);
-                                               if(user_category.equals("1"))
+                                               if(user_category.equals("1")){
+                                                   Intent i = new Intent(c.getContext(),Hour_info_profesor.class);
+
                                                    i.putExtra("classname",v.getText().toString());
                                                    i.putExtra("hour_milis",set.getKey().toString());
+                                                   context.startActivity(i);
+                                               }else{
+                                                   Intent i = new Intent(c.getContext(),Hour_info_elev.class);
+                                                   i.putExtra("hour_milis",set.getKey().toString());
+                                                   context.startActivity(i);
 
+                                               }
 
-                                               context.startActivity(i);
                                            }
                                        });
                                       // if(hour_milisecs > System.currentTimeMillis()){
@@ -445,7 +451,7 @@ public class DatabaseConnector {
                 );
     }
 
-    public void retrieve_hour_data_prof(String hour_milis,TextView class_info,ListView pupil_present,ListView lessons_sent,ListView question){
+    public void retrieve_hour_data_prof(String hour_milis,ListView pupil_present,ListView lessons_sent,ListView question){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -500,7 +506,7 @@ public class DatabaseConnector {
                 });
 
     }
-    public void retrieve_hour_data_elev(int hour_ms,ListView lv){
+    public void retrieve_hour_data_elev(String hour_ms,ListView lv){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -510,7 +516,7 @@ public class DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         DatabaseReference database_reference;
 
-                        database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(Integer.toString(hour_ms));
+                        database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
 
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -542,7 +548,7 @@ public class DatabaseConnector {
                     }
                 });
     }
-    public void retrieve_task_data(String hour_milis,TextView class_status){
+   /* public void retrieve_task_data(String hour_milis,TextView class_status){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -575,7 +581,7 @@ public class DatabaseConnector {
                     }
                 });
 
-    }
+    }*/
     public void retrieve_task_data_proffesor(String deadline,TextView class_info,ListView submissions,ListView lessons_sent,ListView question){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -630,6 +636,53 @@ public class DatabaseConnector {
                     }
                 });
 
+    }
+    public void retrieve_task_data_elev(String hour_ms,ListView lessons,ListView submissions){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        DatabaseReference database_reference;
+
+                        database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
+
+                        database_reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
+                                if(map != null){
+                                    List<String> lessons_list = (List<String>)map.get("files");
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                    lessons.setAdapter(adapter);
+                                    if(map.get("submissions") != null){
+                                        List<String> submission_list = (List<String>)map.get("submissions");
+                                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,submission_list);
+                                        submissions.setAdapter(arrayAdapter);
+                                    }
+
+
+
+                                }
+
+
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }
+                });
     }
     public void retrieve_class_info(String class_selected,LinearLayout pupil_list){
         FirebaseUser user = auth.getCurrentUser();
@@ -769,7 +822,7 @@ public class DatabaseConnector {
             FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
             StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
-            DatabaseReference ref = dbb.getReference("hourss");
+            DatabaseReference ref = dbb.getReference("tasks");
             store.collection("users").document(user.getDisplayName())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -777,6 +830,8 @@ public class DatabaseConnector {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
+                                    .setValue(work.getLastPathSegment());
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
                                     .setValue(work.getLastPathSegment());
                             storage_ref.child("lessons/" + work.getLastPathSegment())
                                     .putFile(work);
