@@ -617,5 +617,29 @@ public class DatabaseConnector {
 
 
     }
+    public void make_presence(String class_presence,String lesson_class,int hour_ms,String teacher){
+        if(class_presence != lesson_class){
+            Toast.makeText(context,"Wrong class",Toast.LENGTH_SHORT).show();
+        }else{
+            FirebaseUser user = auth.getCurrentUser();
+            List<String> filenames  = new ArrayList<>();
+            FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+            StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
+            DatabaseReference ref = dbb.getReference("hourss");
+            store.collection("users").document(user.getDisplayName())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
+                                            .setValue("present");
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
+                                    .setValue("present");
+                        }
+                    });
+
+        }
+    }
 
 }
