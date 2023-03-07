@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Hour_info extends AppCompatActivity {
+public class Hour_info_elev extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class Hour_info extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
         TextView hour_info = findViewById(R.id.hour_details);
-        DatabaseConnector conn = new DatabaseConnector(Hour_info.this);
+        DatabaseConnector conn = new DatabaseConnector(Hour_info_elev.this);
         conn.retrieve_hour_data(e.getString("hour_milis"),hour_info);
     }
 }

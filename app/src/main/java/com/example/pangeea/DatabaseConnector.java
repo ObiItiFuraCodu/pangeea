@@ -191,6 +191,7 @@ public class DatabaseConnector {
 
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                layout.removeAllViews();
 
                                Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
                                if(map != null){
@@ -269,7 +270,7 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        for(int i = 1;i<=files.size();i++){
+                        for(int i = 0;i< files.size();i++){
                             storage_ref.child("lessons/" + files.get(i).getLastPathSegment())
                                     .putFile(files.get(i))
                                     .addOnFailureListener(new OnFailureListener() {
@@ -285,13 +286,10 @@ public class DatabaseConnector {
                         Map<String,Object> map = new HashMap<>();
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
-                        map.put("files",files);
+                        map.put("files",filenames);
                         Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
-
-
-
                         map2.put("files",filenames);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(map2);
@@ -315,7 +313,7 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Map<String,Object> map = new HashMap<>();
-                        for(int i = 1;i<=files.size();i++){
+                        for(int i = 0;i< files.size();i++){
                             storage_ref.child("lessons/" + files.get(i).getLastPathSegment())
                                     .putFile(files.get(i))
                                     .addOnFailureListener(new OnFailureListener() {
@@ -330,11 +328,11 @@ public class DatabaseConnector {
                         }
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
-                        map.put("files",files);
+                        map.put("files",filenames);
                         Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
-                        map2.put("files",files);
+                        map2.put("files",filenames);
 
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(map2);

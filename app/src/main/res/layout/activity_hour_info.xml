@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Hour_info">
+    tools:context=".Hour_info_elev">
 
     <TextView
         android:id="@+id/hour_details"
