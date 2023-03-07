@@ -445,7 +445,7 @@ public class DatabaseConnector {
                 );
     }
 
-    public void retrieve_hour_data(String hour_milis,TextView class_info){
+    public void retrieve_hour_data_prof(String hour_milis,TextView class_info,ListView pupil_present,ListView lessons_sent,ListView question){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -455,31 +455,32 @@ public class DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         DatabaseReference database_reference;
 
-                            if(documentSnapshot.get("category",String.class).equals("1")){
-                                database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(hour_milis);
-                            }else{
-                                database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_milis);
+                        database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(hour_milis);
 
-                            }
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                Map<String,String> map =  (Map<String,String>)snapshot.getValue();
+                                Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
+                                    List<String> lessons_list = (List<String>)map.get("files");
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                    lessons_sent.setAdapter(adapter);
+                                    if(map.get("presence") != null){
+                                        List<String> presence_list = new ArrayList<>();
+                                        presence_list = (List<String>)map.get("presence");
+                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
+                                        pupil_present.setAdapter(adapter2);
 
 
+                                    }
+                                    if(map.get("questions") != null){
+                                        List<String> questions = new ArrayList<>();
+                                        questions = (List<String>)map.get("questions");
+                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
+                                        pupil_present.setAdapter(adapter2);
+                                    }
 
-                                        Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
-
-
-                                        // if(hour_milisecs > System.currentTimeMillis()){
-
-
-                                        // }else{
-                                        // snapshot.getRef().removeValue();
-                                        // }
-                                    class_info.setText(map.get("details"));
                                 }
 
 
@@ -635,6 +636,30 @@ public class DatabaseConnector {
                             ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
                                             .setValue("present");
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
+                                    .setValue("present");
+                        }
+                    });
+
+        }
+    }
+    public void ask_question(String class_presence,String lesson_class,int hour_ms,String teacher){
+        if(class_presence != lesson_class){
+            Toast.makeText(context,"Wrong class",Toast.LENGTH_SHORT).show();
+        }else{
+            FirebaseUser user = auth.getCurrentUser();
+            List<String> filenames  = new ArrayList<>();
+            FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+            StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
+            DatabaseReference ref = dbb.getReference("hourss");
+            store.collection("users").document(user.getDisplayName())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("questions").child(documentSnapshot.getString("Username"))
+                                    .setValue("present");
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("questions").child(documentSnapshot.getString("Username"))
                                     .setValue("present");
                         }
                     });

@@ -19,6 +19,5 @@ public class Hour_info_elev extends AppCompatActivity {
         Bundle e = getIntent().getExtras();
         TextView hour_info = findViewById(R.id.hour_details);
         DatabaseConnector conn = new DatabaseConnector(Hour_info_elev.this);
-        conn.retrieve_hour_data(e.getString("hour_milis"),hour_info);
     }
 }
