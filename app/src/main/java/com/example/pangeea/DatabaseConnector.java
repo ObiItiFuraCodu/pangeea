@@ -201,16 +201,27 @@ public class DatabaseConnector {
                                            map.entrySet()){
                                        Button v = new Button(context);
                                       Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
-                                      if(user_category.equals("1")){
-                                          v.setText(value.get("class_name"));
 
-                                      }else{
-                                          v.setText(value.get("user_subject"));
-                                      }
                                        v.setWidth(100);
                                        Long hour_milisecs =  Long.parseLong(set.getKey().toString());
                                        Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                      //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
+                                       if(user_category.equals("1")){
+                                           if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                               v.setText(value.get("class_name") + " active now ");
+                                           }else{
+                                               v.setText(value.get("class_name") + " starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+
+                                           }
+
+                                       }else{
+                                           if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                               v.setText(value.get("user_subject") + " active now ");
+                                           }else{
+                                               v.setText(value.get("user_subject") + " starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+
+                                           }
+                                       }
                                        v.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View c) {
@@ -345,8 +356,8 @@ public class DatabaseConnector {
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
 
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(test_ms + ONE_HOUR_IN_MILIS)).setValue(map);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(test_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(test_ms)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(test_ms )).setValue(map2);
                     }
                 });
 
@@ -401,20 +412,9 @@ public class DatabaseConnector {
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                                             //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                                               if(user_category.equals("1")){
-                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
-                                                                      v.setText(value.get("class_name") + " active now ");
-                                                                  }else{
-                                                                      v.setText(value.get("class_name") + " starts in " + Long.toString ((System.currentTimeMillis() - ONE_HOUR_IN_MILIS - hour_milisecs) / 3600000));
-
-                                                                  }
-
+                                                                      v.setText(value.get("class_name") + "deadline in : " +  Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                               }else{
-                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
-                                                                      v.setText(value.get("user_subject") + " active now ");
-                                                                  }else{
-                                                                      v.setText(value.get("user_subject") + " starts in " + Long.toString ((System.currentTimeMillis() - ONE_HOUR_IN_MILIS - hour_milisecs) / 3600000));
-
-                                                                  }
+                                                                      v.setText(value.get("user_subject") + "deadline in : " +  Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                               }
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
@@ -443,6 +443,7 @@ public class DatabaseConnector {
                                                               layout.addView(v);
 
                                                                }else{
+                                                                  Log.i("TF","WTFFFFFFFFFFFFFFFFFF");
                                                                   snapshot.getRef().child(snapshot.getKey()).removeValue();
                                                                }
                                                           }
