@@ -200,18 +200,21 @@ public class DatabaseConnector {
                                            map.entrySet()){
                                        Button v = new Button(context);
                                       Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
+                                      if(user_category.equals("1")){
+                                          v.setText(value.get("class_name"));
 
-                                       v.setText(value.get("class_name"));
+                                      }else{
+                                          v.setText(value.get("user_subject"));
+                                      }
                                        v.setWidth(100);
-                                       int hour_milisecs =  Integer.parseInt(set.getKey().toString());
+                                       Long hour_milisecs =  Long.parseLong(set.getKey().toString());
                                        Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
-                                       Log.i("HOURMILIS",Integer.toString(hour_milisecs));
+                                     //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                        v.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View c) {
                                                if(user_category.equals("1")){
                                                    Intent i = new Intent(c.getContext(),Hour_info_profesor.class);
-
                                                    i.putExtra("classname",v.getText().toString());
                                                    i.putExtra("hour_milis",set.getKey().toString());
                                                    context.startActivity(i);
@@ -224,12 +227,13 @@ public class DatabaseConnector {
 
                                            }
                                        });
-                                      // if(hour_milisecs > System.currentTimeMillis()){
+                                      if(hour_milisecs > System.currentTimeMillis()){
                                            layout.addView(v);
 
-                                      // }else{
-                                          // snapshot.getRef().removeValue();
-                                      // }
+                                      }else{
+                                           snapshot.getRef().child(snapshot.getKey()).removeValue();
+                                          Log.i("TAFDASRFWSREFAS",Long.toString(System.currentTimeMillis()));
+                                       }
                                    }
 
 
@@ -264,7 +268,7 @@ public class DatabaseConnector {
                 }
                 );
     }
-    public void add_hour(int hour_ms, String class_name, String details, List<Uri> files){
+    public void add_hour(long hour_ms, String class_name, String details, List<Uri> files){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -297,8 +301,8 @@ public class DatabaseConnector {
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(hour_ms)).setValue(map);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(hour_ms)).setValue(map2);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms)).setValue(map2);
                     }
                 });
 
@@ -306,7 +310,7 @@ public class DatabaseConnector {
 
 
     }
-    public void add_task(int test_ms,String class_name,String details, List<Uri> files){
+    public void add_task(long test_ms,String class_name,String details, List<Uri> files){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tasks");
@@ -340,8 +344,8 @@ public class DatabaseConnector {
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
 
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Integer.toString(test_ms)).setValue(map);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Integer.toString(test_ms)).setValue(map2);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(test_ms)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(test_ms)).setValue(map2);
                     }
                 });
 
@@ -395,9 +399,9 @@ public class DatabaseConnector {
 
                                                               v.setText(value.get("class_name"));
                                                               v.setWidth(100);
-                                                              int hour_milisecs =  Integer.parseInt(set.getKey().toString());
+                                                              Long hour_milisecs =  Long.parseLong(set.getKey().toString());
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
-                                                              Log.i("HOURMILIS",Integer.toString(hour_milisecs));
+                                                            //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View c) {
@@ -419,12 +423,12 @@ public class DatabaseConnector {
 
                                                                   }
                                                               });
-                                                              // if(hour_milisecs > System.currentTimeMillis()){
+                                                              if(hour_milisecs > System.currentTimeMillis()){
                                                               layout.addView(v);
 
-                                                              // }else{
-                                                              // snapshot.getRef().removeValue();
-                                                              // }
+                                                               }else{
+                                                                  snapshot.getRef().child(snapshot.getKey()).removeValue();
+                                                               }
                                                           }
 
 

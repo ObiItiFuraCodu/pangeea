@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,11 +41,14 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(conn.login(email.getText().toString(),password.getText().toString())){
-                    startActivity(new Intent(v.getContext(),MainActivity.class));
-                }else{
-                    Toast.makeText(v.getContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
-                }
+               mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                       .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                           @Override
+                           public void onSuccess(AuthResult authResult) {
+                               startActivity(new Intent(v.getContext(),MainActivity.class));
+
+                           }
+                       });
 
             }
         });

@@ -25,11 +25,12 @@ import android.widget.TimePicker;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class Add_hour extends AppCompatActivity {
     int time;
     Calendar date;
-    //int dateinmillis;
+    int dateinmillis;
     DatabaseConnector connector = new DatabaseConnector(this);
     List<Uri> list = new ArrayList<>();
 
@@ -74,10 +75,11 @@ public class Add_hour extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(e.getString("hour/task").equals("hour")){
-                    connector.add_hour((int) date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list);
+
+                    connector.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list);
 
                 }else{
-                    connector.add_task((int) date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list);
+                    connector.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list);
                 }
                 startActivity(new Intent(Add_hour.this,MainActivity.class));
 
@@ -109,8 +111,8 @@ public class Add_hour extends AppCompatActivity {
     }
 
     public void showDateTimePicker() {
-        final Calendar currentDate = Calendar.getInstance();
-        date = Calendar.getInstance();
+        final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        date = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
 
         new DatePickerDialog(Add_hour.this, new DatePickerDialog.OnDateSetListener() {
@@ -122,6 +124,8 @@ public class Add_hour extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         date.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         date.set(Calendar.MINUTE, minute);
+                        dateinmillis = (int) date.getTimeInMillis();
+
 
 
                     }
