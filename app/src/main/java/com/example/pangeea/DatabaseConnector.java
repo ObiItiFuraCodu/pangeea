@@ -49,6 +49,7 @@ public class DatabaseConnector {
     Context context;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
+    final long ONE_HOUR_IN_MILIS = 3600000;
 
 
     public DatabaseConnector(Context context) {
@@ -301,8 +302,8 @@ public class DatabaseConnector {
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms)).setValue(map);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms)).setValue(map2);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
                     }
                 });
 
@@ -344,13 +345,10 @@ public class DatabaseConnector {
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
 
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(test_ms)).setValue(map);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(test_ms)).setValue(map2);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(test_ms + ONE_HOUR_IN_MILIS)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(test_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
                     }
                 });
-
-
-
 
     }
     public void import_tasks(LinearLayout layout){
@@ -397,21 +395,39 @@ public class DatabaseConnector {
                                                               Button v = new Button(context);
                                                               Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
-                                                              v.setText(value.get("class_name"));
+
                                                               v.setWidth(100);
                                                               Long hour_milisecs =  Long.parseLong(set.getKey().toString());
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                                             //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
+                                                              if(user_category.equals("1")){
+                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                                                      v.setText(value.get("class_name") + " active now ");
+                                                                  }else{
+                                                                      v.setText(value.get("class_name") + " starts in " + Long.toString ((System.currentTimeMillis() - ONE_HOUR_IN_MILIS - hour_milisecs) / 3600000));
+
+                                                                  }
+
+                                                              }else{
+                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                                                      v.setText(value.get("user_subject") + " active now ");
+                                                                  }else{
+                                                                      v.setText(value.get("user_subject") + " starts in " + Long.toString ((System.currentTimeMillis() - ONE_HOUR_IN_MILIS - hour_milisecs) / 3600000));
+
+                                                                  }
+                                                              }
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View c) {
                                                                       if(user_category.equals("1")){
+
                                                                           Intent i = new Intent(c.getContext(),Task_info.class);
                                                                           i.putExtra("classname",v.getText().toString());
                                                                           i.putExtra("hour_milis",set.getKey().toString());
                                                                           context.startActivity(i);
 
                                                                       }else{
+
                                                                           Intent i = new Intent(c.getContext(),Task_info_proffesor.class);
                                                                           i.putExtra("classname",v.getText().toString());
                                                                           i.putExtra("hour_milis",set.getKey().toString());
