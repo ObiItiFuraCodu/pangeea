@@ -401,13 +401,22 @@ public class DatabaseConnector {
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View c) {
-                                                                      Intent i = new Intent(c.getContext(),Task_info.class);
-                                                                      if(user_category.equals("1"))
+                                                                      if(user_category.equals("1")){
+                                                                          Intent i = new Intent(c.getContext(),Task_info.class);
                                                                           i.putExtra("classname",v.getText().toString());
                                                                           i.putExtra("hour_milis",set.getKey().toString());
+                                                                          context.startActivity(i);
+
+                                                                      }else{
+                                                                          Intent i = new Intent(c.getContext(),Task_info_proffesor.class);
+                                                                          i.putExtra("classname",v.getText().toString());
+                                                                          i.putExtra("hour_milis",set.getKey().toString());
+                                                                          context.startActivity(i);
+                                                                      }
 
 
-                                                                      context.startActivity(i);
+
+
                                                                   }
                                                               });
                                                               // if(hour_milisecs > System.currentTimeMillis()){
@@ -582,7 +591,7 @@ public class DatabaseConnector {
                 });
 
     }*/
-    public void retrieve_task_data_proffesor(String deadline,TextView class_info,ListView submissions,ListView lessons_sent,ListView question){
+    public void retrieve_task_data_proffesor(String deadline,ListView submissions,ListView lessons_sent){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -611,12 +620,7 @@ public class DatabaseConnector {
 
 
                                     }
-                                    if(map.get("questions") != null){
-                                        List<String> questions = new ArrayList<>();
-                                        questions = (List<String>)map.get("questions");
-                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
-                                        question.setAdapter(adapter2);
-                                    }
+
 
                                 }
 
