@@ -233,6 +233,7 @@ public class DatabaseConnector {
                                                }else{
                                                    Intent i = new Intent(c.getContext(),Hour_info_elev.class);
                                                    i.putExtra("hour_milis",set.getKey().toString());
+                                                   i.putExtra("presence",false);
                                                    context.startActivity(i);
 
                                                }
@@ -547,7 +548,7 @@ public class DatabaseConnector {
                 });
 
     }
-    public void retrieve_hour_data_elev(String hour_ms,ListView lv,Button questions){
+    public void retrieve_hour_data_elev(String hour_ms,ListView lv,Button questions,boolean presence){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -565,7 +566,17 @@ public class DatabaseConnector {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
+
                                 if(map != null){
+                                    if(!presence){
+                                        Intent i = new Intent(context,NFC_detection.class);
+                                        i.putExtra("teacher",map.get("teacher").toString());
+                                        i.putExtra("hour_ms",hour_ms);
+                                        i.putExtra("user_class",documentSnapshot.get("user_class").toString());
+                                        i.putExtra("presence",presence);
+                                        context.startActivity(i);
+                                    }
+
                                     List<String> lessons_list = (List<String>)map.get("files");
                                     questions.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -813,9 +824,12 @@ public class DatabaseConnector {
 
 
     }
-    public void make_presence(String class_presence,String lesson_class,int hour_ms,String teacher){
-        if(class_presence != lesson_class){
+    public void make_presence(String class_presence,String lesson_class,Long hour_ms,String teacher){
+        if(!class_presence.equals(lesson_class.replaceAll("[^A-Za-z0-9]", ""))){
             Toast.makeText(context,"Wrong class",Toast.LENGTH_SHORT).show();
+            Log.i("ABCDEFG",lesson_class.replaceAll("[^A-Za-z0-9]", ""));
+            Log.i("HIJKLMNOPQRSTCUV",Long.toString(hour_ms));
+
         }else{
             FirebaseUser user = auth.getCurrentUser();
             List<String> filenames  = new ArrayList<>();
@@ -829,13 +843,19 @@ public class DatabaseConnector {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Long.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
                                     .setValue("present");
                         }
                     });
 
         }
+        Intent i = new Intent(context,Hour_info_elev.class);
+        i.putExtra("hour_milis",Long.toString(hour_ms));
+        i.putExtra("presence",true);
+        context.startActivity(i);
+
     }
+
     public void ask_question(String hour_ms,String teacher){
 
             FirebaseUser user = auth.getCurrentUser();
@@ -861,7 +881,7 @@ public class DatabaseConnector {
 
 
             FirebaseUser user = auth.getCurrentUser();
-            List<String> filenames  = new ArrayList<>();
+           // List<String> filenames  = new ArrayList<>();
             FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
             StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
