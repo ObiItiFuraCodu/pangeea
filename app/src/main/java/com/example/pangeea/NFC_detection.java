@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -32,6 +33,10 @@ public class NFC_detection extends AppCompatActivity {
     LinearLayout linear;
     DatabaseConnector connector = new DatabaseConnector(this);
     FirebaseAuth authenticator = FirebaseAuth.getInstance();
+    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+    SharedPreferences.Editor editor = pref.edit();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,14 +102,20 @@ public class NFC_detection extends AppCompatActivity {
                     }
 
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
-                    if(true){
+                    if(pref.getBoolean("key_name", false)){
                         if(nfc_data[2].toCharArray()[0] == '1'){
                             Intent i = new Intent(NFC_detection.this,CSList.class);
+                            editor.putBoolean("logged_in",true);
+                            editor.commit();
+
                             i.putExtra("user_highschool",nfc_data[1]);
 
                             startActivity(i);
                         }else{
                             connector.upload_highschool_class_and_category(nfc_data[1],nfc_data[0],"0","");
+                            editor.putBoolean("logged_in",true);
+                            editor.putString("user_class",nfc_data[0]);
+                            editor.commit();
                             startActivity(new Intent(NFC_detection.this,MainActivity.class));
 
 
@@ -115,6 +126,8 @@ public class NFC_detection extends AppCompatActivity {
                       //  mfc.writeBlock(25,"yes".getBytes(StandardCharsets.UTF_8));
                         TextView view = findViewById(R.id.textView);
                         view.setText(nfc_data[0]);
+                    }else{
+                        //connector.make_presence();
                     }
 
 

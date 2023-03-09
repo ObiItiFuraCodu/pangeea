@@ -3,6 +3,7 @@ package com.example.pangeea;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -52,10 +53,12 @@ public class DatabaseConnector {
     final long ONE_HOUR_IN_MILIS = 3600000;
 
 
+
     public DatabaseConnector(Context context) {
         this.context = context;
     }
-
+    SharedPreferences pref = context.getSharedPreferences("MyPref", 0); // 0 - for private mode
+    SharedPreferences.Editor editor = pref.edit();
     public boolean createuser(String username,String password,String email){
         final boolean[] created = {true};
 
@@ -813,8 +816,8 @@ public class DatabaseConnector {
 
 
     }
-    public void make_presence(String class_presence,String lesson_class,int hour_ms,String teacher){
-        if(class_presence != lesson_class){
+    public void make_presence(String class_presence,int hour_ms,String teacher){
+        if(class_presence != pref.getString("user_class","")){
             Toast.makeText(context,"Wrong class",Toast.LENGTH_SHORT).show();
         }else{
             FirebaseUser user = auth.getCurrentUser();
