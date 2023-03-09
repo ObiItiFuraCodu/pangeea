@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
+    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+    SharedPreferences.Editor editor = pref.edit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_logout: {
                 auth.signOut();
+                editor.remove("logged_in");
+                editor.remove("user_class");
+                editor.commit();
                 startActivity(new Intent(MainActivity.this,Login.class));
                 break;
             }
