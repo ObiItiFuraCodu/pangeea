@@ -51,6 +51,7 @@ public class DatabaseConnector {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
     final long ONE_HOUR_IN_MILIS = 3600000;
+    Basic_tools tool = new Basic_tools();
 
 
 
@@ -210,18 +211,24 @@ public class DatabaseConnector {
                                        Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                      //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                        if(user_category.equals("1")){
-                                           if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                           if(tool.hour_is_active(hour_milisecs)){
                                                v.setText(value.get("class_name") + " active now ");
+
                                            }else{
                                                v.setText(value.get("class_name") + " starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
 
                                            }
 
                                        }else{
-                                           if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                           if(tool.hour_is_active(hour_milisecs)){
                                                v.setText(value.get("user_subject") + " active now ");
+                                               editor.putString("active_hour",Long.toString(hour_milisecs));
+                                               editor.putString("from_teacher",map.get("teacher").toString());
+                                               editor.commit();
+
                                            }else{
                                                v.setText(value.get("user_subject") + " starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+
 
                                            }
                                        }
@@ -247,6 +254,9 @@ public class DatabaseConnector {
 
                                       }else{
                                            snapshot.getRef().child(snapshot.getKey()).removeValue();
+                                           editor.remove("active_hour");
+                                           editor.remove("from_teacher");
+                                           editor.commit();
                                           Log.i("TAFDASRFWSREFAS",Long.toString(System.currentTimeMillis()));
                                        }
                                    }
@@ -816,7 +826,7 @@ public class DatabaseConnector {
 
 
     }
-    public void make_presence(String class_presence,int hour_ms,String teacher){
+    public void make_presence(String class_presence,Long hour_ms,String teacher){
         if(class_presence != pref.getString("user_class","")){
             Toast.makeText(context,"Wrong class",Toast.LENGTH_SHORT).show();
         }else{
@@ -832,7 +842,7 @@ public class DatabaseConnector {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Long.toString(hour_ms)).child("present_list").child(documentSnapshot.getString("Username"))
                                     .setValue("present");
                         }
                     });

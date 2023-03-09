@@ -127,7 +127,12 @@ public class NFC_detection extends AppCompatActivity {
                         TextView view = findViewById(R.id.textView);
                         view.setText(nfc_data[0]);
                     }else{
-                        //connector.make_presence();
+                        if(pref.getString("active_hour","").equals("")){
+                            Log.i("TAG","No active hour");
+                        }else{
+                            connector.make_presence(nfc_data[0], Long.parseLong(pref.getString("active_hour","")),pref.getString("from_teacher",""));
+
+                        }
                     }
 
 
