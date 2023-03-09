@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.service.controls.Control;
@@ -46,6 +47,7 @@ public class NewAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_new_account);
         // Initialize Firebase Auth
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -65,6 +67,7 @@ public class NewAccount extends AppCompatActivity {
             public void onClick(View v) {
                if(conn.createuser(name.getText().toString(),password.getText().toString(),email.getText().toString())){
                    Intent i = new Intent(v.getContext(),NFC_detection.class);
+                   i.putExtra("login","yes");
                    startActivity(i);
                }
 

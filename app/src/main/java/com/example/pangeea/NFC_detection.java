@@ -99,7 +99,7 @@ public class NFC_detection extends AppCompatActivity {
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     Bundle e = getIntent().getExtras();
 
-                    if(e.getBoolean("presence")){
+                    if(e.getString("login") != null){
                         Log.i("CEEEEEEEEEEEEEEEEE","EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                         if(nfc_data[2].toCharArray()[0] == '1'){
                             Intent i = new Intent(NFC_detection.this,CSList.class);
@@ -119,8 +119,13 @@ public class NFC_detection extends AppCompatActivity {
                         TextView view = findViewById(R.id.textView);
                         view.setText(nfc_data[0]);
                     }else{
-                        connector.make_presence(e.getString("user_class"),nfc_data[0],Long.parseLong(e.getString("hour_ms")),e.getString("teacher"));
-                        Log.i("YYYYYYYYYYYYYEEEEEEEEE","EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                        if(!e.getBoolean("presence")){
+                            connector.make_presence(e.getString("user_class"),nfc_data[0],Long.parseLong(e.getString("hour_ms")),e.getString("teacher"));
+                            Log.i("YYYYYYYYYYYYYEEEEEEEEE","EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                        }else{
+                            startActivity(new Intent(NFC_detection.this,MainActivity.class));
+                        }
+
 
                     }
 
