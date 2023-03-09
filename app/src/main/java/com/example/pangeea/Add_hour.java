@@ -43,6 +43,8 @@ public class Add_hour extends AppCompatActivity {
 
         final View dialogView = View.inflate(this, R.layout.activity_add_hour, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        EditText title = findViewById(R.id.lesson_title);
+
 
         Button select_date = findViewById(R.id.select_date_time);
         Button upload_lessons = findViewById(R.id.upload_button);
@@ -76,10 +78,10 @@ public class Add_hour extends AppCompatActivity {
             public void onClick(View v) {
                 if(e.getString("hour/task").equals("hour")){
 
-                    connector.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list);
+                    connector.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
 
                 }else{
-                    connector.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list);
+                    connector.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
                 }
                 startActivity(new Intent(Add_hour.this,MainActivity.class));
 

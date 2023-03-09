@@ -280,7 +280,7 @@ public class DatabaseConnector {
                 }
                 );
     }
-    public void add_hour(long hour_ms, String class_name, String details, List<Uri> files){
+    public void add_hour(long hour_ms, String class_name, String details, List<Uri> files,String title){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -309,11 +309,13 @@ public class DatabaseConnector {
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",filenames);
+                        map.put("title",title);
                         map.put("teacher",(String)documentSnapshot.get("Username"));
                         Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
+                        map.put("title",title);
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
@@ -324,7 +326,7 @@ public class DatabaseConnector {
 
 
     }
-    public void add_task(long test_ms,String class_name,String details, List<Uri> files){
+    public void add_task(long test_ms,String class_name,String details, List<Uri> files,String title){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tasks");
@@ -353,12 +355,14 @@ public class DatabaseConnector {
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",filenames);
+                        map.put("title",title);
                         map.put("teacher",(String)documentSnapshot.get("Username"));
 
                         Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
+                        map.put("title",title);
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
 
 
@@ -676,7 +680,7 @@ public class DatabaseConnector {
                 });
 
     }
-    public void retrieve_task_data_elev(String hour_ms,ListView lessons,ListView submissions){
+    public void retrieve_task_data_elev(String hour_ms,ListView lessons,ListView submissions,TextView teacher){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -702,6 +706,8 @@ public class DatabaseConnector {
                                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,submission_list);
                                         submissions.setAdapter(arrayAdapter);
                                     }
+                                  teacher.setText(map.get("teacher").toString());
+
 
 
 
@@ -851,7 +857,7 @@ public class DatabaseConnector {
 
 
     }
-    public void submit_work(Uri work,String lesson_class,int hour_ms,String teacher){
+    public void submit_work(Uri work,Long hour_ms,String teacher){
 
 
             FirebaseUser user = auth.getCurrentUser();
@@ -866,9 +872,9 @@ public class DatabaseConnector {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Integer.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(Long.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
                                     .setValue(work.getLastPathSegment());
-                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Integer.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(Long.toString(hour_ms)).child("submissions").child(documentSnapshot.getString("Username"))
                                     .setValue(work.getLastPathSegment());
                             storage_ref.child("lessons/" + work.getLastPathSegment())
                                     .putFile(work);
