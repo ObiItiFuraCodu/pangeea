@@ -430,7 +430,7 @@ public class DatabaseConnector {
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View c) {
-                                                                      if(user_category.equals("1")){
+                                                                      if(!user_category.equals("1")){
 
                                                                           Intent i = new Intent(c.getContext(),Task_info.class);
                                                                           i.putExtra("classname",v.getText().toString());
@@ -450,7 +450,7 @@ public class DatabaseConnector {
 
                                                                   }
                                                               });
-                                                              if(hour_milisecs > System.currentTimeMillis()){
+                                                              if(true){
                                                               layout.addView(v);
 
                                                                }else{
@@ -669,12 +669,14 @@ public class DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
-                                    List<String> lessons_list = (List<String>)map.get("files");
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
-                                    lessons_sent.setAdapter(adapter);
+                                    if((List<String>)map.get("files") != null){
+                                        List<String> lessons_list = (List<String>)map.get("files");
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                        lessons_sent.setAdapter(adapter);
+                                    }
                                     if(map.get("submissions") != null){
                                         List<String> presence_list = new ArrayList<>();
-                                        presence_list = (List<String>)map.get("presence");
+                                        presence_list = (List<String>)map.get("submissions");
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
                                         submissions.setAdapter(adapter2);
 
@@ -719,9 +721,12 @@ public class DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
-                                    List<String> lessons_list = (List<String>)map.get("files");
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
-                                    lessons.setAdapter(adapter);
+                                    if((List<String>)map.get("files") != null){
+                                        List<String> lessons_list = (List<String>)map.get("files");
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                        lessons.setAdapter(adapter);
+                                    }
+
                                     if(map.get("submissions") != null){
                                         List<String> submission_list = (List<String>)map.get("submissions");
                                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,submission_list);

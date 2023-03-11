@@ -20,7 +20,6 @@ import java.util.List;
 public class Task_info extends AppCompatActivity {
 
     DatabaseConnector connector = new DatabaseConnector(this);
-    Bundle e = getIntent().getExtras();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +35,8 @@ public class Task_info extends AppCompatActivity {
                         Intent data = result.getData();
                         ///data.getData()
                         TextView helper = findViewById(R.id.helper_text);
+                        Bundle e = getIntent().getExtras();
+
                         connector.submit_work(data.getData(),Long.parseLong(e.getString("hour_ms")) ,helper.getText().toString());
                         startActivity(new Intent(Task_info.this,MainActivity.class));
 
@@ -53,6 +54,8 @@ public class Task_info extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Bundle e = getIntent().getExtras();
+
         connector.retrieve_task_data_elev(e.getString("hour_ms"),findViewById(R.id.lessons_list),findViewById(R.id.submissions_list),findViewById(R.id.helper_text));
         Button submit = findViewById(R.id.submit_work);
         submit.setOnClickListener(new View.OnClickListener() {
