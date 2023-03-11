@@ -37,7 +37,7 @@ public class Task_info extends AppCompatActivity {
                         TextView helper = findViewById(R.id.helper_text);
                         Bundle e = getIntent().getExtras();
 
-                        connector.submit_work(data.getData(),Long.parseLong(e.getString("hour_ms")) ,helper.getText().toString());
+                        connector.submit_work(data.getData(),Long.parseLong(e.getString("hour_milis")) ,helper.getText().toString());
                         startActivity(new Intent(Task_info.this,MainActivity.class));
 
 
@@ -56,7 +56,7 @@ public class Task_info extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
 
-        connector.retrieve_task_data_elev(e.getString("hour_ms"),findViewById(R.id.lessons_list),findViewById(R.id.submissions_list),findViewById(R.id.helper_text));
+        connector.retrieve_task_data_elev(e.getString("hour_milis"),findViewById(R.id.lessons_list),findViewById(R.id.submissions_list),findViewById(R.id.helper_text));
         Button submit = findViewById(R.id.submit_work);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

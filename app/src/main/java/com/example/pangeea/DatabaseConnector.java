@@ -50,6 +50,7 @@ public class DatabaseConnector {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
     final long ONE_HOUR_IN_MILIS = 3600000;
+    Basic_tools tool = new Basic_tools();
 
 
     public DatabaseConnector(Context context) {
@@ -233,7 +234,12 @@ public class DatabaseConnector {
                                                }else{
                                                    Intent i = new Intent(c.getContext(),Hour_info_elev.class);
                                                    i.putExtra("hour_milis",set.getKey().toString());
-                                                   i.putExtra("presence",false);
+                                                   if(tool.hour_is_active(hour_milisecs)){
+                                                       i.putExtra("presence",false);
+
+                                                   }else{
+                                                       i.putExtra("presence",true);
+                                                   }
                                                    context.startActivity(i);
 
                                                }
@@ -675,8 +681,9 @@ public class DatabaseConnector {
                                         lessons_sent.setAdapter(adapter);
                                     }
                                     if(map.get("submissions") != null){
+                                        Map<String,String> submissions_map = (Map<String, String>) map.get("submissions");
                                         List<String> presence_list = new ArrayList<>();
-                                        presence_list = (List<String>)map.get("submissions");
+                                        presence_list.addAll(submissions_map.keySet());
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
                                         submissions.setAdapter(adapter2);
 
@@ -712,8 +719,12 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         DatabaseReference database_reference;
+                        if(hour_ms == null){
+                            Log.i("YUYUYUYUYTUYUYUY","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-                        database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
+                        }
+
+                        database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
 
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -728,7 +739,9 @@ public class DatabaseConnector {
                                     }
 
                                     if(map.get("submissions") != null){
-                                        List<String> submission_list = (List<String>)map.get("submissions");
+                                        Map<String,String> submissions_map = (Map<String, String>) map.get("submissions");
+                                        List<String> submission_list = new ArrayList<>();
+                                        submission_list.addAll(submissions_map.values());
                                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,submission_list);
                                         submissions.setAdapter(arrayAdapter);
                                     }
