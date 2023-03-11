@@ -37,6 +37,7 @@ public class Task_info extends AppCompatActivity {
                         ///data.getData()
                         TextView helper = findViewById(R.id.helper_text);
                         connector.submit_work(data.getData(),Long.parseLong(e.getString("hour_ms")) ,helper.getText().toString());
+                        startActivity(new Intent(Task_info.this,MainActivity.class));
 
 
                     }

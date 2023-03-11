@@ -510,12 +510,18 @@ public class DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
-                                    List<String> lessons_list = (List<String>)map.get("files");
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
-                                    lessons_sent.setAdapter(adapter);
-                                    if(map.get("presence") != null){
+
+                                    if((List<String>)map.get("files") != null){
+                                        List<String> lessons_list = (List<String>)map.get("files");
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                        lessons_sent.setAdapter(adapter);
+                                    }
+
+                                    if(map.get("present_list") != null){
+                                        Map<String,String> presence_map = new HashMap<>();
+                                        presence_map = (Map<String,String>)map.get("present_list");
                                         List<String> presence_list = new ArrayList<>();
-                                        presence_list = (List<String>)map.get("presence");
+                                        presence_list.addAll(presence_map.keySet());
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
                                         pupil_present.setAdapter(adapter2);
 
@@ -577,15 +583,19 @@ public class DatabaseConnector {
                                         context.startActivity(i);
                                     }
 
-                                    List<String> lessons_list = (List<String>)map.get("files");
+
                                     questions.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             ask_question(hour_ms,(String)map.get("teacher"));
                                         }
                                     });
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
-                                    lv.setAdapter(adapter);
+                                    if((List<String>)map.get("files") != null){
+                                        List<String> lessons_list = (List<String>)map.get("files");
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                        lv.setAdapter(adapter);
+
+                                    }
 
 
 

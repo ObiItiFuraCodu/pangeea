@@ -31,8 +31,7 @@ public class Login extends AppCompatActivity {
         Button button = findViewById(R.id.button2);
         EditText email = findViewById(R.id.email2);
         EditText password = findViewById(R.id.password2);
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
+
         mAuth = FirebaseAuth.getInstance();
         DatabaseConnector conn = new DatabaseConnector(this);
         TextView create_account = findViewById(R.id.createaccount);
@@ -50,17 +49,7 @@ public class Login extends AppCompatActivity {
                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                            @Override
                            public void onSuccess(AuthResult authResult) {
-                               FirebaseFirestore store = FirebaseFirestore.getInstance();
-                               store.collection("users").document(mAuth.getCurrentUser().getDisplayName())
-                                               .get()
-                                                       .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                           @Override
-                                                           public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                               editor.putBoolean("logged_in",true);
-                                                               editor.putString("user_class",documentSnapshot.get("user_class").toString());
-                                                               editor.commit();
-                                                           }
-                                                       });
+
 
                                startActivity(new Intent(v.getContext(),MainActivity.class));
 
