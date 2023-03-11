@@ -4,6 +4,7 @@ package com.example.pangeea;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +40,8 @@ import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.units.qual.A;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,6 +54,7 @@ public class DatabaseConnector {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
     final long ONE_HOUR_IN_MILIS = 3600000;
+    final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
 
 
@@ -246,7 +251,7 @@ public class DatabaseConnector {
 
                                            }
                                        });
-                                      if(hour_milisecs > System.currentTimeMillis()){
+                                      if(hour_milisecs > System.currentTimeMillis() - ONE_DAY_IN_MILIS){
                                            layout.addView(v);
 
                                       }else{
@@ -498,7 +503,7 @@ public class DatabaseConnector {
                 );
     }
 
-    public void retrieve_hour_data_prof(String hour_milis,ListView pupil_present,ListView lessons_sent,ListView question){
+    public void retrieve_hour_data_prof(String hour_milis,ListView pupil_present,ListView lessons_sent,ListView question,Button close_presence){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -507,6 +512,7 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         DatabaseReference database_reference;
+                        List<String> presence_list = new ArrayList<>();
 
                         database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(hour_milis);
 
@@ -526,7 +532,6 @@ public class DatabaseConnector {
                                     if(map.get("present_list") != null){
                                         Map<String,String> presence_map = new HashMap<>();
                                         presence_map = (Map<String,String>)map.get("present_list");
-                                        List<String> presence_list = new ArrayList<>();
                                         presence_list.addAll(presence_map.keySet());
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
                                         pupil_present.setAdapter(adapter2);
@@ -540,6 +545,13 @@ public class DatabaseConnector {
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
                                         question.setAdapter(adapter2);
                                     }
+                                    close_presence.setOnClickListener(new View.OnClickListener() {
+                                        @RequiresApi(api = Build.VERSION_CODES.O)
+                                        @Override
+                                        public void onClick(View v) {
+                                            mark_absent((String) map.get("class_name"),presence_list);
+                                        }
+                                    });
 
                                 }
 
@@ -930,5 +942,34 @@ public class DatabaseConnector {
                     });
 
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void mark_absent(String class_marked, List<String> pupils_present){
+        FirebaseUser user = auth.getCurrentUser();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils")
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        for(int i = 0;i< queryDocumentSnapshots.size();i++){
+                                            String user_child_name = queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class);
+                                            if(!pupils_present.contains(user_child_name)){
+                                                store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user_child_name).collection("absences").document(now.toString())
+                                                        .set("absence");
+
+                                            }
+                                        }
+                                    }
+                                });
+
+                    }
+                });
     }
 }
