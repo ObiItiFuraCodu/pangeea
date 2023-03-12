@@ -314,6 +314,7 @@ public class DatabaseConnector {
                                         }
                                     });
                             filenames.add(files.get(i).getLastPathSegment());
+                            save_file(files.get(i).getLastPathSegment(),class_name,title);
 
 
                         }
@@ -361,6 +362,8 @@ public class DatabaseConnector {
                                         }
                                     });
                             filenames.add(files.get(i).getLastPathSegment());
+                            save_file(files.get(i).getLastPathSegment(),class_name,title);
+
 
 
                         }
@@ -968,6 +971,21 @@ public class DatabaseConnector {
                                         }
                                     }
                                 });
+
+                    }
+                });
+    }
+    public void save_file(String file_path,String class_sent,String course_title){
+        FirebaseUser user = auth.getCurrentUser();
+
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_sent).collection("course_files").document(documentSnapshot.get("user_subject",String.class)).collection(course_title)
+                                .add(file_path);
+
 
                     }
                 });
