@@ -990,7 +990,6 @@ public class DatabaseConnector {
                     }
                 });
     }
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void upload_mark(String class_marked, String pupil, String mark,String date){
         FirebaseUser user = auth.getCurrentUser();
 
