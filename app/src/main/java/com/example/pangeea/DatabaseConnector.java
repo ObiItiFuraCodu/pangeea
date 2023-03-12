@@ -799,6 +799,15 @@ public class DatabaseConnector {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             Button button = new Button(context);
                                             button.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
+                                            button.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Intent i = new Intent(context,Pupil_info.class);
+                                                    i.putExtra("pupil_name",button.getText().toString());
+                                                    i.putExtra("pupil_class",class_selected);
+                                                    context.startActivity(i);
+                                                }
+                                            });
                                             pupil_list.addView(button);
                                         }
                                     }

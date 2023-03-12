@@ -2,7 +2,10 @@ package com.example.pangeea;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class Pupil_info extends AppCompatActivity {
     DatabaseConnector connector = new DatabaseConnector(this);
@@ -11,6 +14,16 @@ public class Pupil_info extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pupil_info);
+        Button button = findViewById(R.id.add_mark_1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Pupil_info.this,Add_mark.class);
+                i.putExtra("class",e.getString("pupil_class"));
+                i.putExtra("name",e.getString("pupil_name"));
+                startActivity(i);
+            }
+        });
 
     }
 
