@@ -36,7 +36,7 @@ public class Add_mark extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connector.upload_mark(e.getString("class"),e.getString("pupil_name"),mark.getText().toString(),datestring);
+                connector.upload_mark(e.getString("class"),e.getString("name"),mark.getText().toString(),datestring);
             }
         });
     }
