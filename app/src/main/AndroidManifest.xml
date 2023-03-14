@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".FileViewer"
+            android:exported="false" />
+        <activity
             android:name=".Add_mark"
             android:exported="false" />
         <activity

@@ -619,7 +619,11 @@ public class DatabaseConnector {
                                         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                downloader.saveFile(context,lessons_list.get(position),"files/destination","lessons");
+                                                try{
+                                                    downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
+                                                }catch(Exception e){
+
+                                                }
                                             }
                                         });
 
@@ -712,7 +716,11 @@ public class DatabaseConnector {
                                         submissions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                downloader.saveFile(context,presence_list.get(position),"files/lessons","lessons");
+                                                try{
+                                                    downloader.saveFile(context,presence_list.get(position),"files/lessons","lesosns");
+                                                }catch(Exception e){
+
+                                                }
                                             }
                                         });
 
@@ -769,7 +777,12 @@ public class DatabaseConnector {
                                         lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
+                                                try{
+                                                    downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
+                                                }catch(Exception e){
+
+                                                }
+
                                             }
                                         });
                                     }
