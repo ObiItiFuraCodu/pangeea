@@ -622,7 +622,9 @@ public class DatabaseConnector {
                                                 try{
                                                     downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
                                                 }catch(Exception e){
-
+                                                    Intent i = new Intent(context,FileViewer.class);
+                                                    i.putExtra("lesson_name",lessons_list.get(position));
+                                                    context.startActivity(i);
                                                 }
                                             }
                                         });
@@ -719,6 +721,9 @@ public class DatabaseConnector {
                                                 try{
                                                     downloader.saveFile(context,presence_list.get(position),"files/lessons","lesosns");
                                                 }catch(Exception e){
+                                                    Intent i = new Intent(context,FileViewer.class);
+                                                    i.putExtra("lesson_name",presence_list.get(position));
+                                                    context.startActivity(i);
 
                                                 }
                                             }
@@ -780,7 +785,9 @@ public class DatabaseConnector {
                                                 try{
                                                     downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
                                                 }catch(Exception e){
-
+                                                    Intent i = new Intent(context,FileViewer.class);
+                                                    i.putExtra("lesson_name",lessons_list.get(position));
+                                                    context.startActivity(i);
                                                 }
 
                                             }
