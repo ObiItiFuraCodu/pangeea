@@ -577,6 +577,7 @@ public class DatabaseConnector {
     }
     public void retrieve_hour_data_elev(String hour_ms,ListView lv,Button questions,boolean presence){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -615,6 +616,12 @@ public class DatabaseConnector {
                                         List<String> lessons_list = (List<String>)map.get("files");
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
                                         lv.setAdapter(adapter);
+                                        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                downloader.saveFile(context,lessons_list.get(position),"files/destination","lessons");
+                                            }
+                                        });
 
                                     }
 
@@ -675,6 +682,7 @@ public class DatabaseConnector {
     public void retrieve_task_data_proffesor(String deadline,ListView submissions,ListView lessons_sent){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FileDownloader downloader = new FileDownloader();
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -701,6 +709,12 @@ public class DatabaseConnector {
                                         presence_list.addAll(submissions_map.keySet());
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
                                         submissions.setAdapter(adapter2);
+                                        submissions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                downloader.saveFile(context,presence_list.get(position),"files/lessons","lessons");
+                                            }
+                                        });
 
 
                                     }
@@ -727,6 +741,7 @@ public class DatabaseConnector {
     }
     public void retrieve_task_data_elev(String hour_ms,ListView lessons,ListView submissions,TextView teacher){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -751,6 +766,12 @@ public class DatabaseConnector {
                                         List<String> lessons_list = (List<String>)map.get("files");
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
                                         lessons.setAdapter(adapter);
+                                        lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
+                                            }
+                                        });
                                     }
 
                                     if(map.get("submissions") != null){

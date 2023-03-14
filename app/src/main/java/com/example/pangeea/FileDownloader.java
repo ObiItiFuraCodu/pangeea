@@ -66,10 +66,10 @@ public class FileDownloader {
         }
         return type;
     }
-    public static boolean saveFile(Context context, String source, String destinationDir, String destFileName) {
+    public static boolean saveFile(Context context, String name, String destinationDir, String destFileName) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        storageRef.child(source).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 BufferedInputStream bis = null;
@@ -79,7 +79,7 @@ public class FileDownloader {
 
                 try {
                     if (isVirtualFile(context, uri)) {
-                        input = getInputStreamForVirtualFile(context, uri, getMimeType(source));
+                        input = getInputStreamForVirtualFile(context, uri, getMimeType(name));
                     } else {
                         input = context.getContentResolver().openInputStream(uri);
                     }
