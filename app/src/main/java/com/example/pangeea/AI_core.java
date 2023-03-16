@@ -73,7 +73,20 @@ public class AI_core {
         return output[0];
     }
     private boolean filtering_system(String course_1,String course_2){
-        return true;
+        int nr = 0;
+        for(int i = 0;i< course_1.length();i++){
+            for(int j = i+1;j < course_1.length();j++){
+                if(course_2.contains(course_1.substring(i,j))){
+                    nr++;
+                }
+            }
+        }
+        if(nr >= 2){
+            return true;
+        }else{
+            return false;
+        }
+
 
     }
     public  List<DocumentSnapshot> recommender_system(List<DocumentSnapshot> courses, String course_name){
