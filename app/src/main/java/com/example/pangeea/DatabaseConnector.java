@@ -40,6 +40,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.units.qual.A;
 
+import java.nio.BufferUnderflowException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -332,6 +333,8 @@ public class DatabaseConnector {
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
+                        store.collection("courses").document(class_name.replaceAll("[^0-9.]", "")).collection(class_name.replaceAll("[^0-9.]", "")).document(title)
+                                .set(map);
                     }
                 });
 
@@ -1113,5 +1116,30 @@ public class DatabaseConnector {
                     }
                 });
 
+    }
+    public void retrieve_lessons(String grade,LinearLayout linearl,String main_course){
+        store.collection("courses").document(grade).collection(grade)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list =  AI_core.recommender_system(queryDocumentSnapshots.getDocuments(),main_course);
+                                queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot document : list) {
+                             Button lesson_button = new Button(context);
+                             lesson_button.setText(document.getString("title"));
+                             lesson_button.setOnClickListener(new View.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     List<String> lesson_names = document.get("files",ArrayList.class);
+                                     for(String name : lesson_names){
+                                         FileDownloader.saveFile(context,name,"files/lessons",document.getString("title"));
+
+                                     }
+                                 }
+                             });
+                        }
+                    }
+                });
     }
 }

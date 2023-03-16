@@ -8,12 +8,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AI_core {
@@ -68,6 +71,11 @@ public class AI_core {
             }
         };
         return output[0];
+    }
+    public List<DocumentSnapshot> recommender_system(List<DocumentSnapshot> courses,String course_name){
+        List<DocumentSnapshot> output = new ArrayList<>();
+
+        return output;
     }
 
 }

@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
+
+        <activity
+            android:name=".Lesson_list"
+            android:exported="false" />
         <activity
             android:name=".FileViewer"
             android:exported="false" />
