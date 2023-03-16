@@ -1118,13 +1118,15 @@ public class DatabaseConnector {
 
     }
     public void retrieve_lessons(String grade,LinearLayout linearl,String main_course){
+        AI_core core = new AI_core();
         store.collection("courses").document(grade).collection(grade)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> list =  AI_core.recommender_system(queryDocumentSnapshots.getDocuments(),main_course);
-                                queryDocumentSnapshots.getDocuments();
+                        List<DocumentSnapshot> list =  queryDocumentSnapshots.getDocuments();
+                        list = core.recommender_system(list,main_course);
+
                         for (DocumentSnapshot document : list) {
                              Button lesson_button = new Button(context);
                              lesson_button.setText(document.getString("title"));

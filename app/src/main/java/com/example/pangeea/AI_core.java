@@ -72,15 +72,18 @@ public class AI_core {
         };
         return output[0];
     }
-    public boolean filtering_system(){
+    private boolean filtering_system(String course_1,String course_2){
         return true;
+
     }
-    public static List<DocumentSnapshot> recommender_system(List<DocumentSnapshot> courses, String course_name){
+    public  List<DocumentSnapshot> recommender_system(List<DocumentSnapshot> courses, String course_name){
         List<DocumentSnapshot> output = new ArrayList<>();
+
         for(DocumentSnapshot document : courses){
+            if(filtering_system(document.get("name",String.class),course_name)){
+                output.add(document);
 
-            output.add(document);
-
+            }
         }
 
         return output;
