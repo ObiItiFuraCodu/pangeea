@@ -8,10 +8,12 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.json.JSONArray;
@@ -25,7 +27,7 @@ import java.util.Map;
 
 public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
-    private String accessToken = "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";
+    private String accessToken = "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";
     Context context;
 
     public AI_core(Context context){
@@ -70,8 +72,8 @@ public class AI_core {
             @Override
             public Map< String, String > getHeaders() throws AuthFailureError {
                 Map < String, String > headers = new HashMap< >();
-                headers.put("Authorization", "Bearer " + accessToken);
                 headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "Bearer " + accessToken);
                 return headers;
             }
             @Override
@@ -79,13 +81,13 @@ public class AI_core {
                 return super.parseNetworkResponse(response);
             }
         };
-
         int timeoutMs = 25000; // 25 seconds timeout
         RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         request.setRetryPolicy(policy);
-        // Add the request to the RequestQueue
-        Transmitter.getInstance(context).addToRequestQueue(request);
-       // return output[0];
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+
     }
     private boolean filtering_system(String course_1,String course_2){
         int nr = 0;

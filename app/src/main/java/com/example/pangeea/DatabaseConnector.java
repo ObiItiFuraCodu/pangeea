@@ -624,7 +624,20 @@ public class DatabaseConnector {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 try{
-                                                    downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
+                                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                                    StorageReference storageRef = storage.getReference();
+                                                    storageRef.child("lessons/" + lessons_list.get(position)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                            context.startActivity(intent);
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception exception) {
+                                                            // Handle any errors
+                                                        }
+                                                    });
                                                 }catch(Exception e){
                                                     Intent i = new Intent(context,FileViewer.class);
                                                     i.putExtra("lesson_name",lessons_list.get(position));
@@ -812,7 +825,20 @@ public class DatabaseConnector {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 try{
-                                                    downloader.saveFile(context,lessons_list.get(position),"files/lessons","lesosns");
+                                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                                    StorageReference storageRef = storage.getReference();
+                                                    storageRef.child("lessons/" + lessons_list.get(position)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                            context.startActivity(intent);
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception exception) {
+                                                            // Handle any errors
+                                                        }
+                                                    });
                                                 }catch(Exception e){
                                                     Intent i = new Intent(context,FileViewer.class);
                                                     i.putExtra("lesson_name",lessons_list.get(position));
@@ -1169,7 +1195,22 @@ public class DatabaseConnector {
                                  public void onClick(View v) {
                                      List<String> lesson_names = document.get("files",ArrayList.class);
                                      for(String name : lesson_names){
-                                         FileDownloader.saveFile(context,name,"files/lessons",document.getString("title"));
+                                         FirebaseStorage storage = FirebaseStorage.getInstance();
+                                         StorageReference storageRef = storage.getReference();
+                                         storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                             @Override
+                                             public void onSuccess(Uri uri) {
+
+
+                                                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+                                             }
+                                         }).addOnFailureListener(new OnFailureListener() {
+                                             @Override
+                                             public void onFailure(@NonNull Exception exception) {
+                                                 // Handle any errors
+                                             }
+                                         });
 
                                      }
                                  }
