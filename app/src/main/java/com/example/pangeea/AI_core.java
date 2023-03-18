@@ -1,11 +1,15 @@
 package com.example.pangeea;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,10 +26,15 @@ import java.util.Map;
 public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
     private String accessToken = "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";
+    Context context;
 
-    public String AI_Text(String input){
+    public AI_core(Context context){
+        this.context = context;
+    }
+
+    public void AI_Text(String input, TextView responseview){
         JSONObject requestBody = new JSONObject();
-        final String[] output = {""};
+     //   final String[] output = {""};
         try {
 
             requestBody.put("model", "text-davinci-003");
@@ -44,7 +53,7 @@ public class AI_core {
                 try {
                     JSONArray choicesArray = response.getJSONArray("choices");
                     JSONObject choiceObject = choicesArray.getJSONObject(0);
-                    output[0] = choiceObject.getString("text");
+                    responseview.setText(choiceObject.getString("text"));
                     Log.e("API Response", response.toString());
                     //Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
 
@@ -70,7 +79,13 @@ public class AI_core {
                 return super.parseNetworkResponse(response);
             }
         };
-        return output[0];
+
+        int timeoutMs = 25000; // 25 seconds timeout
+        RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+        // Add the request to the RequestQueue
+        Transmitter.getInstance(context).addToRequestQueue(request);
+       // return output[0];
     }
     private boolean filtering_system(String course_1,String course_2){
         int nr = 0;

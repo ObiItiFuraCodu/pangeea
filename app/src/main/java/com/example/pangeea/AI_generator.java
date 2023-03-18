@@ -17,7 +17,14 @@ public class AI_generator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ai_generator);
-        AI_core ai = new AI_core();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AI_core ai = new AI_core(this);
         Button button = findViewById(R.id.regenerate);
         EditText prompt = findViewById(R.id.prompt);
         TextView result = findViewById(R.id.text_result);
@@ -26,9 +33,8 @@ public class AI_generator extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                result.setText(ai.AI_Text(prompt.getText().toString()));
+                ai.AI_Text(prompt.getText().toString(),result);
             }
         });
-
     }
 }

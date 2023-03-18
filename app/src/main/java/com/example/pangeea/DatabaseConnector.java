@@ -1152,7 +1152,7 @@ public class DatabaseConnector {
 
     }
     public void retrieve_lessons(String grade,LinearLayout linearl,String main_course){
-        AI_core core = new AI_core();
+        AI_core core = new AI_core(context);
         store.collection("courses").document(grade).collection(grade)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
