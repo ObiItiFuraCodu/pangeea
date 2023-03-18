@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
-    private String accessToken = "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";
+    private String accessToken = "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";
     Context context;
 
     public AI_core(Context context){
