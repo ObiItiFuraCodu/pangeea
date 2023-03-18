@@ -19,6 +19,6 @@ public class Hour_info_elev extends AppCompatActivity {
         Bundle e = getIntent().getExtras();
 
         DatabaseConnector connector = new DatabaseConnector(Hour_info_elev.this);
-        connector.retrieve_hour_data_elev(e.getString("hour_milis"),findViewById(R.id.lv),findViewById(R.id.raise_hand),e.getBoolean("presence"));
+        connector.retrieve_hour_data_elev(e.getString("hour_milis"),findViewById(R.id.lv),findViewById(R.id.raise_hand),e.getBoolean("presence"),findViewById(R.id.ai_button),findViewById(R.id.lesson_net_button));
     }
 }

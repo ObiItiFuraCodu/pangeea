@@ -39,6 +39,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.units.qual.A;
+import org.w3c.dom.Text;
 
 import java.nio.BufferUnderflowException;
 import java.time.LocalDateTime;
@@ -578,7 +579,7 @@ public class DatabaseConnector {
                 });
 
     }
-    public void retrieve_hour_data_elev(String hour_ms,ListView lv,Button questions,boolean presence){
+    public void retrieve_hour_data_elev(String hour_ms, ListView lv, Button questions, boolean presence, TextView ai,TextView lesson_network){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -640,6 +641,16 @@ public class DatabaseConnector {
 
 
 
+                                lesson_network.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(context,Lesson_list.class);
+                                        i.putExtra("grade",(String)((String) documentSnapshot.get("user_class")).replaceAll("[^0-9.]", ""));
+                                        i.putExtra("main_course",map.get("title").toString());
+                                        context.startActivity(i);
+
+                                    }
+                                });
 
 
                             }
@@ -649,7 +660,12 @@ public class DatabaseConnector {
 
                             }
                         });
-
+                        ai.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                context.startActivity(new Intent(context,AI_generator.class));
+                            }
+                        });
 
                     }
                 });
@@ -755,7 +771,7 @@ public class DatabaseConnector {
                 });
 
     }
-    public void retrieve_task_data_elev(String hour_ms,ListView lessons,ListView submissions,TextView teacher){
+    public void retrieve_task_data_elev(String hour_ms,ListView lessons,ListView submissions,TextView teacher,TextView ai,TextView lesson_network){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -780,6 +796,16 @@ public class DatabaseConnector {
                                 if(map != null){
                                     if((List<String>)map.get("files") != null){
                                         List<String> lessons_list = (List<String>)map.get("files");
+                                        lesson_network.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent i = new Intent(context,Lesson_list.class);
+                                                i.putExtra("grade",(String)((String) documentSnapshot.get("user_class")).replaceAll("[^0-9.]", ""));
+                                                i.putExtra("main_course",map.get("title").toString());
+                                                context.startActivity(i);
+
+                                            }
+                                        });
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
                                         lessons.setAdapter(adapter);
                                         lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -805,6 +831,14 @@ public class DatabaseConnector {
                                         submissions.setAdapter(arrayAdapter);
                                     }
                                   teacher.setText(map.get("teacher").toString());
+
+                                    ai.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            context.startActivity(new Intent(context,AI_generator.class));
+                                        }
+                                    });
+
 
 
 

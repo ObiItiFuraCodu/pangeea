@@ -56,7 +56,7 @@ public class Task_info extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
 
-        connector.retrieve_task_data_elev(e.getString("hour_milis"),findViewById(R.id.lessons_list),findViewById(R.id.submissions_list),findViewById(R.id.helper_text));
+        connector.retrieve_task_data_elev(e.getString("hour_milis"),findViewById(R.id.lessons_list),findViewById(R.id.submissions_list),findViewById(R.id.helper_text),findViewById(R.id.ai_button_2),findViewById(R.id.lesson_net_button_2));
         Button submit = findViewById(R.id.submit_work);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
