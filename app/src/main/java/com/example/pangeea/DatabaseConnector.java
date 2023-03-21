@@ -316,10 +316,11 @@ public class DatabaseConnector {
                                         }
                                     });
                             filenames.add(files.get(i).getLastPathSegment());
-                            save_file(files.get(i).getLastPathSegment(),class_name,title);
+
 
 
                         }
+                        save_file(filenames,class_name,title);
                         Map<String,Object> map = new HashMap<>();
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
@@ -366,11 +367,12 @@ public class DatabaseConnector {
                                         }
                                     });
                             filenames.add(files.get(i).getLastPathSegment());
-                            save_file(files.get(i).getLastPathSegment(),class_name,title);
+
 
 
 
                         }
+                        save_file(filenames,class_name,title);
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",filenames);
@@ -1088,16 +1090,19 @@ public class DatabaseConnector {
                     }
                 });
     }
-    public void save_file(String file_path,String class_sent,String course_title){
+    public void save_file(List<String> file_paths,String class_sent,String course_title){
         FirebaseUser user = auth.getCurrentUser();
+        Map<String,Object> map = new HashMap<>();
+        map.put("title",course_title);
+        map.put("files",file_paths);
 
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_sent).collection("course_files").document(documentSnapshot.get("user_subject",String.class)).collection(course_title)
-                                .add(file_path);
+                        store.collection("courses").document(class_sent.replaceAll("[^0-9.]", "")).collection(class_sent.replaceAll("[^0-9.]", "")).document(course_title)
+                                .set(map);
 
 
                     }
@@ -1166,7 +1171,65 @@ public class DatabaseConnector {
                                                 mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
+                                            mark_list.setAdapter(adapter);
+                                            absences.setText("Avg mark : " + mark_total / mark_contour);
+
+                                        }
+
+                                    }
+                                });
+                    }
+                });
+
+    }
+    public void retrieve_pupil_info_elev(ListView mark_list,ListView absence_list,TextView avg_mark,TextView absences){
+        FirebaseUser user = auth.getCurrentUser();
+
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(user.getDisplayName()).collection("absences")
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                        int absencecontour = 0;
+                                        if(list != null){
+                                            List<String> datelist = new ArrayList<>();
+                                            for(int i = 0;i< list.size();i++){
+                                                datelist.add(list.get(i).getId());
+                                                absencecontour++;
+                                            }
+                                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             absence_list.setAdapter(adapter);
+                                            absences.setText("Absences : " + absencecontour);
+
+                                        }
+
+                                    }
+                                });
+
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(user.getDisplayName()).collection("marks")
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                        int mark_contour = 0;
+                                        int mark_total = 0;
+                                        if(list != null){
+                                            List<String> datelist = new ArrayList<>();
+                                            for(int i = 0;i< list.size();i++){
+
+                                                datelist.add(list.get(i).getId()  +  list.get(i).getString("mark"));
+                                                mark_contour++;
+                                                mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
+                                            }
+                                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
+                                            mark_list.setAdapter(adapter);
                                             absences.setText("Avg mark : " + mark_total / mark_contour);
 
                                         }

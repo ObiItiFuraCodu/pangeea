@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".Materie_info"
+            android:exported="false" />
+        <activity
             android:name=".AI_generator"
             android:exported="false" />
         <activity
