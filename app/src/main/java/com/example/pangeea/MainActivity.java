@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String highschool;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
@@ -102,8 +103,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onStart();
 
+        store.collection("users").document(auth.getCurrentUser().getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.getString("user_category").equals("0")){
+                            navigationView.getMenu().findItem(R.id.nav_add_hour).setVisible(false);
+                            connector.retrieve_materies((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
+                            navigationView.getMenu().findItem(R.id.nav_add_hour).setTitle("Materies");
+
+
+                        }else{
+
+                            connector.retrieveclasses((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
+
+                        }
+                    }
+                });
+
         LinearLayout linear = findViewById(R.id.liner);
-        connector.retrieveclasses((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
         connector.import_hours(linear);
         connector.import_tasks(linear);
 

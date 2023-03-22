@@ -982,6 +982,44 @@ public class DatabaseConnector {
 
 
     }
+    public void retrieve_materies(Spinner spinner){
+        FirebaseUser user = auth.getCurrentUser();
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("absences")
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        List<String> keys = new ArrayList<>();
+                                        for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
+                                            keys.add(document.getId());
+                                        }
+                                        ArrayAdapter adapter = new ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,keys);
+                                        spinner.setAdapter(adapter);
+                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                Intent i = new Intent(context,Materie_info.class);
+                                                i.putExtra("materie_name",keys.get(position));
+                                                context.startActivity(i);
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> parent) {
+
+                                            }
+                                        });
+
+                                    }
+                                });
+                    }
+                });
+
+    }
     public void make_presence(String class_presence,String lesson_class,Long hour_ms,String teacher){
         if(!class_presence.equals(lesson_class.replaceAll("[^A-Za-z0-9]", ""))){
             Toast.makeText(context,"Wrong class",Toast.LENGTH_SHORT).show();
@@ -1079,7 +1117,9 @@ public class DatabaseConnector {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             String user_child_name = queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class);
                                             if(!pupils_present.contains(user_child_name)){
-                                                store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user_child_name).collection("absences").document(now.toString())
+                                                store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user_child_name).collection("absences")
+                                                        .document(documentSnapshot.get("user_subject",String.class)).collection("marks").document(now.toString())
+
                                                         .set("absence");
 
                                             }
@@ -1118,7 +1158,8 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document(date)
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks")
+                                .document(documentSnapshot.get("user_subject",String.class)).collection("marks").document(date)
                                 .set(map);
 
                     }
@@ -1133,6 +1174,7 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(pupil_class).collection("pupils").document(pupil_name).collection("absences")
+                                .document(documentSnapshot.get("user_subject",String.class)).collection("absences")
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
@@ -1155,6 +1197,7 @@ public class DatabaseConnector {
                                 });
 
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(pupil_class).collection("pupils").document(pupil_name).collection("marks")
+                                .document(documentSnapshot.get("user_subject",String.class)).collection("marks")
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
@@ -1182,7 +1225,7 @@ public class DatabaseConnector {
                 });
 
     }
-    public void retrieve_pupil_info_elev(ListView mark_list,ListView absence_list,TextView avg_mark,TextView absences){
+    public void retrieve_pupil_info_elev(ListView mark_list,ListView absence_list,TextView avg_mark,TextView absences,String materie){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -1191,6 +1234,7 @@ public class DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(user.getDisplayName()).collection("absences")
+                                .document(materie).collection("absences")
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
@@ -1213,6 +1257,8 @@ public class DatabaseConnector {
                                 });
 
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(user.getDisplayName()).collection("marks")
+                                .document(materie).collection("marks")
+
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
