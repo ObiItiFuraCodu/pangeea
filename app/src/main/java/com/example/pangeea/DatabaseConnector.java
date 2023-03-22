@@ -1215,7 +1215,7 @@ public class DatabaseConnector {
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             mark_list.setAdapter(adapter);
-                                            absences.setText("Avg mark : " + mark_total / mark_contour);
+                                           // absences.setText("Avg mark : " + mark_total / mark_contour);
 
                                         }
 

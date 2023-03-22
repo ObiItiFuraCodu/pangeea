@@ -15,7 +15,6 @@ import com.google.android.material.navigation.NavigationView;
 
 public class Pupil_info extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseConnector connector = new DatabaseConnector(this);
-    Bundle e = getIntent().getExtras();
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     @Override
@@ -39,6 +38,8 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
     @Override
     protected void onStart() {
         super.onStart();
+        Bundle e = getIntent().getExtras();
+
         connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences));
 
     }
@@ -60,6 +61,8 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
         switch (item.getItemId()) {
 
             case R.id.nav_add_mark: {
+                Bundle e = getIntent().getExtras();
+
                 Intent i = new Intent(Pupil_info.this,Add_mark.class);
                 i.putExtra("class",e.getString("pupil_class"));
                 i.putExtra("name",e.getString("pupil_name"));

@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.getString("user_category").equals("0")){
-                            navigationView.getMenu().findItem(R.id.nav_add_hour).setVisible(false);
+                            //navigationView.getMenu().findItem(R.id.nav_add_hour).setVisible(false);
                             connector.retrieve_materies((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
                             navigationView.getMenu().findItem(R.id.nav_add_hour).setTitle("Materies");
 
