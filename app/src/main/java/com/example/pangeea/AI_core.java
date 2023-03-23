@@ -91,6 +91,9 @@ public class AI_core {
     }
     private boolean filtering_system(String course_1,String course_2){
         int nr = 0;
+        if(course_1 == null || course_2 == null){
+            return false;
+        }
         for(int i = 0;i< course_1.length();i++){
             for(int j = i+1;j < course_1.length();j++){
                 if(course_2.contains(course_1.substring(i,j))){

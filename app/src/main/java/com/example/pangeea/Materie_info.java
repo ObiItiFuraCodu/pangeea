@@ -16,7 +16,7 @@ public class Materie_info extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        connector.retrieve_pupil_info_elev(findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences),getIntent().getExtras().getString("materie_info"));
+        connector.retrieve_pupil_info_elev(findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences),getIntent().getExtras().getString("materie_name"));
 
     }
 }

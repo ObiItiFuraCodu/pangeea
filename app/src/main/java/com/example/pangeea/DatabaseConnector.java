@@ -989,12 +989,13 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("absences")
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("marks")
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         List<String> keys = new ArrayList<>();
+                                        keys.add("");
                                         for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
                                             keys.add(document.getId());
                                         }
@@ -1003,9 +1004,12 @@ public class DatabaseConnector {
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                             @Override
                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                Intent i = new Intent(context,Materie_info.class);
-                                                i.putExtra("materie_name",keys.get(position));
-                                                context.startActivity(i);
+                                                if(!keys.get(position).equals("")){
+                                                    Intent i = new Intent(context,Materie_info.class);
+                                                    i.putExtra("materie_name",keys.get(position));
+                                                    context.startActivity(i);
+                                                }
+
                                             }
 
                                             @Override
@@ -1118,7 +1122,7 @@ public class DatabaseConnector {
                                             String user_child_name = queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class);
                                             if(!pupils_present.contains(user_child_name)){
                                                 store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user_child_name).collection("absences")
-                                                        .document(documentSnapshot.get("user_subject",String.class)).collection("marks").document(now.toString())
+                                                        .document(documentSnapshot.get("user_subject",String.class)).collection("absences").document(now.toString())
 
                                                         .set("absence");
 
@@ -1153,6 +1157,8 @@ public class DatabaseConnector {
 
         Map<String,String> map = new HashMap<>();
         map.put("mark",mark);
+        Map<String,String> test = new HashMap<>();
+        test.put("didldo","blblblb");
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -1161,6 +1167,9 @@ public class DatabaseConnector {
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks")
                                 .document(documentSnapshot.get("user_subject",String.class)).collection("marks").document(date)
                                 .set(map);
+                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks")
+                                .document(documentSnapshot.get("user_subject",String.class))
+                                .set(test);
 
                     }
                 });
@@ -1209,9 +1218,9 @@ public class DatabaseConnector {
                                             List<String> datelist = new ArrayList<>();
                                             for(int i = 0;i< list.size();i++){
 
-                                                datelist.add(list.get(i).getId()  +  list.get(i).getString("mark"));
-                                                mark_contour++;
-                                                mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
+                                                datelist.add( list.get(i).getString("mark"));
+                                               // mark_contour++;
+                                               // mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             mark_list.setAdapter(adapter);
@@ -1249,7 +1258,7 @@ public class DatabaseConnector {
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             absence_list.setAdapter(adapter);
-                                            absences.setText("Absences : " + absencecontour);
+                                           // absences.setText("Absences : " + absencecontour);
 
                                         }
 
@@ -1270,13 +1279,13 @@ public class DatabaseConnector {
                                             List<String> datelist = new ArrayList<>();
                                             for(int i = 0;i< list.size();i++){
 
-                                                datelist.add(list.get(i).getId()  +  list.get(i).getString("mark"));
-                                                mark_contour++;
-                                                mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
+                                                datelist.add(list.get(i).getString("mark"));
+                                               // mark_contour++;
+                                               /// mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             mark_list.setAdapter(adapter);
-                                            absences.setText("Avg mark : " + mark_total / mark_contour);
+                                           // absences.setText("Avg mark : " + mark_total / mark_contour);
 
                                         }
 
@@ -1293,38 +1302,42 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
                         List<DocumentSnapshot> list =  queryDocumentSnapshots.getDocuments();
-                        list = core.recommender_system(list,main_course);
+                        if(!(list == null || list.isEmpty())){
+                            list = core.recommender_system(list,main_course);
 
-                        for (DocumentSnapshot document : list) {
-                             Button lesson_button = new Button(context);
-                             lesson_button.setText(document.getString("title"));
-                             lesson_button.setOnClickListener(new View.OnClickListener() {
-                                 @Override
-                                 public void onClick(View v) {
-                                     List<String> lesson_names = document.get("files",ArrayList.class);
-                                     for(String name : lesson_names){
-                                         FirebaseStorage storage = FirebaseStorage.getInstance();
-                                         StorageReference storageRef = storage.getReference();
-                                         storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                             @Override
-                                             public void onSuccess(Uri uri) {
+                            for (DocumentSnapshot document : list) {
+                                Button lesson_button = new Button(context);
+                                lesson_button.setText(document.getString("title"));
+                                lesson_button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        List<String> lesson_names = document.get("files",ArrayList.class);
+                                        for(String name : lesson_names){
+                                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                                            StorageReference storageRef = storage.getReference();
+                                            storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
 
 
-                                                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
-                                             }
-                                         }).addOnFailureListener(new OnFailureListener() {
-                                             @Override
-                                             public void onFailure(@NonNull Exception exception) {
-                                                 // Handle any errors
-                                             }
-                                         });
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception exception) {
+                                                    // Handle any errors
+                                                }
+                                            });
 
-                                     }
-                                 }
-                             });
+                                        }
+                                    }
+                                });
+                            }
                         }
+
                     }
                 });
     }
