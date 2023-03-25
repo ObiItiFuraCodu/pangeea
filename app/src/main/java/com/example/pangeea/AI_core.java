@@ -15,6 +15,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.theokanning.openai.completion.CompletionChoice;
+import com.theokanning.openai.completion.CompletionRequest;
+import com.theokanning.openai.service.OpenAiService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AI_core {
-    private String apiUrl = "https://api.openai.com/v1/completions";
+    private String apiUrl = "https://api.openai.com/v1/engines/davinci/completions";
     private String accessToken = "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";
     Context context;
 
@@ -88,6 +91,16 @@ public class AI_core {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
 
+    }
+    public void AI_text_2(String prompt,TextView result){
+        OpenAiService service = new OpenAiService("your_token");
+        CompletionRequest completionRequest = CompletionRequest.builder()
+                .prompt("Somebody once told me the world is gonna roll me")
+                .model("ada")
+                .echo(true)
+                .build();
+        List<CompletionChoice> list =  service.createCompletion(completionRequest).getChoices();
+        result.setText(list.get(1).getText());
     }
     private boolean filtering_system(String course_1,String course_2){
         int nr = 0;
