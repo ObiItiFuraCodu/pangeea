@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,7 +40,12 @@ public class Add_mark extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connector.upload_mark(e.getString("class"),e.getString("name"),mark.getText().toString(),datestring);
+                if(mark.getText().toString().contains("[a-zA-Z]") == false){
+                    connector.upload_mark(e.getString("class"),e.getString("name"),mark.getText().toString(),datestring);
+
+                }else{
+                    Toast.makeText(Add_mark.this,"Invalid mark",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
