@@ -24,7 +24,7 @@ public class Dashboard extends AppCompatActivity {
 
         //Create pending intent & register it to your alarm notifier class
         Intent intent = new Intent(this, HourSetter.class);
-        intent.putExtra("uur", "1e"); // if you want
+       // intent.putExtra("uur", "1e"); // if you want
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
         //set timer you want alarm to work (here I have set it to 9.00)
