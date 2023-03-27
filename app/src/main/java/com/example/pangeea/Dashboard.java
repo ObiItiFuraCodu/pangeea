@@ -16,6 +16,10 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        setAlarm();
+
+    }
+    public void setAlarm(){
         AlarmManager mAlarmManger = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
         //Create pending intent & register it to your alarm notifier class
@@ -31,6 +35,5 @@ public class Dashboard extends AppCompatActivity {
 
         //set that timer as a RTC Wakeup to alarm manager object
         mAlarmManger .set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-
     }
 }
