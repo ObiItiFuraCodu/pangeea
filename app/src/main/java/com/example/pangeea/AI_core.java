@@ -93,7 +93,7 @@ public class AI_core {
 
     }
     public void AI_text_2(String prompt,TextView result){
-        OpenAiService service = new OpenAiService("your_token");
+        OpenAiService service = new OpenAiService(accessToken);
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt("Somebody once told me the world is gonna roll me")
                 .model("ada")
