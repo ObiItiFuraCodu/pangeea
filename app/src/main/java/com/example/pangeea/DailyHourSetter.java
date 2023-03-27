@@ -32,7 +32,7 @@ public class DailyHourSetter extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("timetables")
+                                        store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("timetables").document("classes").collection("classes")
                                                 .get()
                                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                     @Override
