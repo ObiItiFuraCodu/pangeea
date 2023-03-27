@@ -344,6 +344,29 @@ public class DatabaseConnector {
 
 
     }
+    public void add_automated_hour(long hour_ms, String class_name, String details, String title,String teacher,String highschool){
+        FirebaseUser user = auth.getCurrentUser();
+        List<String> filenames  = new ArrayList<>();
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
+        DatabaseReference ref = dbb.getReference("hourss");
+                        save_file(filenames,class_name,title);
+                        Map<String,Object> map = new HashMap<>();
+                        map.put("details",details);
+                        map.put("user_subject",title);
+                        map.put("files",filenames);
+                        map.put("title",title);
+                        map.put("teacher",teacher);
+                        Map<String,Object> map2 = new HashMap<>();
+                        map2.put("details",details);
+                        map2.put("class_name",class_name);
+                        map2.put("files",filenames);
+                        map.put("title",title);
+                        map2.put("teacher",teacher);
+                        ref.child(highschool).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
+                        ref.child(highschool).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
+    }
     public void add_task(long test_ms,String class_name,String details, List<Uri> files,String title){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
