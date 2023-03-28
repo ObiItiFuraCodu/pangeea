@@ -92,7 +92,7 @@ public class AI_core {
         queue.add(request);
 
     }
-    public void AI_text_2(String prompt,TextView result){
+    public List<String> AI_text_2(String prompt){
         OpenAiService service = new OpenAiService(accessToken);
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt("Somebody once told me the world is gonna roll me")
@@ -100,7 +100,11 @@ public class AI_core {
                 .echo(true)
                 .build();
         List<CompletionChoice> list =  service.createCompletion(completionRequest).getChoices();
-        result.setText(list.get(1).getText());
+        List<String> results = new ArrayList<>();
+        for(CompletionChoice choice : list){
+            results.add(choice.getText());
+        }
+        return results;
     }
     private boolean filtering_system(String course_1,String course_2){
         int nr = 0;

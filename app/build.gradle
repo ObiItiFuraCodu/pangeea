@@ -41,6 +41,8 @@ dependencies {
     implementation 'com.theokanning.openai-gpt3-java:api:0.11.1'
     implementation 'com.theokanning.openai-gpt3-java:service:0.11.1'
     implementation 'com.theokanning.openai-gpt3-java:client:0.11.1'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
     implementation 'com.google.firebase:firebase-database:20.1.0'
