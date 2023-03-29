@@ -1,10 +1,11 @@
 package com.example.pangeea;
 
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
+/*import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -13,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.Volley;*/
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.theokanning.openai.completion.CompletionChoice;
 import com.theokanning.openai.completion.CompletionRequest;
@@ -23,21 +24,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class AI_core {
-    private String apiUrl = "https://api.openai.com/v1/engines/davinci/completions";
-    private String accessToken = "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";
+    private String apiUrl = "https://api.openai.com/v1/completions";
+    private String accessToken = "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";
     Context context;
+    OkHttpClient client = new OkHttpClient();
 
     public AI_core(Context context){
         this.context = context;
     }
 
-    public void AI_Text(String input, TextView responseview){
+  /*  public void AI_Text(String input, TextView responseview){
         JSONObject requestBody = new JSONObject();
      //   final String[] output = {""};
         try {
@@ -90,6 +101,45 @@ public class AI_core {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
+
+    }*/
+    public void AI_text_3(String prompt,TextView result){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+        RequestBody formBody = new FormBody.Builder()
+                .add("model", "text-davinci-002")
+                .add("prompt", prompt)
+                .add("max_tokens", "100")
+                .add("temperature", "1")
+                .add("top_p", "1")
+                .add("frequency_penalty", "0.0")
+                .add("presence_penalty", "0.0")
+                .build();
+
+
+
+
+
+
+
+
+
+        Request request = new Request.Builder()
+                .header("Authorization", "Bearer " + accessToken)
+                .header("Content-Type", "application/json")
+                .url("https://api.openai.com/v1/engines/text-davinci-003/completions")
+                .post(formBody)
+                .build();
+        Call call = client.newCall(request);
+        try {
+            Response response = client.newCall(request).execute();
+            Log.i("YEAH",  response.body().string());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
     public List<String> AI_text_2(String prompt){
