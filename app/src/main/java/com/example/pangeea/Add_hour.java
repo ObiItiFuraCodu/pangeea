@@ -17,9 +17,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class Add_hour extends AppCompatActivity {
     int dateinmillis;
     DatabaseConnector connector = new DatabaseConnector(this);
     List<Uri> list = new ArrayList<>();
+    List<String> stringlist = new ArrayList<>();
 
 
     @Override
@@ -47,8 +50,8 @@ public class Add_hour extends AppCompatActivity {
 
 
         Button select_date = findViewById(R.id.select_date_time);
-        Button upload_lessons = findViewById(R.id.upload_button);
-        Button add_ai = findViewById(R.id.generate_ai);
+        Button upload_lessons = findViewById(R.id.add_lesson);
+        Spinner support_lessons = findViewById(R.id.support_lessons);
         Button add = findViewById(R.id.add_button);
         EditText details = findViewById(R.id.details);
 
@@ -67,12 +70,12 @@ public class Add_hour extends AppCompatActivity {
                 openFile();
             }
         });
-        add_ai.setOnClickListener(new View.OnClickListener() {
+       /* add_ai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +103,11 @@ public class Add_hour extends AppCompatActivity {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
                         list.add(data.getData());
+                        stringlist.add(data.getData().getLastPathSegment());
+                        Spinner spinner = findViewById(R.id.support_lessons);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_hour.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
+                        spinner.setAdapter(adapter);
+
 
                     }
                 }

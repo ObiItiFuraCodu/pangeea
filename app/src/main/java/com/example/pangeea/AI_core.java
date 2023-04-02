@@ -16,9 +16,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;*/
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.theokanning.openai.completion.CompletionChoice;
-import com.theokanning.openai.completion.CompletionRequest;
-import com.theokanning.openai.service.OpenAiService;
+//import com.theokanning.openai.completion.CompletionChoice;
+//import com.theokanning.openai.completion.CompletionRequest;
+//import com.theokanning.openai.service.OpenAiService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -143,7 +143,7 @@ public class AI_core {
 
     }
     public List<String> AI_text_2(String prompt){
-        OpenAiService service = new OpenAiService(accessToken);
+       /* OpenAiService service = new OpenAiService(accessToken);
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt("Somebody once told me the world is gonna roll me")
                 .model("ada")
@@ -153,8 +153,8 @@ public class AI_core {
         List<String> results = new ArrayList<>();
         for(CompletionChoice choice : list){
             results.add(choice.getText());
-        }
-        return results;
+        }*/
+        return new ArrayList<>();
     }
     private boolean filtering_system(String course_1,String course_2){
         int nr = 0;
