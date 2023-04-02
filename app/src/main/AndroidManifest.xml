@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".Add_test_question"
+            android:exported="false" />
+        <activity
+            android:name=".Add_test"
+            android:exported="false" />
+        <activity
             android:name=".ModifyTimetable"
             android:exported="false" />
         <activity
