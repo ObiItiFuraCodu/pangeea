@@ -120,4 +120,13 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/c_prompt" />
+
+    <Spinner
+        android:id="@+id/question_files"
+        android:layout_width="369dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_q"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_prompt" />
 </androidx.constraintlayout.widget.ConstraintLayout>
