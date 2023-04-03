@@ -69,10 +69,16 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
 
-            case R.id.nav_add_test: {
+            case R.id.nav_add_task: {
                 Intent i = new Intent(Class_info.this,Add_hour.class);
                 i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
                 i.putExtra("hour/task","task");
+                startActivity(i);
+                break;
+            }
+            case R.id.nav_add_test: {
+                Intent i = new Intent(Class_info.this,Add_test.class);
+                i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
                 startActivity(i);
                 break;
             }
