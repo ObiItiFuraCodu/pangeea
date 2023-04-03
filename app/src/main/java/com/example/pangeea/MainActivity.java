@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         LinearLayout linear = findViewById(R.id.liner);
         connector.import_hours(linear);
         connector.import_tasks(linear);
+        connector.import_tests(linear);
 
     }
 }

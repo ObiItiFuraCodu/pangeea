@@ -645,14 +645,14 @@ public class DatabaseConnector {
                                                                   public void onClick(View c) {
                                                                       if(!user_category.equals("1")){
 
-                                                                          Intent i = new Intent(c.getContext(),Task_info.class);
+                                                                          Intent i = new Intent(c.getContext(),Test_info_prof.class);
                                                                           i.putExtra("classname",v.getText().toString());
                                                                           i.putExtra("hour_milis",set.getKey().toString());
                                                                           context.startActivity(i);
 
                                                                       }else{
 
-                                                                          Intent i = new Intent(c.getContext(),Task_info_proffesor.class);
+                                                                          Intent i = new Intent(c.getContext(),Test_viewer_elev.class);
                                                                           i.putExtra("classname",v.getText().toString());
                                                                           i.putExtra("hour_milis",set.getKey().toString());
                                                                           context.startActivity(i);
@@ -1082,7 +1082,7 @@ public class DatabaseConnector {
                 });
     }
 
-    public void retrieve_test_data_proffesor(String deadline,ListView submissions,ListView lessons_sent){
+    public void retrieve_test_data_proffesor(ListView questions,String deadline){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FileDownloader downloader = new FileDownloader();
@@ -1093,7 +1093,7 @@ public class DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         DatabaseReference database_reference;
 
-                        database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(deadline);
+                        database_reference = database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(deadline);
 
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -1101,28 +1101,19 @@ public class DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
-                                    if((List<String>)map.get("files") != null){
-                                        List<String> lessons_list = (List<String>)map.get("files");
-                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
-                                        lessons_sent.setAdapter(adapter);
-                                    }
-                                    if(map.get("submissions") != null){
-                                        Map<String,String> submissions_map = (Map<String, String>) map.get("submissions");
-                                        List<String> presence_list = new ArrayList<>();
-                                        presence_list.addAll(submissions_map.keySet());
-                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,presence_list);
-                                        submissions.setAdapter(adapter2);
-                                        submissions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    if(map.get("questions") != null){
+                                        Map<String,String> questions_map = (Map<String, String>) map.get("submissions");
+                                        List<String> questions_list = new ArrayList<>();
+                                        questions_list.addAll(questions_map.keySet());
+                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions_list);
+                                        questions.setAdapter(adapter2);
+                                        questions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                try{
-                                                    downloader.saveFile(context,presence_list.get(position),"files/lessons","lesosns");
-                                                }catch(Exception e){
-                                                    Intent i = new Intent(context,FileViewer.class);
-                                                    i.putExtra("lesson_name",presence_list.get(position));
-                                                    context.startActivity(i);
+                                                Intent i = new Intent(context,Test_viewer_proffesor.class);
+                                                context.startActivity(i);
 
-                                                }
                                             }
                                         });
 
@@ -1214,13 +1205,7 @@ public class DatabaseConnector {
                                         });
                                     }
 
-                                    if(map.get("submissions") != null){
-                                        Map<String,String> submissions_map = (Map<String, String>) map.get("submissions");
-                                        List<String> submission_list = new ArrayList<>();
-                                        submission_list.addAll(submissions_map.values());
-                                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,submission_list);
-                                        submissions.setAdapter(arrayAdapter);
-                                    }
+
                                     teacher.setText(map.get("teacher").toString());
 
                                     ai.setOnClickListener(new View.OnClickListener() {
@@ -1229,6 +1214,10 @@ public class DatabaseConnector {
                                             context.startActivity(new Intent(context,AI_generator.class));
                                         }
                                     });
+                                    if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
+                                        Intent i = new Intent(context,Test_viewer_elev.class);
+                                        context.startActivity(i);
+                                    }
 
 
 
