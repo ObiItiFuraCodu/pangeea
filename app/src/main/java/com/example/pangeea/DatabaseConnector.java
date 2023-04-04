@@ -1156,6 +1156,13 @@ public class DatabaseConnector {
                         }
 
                         database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
+                        if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
+                            Intent i = new Intent(context,NFC_detection.class);
+                            i.putExtra("Test","ye");
+                            i.putExtra("hour_ms",hour_ms);
+
+                            context.startActivity(i);
+                        }
 
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -1214,10 +1221,7 @@ public class DatabaseConnector {
                                             context.startActivity(new Intent(context,AI_generator.class));
                                         }
                                     });
-                                    if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
-                                        Intent i = new Intent(context,Test_viewer_elev.class);
-                                        context.startActivity(i);
-                                    }
+
 
 
 
@@ -1240,6 +1244,52 @@ public class DatabaseConnector {
 
                     }
                 });
+    }
+    public void retrieve_test_questions_elev(ListView question,String hour_ms){
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms)
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
+                                        List<HashMap<String,String>> q_list = (List<HashMap<String,String>>) map.get("questions");
+                                        List<String> q_names = new ArrayList<>();
+                                        for(HashMap<String,String> question : q_list){
+                                            q_names.add(question.get("prompt"));
+
+                                        }
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,q_names);
+                                        question.setAdapter(adapter);
+                                        question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                Intent i = new Intent(context,Question_viewer.class);
+                                                i.putExtra("question",q_list.get(position));
+                                                context.startActivity(i);
+
+
+                                            }
+                                        });
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                    }
+                });
+
+
     }
     public void retrieve_class_info(String class_selected,LinearLayout pupil_list){
         FirebaseUser user = auth.getCurrentUser();

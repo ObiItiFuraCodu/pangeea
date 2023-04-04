@@ -98,8 +98,13 @@ public class NFC_detection extends AppCompatActivity {
 
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     Bundle e = getIntent().getExtras();
+                    if(e.getString("Test") != null){
+                        Intent i = new Intent(this,Test_viewer_elev.class);
+                        i.putExtra("hour_ms",e.getString("hour_ms"));
+                        startActivity(i);
+                    }
 
-                    if(e.getString("login") != null){
+                   else if(e.getString("login") != null){
                         Log.i("CEEEEEEEEEEEEEEEEE","EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                         if(nfc_data[2].toCharArray()[0] == '1'){
                             Intent i = new Intent(NFC_detection.this,CSList.class);
