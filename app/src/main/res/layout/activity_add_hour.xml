@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="8dp"
 
-    tools:context=".Add_hour">
+    tools:context=".hour.Add_hour">
 
 
     <EditText

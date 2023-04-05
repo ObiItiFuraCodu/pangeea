@@ -5,7 +5,7 @@
     android:id="@+id/materie_name"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Materie_info">
+    tools:context=".catalogue.Materie_info">
 
     <TextView
         android:id="@+id/absences2"

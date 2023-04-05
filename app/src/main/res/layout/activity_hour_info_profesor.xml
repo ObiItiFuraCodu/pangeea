@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Hour_info_profesor">
+    tools:context=".hour.Hour_info_profesor">
 
 
     <androidx.constraintlayout.widget.Guideline

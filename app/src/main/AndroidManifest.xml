@@ -18,76 +18,76 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
-            android:name=".Question_viewer"
+            android:name=".test.Question_viewer"
             android:exported="false" />
         <activity
-            android:name=".Test_info_elev"
+            android:name=".test.Test_info_elev"
             android:exported="false" />
         <activity
-            android:name=".Test_info_prof"
+            android:name=".test.Test_info_prof"
             android:exported="false" />
         <activity
-            android:name=".Test_viewer_elev"
+            android:name=".test.Test_viewer_elev"
             android:exported="false" />
         <activity
-            android:name=".Test_viewer_proffesor"
+            android:name=".test.Test_viewer_proffesor"
             android:exported="false" />
         <activity
-            android:name=".Add_test_question"
+            android:name=".test.Add_test_question"
             android:exported="false" />
         <activity
-            android:name=".Add_test"
+            android:name=".test.Add_test"
             android:exported="false" />
         <activity
-            android:name=".ModifyTimetable"
+            android:name=".other.ModifyTimetable"
             android:exported="false" />
         <activity
-            android:name=".Dashboard"
+            android:name=".other.Dashboard"
             android:exported="false" />
         <activity
-            android:name=".DailyHourSetter"
+            android:name=".other.DailyHourSetter"
             android:exported="false" />
         <activity
-            android:name=".Materie_info"
+            android:name=".catalogue.Materie_info"
             android:exported="false" />
         <activity
-            android:name=".AI_generator"
+            android:name=".ai.AI_generator"
             android:exported="false" />
         <activity
-            android:name=".Lesson_list"
+            android:name=".content.Lesson_list"
             android:exported="false" />
         <activity
-            android:name=".FileViewer"
+            android:name=".other.FileViewer"
             android:exported="false" />
         <activity
-            android:name=".Add_mark"
+            android:name=".catalogue.Add_mark"
             android:exported="false" />
         <activity
-            android:name=".Pupil_info"
+            android:name=".catalogue.Pupil_info"
             android:exported="false" />
         <activity
-            android:name=".Task_info_proffesor"
+            android:name=".task.Task_info_proffesor"
             android:exported="false" />
         <activity
-            android:name=".Hour_info_profesor"
+            android:name=".hour.Hour_info_profesor"
             android:exported="false" />
         <activity
-            android:name=".Task_info"
+            android:name=".task.Task_info"
             android:exported="false" />
         <activity
-            android:name=".Hour_info_elev"
+            android:name=".hour.Hour_info_elev"
             android:exported="false" />
         <activity
-            android:name=".Add_hour"
+            android:name=".hour.Add_hour"
             android:exported="false" />
         <activity
-            android:name=".CSList"
+            android:name=".other.CSList"
             android:exported="false" />
         <activity
-            android:name=".ControlRoom"
+            android:name=".other.ControlRoom"
             android:exported="false" />
         <activity
-            android:name=".NFC_detection"
+            android:name=".other.NFC_detection"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -98,13 +98,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Class_info"
+            android:name=".main.Class_info"
             android:exported="false" />
         <activity
-            android:name=".NewAccount"
+            android:name=".main.NewAccount"
             android:exported="true" />
         <activity
-            android:name=".Login"
+            android:name=".main.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -113,7 +113,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true" />
     </application>
 

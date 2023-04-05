@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Test_info_elev">
+    tools:context=".test.Test_info_elev">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

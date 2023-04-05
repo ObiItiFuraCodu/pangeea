@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Add_test_question">
+    tools:context=".test.Add_test_question">
 
     <TextView
         android:id="@+id/q_type"
