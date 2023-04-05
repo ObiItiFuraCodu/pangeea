@@ -3,11 +3,12 @@ package com.example.pangeea.content;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.pangeea.backend.ContentBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 
 public class Lesson_list extends AppCompatActivity {
-    DatabaseConnector connector = new DatabaseConnector(this);
+    ContentBackend connector = new ContentBackend(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,12 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Pupil_info extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    DatabaseConnector connector = new DatabaseConnector(this);
+    CatalogueBackend connector = new CatalogueBackend(this);
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     @Override

@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.example.pangeea.backend.DatabaseConnector;
+import com.example.pangeea.backend.TestBackend;
 import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.R;
 
@@ -36,7 +37,7 @@ public class Add_test extends AppCompatActivity {
     int time;
     Calendar date;
     int dateinmillis;
-    DatabaseConnector connector = new DatabaseConnector(this);
+    TestBackend connector = new TestBackend(this);
     List<Uri> list = new ArrayList<>();
     List<String> stringlist = new ArrayList<>();
     List<HashMap<String,String>> questions_list = new ArrayList<>();

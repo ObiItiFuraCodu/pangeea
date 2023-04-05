@@ -15,11 +15,12 @@ import android.widget.TextView;
 
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.backend.TaskBackend;
 import com.example.pangeea.main.MainActivity;
 
 public class Task_info extends AppCompatActivity {
 
-    DatabaseConnector connector = new DatabaseConnector(this);
+    TaskBackend connector = new TaskBackend(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

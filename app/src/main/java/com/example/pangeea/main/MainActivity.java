@@ -13,8 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.backend.HourBackend;
+import com.example.pangeea.backend.TaskBackend;
+import com.example.pangeea.backend.TestBackend;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +26,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    DatabaseConnector connector = new DatabaseConnector(this);
+    CatalogueBackend connector = new CatalogueBackend(this);
+    HourBackend backend1 = new HourBackend(this);
+    TaskBackend backend2 = new TaskBackend(this);
+    TestBackend backend3 = new TestBackend(this);
     FirebaseFirestore store = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     public DrawerLayout drawerLayout;
@@ -112,9 +119,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
         LinearLayout linear = findViewById(R.id.liner);
-        connector.import_hours(linear);
-        connector.import_tasks(linear);
-        connector.import_tests(linear);
+        backend1.import_hours(linear);
+        backend2.import_tasks(linear);
+        backend3.import_tests(linear);
 
     }
 }

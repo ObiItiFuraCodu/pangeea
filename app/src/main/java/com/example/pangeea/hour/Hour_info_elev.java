@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.backend.HourBackend;
 
 public class Hour_info_elev extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class Hour_info_elev extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
 
-        DatabaseConnector connector = new DatabaseConnector(Hour_info_elev.this);
+        HourBackend connector = new HourBackend(Hour_info_elev.this);
         connector.retrieve_hour_data_elev(e.getString("hour_milis"),findViewById(R.id.lv),findViewById(R.id.raise_hand),e.getBoolean("presence"),findViewById(R.id.ai_button),findViewById(R.id.lesson_net_button));
     }
 }

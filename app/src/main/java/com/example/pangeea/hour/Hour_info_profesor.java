@@ -6,9 +6,10 @@ import android.os.Bundle;
 
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.backend.HourBackend;
 
 public class Hour_info_profesor extends AppCompatActivity {
-    DatabaseConnector connector = new DatabaseConnector(this);
+   HourBackend connector = new HourBackend(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

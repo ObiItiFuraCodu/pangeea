@@ -6,9 +6,10 @@ import android.os.Bundle;
 
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.backend.TaskBackend;
 
 public class Task_info_proffesor extends AppCompatActivity {
-    DatabaseConnector connector = new DatabaseConnector(this);
+    TaskBackend connector = new TaskBackend(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

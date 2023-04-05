@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 import com.example.pangeea.hour.Add_hour;
@@ -98,7 +99,7 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
     protected void onStart() {
         super.onStart();
         Bundle bundle = getIntent().getExtras();
-        DatabaseConnector connector = new DatabaseConnector(Class_info.this);
+        CatalogueBackend connector = new CatalogueBackend(Class_info.this);
         LinearLayout pupil_list = findViewById(R.id.linear_layout);
         connector.retrieve_class_info(bundle.getString("class_selected"),pupil_list);
     }

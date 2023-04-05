@@ -59,7 +59,7 @@ public class HourSetter extends Service {
                                                             tomorrow.set(Calendar.SECOND,0);
                                                             tomorrow.set(Calendar.MILLISECOND,0);
                                                             tomorrow.set(Calendar.DAY_OF_WEEK,Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 1);
-                                                            connector.add_automated_hour(tomorrow.getTimeInMillis(),class_taught,"automated_hour",name,teacher,documentSnapshot.getString("user_highschool"));
+                                                          //  connector.add_automated_hour(tomorrow.getTimeInMillis(),class_taught,"automated_hour",name,teacher,documentSnapshot.getString("user_highschool"));
                                                         }
                                                     }
 

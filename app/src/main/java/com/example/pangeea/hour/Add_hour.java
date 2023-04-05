@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.example.pangeea.backend.DatabaseConnector;
+import com.example.pangeea.backend.HourBackend;
+import com.example.pangeea.backend.TaskBackend;
 import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.R;
 
@@ -44,6 +46,8 @@ public class Add_hour extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_hour);
         Bundle e = getIntent().getExtras();
+        HourBackend backend1 = new HourBackend(this);
+        TaskBackend backend2 = new TaskBackend(this);
 
         final View dialogView = View.inflate(this, R.layout.activity_add_hour, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -82,10 +86,10 @@ public class Add_hour extends AppCompatActivity {
             public void onClick(View v) {
                 if(e.getString("hour/task").equals("hour")){
 
-                    connector.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
+                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
 
                 }else{
-                    connector.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
+                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
                 }
                 startActivity(new Intent(Add_hour.this, MainActivity.class));
 

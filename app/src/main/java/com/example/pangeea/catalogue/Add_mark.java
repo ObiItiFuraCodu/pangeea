@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 
@@ -31,7 +32,7 @@ public class Add_mark extends AppCompatActivity {
         Button add_date = findViewById(R.id.add_date);
         Button add = findViewById(R.id.add_mark);
         EditText mark = findViewById(R.id.mark);
-        DatabaseConnector connector = new DatabaseConnector(this);
+        CatalogueBackend connector = new CatalogueBackend(this);
         add_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

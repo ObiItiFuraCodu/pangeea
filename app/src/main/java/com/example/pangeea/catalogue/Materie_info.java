@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.pangeea.backend.CatalogueBackend;
+import com.example.pangeea.backend.ContentBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 
 public class Materie_info extends AppCompatActivity {
-    DatabaseConnector connector = new DatabaseConnector(this);
+    ContentBackend connector = new ContentBackend(this);
+    CatalogueBackend backend = new CatalogueBackend(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,7 @@ public class Materie_info extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        connector.retrieve_pupil_info_elev(findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences),getIntent().getExtras().getString("materie_name"));
+        backend.retrieve_pupil_info_elev(findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences),getIntent().getExtras().getString("materie_name"));
 
     }
 }
