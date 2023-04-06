@@ -227,7 +227,7 @@ public class TestBackend extends DatabaseConnector {
                                       }
                 );
     }
-    public void retrieve_test_data_proffesor(ListView questions, String deadline){
+    public void retrieve_test_data_proffesor(ListView support_lessons, String deadline_ms,ListView submissions){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FileDownloader downloader = new FileDownloader();
@@ -238,7 +238,7 @@ public class TestBackend extends DatabaseConnector {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         DatabaseReference database_reference;
 
-                        database_reference = database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(deadline);
+                        database_reference = database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(deadline_ms);
 
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -247,13 +247,30 @@ public class TestBackend extends DatabaseConnector {
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
 
-                                    if(map.get("questions") != null){
+                                    if(map.get("support_lessons") != null){
+                                        Map<String,String> questions_map = (Map<String, String>) map.get("support_lessons");
+                                        List<String> questions_list = new ArrayList<>();
+                                        questions_list.addAll(questions_map.keySet());
+                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions_list);
+                                        support_lessons.setAdapter(adapter2);
+                                        support_lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                Intent i = new Intent(context, Test_viewer_proffesor.class);
+                                                context.startActivity(i);
+
+                                            }
+                                        });
+
+
+                                    }
+                                    if(map.get("submissions") != null){
                                         Map<String,String> questions_map = (Map<String, String>) map.get("submissions");
                                         List<String> questions_list = new ArrayList<>();
                                         questions_list.addAll(questions_map.keySet());
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions_list);
-                                        questions.setAdapter(adapter2);
-                                        questions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        submissions.setAdapter(adapter2);
+                                        submissions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 Intent i = new Intent(context, Test_viewer_proffesor.class);
@@ -285,7 +302,7 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
-    public void retrieve_test_data_elev(String hour_ms, ListView lessons, ListView submissions, TextView teacher, TextView ai, TextView lesson_network){
+    public void retrieve_test_data_elev(String hour_ms, ListView lessons, TextView teacher, TextView ai, TextView lesson_network){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
