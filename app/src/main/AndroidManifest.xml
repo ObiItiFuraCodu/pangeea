@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".test.Question_viewer_ABC"
+            android:exported="false" />
+        <activity
             android:name=".test.Question_viewer"
             android:exported="false" />
         <activity
