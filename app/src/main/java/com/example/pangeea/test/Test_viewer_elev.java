@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Test_viewer_elev extends AppCompatActivity {
-    private List<HashMap<String,String>> answer_list = new ArrayList<>();
+    private List<HashMap<String,Object>> answer_list = new ArrayList<>();
 
 
     @Override
@@ -36,7 +36,7 @@ public class Test_viewer_elev extends AppCompatActivity {
 
 
     }
-    public void add_question(HashMap<String,String> answer,int index){
+    public void add_question(HashMap<String,Object> answer,int index){
         answer_list.set(index,answer);
     }
 

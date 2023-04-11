@@ -462,61 +462,30 @@ public class TestBackend extends DatabaseConnector {
 
 
     }
-    public void correct_test_and_upload(String hour_ms,List<HashMap<String,String>> answers,String teacher){
+    public void correct_test_and_upload(String hour_ms,List<HashMap<String,Object>> answers,String teacher){
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        List<String> correction_list = new ArrayList<>();
+        StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+        for(HashMap<String,Object> answer : answers){
+            List<Uri> answer_files = (List<Uri>) answer.get("files");
+        }
+
+
+
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms)
-                                .addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
-                                        List<HashMap<String,String>> q_list = (List<HashMap<String,String>>) map.get("questions");
 
-                                        for(int i = 1;i<= q_list.size();i++){
-                                            HashMap<String,String> question = q_list.get(i);
-                                            HashMap<String,String> answer = answers.get(i);
-                                            if(answer.get("type").equals("A/B/C")){
-                                                if(answer.equals(question)){
-                                                    correction_list.set(i,"correct");
-
-                                                }else{
-                                                    correction_list.set(i,"wrong");
-
-                                                }
-                                            }else{
-                                                correction_list.set(i,"to be marked");
-                                            }
-
-
-
-                                         }
-
-
-
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
-                                .setValue(correction_list);
+                                .setValue(answers);
                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
-                                .setValue(correction_list);
+                                .setValue(answers);
                     }
                 });
 
     }
-    public void retrieve_to_be_corrected(){
-        //TODO:TO BE IMPLEMENTED
-    }
+
 
 }

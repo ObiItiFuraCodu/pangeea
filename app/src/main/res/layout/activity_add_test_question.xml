@@ -11,9 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="93dp"
         android:text="Type"
+        app:layout_constraintBottom_toTopOf="@+id/q_prompt"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="45dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -129,4 +132,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/c_prompt" />
+
+    <Button
+        android:id="@+id/add_q_file"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="@+id/question_files"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/question_files" />
 </androidx.constraintlayout.widget.ConstraintLayout>

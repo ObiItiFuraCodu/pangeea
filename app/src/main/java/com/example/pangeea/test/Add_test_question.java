@@ -1,7 +1,14 @@
 package com.example.pangeea.test;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.pangeea.R;
+import com.example.pangeea.hour.Add_hour;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +28,9 @@ public class Add_test_question extends AppCompatActivity {
     Boolean a_val = false;
     Boolean b_val = false;
     Boolean c_val = false;
+    List<String> filenames = new ArrayList<>();
+    List<Uri> files = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +47,7 @@ public class Add_test_question extends AppCompatActivity {
         Button a_valid = findViewById(R.id.a_valid);
         Button b_valid = findViewById(R.id.b_valid);
         Button c_valid = findViewById(R.id.c_valid);
+        Button add_q_f = findViewById(R.id.add_q_file);
 
         Button enter = findViewById(R.id.add_q);
         a_valid.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +87,12 @@ public class Add_test_question extends AppCompatActivity {
                     c_val = false;
                     c_valid.setBackgroundColor(getResources().getColor(R.color.purple_200));
                 }
+            }
+        });
+        add_q_f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFile();
             }
         });
         Spinner type = findViewById(R.id.spinner2);
@@ -145,4 +163,27 @@ public class Add_test_question extends AppCompatActivity {
 
 
     }
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
+            , new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        Intent data = result.getData();
+                        files.add(data.getData());
+                        filenames.add(data.getData().getLastPathSegment());
+                        Spinner spinner = findViewById(R.id.question_files);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test_question.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,filenames);
+                        spinner.setAdapter(adapter);
+
+
+                    }
+                }
+            });
+    public void openFile(){
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("*/*");
+        intent = Intent.createChooser(intent,"Choose NOW");
+        activityResultLauncher.launch(intent);
+    }
+
 }
