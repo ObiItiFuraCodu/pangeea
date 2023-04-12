@@ -26,6 +26,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
         TextView q_prompt = findViewById(R.id.question_prompt_abc);
         TextView q_files = findViewById(R.id.question_files_abc);
         Button upload_question = findViewById(R.id.upload_question_abc);
+        answer_map.put("type","A/B/C");
 
         Button A = findViewById(R.id.a_button);
         Button B = findViewById(R.id.b_button);

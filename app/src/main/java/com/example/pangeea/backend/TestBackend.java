@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.content.Lesson_list;
 import com.example.pangeea.other.Basic_tools;
@@ -38,6 +40,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -275,6 +279,7 @@ public class TestBackend extends DatabaseConnector {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 Intent i = new Intent(context, Test_viewer_proffesor.class);
+                                                i.putExtra("pupil",questions_list.get(position).toString());
                                                 context.startActivity(i);
 
                                             }
@@ -468,6 +473,12 @@ public class TestBackend extends DatabaseConnector {
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
         for(HashMap<String,Object> answer : answers){
             List<Uri> answer_files = (List<Uri>) answer.get("files");
+            for(Uri file : answer_files){
+                storage_ref.child("tests/" + user.getDisplayName() + "/submissions")
+                        .putFile(file);
+            }
+            answer.remove(answer.get("files"));
+
         }
 
 
@@ -486,6 +497,60 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
+    public void retrieve_questions_to_be_corrected(ListView to_correct,String test_ms,String pupil){
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        List<String> question_names = new ArrayList<>();
+        StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(documentSnapshot.getString("teacher")).child(test_ms).child("submissions").child(pupil)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DataSnapshot dataSnapshot) {
+                                        List<HashMap<String,Object>> question_list = new ArrayList<>();
+                                        for(int i = 0;i<  question_list.size();i++){
+
+                                            HashMap<String,Object> question = question_list.get(i);
+                                            String type = (String)question.get("type");
+                                            if(type.equals("to_be_corrected")){
+                                                question_names.add(Integer.toString(i));
+                                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,question_names);
+                                                to_correct.setAdapter(adapter);
+                                                to_correct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                    @Override
+                                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                        List<String> filenames = (List<String>) question.get("filenames");
+                                                        for(String file : filenames){
+                                                            storage_ref.child("tests/" + pupil + "/submissions/" + file).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                @Override
+                                                                public void onSuccess(Uri uri) {
+                                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                                    context.startActivity(intent);
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+
+                                            }
+                                        }
+
+                                    }
+                                });
+
+
+
+                    }
+                });
+    }
+
 
 
 }

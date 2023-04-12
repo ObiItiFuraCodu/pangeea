@@ -38,11 +38,14 @@ import java.util.Map;
 
 public class Question_viewer extends AppCompatActivity {
     HashMap<String,Object> question = new HashMap<>();
+    HashMap<String,Object> answer_map = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_viewer);
         FirebaseFirestore store = FirebaseFirestore.getInstance();
+        answer_map.put("type","to_be_corrected");
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         TextView q_prompt = findViewById(R.id.question_prompt);
@@ -69,6 +72,8 @@ public class Question_viewer extends AppCompatActivity {
         upload_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Test_viewer_elev info = new Test_viewer_elev();
+                info.add_question(answer_map ,(int)question.get("index"));
                 startActivity(new Intent(v.getContext(),Test_viewer_elev.class));
             }
         });
@@ -93,8 +98,8 @@ public class Question_viewer extends AppCompatActivity {
                             List<String> filenames = new ArrayList<>();
                             files.add(data.getData());
                             filenames.add(data.getData().getLastPathSegment());
-                            question.put("filenames",filenames);
-                            question.put("files",files);
+                            answer_map.put("filenames",filenames);
+                            answer_map.put("files",files);
 
 
                         }else{
@@ -102,8 +107,8 @@ public class Question_viewer extends AppCompatActivity {
                             List<String> filenames = (List<String>) question.get("filenames");
                             files.add(data.getData());
                             filenames.add(data.getData().getLastPathSegment());
-                            question.put("filenames",filenames);
-                            question.put("files",files);
+                            answer_map.put("filenames",filenames);
+                            answer_map.put("files",files);
 
                         }
 
