@@ -1,6 +1,7 @@
 package com.example.pangeea.backend;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_generator;
@@ -501,6 +503,7 @@ public class TestBackend extends DatabaseConnector {
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         List<String> question_names = new ArrayList<>();
+        List<String> correct_questions = new ArrayList<>();
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -518,6 +521,7 @@ public class TestBackend extends DatabaseConnector {
 
                                             HashMap<String,Object> question = question_list.get(i);
                                             String type = (String)question.get("type");
+
                                             if(type.equals("to_be_corrected")){
                                                 question_names.add(Integer.toString(i));
                                                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,question_names);
@@ -535,6 +539,50 @@ public class TestBackend extends DatabaseConnector {
                                                                 }
                                                             });
                                                         }
+                                                    }
+                                                });
+                                                to_correct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                                    @Override
+                                                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                                        new AlertDialog.Builder(context)
+                                                                .setTitle("Delete entry")
+                                                                .setMessage("Are you sure you want to delete this entry?")
+
+                                                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        // Continue with delete operation
+                                                                        HashMap<String,Object> answer_map = new HashMap<>();
+                                                                        answer_map.put("answer","correct");
+                                                                        question_list.set(position,answer_map);
+                                                                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
+                                                                                .setValue(question_list);
+                                                                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil)
+                                                                                .setValue(question_list);
+                                                                        dialog.dismiss();
+
+                                                                    }
+                                                                })
+
+                                                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        HashMap<String,Object> answer_map = new HashMap<>();
+                                                                        answer_map.put("answer","correct");
+                                                                        question_list.set(position,answer_map);
+                                                                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
+                                                                                .setValue(question_list);
+                                                                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil)
+                                                                                .setValue(question_list);
+                                                                        dialog.dismiss();
+                                                                    }
+                                                                })
+                                                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                                                .show();
+                                                        return false;
                                                     }
                                                 });
 
