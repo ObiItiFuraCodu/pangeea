@@ -110,21 +110,21 @@ public class Add_test_question extends AppCompatActivity {
                             question.put("type",types.get(position));
 
                             if(a_val == true){
-                                question.put("valid",a_variant.getText().toString());
+                                question.put(a_variant.getText().toString(),"valid");
                             }else{
-                                question.put("invalid",a_variant.getText().toString());
+                                question.put(a_variant.getText().toString(),"invalid");
 
                             }
                             if(b_val == true){
-                                question.put("valid",b_variant.getText().toString());
+                                question.put(b_variant.getText().toString(),"valid");
                             }else{
-                                question.put("invalid",b_variant.getText().toString());
+                                question.put(b_variant.getText().toString(),"invalid");
 
                             }
                             if(c_val == true){
-                                question.put("valid",c_variant.getText().toString());
+                                question.put(c_variant.getText().toString(),"valid");
                             }else{
-                                question.put("invalid",c_variant.getText().toString());
+                                question.put(c_variant.getText().toString(),"invalid");
 
                             }
                             Add_test test = new Add_test();
