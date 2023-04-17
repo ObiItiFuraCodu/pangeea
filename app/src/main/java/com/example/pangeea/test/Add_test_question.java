@@ -128,7 +128,8 @@ public class Add_test_question extends AppCompatActivity {
 
                             }
                             Add_test test = new Add_test();
-                            test.add_question(question);
+                           // test.add_question(question,Add_test.class);
+                            //TODO:REPAIR DIS SHIT
 
                         }
                     });
@@ -148,7 +149,8 @@ public class Add_test_question extends AppCompatActivity {
                             question.put("type",types.get(position));
 
                             Add_test test = new Add_test();
-                            test.add_question(question);
+                            //test.add_question(question,(Activity)Add_test.class);
+                            finish();
 
                         }
                     });

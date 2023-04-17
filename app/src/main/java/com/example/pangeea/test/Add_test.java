@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -41,27 +42,30 @@ public class Add_test extends AppCompatActivity {
     List<Uri> list = new ArrayList<>();
     List<String> stringlist = new ArrayList<>();
     List<HashMap<String,String>> questions_list = new ArrayList<>();
+    List<String> question_stringlist = new ArrayList<>();
+    Spinner test_questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_hour);
+        setContentView(R.layout.activity_add_test);
         Bundle e = getIntent().getExtras();
 
         final View dialogView = View.inflate(this, R.layout.activity_add_hour, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         EditText title = findViewById(R.id.test_title);
 
+        test_questions = findViewById(R.id.test_questions);
 
         Button select_date = findViewById(R.id.select_test_date);
         Button upload_lessons = findViewById(R.id.add_test_support_lesson);
         //Spinner support_lessons = findViewById(R.id.test_support_lessons);
 
-        Spinner test_questions = findViewById(R.id.test_questions);
         Button add_test_question = findViewById(R.id.add_test_question);
 
         Button add = findViewById(R.id.add_test);
         EditText details = findViewById(R.id.test_details);
+
 
 
 
@@ -126,8 +130,13 @@ public class Add_test extends AppCompatActivity {
         intent = Intent.createChooser(intent,"Choose NOW");
         activityResultLauncher.launch(intent);
     }
-    public void add_question(HashMap<String,String> question){
-     questions_list.add(question);
+    public void add_question(HashMap<String,String> question,Activity activity){
+        Spinner questions = (Spinner)activity.findViewById(R.id.test_questions);
+        questions_list.add(question);
+     question_stringlist.add(question.get("prompt"));
+     ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,question_stringlist);
+     questions.setAdapter(adapter);
+
     }
 
     public void showDateTimePicker() {
