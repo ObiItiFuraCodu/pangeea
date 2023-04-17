@@ -38,6 +38,7 @@ public class CatalogueBackend extends DatabaseConnector{
 
     public CatalogueBackend(Context context) {
         super(context);
+        this.context = context;
     }
     public void retrieve_class_info(String class_selected, LinearLayout pupil_list){
         FirebaseUser user = auth.getCurrentUser();

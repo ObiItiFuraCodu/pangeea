@@ -33,6 +33,8 @@ public class ContentBackend extends DatabaseConnector{
 
     public ContentBackend(Context context) {
         super(context);
+        this.context = context;
+
     }
     public void retrieve_lessons(String grade, LinearLayout linearl, String main_course){
         AI_core core = new AI_core(context);

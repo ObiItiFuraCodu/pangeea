@@ -53,6 +53,8 @@ public class HourBackend extends DatabaseConnector {
 
     public HourBackend(Context context) {
         super(context);
+        this.context = context;
+
     }
     public void import_hours(LinearLayout layout){
         FirebaseUser user = auth.getCurrentUser();

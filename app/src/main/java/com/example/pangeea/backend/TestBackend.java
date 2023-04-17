@@ -63,6 +63,8 @@ public class TestBackend extends DatabaseConnector {
 
     public TestBackend(Context context) {
         super(context);
+        this.context = context;
+
     }
     public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,String>> questions){
         FirebaseUser user = auth.getCurrentUser();

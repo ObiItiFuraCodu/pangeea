@@ -49,6 +49,8 @@ public class TaskBackend extends DatabaseConnector{
     Basic_tools tool = new Basic_tools();
     public TaskBackend(Context context) {
         super(context);
+        this.context = context;
+
     }
 
 
