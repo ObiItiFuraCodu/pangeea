@@ -1,5 +1,7 @@
 package com.example.pangeea.test;
 
+import static java.sql.Types.NULL;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -13,6 +15,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,12 +42,12 @@ public class Add_test extends AppCompatActivity {
     Calendar date;
     int dateinmillis;
     TestBackend connector = new TestBackend(this);
+
+    Spinner test_questions;
     List<Uri> list = new ArrayList<>();
     List<String> stringlist = new ArrayList<>();
     List<HashMap<String,String>> questions_list = new ArrayList<>();
     List<String> question_stringlist = new ArrayList<>();
-    Spinner test_questions;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +62,8 @@ public class Add_test extends AppCompatActivity {
 
         Button select_date = findViewById(R.id.select_test_date);
         Button upload_lessons = findViewById(R.id.add_test_support_lesson);
-        //Spinner support_lessons = findViewById(R.id.test_support_lessons);
+        Spinner support_lessons = findViewById(R.id.test_support_lessons);
+        Spinner questions = findViewById(R.id.test_questions);
 
         Button add_test_question = findViewById(R.id.add_test_question);
 
@@ -101,10 +105,29 @@ public class Add_test extends AppCompatActivity {
       add_test_question.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-             startActivity(new Intent(v.getContext(), Add_test_question.class));
+             Intent i = new Intent(Add_test.this,Add_test_question.class);
+             if(!e.get("questions").equals(NULL)){
+                 i.putExtra("questions", (Bundle) e.get("questions"));
+                 i.putExtra("questionnames", (Bundle) e.get("questionnames"));
+
+
+             }
+              i.putExtra("files", (Parcelable) list);
+              i.putExtra("filenames", (Parcelable) stringlist);
+
           }
       });
+    if(!e.get("questions").equals(NULL)){
 
+        list = (List<Uri>) e.get("files");
+        questions_list = (List<HashMap<String, String>>) e.get("questions");
+        question_stringlist = (List<String>) e.get("questionnames");
+        stringlist = (List<String>) e.get("filenames");
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,question_stringlist);
+        questions.setAdapter(adapter);
+    }
 
 
     }
@@ -130,14 +153,7 @@ public class Add_test extends AppCompatActivity {
         intent = Intent.createChooser(intent,"Choose NOW");
         activityResultLauncher.launch(intent);
     }
-    public void add_question(HashMap<String,String> question,Activity activity){
-        Spinner questions = (Spinner)activity.findViewById(R.id.test_questions);
-        questions_list.add(question);
-     question_stringlist.add(question.get("prompt"));
-     ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,question_stringlist);
-     questions.setAdapter(adapter);
 
-    }
 
     public void showDateTimePicker() {
         final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));

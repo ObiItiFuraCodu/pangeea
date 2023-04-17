@@ -1,5 +1,7 @@
 package com.example.pangeea.test;
 
+import static java.sql.Types.NULL;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -10,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -108,28 +111,46 @@ public class Add_test_question extends AppCompatActivity {
                             HashMap<String,String> question = new HashMap<>();
                             question.put("prompt",prompt.getText().toString());
                             question.put("type",types.get(position));
+                            Bundle e = getIntent().getExtras();
+                            if(types.get(position).equals("A/B/C")){
+                                if(a_val == true){
+                                    question.put(a_variant.getText().toString(),"valid");
+                                }else{
+                                    question.put(a_variant.getText().toString(),"invalid");
 
-                            if(a_val == true){
-                                question.put(a_variant.getText().toString(),"valid");
+                                }
+                                if(b_val == true){
+                                    question.put(b_variant.getText().toString(),"valid");
+                                }else{
+                                    question.put(b_variant.getText().toString(),"invalid");
+
+                                }
+                                if(c_val == true){
+                                    question.put(c_variant.getText().toString(),"valid");
+                                }else{
+                                    question.put(c_variant.getText().toString(),"invalid");
+
+                                }
+                            }
+                            List<HashMap<String,String>> questions;
+                            List<String> question_names;
+                            if(!e.get("questions").equals(NULL)){
+                                 questions = (List<HashMap<String, String>>) e.get("questions");
+                                 question_names = (List<String>) e.get("questionnames");
+
                             }else{
-                                question.put(a_variant.getText().toString(),"invalid");
+                                 questions = new ArrayList<>();
+                                 question_names = new ArrayList<>();
 
                             }
-                            if(b_val == true){
-                                question.put(b_variant.getText().toString(),"valid");
-                            }else{
-                                question.put(b_variant.getText().toString(),"invalid");
-
-                            }
-                            if(c_val == true){
-                                question.put(c_variant.getText().toString(),"valid");
-                            }else{
-                                question.put(c_variant.getText().toString(),"invalid");
-
-                            }
-                            Add_test test = new Add_test();
-                           // test.add_question(question,Add_test.class);
-                            //TODO:REPAIR DIS SHIT
+                            questions.add(question);
+                            question_names.add(prompt.getText().toString());
+                            Intent i = new Intent(Add_test_question.this,Add_test.class);
+                            i.putExtra("questions", (Parcelable) questions);
+                            i.putExtra("questionnames", (Parcelable) question_names);
+                            i.putExtra("files", (Bundle) e.get("files"));
+                            i.putExtra("filenames", (Bundle) e.get("filenames"));
+                            startActivity(i);
 
                         }
                     });
