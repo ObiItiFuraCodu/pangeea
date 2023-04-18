@@ -20,7 +20,7 @@ public class Test_info_elev extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
         TestBackend backend = new TestBackend(this);
-        backend.retrieve_test_data_elev(e.getString("hour_ms"),findViewById(R.id.lessons_lt),findViewById(R.id.teacher_tv),findViewById(R.id.ai_tv),findViewById(R.id.lesson_network_tv));
+        backend.retrieve_test_data_elev(e.getString("hour_milis"),findViewById(R.id.lessons_lt),findViewById(R.id.teacher_tv),findViewById(R.id.ai_tv),findViewById(R.id.lesson_network_tv));
 
     }
 }

@@ -26,6 +26,7 @@ import com.example.pangeea.other.FileViewer;
 import com.example.pangeea.other.NFC_detection;
 import com.example.pangeea.test.Question_viewer;
 import com.example.pangeea.test.Question_viewer_ABC;
+import com.example.pangeea.test.Test_info_elev;
 import com.example.pangeea.test.Test_info_prof;
 import com.example.pangeea.test.Test_viewer_elev;
 import com.example.pangeea.test.Test_viewer_proffesor;
@@ -175,7 +176,7 @@ public class TestBackend extends DatabaseConnector {
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View c) {
-                                                                      if(!user_category.equals("1")){
+                                                                      if(user_category.equals("1")){
 
                                                                           Intent i = new Intent(c.getContext(), Test_info_prof.class);
                                                                           i.putExtra("classname",v.getText().toString());
@@ -184,7 +185,7 @@ public class TestBackend extends DatabaseConnector {
 
                                                                       }else{
 
-                                                                          Intent i = new Intent(c.getContext(), Test_viewer_elev.class);
+                                                                          Intent i = new Intent(c.getContext(), Test_info_elev.class);
                                                                           i.putExtra("classname",v.getText().toString());
                                                                           i.putExtra("hour_milis",set.getKey().toString());
                                                                           context.startActivity(i);

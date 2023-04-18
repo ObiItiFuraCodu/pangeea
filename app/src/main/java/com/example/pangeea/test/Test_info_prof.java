@@ -21,6 +21,6 @@ public class Test_info_prof extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
         TestBackend backend = new TestBackend(this);
-        backend.retrieve_test_data_proffesor(findViewById(R.id.support_lesson_list),e.getString("hour_ms"),findViewById(R.id.submission_list));
+        backend.retrieve_test_data_proffesor(findViewById(R.id.support_lesson_list),e.getString("hour_milis"),findViewById(R.id.submission_list));
     }
 }
