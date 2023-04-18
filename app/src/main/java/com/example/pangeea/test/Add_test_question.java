@@ -189,6 +189,10 @@ public class Add_test_question extends AppCompatActivity {
                             i.putExtra("questionnames", (Serializable) question_names);
                             i.putExtra("files", (Serializable) e.get("files"));
                             i.putExtra("filenames", (Serializable) e.get("filenames"));
+                            i.putExtra("class_selected",e.getString("class_selected"));
+                            if(e.get("hour_ms") != null){
+                                i.putExtra("hour_ms",e.getLong("hour_ms"));
+                            }
                             startActivity(i);
 
                         }

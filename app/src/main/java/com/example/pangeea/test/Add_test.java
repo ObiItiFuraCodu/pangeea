@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.backend.TestBackend;
@@ -42,7 +43,7 @@ public class Add_test extends AppCompatActivity {
 
     int time;
     Calendar date;
-    int dateinmillis;
+    Long dateinmillis;
     TestBackend connector = new TestBackend(this);
 
     Spinner test_questions;
@@ -97,9 +98,19 @@ public class Add_test extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connector.add_test(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list);
+                if(date == null && e.get("hour_ms") == null){
+                    Toast.makeText(Add_test.this,"you didnt pick a date",Toast.LENGTH_SHORT).show();
+                }else{
+                    if(e.get("hour_ms") != null){
+                        connector.add_test(e.getLong("hour_ms"), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list);
 
-                startActivity(new Intent(Add_test.this, MainActivity.class));
+                    }else{
+                        connector.add_test(date.getTimeInMillis(), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list);
+                    }
+                    startActivity(new Intent(Add_test.this, MainActivity.class));
+
+                }
+
 
             }
         });
@@ -116,6 +127,10 @@ public class Add_test extends AppCompatActivity {
              }
               i.putExtra("files", (Serializable) list);
               i.putExtra("filenames", (Serializable) stringlist);
+              i.putExtra("class_selected",e.getString("class_selected"));
+              if(dateinmillis != null){
+                  i.putExtra("hour_ms",date.getTimeInMillis());
+              }
               startActivity(i);
 
           }
@@ -176,7 +191,7 @@ public class Add_test extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         date.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         date.set(Calendar.MINUTE, minute);
-                        dateinmillis = (int) date.getTimeInMillis();
+                        dateinmillis =  date.getTimeInMillis();
 
 
 
