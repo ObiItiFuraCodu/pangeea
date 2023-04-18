@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import com.example.pangeea.R;
 import com.example.pangeea.hour.Add_hour;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -134,7 +135,7 @@ public class Add_test_question extends AppCompatActivity {
                             }
                             List<HashMap<String,String>> questions;
                             List<String> question_names;
-                            if(!e.get("questions").equals(NULL)){
+                            if(e.get("questions") != null){
                                  questions = (List<HashMap<String, String>>) e.get("questions");
                                  question_names = (List<String>) e.get("questionnames");
 
@@ -146,8 +147,8 @@ public class Add_test_question extends AppCompatActivity {
                             questions.add(question);
                             question_names.add(prompt.getText().toString());
                             Intent i = new Intent(Add_test_question.this,Add_test.class);
-                            i.putExtra("questions", (Parcelable) questions);
-                            i.putExtra("questionnames", (Parcelable) question_names);
+                            i.putExtra("questions", (Serializable) questions);
+                            i.putExtra("questionnames", (Serializable) question_names);
                             i.putExtra("files", (Bundle) e.get("files"));
                             i.putExtra("filenames", (Bundle) e.get("filenames"));
                             startActivity(i);
@@ -165,13 +166,30 @@ public class Add_test_question extends AppCompatActivity {
                     enter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Bundle e = getIntent().getExtras();
                             HashMap<String,String> question = new HashMap<>();
                             question.put("prompt",prompt.getText().toString());
                             question.put("type",types.get(position));
 
-                            Add_test test = new Add_test();
-                            //test.add_question(question,(Activity)Add_test.class);
-                            finish();
+                            List<HashMap<String,String>> questions;
+                            List<String> question_names;
+                            if(e.get("questions") != null){
+                                questions = (List<HashMap<String, String>>) e.get("questions");
+                                question_names = (List<String>) e.get("questionnames");
+
+                            }else{
+                                questions = new ArrayList<>();
+                                question_names = new ArrayList<>();
+
+                            }
+                            questions.add(question);
+                            question_names.add(prompt.getText().toString());
+                            Intent i = new Intent(Add_test_question.this,Add_test.class);
+                            i.putExtra("questions", (Serializable) questions);
+                            i.putExtra("questionnames", (Serializable) question_names);
+                            i.putExtra("files", (Serializable) e.get("files"));
+                            i.putExtra("filenames", (Serializable) e.get("filenames"));
+                            startActivity(i);
 
                         }
                     });

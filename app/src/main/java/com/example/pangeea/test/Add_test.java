@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import com.example.pangeea.backend.TestBackend;
 import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -106,18 +108,19 @@ public class Add_test extends AppCompatActivity {
           @Override
           public void onClick(View v) {
              Intent i = new Intent(Add_test.this,Add_test_question.class);
-             if(!e.get("questions").equals(NULL)){
-                 i.putExtra("questions", (Bundle) e.get("questions"));
-                 i.putExtra("questionnames", (Bundle) e.get("questionnames"));
+             if(e.get("questions") != null){
+                 i.putExtra("questions", (Serializable) e.get("questions"));
+                 i.putExtra("questionnames", (Serializable) e.get("questionnames"));
 
 
              }
-              i.putExtra("files", (Parcelable) list);
-              i.putExtra("filenames", (Parcelable) stringlist);
+              i.putExtra("files", (Serializable) list);
+              i.putExtra("filenames", (Serializable) stringlist);
+              startActivity(i);
 
           }
       });
-    if(!e.get("questions").equals(NULL)){
+    if(e.get("questions") != null){
 
         list = (List<Uri>) e.get("files");
         questions_list = (List<HashMap<String, String>>) e.get("questions");
@@ -127,7 +130,9 @@ public class Add_test extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,question_stringlist);
         questions.setAdapter(adapter);
-    }
+        ArrayAdapter<String> adapter_files = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
+        support_lessons.setAdapter(adapter_files);
+     }
 
 
     }
@@ -139,11 +144,13 @@ public class Add_test extends AppCompatActivity {
                         Intent data = result.getData();
                         list.add(data.getData());
                         stringlist.add(data.getData().getLastPathSegment());
-                        Spinner spinner = findViewById(R.id.support_lessons);
+                        Spinner spinner = findViewById(R.id.test_support_lessons);
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
                         spinner.setAdapter(adapter);
 
 
+                    }else{
+                        Log.e("MUIE","aiwsawsa");
                     }
                 }
             });
