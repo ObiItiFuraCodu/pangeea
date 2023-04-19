@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,9 +74,16 @@ public class Question_viewer extends AppCompatActivity {
         upload_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Test_viewer_elev info = new Test_viewer_elev();
-                info.add_question(answer_map ,(int)question.get("index"));
-                startActivity(new Intent(v.getContext(),Test_viewer_elev.class));
+
+                Bundle e = getIntent().getExtras();
+                List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) e.get("answer_list");
+                answer_list.add(answer_map);
+                Intent i = new Intent(Question_viewer.this,Test_viewer_elev.class);
+                i.putExtra("answer_list", (Serializable) answer_list);
+                i.putExtra("hour_ms",e.getString("hour_ms"));
+                i.putExtra("teacher",e.getString("teacher"));
+                startActivity(i);
+
             }
         });
 
@@ -93,7 +102,7 @@ public class Question_viewer extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
-                        if(question.get("files") == NULL){
+                        if(question.get("files") == null){
                             List<Uri> files = new ArrayList<>();
                             List<String> filenames = new ArrayList<>();
                             files.add(data.getData());

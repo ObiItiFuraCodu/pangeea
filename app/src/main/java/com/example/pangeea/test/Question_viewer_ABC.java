@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.example.pangeea.R;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 public class Question_viewer_ABC extends AppCompatActivity {
     String answer = "Non existent";
@@ -154,9 +156,14 @@ public class Question_viewer_ABC extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Test_viewer_elev info = new Test_viewer_elev();
-                info.add_question(answer_map ,(int)question.get("index"));
-                startActivity(new Intent(v.getContext(),Test_viewer_elev.class));
+                Bundle e = getIntent().getExtras();
+                List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) e.get("answer_list");
+                answer_list.add(answer_map);
+                Intent i = new Intent(Question_viewer_ABC.this,Test_viewer_elev.class);
+                i.putExtra("answer_list", (Serializable) answer_list);
+                i.putExtra("hour_ms",e.getString("hour_ms"));
+                i.putExtra("teacher",e.getString("teacher"));
+                startActivity(i);
             }
         });
 

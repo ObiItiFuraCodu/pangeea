@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,6 +48,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.units.qual.A;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -329,10 +332,19 @@ public class TestBackend extends DatabaseConnector {
                         }
 
                         database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
-                        if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
+                        /*if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
                             Intent i = new Intent(context, NFC_detection.class);
                             i.putExtra("Test","ye");
                             i.putExtra("hour_ms",hour_ms);
+
+                            context.startActivity(i);
+                        }*/
+                        //TODO:PUT BACK AFTER REPAIRING
+                        if(true){
+                            Intent i = new Intent(context, NFC_detection.class);
+                            i.putExtra("Test","ye");
+                            i.putExtra("hour_ms",hour_ms);
+
 
                             context.startActivity(i);
                         }
@@ -418,7 +430,7 @@ public class TestBackend extends DatabaseConnector {
                     }
                 });
     }
-    public void retrieve_test_questions_elev(ListView question,String hour_ms){
+    public void retrieve_test_questions_elev(ListView question, String hour_ms, List<HashMap<String,Object>> answer_list){
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -433,9 +445,11 @@ public class TestBackend extends DatabaseConnector {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                         List<HashMap<String,String>> q_list = (List<HashMap<String,String>>) map.get("questions");
+
                                         List<String> q_names = new ArrayList<>();
                                         for(HashMap<String,String> question : q_list){
                                             q_names.add(question.get("prompt"));
+                                            answer_list.add(new HashMap<>());
 
                                         }
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,q_names);
@@ -445,11 +459,19 @@ public class TestBackend extends DatabaseConnector {
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 if(q_list.get(position).get("type").equals("A/B/C")){
                                                     Intent i = new Intent(context, Question_viewer_ABC.class);
+                                                    i.putExtra("index",position);
                                                     i.putExtra("question",q_list.get(position));
+                                                    i.putExtra("answer_list", (Serializable) answer_list);
+                                                    i.putExtra("hour_ms",hour_ms);
+                                                    i.putExtra("teacher",(String)map.get("teacher"));
                                                     context.startActivity(i);
                                                 }else{
                                                     Intent i = new Intent(context, Question_viewer.class);
+                                                    i.putExtra("index",position);
                                                     i.putExtra("question",q_list.get(position));
+                                                    i.putExtra("answer_list",(Serializable) answer_list);
+                                                    i.putExtra("hour_ms",hour_ms);
+                                                    i.putExtra("teacher",(String)map.get("teacher"));
                                                     context.startActivity(i);
                                                 }
 
@@ -478,11 +500,14 @@ public class TestBackend extends DatabaseConnector {
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
         for(HashMap<String,Object> answer : answers){
             List<Uri> answer_files = (List<Uri>) answer.get("files");
-            for(Uri file : answer_files){
-                storage_ref.child("tests/" + user.getDisplayName() + "/submissions")
-                        .putFile(file);
+            if(answer_files != null){
+                for(Uri file : answer_files){
+                    storage_ref.child("tests/" + user.getDisplayName() + "/submissions")
+                            .putFile(file);
+                }
             }
-            answer.remove(answer.get("files"));
+
+            answer.remove("files");
 
         }
 

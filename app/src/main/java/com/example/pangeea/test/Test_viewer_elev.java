@@ -36,16 +36,17 @@ public class Test_viewer_elev extends AppCompatActivity {
 
 
     }
-    public void add_question(HashMap<String,Object> answer,int index){
-        answer_list.set(index,answer);
-    }
+
 
     @Override
     protected void onStart() {
         super.onStart();
         Bundle e = getIntent().getExtras();
         TestBackend backend = new TestBackend(this);
-        backend.retrieve_test_questions_elev(findViewById(R.id.q_lv),e.getString("hour_ms"));
+        if(e.get("answer_list") != null){
+            answer_list = (List<HashMap<String, Object>>) e.get("answer_list");
+        }
+        backend.retrieve_test_questions_elev(findViewById(R.id.q_lv),e.getString("hour_ms"),answer_list);
 
     }
 
