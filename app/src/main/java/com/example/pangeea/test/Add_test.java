@@ -49,7 +49,7 @@ public class Add_test extends AppCompatActivity {
     Spinner test_questions;
     List<Uri> list = new ArrayList<>();
     List<String> stringlist = new ArrayList<>();
-    List<HashMap<String,String>> questions_list = new ArrayList<>();
+    List<HashMap<String,Object>> questions_list = new ArrayList<>();
     List<String> question_stringlist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +138,7 @@ public class Add_test extends AppCompatActivity {
     if(e.get("questions") != null){
 
         list = (List<Uri>) e.get("files");
-        questions_list = (List<HashMap<String, String>>) e.get("questions");
+        questions_list = (List<HashMap<String, Object>>) e.get("questions");
         question_stringlist = (List<String>) e.get("questionnames");
         stringlist = (List<String>) e.get("filenames");
 

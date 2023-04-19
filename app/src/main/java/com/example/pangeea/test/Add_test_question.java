@@ -106,37 +106,47 @@ public class Add_test_question extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(types.get(position).equals("A/B/C")){
+                    a_variant.setVisibility(View.VISIBLE);
+                    b_variant.setVisibility(View.VISIBLE);
+                    c_variant.setVisibility(View.VISIBLE);
+                    a_valid.setVisibility(View.VISIBLE);
+                    b_valid.setVisibility(View.VISIBLE);
+                    c_valid.setVisibility(View.VISIBLE);
                     enter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            HashMap<String,String> question = new HashMap<>();
+                            HashMap<String,Object> question = new HashMap<>();
                             question.put("prompt",prompt.getText().toString());
                             question.put("type",types.get(position));
+                            question.put("filenames",filenames);
+
+                            HashMap<String,String> variants = new HashMap<>();
                             Bundle e = getIntent().getExtras();
                             if(types.get(position).equals("A/B/C")){
                                 if(a_val == true){
-                                    question.put(a_variant.getText().toString(),"valid");
+                                    variants.put(a_variant.getText().toString(),"valid");
                                 }else{
-                                    question.put(a_variant.getText().toString(),"invalid");
+                                    variants.put(a_variant.getText().toString(),"invalid");
 
                                 }
                                 if(b_val == true){
-                                    question.put(b_variant.getText().toString(),"valid");
+                                    variants.put(b_variant.getText().toString(),"valid");
                                 }else{
-                                    question.put(b_variant.getText().toString(),"invalid");
+                                    variants.put(b_variant.getText().toString(),"invalid");
 
                                 }
                                 if(c_val == true){
-                                    question.put(c_variant.getText().toString(),"valid");
+                                    variants.put(c_variant.getText().toString(),"valid");
                                 }else{
-                                    question.put(c_variant.getText().toString(),"invalid");
+                                    variants.put(c_variant.getText().toString(),"invalid");
 
                                 }
+                                question.put("variants",variants);
                             }
-                            List<HashMap<String,String>> questions;
+                            List<HashMap<String,Object>> questions;
                             List<String> question_names;
                             if(e.get("questions") != null){
-                                 questions = (List<HashMap<String, String>>) e.get("questions");
+                                 questions = (List<HashMap<String, Object>>) e.get("questions");
                                  question_names = (List<String>) e.get("questionnames");
 
                             }else{
@@ -149,8 +159,12 @@ public class Add_test_question extends AppCompatActivity {
                             Intent i = new Intent(Add_test_question.this,Add_test.class);
                             i.putExtra("questions", (Serializable) questions);
                             i.putExtra("questionnames", (Serializable) question_names);
-                            i.putExtra("files", (Bundle) e.get("files"));
-                            i.putExtra("filenames", (Bundle) e.get("filenames"));
+                            i.putExtra("files", (Serializable) e.get("files"));
+                            i.putExtra("filenames", (Serializable) e.get("filenames"));
+                            i.putExtra("class_selected",e.getString("class_selected"));
+                            if(e.get("hour_ms") != null){
+                                i.putExtra("hour_ms",e.getLong("hour_ms"));
+                            }
                             startActivity(i);
 
                         }
@@ -167,14 +181,15 @@ public class Add_test_question extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Bundle e = getIntent().getExtras();
-                            HashMap<String,String> question = new HashMap<>();
+                            HashMap<String,Object> question = new HashMap<>();
                             question.put("prompt",prompt.getText().toString());
                             question.put("type",types.get(position));
+                            question.put("filenames",filenames);
 
-                            List<HashMap<String,String>> questions;
+                            List<HashMap<String,Object>> questions;
                             List<String> question_names;
                             if(e.get("questions") != null){
-                                questions = (List<HashMap<String, String>>) e.get("questions");
+                                questions = (List<HashMap<String, Object>>) e.get("questions");
                                 question_names = (List<String>) e.get("questionnames");
 
                             }else{

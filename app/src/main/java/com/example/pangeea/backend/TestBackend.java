@@ -70,7 +70,7 @@ public class TestBackend extends DatabaseConnector {
         this.context = context;
 
     }
-    public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,String>> questions){
+    public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,Object>> questions){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tests");
