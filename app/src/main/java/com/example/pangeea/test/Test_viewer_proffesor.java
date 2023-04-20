@@ -19,7 +19,7 @@ public class Test_viewer_proffesor extends AppCompatActivity {
         super.onStart();
         Bundle e = getIntent().getExtras();
         TestBackend backend = new TestBackend(this);
-        backend.retrieve_questions_to_be_corrected(findViewById(R.id.q_lv_2),e.getString("hour_ms"),e.getString("pupil"));
+        backend.retrieve_questions_to_be_corrected(findViewById(R.id.q_lv_2),e.getString("hour_ms"),e.getString("pupil"),e.getString("pupil_class"));
 
     }
 }
