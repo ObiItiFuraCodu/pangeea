@@ -288,6 +288,7 @@ public class TestBackend extends DatabaseConnector {
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 Intent i = new Intent(context, Test_viewer_proffesor.class);
                                                 i.putExtra("pupil",questions_list.get(position).toString());
+                                                i.putExtra("hour_ms",deadline_ms);
                                                 context.startActivity(i);
 
                                             }
@@ -532,6 +533,7 @@ public class TestBackend extends DatabaseConnector {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         List<String> question_names = new ArrayList<>();
         List<String> correct_questions = new ArrayList<>();
+        //Log.i("P[IDADSADWQADAW",pupil);
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -539,13 +541,13 @@ public class TestBackend extends DatabaseConnector {
 
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(documentSnapshot.getString("teacher")).child(test_ms).child("submissions").child(pupil)
+                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(documentSnapshot.getString("Username")).child(test_ms).child("submissions").child(pupil)
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                     @Override
                                     public void onSuccess(DataSnapshot dataSnapshot) {
-                                        List<HashMap<String,Object>> question_list = new ArrayList<>();
-                                        for(int i = 0;i<  question_list.size();i++){
+                                        List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) dataSnapshot.getValue();
+                                        for(int i = 1;i<  question_list.size();i++){
 
                                             HashMap<String,Object> question = question_list.get(i);
                                             String type = (String)question.get("type");
@@ -574,8 +576,8 @@ public class TestBackend extends DatabaseConnector {
                                                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                                                         new AlertDialog.Builder(context)
-                                                                .setTitle("Delete entry")
-                                                                .setMessage("Are you sure you want to delete this entry?")
+                                                                .setTitle("Is it good?")
+                                                                .setMessage("Is this question good?")
 
                                                                 // Specifying a listener allows you to take an action before dismissing the dialog.
                                                                 // The dialog is automatically dismissed when a dialog button is clicked.
@@ -584,7 +586,7 @@ public class TestBackend extends DatabaseConnector {
                                                                         // Continue with delete operation
                                                                         HashMap<String,Object> answer_map = new HashMap<>();
                                                                         answer_map.put("answer","correct");
-                                                                        question_list.set(position,answer_map);
+                                                                        question_list.set(position+1,answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil)
@@ -600,7 +602,7 @@ public class TestBackend extends DatabaseConnector {
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         HashMap<String,Object> answer_map = new HashMap<>();
                                                                         answer_map.put("answer","correct");
-                                                                        question_list.set(position,answer_map);
+                                                                        question_list.set(position+1,answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil)
