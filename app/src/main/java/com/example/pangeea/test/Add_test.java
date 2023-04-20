@@ -65,6 +65,8 @@ public class Add_test extends AppCompatActivity {
 
         Button select_date = findViewById(R.id.select_test_date);
         Button upload_lessons = findViewById(R.id.add_test_support_lesson);
+        Button ai_generator = findViewById(R.id.ai_generator);
+
         Spinner support_lessons = findViewById(R.id.test_support_lessons);
         Spinner questions = findViewById(R.id.test_questions);
 
@@ -75,7 +77,14 @@ public class Add_test extends AppCompatActivity {
 
 
 
-
+        ai_generator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),AI_test_generator.class);
+                i.putExtra("title",title.getText().toString());
+                startActivity(i);
+            }
+        });
         select_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
