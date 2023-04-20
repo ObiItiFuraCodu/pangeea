@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.content.Lesson_list;
+import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.other.Basic_tools;
 import com.example.pangeea.other.FileDownloader;
 import com.example.pangeea.other.FileViewer;
@@ -63,6 +64,13 @@ public class TestBackend extends DatabaseConnector {
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
+    int corected_q;
+    int correct_q;
+    int wrong_q;
+    int to_be_corrected;
+    int total_questions;
+
+
 
 
     public TestBackend(Context context) {
@@ -533,6 +541,11 @@ public class TestBackend extends DatabaseConnector {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         List<String> question_names = new ArrayList<>();
         List<String> correct_questions = new ArrayList<>();
+        corected_q = 0;
+        total_questions = 0;
+        to_be_corrected = 0;
+        correct_q = 0;
+        wrong_q = 0;
         //Log.i("P[IDADSADWQADAW",pupil);
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
         store.collection("users").document(user.getDisplayName())
@@ -553,6 +566,8 @@ public class TestBackend extends DatabaseConnector {
                                             String type = (String)question.get("type");
 
                                             if(type.equals("to_be_corrected")){
+                                                to_be_corrected++;
+                                                total_questions++;
                                                 question_names.add(Integer.toString(i));
                                                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,question_names);
                                                 to_correct.setAdapter(adapter);
@@ -585,12 +600,23 @@ public class TestBackend extends DatabaseConnector {
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         // Continue with delete operation
                                                                         HashMap<String,Object> answer_map = new HashMap<>();
+                                                                        correct_q++;
+                                                                        to_be_corrected--;
+
                                                                         answer_map.put("answer","correct");
-                                                                        question_list.set(position+1,answer_map);
+                                                                        question_list.set(Integer.parseInt(to_correct.getItemAtPosition(position).toString()),answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
+                                                                        if(to_be_corrected == 0){
+                                                                            database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
+                                                                                    .setValue(correct_q/total_questions);
+                                                                            database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil).child("final_mark")
+                                                                                    .setValue(correct_q/total_questions);
+
+                                                                            context.startActivity(new Intent(context, MainActivity.class));
+                                                                        }
                                                                         dialog.dismiss();
 
                                                                     }
@@ -601,13 +627,25 @@ public class TestBackend extends DatabaseConnector {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         HashMap<String,Object> answer_map = new HashMap<>();
-                                                                        answer_map.put("answer","correct");
-                                                                        question_list.set(position+1,answer_map);
+                                                                        answer_map.put("answer","wrong");
+                                                                        wrong_q++;
+                                                                        to_be_corrected--;
+
+                                                                        question_list.set(Integer.parseInt(to_correct.getItemAtPosition(position).toString()),answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
+                                                                        if(to_be_corrected == 0){
+                                                                            database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
+                                                                                    .setValue(correct_q/total_questions);
+                                                                            database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil).child("final_mark")
+                                                                                    .setValue(correct_q/total_questions);
+
+                                                                            context.startActivity(new Intent(context, MainActivity.class));
+                                                                        }
                                                                         dialog.dismiss();
+
                                                                     }
                                                                 })
                                                                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -617,7 +655,23 @@ public class TestBackend extends DatabaseConnector {
                                                 });
 
 
+                                            }else{
+                                                if(question.get("answer").equals("wrong")){
+                                                    wrong_q++;
+                                                }else{
+                                                    correct_q++;
+                                                }
+                                                corected_q++;
+                                                total_questions++;
                                             }
+                                        }
+                                        if(to_be_corrected == 0){
+                                            database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
+                                                    .setValue(correct_q/total_questions);
+                                            database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(test_ms).child("submissions").child(pupil).child("final_mark")
+                                                    .setValue(correct_q/total_questions);
+
+                                            context.startActivity(new Intent(context, MainActivity.class));
                                         }
 
                                     }

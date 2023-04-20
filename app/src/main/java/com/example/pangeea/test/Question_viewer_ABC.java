@@ -158,7 +158,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
 
                 Bundle e = getIntent().getExtras();
                 List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) e.get("answer_list");
-                answer_list.add(answer_map);
+                answer_list.set(e.getInt("index"), answer_map);
                 Intent i = new Intent(Question_viewer_ABC.this,Test_viewer_elev.class);
                 i.putExtra("answer_list", (Serializable) answer_list);
                 i.putExtra("hour_ms",e.getString("hour_ms"));
