@@ -32,8 +32,8 @@
 
     <TextView
         android:id="@+id/text_result_from"
-        android:layout_width="323dp"
-        android:layout_height="440dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="136dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/bad"

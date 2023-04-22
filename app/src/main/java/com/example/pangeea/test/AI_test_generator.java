@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
+import com.example.pangeea.ai.AI_test;
 
 public class AI_test_generator extends AppCompatActivity {
 
@@ -17,11 +18,12 @@ public class AI_test_generator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ai_test_generator);
         AI_core core = new AI_core(this);
+        AI_test test = new AI_test(this);
         Bundle e = getIntent().getExtras();
         TextView result = findViewById(R.id.text_result_from);
         Button good = findViewById(R.id.good);
         Button bad = findViewById(R.id.bad);
-        core.AI_text_3("Genereaza un test bazat pe lectia" + e.getString("title") + "cu 3 intrebari fiecare avand 3 posibile raspunsuri",result);
+        core.AI_Text("Genereaza un test bazat pe lectia " + e.getString("title") + " cu 3 intrebari fiecare avand 3 posibile raspunsuri",result);
         good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +33,7 @@ public class AI_test_generator extends AppCompatActivity {
         bad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                core.AI_text_3("Genereaza un test bazat pe lectia" + e.getString("title") + "cu 3 intrebari fiecare avand 3 posibile raspunsuri",result);
+                core.AI_Text("Genereaza un test bazat pe lectia " + e.getString("title") + " cu 3 intrebari fiecare avand 3 posibile raspunsuri",result);
 
             }
         });
