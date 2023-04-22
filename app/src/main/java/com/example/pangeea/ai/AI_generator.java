@@ -33,7 +33,7 @@ public class AI_generator extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ai.AI_text_3(prompt.getText().toString(),result);
+                ai.AI_Text(prompt.getText().toString(),result);
             }
         });
     }

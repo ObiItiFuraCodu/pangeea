@@ -41,9 +41,14 @@ public class AI_core {
         //   final String[] output = {""};
         try {
 
-            requestBody.put("model", "text-davinci-002");
-            requestBody.put("prompt", input);
-            requestBody.put("max_tokens", 255);
+            requestBody.put("model", "text-davinci-003");
+            requestBody.put("prompt", "Genereaza o intrebare in romana bazata pe lectia "+input+" de forma \n" +
+                    "intrebare \n" +
+                    "a) raspuns 1\n" +
+                    "b) raspuns 2\n" +
+                    "c) raspuns 3 " +
+                    "raspunsul corect va avea un '-' in dreapta sa");
+            requestBody.put("max_tokens", 500);
             requestBody.put("temperature", 1.0);
             requestBody.put("top_p", 1.0);
             requestBody.put("stop",null);
