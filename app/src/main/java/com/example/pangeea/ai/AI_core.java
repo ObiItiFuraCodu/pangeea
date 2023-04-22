@@ -29,6 +29,7 @@ import java.util.Map;
 public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
     private String accessToken = "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";
+    String result = "";
     Context context;
 
 
@@ -36,18 +37,13 @@ public class AI_core {
         this.context = context;
     }
 
-    public void AI_Text(String input, TextView responseview){
+    public String AI_Text(String input){
         JSONObject requestBody = new JSONObject();
         //   final String[] output = {""};
         try {
 
             requestBody.put("model", "text-davinci-003");
-            requestBody.put("prompt", "Genereaza o intrebare in romana bazata pe lectia "+input+" de forma \n" +
-                    "intrebare \n" +
-                    "a) raspuns 1\n" +
-                    "b) raspuns 2\n" +
-                    "c) raspuns 3 " +
-                    "raspunsul corect va avea un '-' in dreapta sa");
+            requestBody.put("prompt", input);
             requestBody.put("max_tokens", 500);
             requestBody.put("temperature", 1.0);
             requestBody.put("top_p", 1.0);
@@ -63,7 +59,7 @@ public class AI_core {
                 try {
                     JSONArray choicesArray = response.getJSONArray("choices");
                     JSONObject choiceObject = choicesArray.getJSONObject(0);
-                    responseview.setText(choiceObject.getString("text"));
+                    result = choiceObject.getString("text");
                     Log.e("API Response", response.toString());
                     //Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
 
@@ -95,7 +91,7 @@ public class AI_core {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
-
+    return result;
     }
    /* public void AI_text_3(String prompt,TextView result){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
