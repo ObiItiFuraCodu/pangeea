@@ -37,7 +37,7 @@ public class AI_core {
         this.context = context;
     }
 
-    public String AI_Text(String input){
+    public void AI_Text(String input,TextView view){
         JSONObject requestBody = new JSONObject();
         //   final String[] output = {""};
         try {
@@ -59,7 +59,7 @@ public class AI_core {
                 try {
                     JSONArray choicesArray = response.getJSONArray("choices");
                     JSONObject choiceObject = choicesArray.getJSONObject(0);
-                    result = choiceObject.getString("text");
+                    view.setText(choiceObject.getString("text"));
                     Log.e("API Response", response.toString());
                     //Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
 
@@ -91,7 +91,7 @@ public class AI_core {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
-    return result;
+
     }
    /* public void AI_text_3(String prompt,TextView result){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
