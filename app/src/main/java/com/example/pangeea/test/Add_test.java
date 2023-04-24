@@ -81,7 +81,24 @@ public class Add_test extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(),AI_test_generator.class);
-                i.putExtra("title",title.getText().toString());
+
+                if(date == null && e.get("hour_ms") == null){
+                    Toast.makeText(Add_test.this,"you didnt pick a date",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    if(e.get("hour_ms") != null){
+                        i.putExtra("title",title.getText().toString());
+                        i.putExtra("class_name",e.getString("class_selected"));
+                        i.putExtra("hour_ms",e.getLong("hour_ms"));
+                        i.putExtra("details",details.getText().toString());
+                    }else{
+                        i.putExtra("title",title.getText().toString());
+                        i.putExtra("class_name",e.getString("class_selected"));
+                        i.putExtra("hour_ms",date.getTimeInMillis());
+                        i.putExtra("details",details.getText().toString());
+                    }
+                }
+
                 startActivity(i);
             }
         });

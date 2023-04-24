@@ -3,6 +3,9 @@ package com.example.pangeea.ai;
 import android.content.Context;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -15,6 +18,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pangeea.other.CustomButtonView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.json.JSONArray;
@@ -92,6 +96,88 @@ public class AI_core {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
 
+    }
+    public void generate_question(String prompt, LinearLayout list, Boolean main, Boolean valid,TextView text_unmain){
+        JSONObject requestBody = new JSONObject();
+        //   final String[] output = {""};
+        try {
+
+            requestBody.put("model", "text-davinci-003");
+            if(main){
+                requestBody.put("prompt", "O intrebare legata de lectia '"+prompt+"' este:");
+
+            }else{
+                if(valid){
+                    requestBody.put("prompt","Un raspuns corect la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+
+                }else{
+                    requestBody.put("prompt","Un raspuns gresit la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+
+                }
+            }
+            requestBody.put("max_tokens", 500);
+            requestBody.put("temperature", 1.0);
+            requestBody.put("top_p", 1.0);
+            requestBody.put("stop",null);
+            requestBody.put("frequency_penalty", 0.0);
+            requestBody.put("presence_penalty", 0.0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiUrl, requestBody, new Response.Listener < JSONObject > () {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray choicesArray = response.getJSONArray("choices");
+                    JSONObject choiceObject = choicesArray.getJSONObject(0);
+                    CustomButtonView button = new CustomButtonView(context);
+                    if(main){
+                        Button button1 = (Button) button.getChildAt(0);
+                        button1.setText(choiceObject.getString("text"));
+                        list.addView(button);
+                    }else{
+                        text_unmain.setText(choiceObject.getString("text"));
+                    }
+
+                    if(main){
+                        generate_question(choiceObject.getString("text"),list,false,true, (TextView) button.getChildAt(1));
+                        generate_question(choiceObject.getString("text"),list,false,true, (TextView) button.getChildAt(2));
+                        generate_question(choiceObject.getString("text"),list,false,false, (TextView) button.getChildAt(3));
+
+
+                    }
+
+                    Log.e("API Response", response.toString());
+                    //Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("API Error", error.toString());
+            }
+        }) {
+            @Override
+            public Map< String, String > getHeaders() throws AuthFailureError {
+                Map < String, String > headers = new HashMap< >();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+            @Override
+            protected Response < JSONObject > parseNetworkResponse(NetworkResponse response) {
+                return super.parseNetworkResponse(response);
+            }
+        };
+        int timeoutMs = 25000; // 25 seconds timeout
+        RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
     }
    /* public void AI_text_3(String prompt,TextView result){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

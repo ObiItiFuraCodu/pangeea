@@ -32,7 +32,7 @@ public class Test_AI {
     public void generate_test(){
         AI_core core = new AI_core(context);
         for(int i = 1;i<= num_questions;i++){
-            TextView prompt = new TextView(context);
+           /* TextView prompt = new TextView(context);
             TextView a = new TextView(context);
             TextView b = new TextView(context);
             TextView c = new TextView(context);
@@ -78,15 +78,12 @@ public class Test_AI {
             }
 
 
-            question_list.addView(prompt);
-            question_list.addView(a);
-            question_list.addView(b);
-            question_list.addView(c);
 
            /// test.add(question);
 
 
-
+*/
+            core.generate_question(lesson,question_list,true,false,null);
         }
 
     }
