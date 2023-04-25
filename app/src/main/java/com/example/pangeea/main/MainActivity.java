@@ -19,6 +19,7 @@ import com.example.pangeea.R;
 import com.example.pangeea.backend.HourBackend;
 import com.example.pangeea.backend.TaskBackend;
 import com.example.pangeea.backend.TestBackend;
+import com.example.pangeea.test.See_corrected_tests;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             }
+            case R.id.see_corrected_tests:{
+                startActivity(new Intent(MainActivity.this, See_corrected_tests.class));
+                finish();
+            }
         }
 
         return true;
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                         }else{
-
+                            navigationView.getMenu().findItem(R.id.see_corrected_tests).setVisible(false);
                             connector.retrieveclasses((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
 
                         }

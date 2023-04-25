@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".test.Test_result"
+            android:exported="false" />
+        <activity
+            android:name=".test.See_corrected_tests"
+            android:exported="false" />
+        <activity
             android:name=".test.AI_test_generator"
             android:exported="false" />
         <activity
