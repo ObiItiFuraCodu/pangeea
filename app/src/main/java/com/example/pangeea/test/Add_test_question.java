@@ -124,21 +124,26 @@ public class Add_test_question extends AppCompatActivity {
                             Bundle e = getIntent().getExtras();
                             if(types.get(position).equals("A/B/C")){
                                 if(a_val == true){
-                                    variants.put(a_variant.getText().toString(),"valid");
+                                    variants.put("A",a_variant.getText().toString());
+                                    variants.put("A_valid","valid");
                                 }else{
-                                    variants.put(a_variant.getText().toString(),"invalid");
-
+                                    variants.put("A",a_variant.getText().toString());
+                                    variants.put("A_valid","invalid");
                                 }
                                 if(b_val == true){
-                                    variants.put(b_variant.getText().toString(),"valid");
+                                    variants.put("B",a_variant.getText().toString());
+                                    variants.put("B_valid","valid");
                                 }else{
-                                    variants.put(b_variant.getText().toString(),"invalid");
+                                    variants.put("B",a_variant.getText().toString());
+                                    variants.put("B_valid","invalid");
 
                                 }
                                 if(c_val == true){
-                                    variants.put(c_variant.getText().toString(),"valid");
+                                    variants.put("C",a_variant.getText().toString());
+                                    variants.put("C_valid","valid");
                                 }else{
-                                    variants.put(c_variant.getText().toString(),"invalid");
+                                    variants.put("C",a_variant.getText().toString());
+                                    variants.put("C_valid","invalid");
 
                                 }
                                 question.put("variants",variants);

@@ -96,10 +96,12 @@ public class Add_test extends AppCompatActivity {
                         i.putExtra("class_name",e.getString("class_selected"));
                         i.putExtra("hour_ms",date.getTimeInMillis());
                         i.putExtra("details",details.getText().toString());
+
                     }
+                    startActivity(i);
                 }
 
-                startActivity(i);
+
             }
         });
         select_date.setOnClickListener(new View.OnClickListener() {

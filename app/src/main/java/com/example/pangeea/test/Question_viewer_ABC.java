@@ -37,10 +37,18 @@ public class Question_viewer_ABC extends AppCompatActivity {
         Button A = findViewById(R.id.a_button);
         Button B = findViewById(R.id.b_button);
         Button C = findViewById(R.id.c_button);
-        answer_map.put("A","invalid");
-        answer_map.put("B","invalid");
-        answer_map.put("C","invalid");
-        answer_map.put("prompt",question.get("prompt"));
+        answer_map.put("A_valid","invalid");
+        answer_map.put("B_valid","invalid");
+        answer_map.put("C_valid","invalid");
+
+        HashMap<String,String> variants = (HashMap<String, String>) question.get("variants");
+        A.setText(variants.get("A"));
+        answer_map.put("A",variants.get("A"));
+        B.setText(variants.get("B"));
+        answer_map.put("B",variants.get("B"));
+        C.setText(variants.get("C"));
+        answer_map.put("C",variants.get("C"));
+
 
         A.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +56,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 if(a_pressed == false){
                     a_pressed = true;
                     A.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                    answer_map.put("A","valid");
+                    answer_map.put("A_valid","valid");
                     if(answer_map == question){
                         answer_map.put("answer","correct");
                         question.put("answer","correct");
@@ -60,7 +68,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 }else{
                     a_pressed = false;
                     A.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                    answer_map.put("A","invalid");
+                    answer_map.put("A_valid","invalid");
                     if(answer_map == question){
                         answer_map.put("answer","correct");
                         question.put("answer","correct");
@@ -80,7 +88,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 if(b_pressed == false){
                     b_pressed = true;
                     B.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                    answer_map.put("B","valid");
+                    answer_map.put("B_valid","valid");
                     if(answer_map == question);
                     if(answer_map == question){
                         answer_map.put("answer","correct");
@@ -95,7 +103,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 }else{
                     b_pressed = false;
                     B.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                    answer_map.put("B","invalid");
+                    answer_map.put("B_valid","invalid");
                     if(answer_map == question){
                         answer_map.put("answer","correct");
                         question.put("answer","correct");
@@ -113,7 +121,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 if(c_pressed == false){
                     c_pressed = true;
                     C.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                    answer_map.put("C","valid");
+                    answer_map.put("C_valid","valid");
 
                     if(answer_map == question){
                         answer_map.put("answer","correct");
@@ -126,7 +134,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 }else{
                     c_pressed = false;
                     C.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                    answer_map.put("C","invalid");
+                    answer_map.put("C_valid","invalid");
                     if(answer_map == question){
                         answer_map.put("answer","correct");
                         question.put("answer","correct");

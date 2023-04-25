@@ -57,16 +57,19 @@ public class AI_test_generator extends AppCompatActivity {
                   question.put("prompt",prompt.getText().toString());
                   question.put("type","A/B/C");
                   HashMap<String,String> variants = new HashMap<>();
-                  variants.put(a.getText().toString(),"valid");
-                  variants.put(b.getText().toString(),"valid");
-                  variants.put(c.getText().toString(),"invalid");
+                  variants.put("A",a.getText().toString());
+                  variants.put("A_valid","valid");
+                  variants.put("B",b.getText().toString());
+                  variants.put("B_valid","valid");
+                  variants.put("C",c.getText().toString());
+                  variants.put("C_valid","invalid");
                   question.put("variants",variants);
                   question_array.add(question);
 
 
               }
                 TestBackend backend = new TestBackend(AI_test_generator.this);
-                backend.add_test(e.getLong("test_ms"),e.getString("class_name"),e.getString("details"),files,e.getString("title"),question_array);
+                backend.add_test(e.getLong("hour_ms"),e.getString("class_name"),e.getString("details"),files,e.getString("title"),question_array);
                 finish();
 
             }
