@@ -536,6 +536,9 @@ public class TestBackend extends DatabaseConnector {
                                 .setValue(answers);
                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
                                 .setValue(answers);
+                        store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("tests").document(hour_ms)
+                                .set(answers);
+
                     }
                 });
 
@@ -642,12 +645,18 @@ public class TestBackend extends DatabaseConnector {
                                                                                 .setValue(question_list);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
+                                                                        store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
+                                                                                .set(question_list);
                                                                         if(to_be_corrected == 0){
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                                                     .setValue(correct_q/total_questions);
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                                                     .setValue(correct_q/total_questions);
-
+                                                                            HashMap<String,Object> final_mark = new HashMap<>();
+                                                                            final_mark.put("mark",correct_q/total_questions);
+                                                                            question_list.add(final_mark);
+                                                                            store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
+                                                                                    .set(question_list);
 
                                                                             context.startActivity(new Intent(context, MainActivity.class));
                                                                         }

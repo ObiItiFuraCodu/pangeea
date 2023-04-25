@@ -163,7 +163,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
         upload_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                answer_map.put("prompt",(String)question.get("prompt"));
                 Bundle e = getIntent().getExtras();
                 List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) e.get("answer_list");
                 answer_list.set(e.getInt("index"), answer_map);
