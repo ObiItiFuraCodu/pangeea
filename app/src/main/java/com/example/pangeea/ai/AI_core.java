@@ -1,11 +1,9 @@
 package com.example.pangeea.ai;
 
 import android.content.Context;
-import android.content.Context;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -18,7 +16,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.pangeea.other.CustomButtonView;
+import com.example.pangeea.CustomElements.CustomButtonView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.json.JSONArray;
@@ -104,14 +102,14 @@ public class AI_core {
 
             requestBody.put("model", "text-davinci-003");
             if(main){
-                requestBody.put("prompt", "O intrebare legata de lectia '"+prompt+"' este:");
+                requestBody.put("prompt", "O intrebare scurta legata de lectia '"+prompt+"' este:");
 
             }else{
                 if(valid){
-                    requestBody.put("prompt","Un raspuns corect la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt","Un raspuns scurt corect la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
 
                 }else{
-                    requestBody.put("prompt","Un raspuns gresit la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt","Un raspuns scurt gresit la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
 
                 }
             }

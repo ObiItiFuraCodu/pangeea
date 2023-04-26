@@ -1,4 +1,4 @@
-package com.example.pangeea.other;
+package com.example.pangeea.CustomElements;
 
 import android.content.Context;
 import android.util.AttributeSet;

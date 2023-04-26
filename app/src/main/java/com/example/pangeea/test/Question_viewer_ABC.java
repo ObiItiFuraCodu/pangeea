@@ -32,7 +32,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
         TextView q_prompt = findViewById(R.id.question_prompt_abc);
         TextView q_files = findViewById(R.id.question_files_abc);
         Button upload_question = findViewById(R.id.upload_question_abc);
-        answer_map.put("type","A/B/C");
+
 
         Button A = findViewById(R.id.a_button);
         Button B = findViewById(R.id.b_button);
@@ -41,12 +41,12 @@ public class Question_viewer_ABC extends AppCompatActivity {
         answer_map.put("B_valid","invalid");
         answer_map.put("C_valid","invalid");
 
-        HashMap<String,String> variants = (HashMap<String, String>) question.get("variants");
-        A.setText(variants.get("A"));
+        HashMap<String,Object> variants = (HashMap<String, Object>) question.get("variants");
+        A.setText((String) variants.get("A"));
         answer_map.put("A",variants.get("A"));
-        B.setText(variants.get("B"));
+        B.setText((String) variants.get("B"));
         answer_map.put("B",variants.get("B"));
-        C.setText(variants.get("C"));
+        C.setText((String) variants.get("C"));
         answer_map.put("C",variants.get("C"));
 
 
@@ -57,24 +57,24 @@ public class Question_viewer_ABC extends AppCompatActivity {
                     a_pressed = true;
                     A.setBackgroundColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("A_valid","valid");
-                    if(answer_map == question){
+                    if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
-                        question.put("answer","correct");
+                        variants.put("answer","correct");
                     }else{
                         answer_map.put("answer","wrong");
-                        question.put("answer","wrong");
+                        variants.put("answer","wrong");
                     }
 
                 }else{
                     a_pressed = false;
                     A.setBackgroundColor(getResources().getColor(R.color.purple_500));
                     answer_map.put("A_valid","invalid");
-                    if(answer_map == question){
+                    if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
-                        question.put("answer","correct");
+                        variants.put("answer","correct");
                     }else{
                         answer_map.put("answer","wrong");
-                        question.put("answer","wrong");
+                        variants.put("answer","wrong");
                     }
 
                 }
@@ -89,13 +89,12 @@ public class Question_viewer_ABC extends AppCompatActivity {
                     b_pressed = true;
                     B.setBackgroundColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("B_valid","valid");
-                    if(answer_map == question);
-                    if(answer_map == question){
+                    if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
-                        question.put("answer","correct");
+                        variants.put("answer","correct");
                     }else{
                         answer_map.put("answer","wrong");
-                        question.put("answer","wrong");
+                        variants.put("answer","wrong");
                     }
 
 
@@ -104,12 +103,12 @@ public class Question_viewer_ABC extends AppCompatActivity {
                     b_pressed = false;
                     B.setBackgroundColor(getResources().getColor(R.color.purple_500));
                     answer_map.put("B_valid","invalid");
-                    if(answer_map == question){
+                    if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
-                        question.put("answer","correct");
+                        variants.put("answer","correct");
                     }else{
                         answer_map.put("answer","wrong");
-                        question.put("answer","wrong");
+                        variants.put("answer","wrong");
                     }
                 }
 
@@ -123,24 +122,24 @@ public class Question_viewer_ABC extends AppCompatActivity {
                     C.setBackgroundColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("C_valid","valid");
 
-                    if(answer_map == question){
+                    if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
-                        question.put("answer","correct");
+                        variants.put("answer","correct");
                     }else{
                         answer_map.put("answer","wrong");
-                        question.put("answer","wrong");
+                        variants.put("answer","wrong");
                     }
 
                 }else{
                     c_pressed = false;
                     C.setBackgroundColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("C_valid","invalid");
-                    if(answer_map == question){
+                    if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
-                        question.put("answer","correct");
+                        variants.put("answer","correct");
                     }else{
                         answer_map.put("answer","wrong");
-                        question.put("answer","wrong");
+                        variants.put("answer","wrong");
                     }
                 }
 
@@ -163,7 +162,9 @@ public class Question_viewer_ABC extends AppCompatActivity {
         upload_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                answer_map.put("type","A/B/C");
                 answer_map.put("prompt",(String)question.get("prompt"));
+                answer_map.put("actual_answer",question);
                 Bundle e = getIntent().getExtras();
                 List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) e.get("answer_list");
                 answer_list.set(e.getInt("index"), answer_map);
@@ -172,6 +173,7 @@ public class Question_viewer_ABC extends AppCompatActivity {
                 i.putExtra("hour_ms",e.getString("hour_ms"));
                 i.putExtra("teacher",e.getString("teacher"));
                 startActivity(i);
+                finish();
             }
         });
 

@@ -50,7 +50,7 @@ public class See_corrected_tests extends AppCompatActivity {
                                             button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) document.getData();
+                                                    List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) document.get("answers");
                                                     Intent i = new Intent(v.getContext(),Test_result.class);
                                                     i.putExtra("question_list", (Serializable) question_list);
                                                     startActivity(i);
@@ -58,6 +58,7 @@ public class See_corrected_tests extends AppCompatActivity {
 
                                                 }
                                             });
+                                            linearl.addView(button);
                                         }
                                     }
                                 });

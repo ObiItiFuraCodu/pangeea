@@ -4,17 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.pangeea.R;
 import com.example.pangeea.ai.Test_AI;
 import com.example.pangeea.backend.TestBackend;
-import com.example.pangeea.other.CustomButtonView;
+import com.example.pangeea.CustomElements.CustomButtonView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
