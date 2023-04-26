@@ -18,7 +18,7 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
-            android:name=".Test_Q_explanation"
+            android:name=".test.Test_Q_explanation"
             android:exported="false" />
         <activity
             android:name=".test.Test_result"

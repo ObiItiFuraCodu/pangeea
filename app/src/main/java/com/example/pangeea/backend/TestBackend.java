@@ -614,7 +614,10 @@ public class TestBackend extends DatabaseConnector {
                                                                         HashMap<String,Object> answer_map = new HashMap<>();
                                                                         correct_q++;
                                                                         to_be_corrected--;
-
+                                                                        HashMap<String,Object> q_map = new HashMap<>();
+                                                                        q_map.put("answers",question_list);
+                                                                        HashMap<String,Object> final_mark = new HashMap<>();
+                                                                        final_mark.put("mark",correct_q/total_questions);
                                                                         answer_map.put("answer","correct");
                                                                         question_list.set(Integer.parseInt(to_correct.getItemAtPosition(position).toString()),answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
@@ -627,7 +630,9 @@ public class TestBackend extends DatabaseConnector {
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                                                     .setValue(correct_q/total_questions);
                                                                             catalogue.upload_mark(pupil_class,pupil,Integer.toString(correct_q/total_questions*10),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-
+                                                                            q_map.put("mark",final_mark);
+                                                                            store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
+                                                                                    .set(q_map);
                                                                             context.startActivity(new Intent(context, MainActivity.class));
                                                                         }
                                                                         dialog.dismiss();
@@ -643,6 +648,8 @@ public class TestBackend extends DatabaseConnector {
                                                                         answer_map.put("answer","wrong");
                                                                         wrong_q++;
                                                                         to_be_corrected--;
+                                                                        HashMap<String,Object> q_map = new HashMap<>();
+                                                                        q_map.put("answers",question_list);
 
                                                                         question_list.set(Integer.parseInt(to_correct.getItemAtPosition(position).toString()),answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)
@@ -650,7 +657,7 @@ public class TestBackend extends DatabaseConnector {
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil)
                                                                                 .setValue(question_list);
                                                                         store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
-                                                                                .set(question_list);
+                                                                                .set(q_map);
                                                                         if(to_be_corrected == 0){
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                                                     .setValue(correct_q/total_questions);
@@ -658,9 +665,10 @@ public class TestBackend extends DatabaseConnector {
                                                                                     .setValue(correct_q/total_questions);
                                                                             HashMap<String,Object> final_mark = new HashMap<>();
                                                                             final_mark.put("mark",correct_q/total_questions);
-                                                                            question_list.add(final_mark);
+                                                                            q_map.put("mark",final_mark);
                                                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
-                                                                                    .set(question_list);
+                                                                                    .set(q_map);
+                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString(correct_q/total_questions*10),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 
                                                                             context.startActivity(new Intent(context, MainActivity.class));
                                                                         }
@@ -686,11 +694,19 @@ public class TestBackend extends DatabaseConnector {
                                             }
                                         }
                                         if(to_be_corrected == 0){
+                                            HashMap<String,Object> q_map = new HashMap<>();
+                                            q_map.put("answers",question_list);
+                                            HashMap<String,Object> final_mark = new HashMap<>();
+                                            final_mark.put("mark",correct_q/total_questions);
                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                     .setValue(correct_q/total_questions);
                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                     .setValue(correct_q/total_questions);
+                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString(correct_q/total_questions*10),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 
+                                            q_map.put("mark",final_mark);
+                                            store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
+                                                    .set(q_map);
                                             context.startActivity(new Intent(context, MainActivity.class));
                                         }
 

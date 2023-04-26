@@ -44,8 +44,7 @@ public class Test_Q_explanation extends AppCompatActivity {
                 TextView explanation = (TextView) answer.getChildAt(1);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
-
-
+            layout.addView(answer);
         }
         if(!map.get("B_valid").equals(actual_answer.get("B_valid"))){
             CustomButtonAnswer answer = new CustomButtonAnswer(Test_Q_explanation.this);
@@ -59,6 +58,7 @@ public class Test_Q_explanation extends AppCompatActivity {
                 TextView explanation = (TextView) answer.getChildAt(1);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
+            layout.addView(answer);
 
 
         }
@@ -74,6 +74,7 @@ public class Test_Q_explanation extends AppCompatActivity {
                 TextView explanation = (TextView) answer.getChildAt(1);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
+            layout.addView(answer);
 
 
         }

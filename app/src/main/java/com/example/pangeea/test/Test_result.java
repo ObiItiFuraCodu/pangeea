@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Test_result extends AppCompatActivity {
-    HashMap<String,Object> map = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +31,8 @@ public class Test_result extends AppCompatActivity {
         LinearLayout mistakes = findViewById(R.id.test_mistakes);
 
         int i = 0;
-        map = question_list.get(0);
-        while(!map.get("answer").equals(null)){
+
+        for(HashMap<String,Object> map : question_list){
             String result = (String) map.get("answer");
             if(result.equals("wrong")){
                 Button button = new Button(Test_result.this);
@@ -43,19 +43,16 @@ public class Test_result extends AppCompatActivity {
                         if(map.get("type").equals("A/B/C")){
                             Intent i = new Intent(Test_result.this,Test_Q_explanation.class);
                             i.putExtra("question_content",map);
+                            startActivity(i);
 
                         }
                     }
                 });
                 mistakes.addView(button);
             }
-            i++;
-            map = question_list.get(i);
-
         }
-        HashMap<String, Object> final_mark = question_list.get(i);
-        question_list.remove(i);
-        String final_mark_string = (String) final_mark.get("mark");
+
+        String final_mark_string = Integer.toString(e.getInt("final_mark"));
         mark.setText(final_mark_string);
 
     }

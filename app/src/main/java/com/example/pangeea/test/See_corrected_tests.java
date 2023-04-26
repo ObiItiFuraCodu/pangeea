@@ -51,8 +51,12 @@ public class See_corrected_tests extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View v) {
                                                     List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) document.get("answers");
+                                                    HashMap<String,Object> final_mark = (HashMap<String, Object>) document.get("mark");
+                                                    long final_mark_long = (long)final_mark.get("mark");
+                                                    int final_mark_int = (int)final_mark_long;
                                                     Intent i = new Intent(v.getContext(),Test_result.class);
                                                     i.putExtra("question_list", (Serializable) question_list);
+                                                    i.putExtra("final_mark",final_mark_int);
                                                     startActivity(i);
 
 
