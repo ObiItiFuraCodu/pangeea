@@ -246,7 +246,7 @@ public class AI_core {
         List<DocumentSnapshot> output = new ArrayList<>();
 
         for(DocumentSnapshot document : courses){
-            if(filtering_system(document.get("name",String.class),course_name)){
+            if(filtering_system(document.get("title",String.class),course_name)){
                 output.add(document);
 
             }
