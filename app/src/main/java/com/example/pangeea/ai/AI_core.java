@@ -16,6 +16,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pangeea.CustomElements.CustomButtonLesson;
 import com.example.pangeea.CustomElements.CustomButtonView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -253,6 +254,23 @@ public class AI_core {
 
         return output;
     }
+    public void generate_lessons(LinearLayout layout,List<String> questions,String title){
+        CustomButtonLesson lesson = new CustomButtonLesson(context);
+        Button button = (Button) lesson.getChildAt(0);
+        button.setText(title);
+        AI_Text("Genereaza o lectie de 250 de cuvinte legata de " + title + "\n Lectie :", (TextView) lesson.getChildAt(1));
+        layout.addView(lesson);
+        for(String question : questions){
+            CustomButtonLesson lesson1 = new CustomButtonLesson(context);
+            Button button1 = (Button) lesson1.getChildAt(0);
+            button1.setText(question);
+            AI_Text("Genereaza un raspuns de 100 de cuvinte la intrebarea " + title + "\n Raspuns :", (TextView) lesson1.getChildAt(1));
+            layout.addView(lesson1);
+
+        }
+
+    }
+
 
 
 

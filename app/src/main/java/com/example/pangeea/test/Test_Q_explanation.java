@@ -37,11 +37,19 @@ public class Test_Q_explanation extends AppCompatActivity {
             Button iswrong = (Button) answer.getChildAt(0);
             if(actual_answer.get("A_valid").equals("valid")){
                 iswrong.setText("A era adevarat");
-                TextView explanation = (TextView) answer.getChildAt(1);
+                TextView question_was = (TextView) answer.getChildAt(1);
+                question_was.setText("Intrebarea era : "+ (String)map.get("prompt"));
+                TextView button_was = (TextView) answer.getChildAt(2);
+                button_was.setText("A era : " + actual_answer.get("A"));
+                TextView explanation = (TextView) answer.getChildAt(3);
                 core.AI_Text("De ce este adevarat raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }else{
                 iswrong.setText("A era gresit");
-                TextView explanation = (TextView) answer.getChildAt(1);
+                TextView question_was = (TextView) answer.getChildAt(1);
+                question_was.setText("Intrebarea era : "+ (String)map.get("prompt"));
+                TextView button_was = (TextView) answer.getChildAt(2);
+                button_was.setText("A era : " + actual_answer.get("A"));
+                TextView explanation = (TextView) answer.getChildAt(3);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
             layout.addView(answer);
@@ -51,12 +59,20 @@ public class Test_Q_explanation extends AppCompatActivity {
             Button iswrong = (Button) answer.getChildAt(0);
             if(actual_answer.get("B_valid").equals("valid")){
                 iswrong.setText("B era adevarat");
-                TextView explanation = (TextView) answer.getChildAt(1);
-                core.AI_Text("De ce este adevarat raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
+                TextView question_was = (TextView) answer.getChildAt(1);
+                question_was.setText("Intrebarea era : "+ (String)map.get("prompt"));
+                TextView button_was = (TextView) answer.getChildAt(2);
+                button_was.setText("B era : " + actual_answer.get("B"));
+                TextView explanation = (TextView) answer.getChildAt(3);
+                core.AI_Text("De ce este adevarat raspunsul " + (String)actual_answer.get("B") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }else{
                 iswrong.setText("B era gresit");
-                TextView explanation = (TextView) answer.getChildAt(1);
-                core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
+                TextView question_was = (TextView) answer.getChildAt(1);
+                question_was.setText("Intrebarea era : "+ (String)map.get("prompt"));
+                TextView button_was = (TextView) answer.getChildAt(2);
+                button_was.setText("B era : " + actual_answer.get("B"));
+                TextView explanation = (TextView) answer.getChildAt(3);
+                core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("B") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
             layout.addView(answer);
 
@@ -67,12 +83,20 @@ public class Test_Q_explanation extends AppCompatActivity {
             Button iswrong = (Button) answer.getChildAt(0);
             if(actual_answer.get("C_valid").equals("valid")){
                 iswrong.setText("C era adevarat");
-                TextView explanation = (TextView) answer.getChildAt(1);
-                core.AI_Text("De ce este adevarat raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
+                TextView question_was = (TextView) answer.getChildAt(1);
+                question_was.setText("Intrebarea era : "+ (String)map.get("prompt"));
+                TextView button_was = (TextView) answer.getChildAt(2);
+                button_was.setText("C era : " + actual_answer.get("C"));
+                TextView explanation = (TextView) answer.getChildAt(3);
+                core.AI_Text("De ce este adevarat raspunsul " + (String)actual_answer.get("C") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }else{
                 iswrong.setText("C era gresit");
-                TextView explanation = (TextView) answer.getChildAt(1);
-                core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
+                TextView question_was = (TextView) answer.getChildAt(1);
+                question_was.setText("Intrebarea era : "+ (String)map.get("prompt"));
+                TextView button_was = (TextView) answer.getChildAt(2);
+                button_was.setText("C era : " + actual_answer.get("C"));
+                TextView explanation = (TextView) answer.getChildAt(3);
+                core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("C") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
             layout.addView(answer);
 

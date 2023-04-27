@@ -33,13 +33,19 @@ public class CustomButtonAnswer extends LinearLayout {
         Button button = new Button(getContext());
         button.setText("Your answer:");
 
+        TextView textView2 = new TextView(getContext());
+        textView2.setText("Question was:");
 
+        TextView textView25 = new TextView(getContext());
+        textView25.setText("Answer was");
 
         TextView textView3 = new TextView(getContext());
-        textView3.setText("Actual answer:");
+        textView3.setText("Why?:");
 
 
         addView(button);
+        addView(textView2);
+        addView(textView25);
         addView(textView3);
 
     }
