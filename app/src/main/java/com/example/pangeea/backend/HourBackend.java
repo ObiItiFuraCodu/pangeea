@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.example.pangeea.ai.AI_generator;
+import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
 import com.example.pangeea.hour.Hour_info_elev;
 import com.example.pangeea.hour.Hour_info_profesor;
@@ -414,6 +415,14 @@ public class HourBackend extends DatabaseConnector {
 
                                     }
                                 });
+                                ai.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(context, AI_lesson.class);
+                                        i.putExtra("title",map.get("title").toString());
+                                        context.startActivity(i);
+                                    }
+                                });
 
 
                             }
@@ -423,12 +432,7 @@ public class HourBackend extends DatabaseConnector {
 
                             }
                         });
-                        ai.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                context.startActivity(new Intent(context, AI_generator.class));
-                            }
-                        });
+
 
                     }
                 });

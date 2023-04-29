@@ -10,6 +10,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_test.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_test_question.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_ai_generator.xml" value="0.5385416666666667" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_ai_lesson.xml" value="0.9" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_ai_test_generator.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_class_info.xml" value="0.25" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_control_room.xml" value="0.5" />
@@ -31,6 +32,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_question_viewer.xml" value="0.67" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_question_viewer_abc.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_see_corrected_tests.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_sorted_lesson_list.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_task_info.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_task_info_proffesor.xml" value="0.29747899159663865" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_info_elev.xml" value="0.5" />

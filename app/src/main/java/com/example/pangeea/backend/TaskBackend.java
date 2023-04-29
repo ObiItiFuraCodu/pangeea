@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.pangeea.ai.AI_generator;
+import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
 import com.example.pangeea.other.Basic_tools;
 import com.example.pangeea.other.FileDownloader;
@@ -323,6 +324,14 @@ public class TaskBackend extends DatabaseConnector{
 
                                             }
                                         });
+                                        ai.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent i = new Intent(context, AI_lesson.class);
+                                                i.putExtra("title",map.get("title").toString());
+                                                context.startActivity(i);
+                                            }
+                                        });
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
                                         lessons.setAdapter(adapter);
                                         lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -362,12 +371,7 @@ public class TaskBackend extends DatabaseConnector{
                                     }
                                     teacher.setText(map.get("teacher").toString());
 
-                                    ai.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            context.startActivity(new Intent(context, AI_generator.class));
-                                        }
-                                    });
+
 
 
 
