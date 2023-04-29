@@ -264,7 +264,7 @@ public class AI_core {
             CustomButtonLesson lesson1 = new CustomButtonLesson(context);
             Button button1 = (Button) lesson1.getChildAt(0);
             button1.setText(question);
-            AI_Text("Genereaza un raspuns de 100 de cuvinte la intrebarea " + title + "\n Raspuns :", (TextView) lesson1.getChildAt(1));
+            AI_Text("Genereaza un raspuns de 100 de cuvinte la intrebarea " + question + "\n Raspuns :", (TextView) lesson1.getChildAt(1));
             layout.addView(lesson1);
 
         }
