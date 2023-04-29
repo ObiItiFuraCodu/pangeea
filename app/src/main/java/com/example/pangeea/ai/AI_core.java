@@ -47,7 +47,7 @@ public class AI_core {
 
             requestBody.put("model", "text-davinci-003");
             requestBody.put("prompt", input);
-            requestBody.put("max_tokens", 500);
+            requestBody.put("max_tokens", 1000);
             requestBody.put("temperature", 1.0);
             requestBody.put("top_p", 1.0);
             requestBody.put("stop",null);
@@ -258,7 +258,7 @@ public class AI_core {
         CustomButtonLesson lesson = new CustomButtonLesson(context);
         Button button = (Button) lesson.getChildAt(0);
         button.setText(title);
-        AI_Text("Genereaza o lectie de 250 de cuvinte legata de " + title + "\n Lectie :", (TextView) lesson.getChildAt(1));
+        AI_Text("Genereaza o lectie de 300 de cuvinte legata de " + title + "\n Lectie :", (TextView) lesson.getChildAt(1));
         layout.addView(lesson);
         for(String question : questions){
             CustomButtonLesson lesson1 = new CustomButtonLesson(context);
