@@ -18,10 +18,10 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
-            android:name=".Lesson_viewer"
+            android:name=".content.Lesson_viewer"
             android:exported="false" />
         <activity
-            android:name=".Improve_performance"
+            android:name=".content.Improve_performance"
             android:exported="false" />
         <activity
             android:name=".test.Test_Q_explanation"

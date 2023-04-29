@@ -1,15 +1,15 @@
-package com.example.pangeea;
+package com.example.pangeea.content;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +29,7 @@ import java.util.List;
 public class Improve_performance extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private FirebaseDatabase db = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,8 @@ public class Improve_performance extends AppCompatActivity {
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                        for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){
                                            HashMap<String,Object> mark = (HashMap<String, Object>) snapshot.get("mark");
-                                           int mark_int = (int) mark.get("mark");
+                                           long mark_long = (long)mark.get("mark");
+                                           int mark_int = (int)mark_long;
                                            if(mark_int < 5){
                                                //SORTED BEGIN
                                                store.collection("courses").document(documentSnapshot.getString("user_class").replaceAll("[^\\d.]", "")).collection(documentSnapshot.getString("user_class").replaceAll("[^\\d.]", ""))
@@ -64,7 +65,7 @@ public class Improve_performance extends AppCompatActivity {
                                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                            @Override
                                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots1) {
-                                                               db.getReference("tests").child("classes").child(documentSnapshot.getString("user_highschool")).child(snapshot.getId())
+                                                               db.getReference("tests").child(documentSnapshot.getString("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(snapshot.getId())
                                                                        .addValueEventListener(new ValueEventListener() {
                                                                            @Override
                                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,7 +90,7 @@ public class Improve_performance extends AppCompatActivity {
                                                        });
                                                //SORTED END
                                                //GENERATED BEGIN
-                                               db.getReference("tests").child("classes").child(documentSnapshot.getString("user_highschool")).child(snapshot.getId())
+                                               db.getReference("tests").child(documentSnapshot.getString("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(snapshot.getId())
                                                        .addValueEventListener(new ValueEventListener() {
                                                            @Override
                                                            public void onDataChange(@NonNull DataSnapshot snapshot1) {
@@ -109,12 +110,13 @@ public class Improve_performance extends AppCompatActivity {
                                                                button.setOnClickListener(new View.OnClickListener() {
                                                                    @Override
                                                                    public void onClick(View v) {
-                                                                       Intent i = new Intent(Improve_performance.this,Lesson_viewer.class);
+                                                                       Intent i = new Intent(Improve_performance.this, Lesson_viewer.class);
                                                                        i.putExtra("title",title);
                                                                        i.putExtra("answer_list", (Serializable) wrong_answers);
                                                                        startActivity(i);
                                                                    }
                                                                });
+                                                               generated.addView(button);
 
                                                            }
 

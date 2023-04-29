@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.pangeea.Improve_performance;
+import com.example.pangeea.content.Improve_performance;
 import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.ContentBackend;
-import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 
 public class Materie_info extends AppCompatActivity {

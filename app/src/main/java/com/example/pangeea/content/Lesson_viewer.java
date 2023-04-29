@@ -1,10 +1,11 @@
-package com.example.pangeea;
+package com.example.pangeea.content;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
 
 import java.util.List;
