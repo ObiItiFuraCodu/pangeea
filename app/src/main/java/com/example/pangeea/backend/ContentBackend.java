@@ -3,6 +3,7 @@ package com.example.pangeea.backend;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -46,6 +47,7 @@ public class ContentBackend extends DatabaseConnector{
 
                         List<DocumentSnapshot> list =  queryDocumentSnapshots.getDocuments();
                         if(!(list == null || list.isEmpty())){
+                            Log.i("WWQEBEWA","WBWBWBW");
                             list = core.recommender_system(list,main_course);
 
                             for (DocumentSnapshot document : list) {
@@ -76,6 +78,7 @@ public class ContentBackend extends DatabaseConnector{
                                         }
                                     }
                                 });
+                                linearl.addView(lesson_button);
                             }
                         }
 
