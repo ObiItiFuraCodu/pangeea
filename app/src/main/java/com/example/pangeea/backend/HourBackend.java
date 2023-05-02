@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.pangeea.CustomElements.CustomButtonAnswer;
+import com.example.pangeea.CustomElements.CustomButtonLesson;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
@@ -101,27 +103,38 @@ public class HourBackend extends DatabaseConnector {
 
                                                           for(Map.Entry<String,Map<String,String>> set :
                                                                   map.entrySet()){
-                                                              Button v = new Button(context);
+                                                              CustomButtonLesson v = new CustomButtonLesson(context);
                                                               Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
-                                                              v.setWidth(100);
+
                                                               Long hour_milisecs =  Long.parseLong(set.getKey().toString());
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                                               //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                                               if(user_category.equals("1")){
                                                                   if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
-                                                                      v.setText(value.get("class_name") + " active now ");
+                                                                      Button button = (Button) v.getChildAt(0);
+                                                                      TextView view = (TextView) v.getChildAt(1);
+                                                                      button.setText("hour " + value.get("class_name"));
+                                                                      view.setText("active now");
                                                                   }else{
-                                                                      v.setText(value.get("class_name") + " starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+                                                                      Button button = (Button) v.getChildAt(0);
+                                                                      TextView view = (TextView) v.getChildAt(1);
+                                                                      button.setText("hour "+ value.get("class_name"));
+                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
 
                                                                   }
 
                                                               }else{
                                                                   if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
-                                                                      v.setText(value.get("user_subject") + " active now ");
+                                                                      Button button = (Button) v.getChildAt(0);
+                                                                      TextView view = (TextView) v.getChildAt(1);
+                                                                      button.setText("hour" + value.get("user_subject"));
+                                                                      view.setText("active now");
                                                                   }else{
-                                                                      v.setText(value.get("user_subject") + " starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
-
+                                                                      Button button = (Button) v.getChildAt(0);
+                                                                      TextView view = (TextView) v.getChildAt(1);
+                                                                      button.setText("hour "+ value.get("user_subject"));
+                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
                                                                   }
                                                               }
                                                               v.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +142,7 @@ public class HourBackend extends DatabaseConnector {
                                                                   public void onClick(View c) {
                                                                       if(user_category.equals("1")){
                                                                           Intent i = new Intent(c.getContext(), Hour_info_profesor.class);
-                                                                          i.putExtra("classname",v.getText().toString());
+                                                                          i.putExtra("classname",value.get("class_name"));
                                                                           i.putExtra("hour_milis",set.getKey().toString());
                                                                           context.startActivity(i);
                                                                       }else{
