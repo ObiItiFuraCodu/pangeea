@@ -181,12 +181,12 @@ public class TaskBackend extends DatabaseConnector{
 
                                                                   }
                                                               });
-                                                              if(true){
+                                                              if(hour_milisecs > System.currentTimeMillis() - ONE_DAY_IN_MILIS){
                                                                   layout.addView(v);
 
                                                               }else{
                                                                   Log.i("TF","WTFFFFFFFFFFFFFFFFFF");
-                                                                  snapshot.getRef().child(snapshot.getKey()).removeValue();
+                                                                  snapshot.getRef().child(Long.toString(hour_milisecs)).removeValue();
                                                               }
                                                           }
 

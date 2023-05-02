@@ -123,10 +123,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
 
-        LinearLayout linear = findViewById(R.id.liner);
-        backend1.import_hours(linear);
-        backend2.import_tasks(linear);
-        backend3.import_tests(linear);
+
+        backend1.import_hours(findViewById(R.id.liner2));
+        backend2.import_tasks(findViewById(R.id.liner));
+        backend3.import_tests(findViewById(R.id.liner3));
 
     }
 }

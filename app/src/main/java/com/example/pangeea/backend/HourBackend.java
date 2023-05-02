@@ -151,8 +151,10 @@ public class HourBackend extends DatabaseConnector {
                                                                   layout.addView(v);
 
                                                               }else{
-                                                                  snapshot.getRef().child(snapshot.getKey()).removeValue();
-                                                                  Log.i("TAFDASRFWSREFAS",Long.toString(System.currentTimeMillis()));
+                                                                 // snapshot.getRef().child(snapshot.getKey()).removeValue();
+                                                                  Log.i("BLBLBLBLBLBLB",snapshot.getKey());
+                                                                  snapshot.getRef().child(Long.toString(hour_milisecs)).removeValue();
+                                                                  ///Log.i("TAFDASRFWSREFAS",Long.toString(System.currentTimeMillis()));
                                                               }
                                                           }
 
