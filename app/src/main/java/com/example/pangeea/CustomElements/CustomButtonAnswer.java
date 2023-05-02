@@ -10,7 +10,7 @@ import com.example.pangeea.R;
 
 public class CustomButtonAnswer extends LinearLayout {
     public CustomButtonAnswer(Context context) {
-        super(context);
+        super(context);/*comentariu lung */
         init();
     }
 
