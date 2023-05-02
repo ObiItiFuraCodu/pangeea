@@ -367,22 +367,14 @@ public class TestBackend extends DatabaseConnector {
                         }
 
                         database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
-                        /*if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
+                        if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
                             Intent i = new Intent(context, NFC_detection.class);
                             i.putExtra("Test","ye");
                             i.putExtra("hour_ms",hour_ms);
-
-                            context.startActivity(i);
-                        }*/
-                        //TODO:PUT BACK AFTER REPAIRING
-                        if(true){
-                            Intent i = new Intent(context, NFC_detection.class);
-                            i.putExtra("Test","ye");
-                            i.putExtra("hour_ms",hour_ms);
-
 
                             context.startActivity(i);
                         }
+
 
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
