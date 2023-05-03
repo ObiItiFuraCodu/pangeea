@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         backend1.import_hours(findViewById(R.id.liner2));
-        backend2.import_tasks(findViewById(R.id.liner));
+        backend2.import_tasks(findViewById(R.id.liner3));
         backend3.import_tests(findViewById(R.id.liner3));
 
     }

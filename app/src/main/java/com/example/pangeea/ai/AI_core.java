@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pangeea.CustomElements.CustomButtonLesson;
 import com.example.pangeea.CustomElements.CustomButtonView;
+import com.example.pangeea.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.json.JSONArray;
@@ -36,7 +37,10 @@ public class AI_core {
     private String accessToken = "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";
     String result = "";
     Context context;
-
+    public boolean getRandomBoolean() {
+        return Math.random() < 0.5;
+        //I tried another approaches here, still the same result
+    }
 
     public AI_core(Context context){
         this.context = context;
@@ -163,14 +167,14 @@ public class AI_core {
 
             requestBody.put("model", "text-davinci-003");
             if(main){
-                requestBody.put("prompt", "O intrebare scurta legata de lectia '"+prompt+"' este:");
+                requestBody.put("prompt", "O intrebare legata de lectia '"+prompt+"' este:");
 
             }else{
                 if(valid){
-                    requestBody.put("prompt","Un raspuns scurt corect la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt","Un raspuns corect din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
 
                 }else{
-                    requestBody.put("prompt","Un raspuns scurt gresit la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt","Un raspuns scurt gresit din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
 
                 }
             }
@@ -196,12 +200,17 @@ public class AI_core {
                         list.addView(button);
                     }else{
                         text_unmain.setText(choiceObject.getString("text"));
+                        if(valid){
+                            text_unmain.setBackgroundColor(context.getResources().getColor(R.color.green));
+                        }else{
+                            text_unmain.setBackgroundColor(context.getResources().getColor(R.color.red));
+                        }
                     }
 
                     if(main){
-                        generate_question(choiceObject.getString("text"),list,false,true, (TextView) button.getChildAt(1));
-                        generate_question(choiceObject.getString("text"),list,false,true, (TextView) button.getChildAt(2));
-                        generate_question(choiceObject.getString("text"),list,false,false, (TextView) button.getChildAt(3));
+                        generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(1));
+                        generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(2));
+                        generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(3));
 
 
                     }
