@@ -2,6 +2,7 @@ package com.example.pangeea.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.pangeea.R;
 import com.example.pangeea.ai.Test_AI;
 import com.example.pangeea.backend.TestBackend;
 import com.example.pangeea.CustomElements.CustomButtonView;
+import com.example.pangeea.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,6 +70,7 @@ public class AI_test_generator extends AppCompatActivity {
               }
                 TestBackend backend = new TestBackend(AI_test_generator.this);
                 backend.add_test(e.getLong("hour_ms"),e.getString("class_name"),e.getString("details"),files,e.getString("title"),question_array);
+                startActivity(new Intent(AI_test_generator.this, MainActivity.class));
                 finish();
 
             }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.main.MainActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,6 +50,8 @@ public class Add_mark extends AppCompatActivity {
                 }else{
                     Toast.makeText(Add_mark.this,"Invalid mark",Toast.LENGTH_SHORT).show();
                 }
+                startActivity(new Intent(Add_mark.this, MainActivity.class));
+                finish();
             }
         });
     }

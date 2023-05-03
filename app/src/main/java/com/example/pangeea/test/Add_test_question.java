@@ -171,6 +171,7 @@ public class Add_test_question extends AppCompatActivity {
                                 i.putExtra("hour_ms",e.getLong("hour_ms"));
                             }
                             startActivity(i);
+                            finish();
 
                         }
                     });
@@ -214,6 +215,7 @@ public class Add_test_question extends AppCompatActivity {
                                 i.putExtra("hour_ms",e.getLong("hour_ms"));
                             }
                             startActivity(i);
+                            finish();
 
                         }
                     });

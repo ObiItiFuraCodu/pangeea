@@ -160,6 +160,7 @@ public class Add_test extends AppCompatActivity {
                   i.putExtra("hour_ms",date.getTimeInMillis());
               }
               startActivity(i);
+              finish();
 
           }
       });

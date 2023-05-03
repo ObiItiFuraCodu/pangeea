@@ -58,6 +58,7 @@ public class See_corrected_tests extends AppCompatActivity {
                                                     i.putExtra("question_list", (Serializable) question_list);
                                                     i.putExtra("final_mark",final_mark_int);
                                                     startActivity(i);
+                                                    finish();
 
 
                                                 }

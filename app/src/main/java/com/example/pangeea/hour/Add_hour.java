@@ -92,6 +92,7 @@ public class Add_hour extends AppCompatActivity {
                     backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
                 }
                 startActivity(new Intent(Add_hour.this, MainActivity.class));
+                finish();
 
             }
         });

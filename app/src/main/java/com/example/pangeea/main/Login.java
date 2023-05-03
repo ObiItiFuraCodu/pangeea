@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity {
 
 
                                startActivity(new Intent(v.getContext(), MainActivity.class));
+                               finish();
 
                            }
                        });
@@ -65,6 +66,7 @@ public class Login extends AppCompatActivity {
         if(currentUser != null){
             Intent i = new Intent(Login.this, ControlRoom.class);
             startActivity(i);
+            finish();
         }
 
 

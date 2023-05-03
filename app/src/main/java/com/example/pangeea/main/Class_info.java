@@ -71,12 +71,14 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
                 i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
                 i.putExtra("hour/task","task");
                 startActivity(i);
+                finish();
                 break;
             }
             case R.id.nav_add_test: {
                 Intent i = new Intent(Class_info.this, Add_test.class);
                 i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
                 startActivity(i);
+                finish();
                 break;
             }
             case R.id.nav_add_hour: {
@@ -84,6 +86,7 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
                 i.putExtra("class_selected",getIntent().getExtras().getString("class_selected"));
                 i.putExtra("hour/task","hour");
                 startActivity(i);
+                finish();
                 break;
 
 

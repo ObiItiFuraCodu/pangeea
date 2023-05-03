@@ -114,6 +114,7 @@ public class Improve_performance extends AppCompatActivity {
                                                                        i.putExtra("title",title);
                                                                        i.putExtra("answer_list", (Serializable) wrong_answers);
                                                                        startActivity(i);
+                                                                       finish();
                                                                    }
                                                                });
                                                                generated.addView(button);

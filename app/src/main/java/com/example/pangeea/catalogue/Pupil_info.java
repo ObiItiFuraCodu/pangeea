@@ -68,6 +68,7 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
                 i.putExtra("class",e.getString("pupil_class"));
                 i.putExtra("name",e.getString("pupil_name"));
                 startActivity(i);
+                finish();
             }
 
         }

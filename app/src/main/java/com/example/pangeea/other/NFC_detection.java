@@ -43,6 +43,7 @@ public class NFC_detection extends AppCompatActivity {
                         i.putExtra("hour_ms",f.getString("hour_ms"));
                         i.putExtra("teacher",f.getString("teacher"));
                         startActivity(i);
+                        finish();
 
         }
         mPendingIntent =  PendingIntent.getActivity(this, 0,
@@ -107,11 +108,12 @@ public class NFC_detection extends AppCompatActivity {
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     Bundle e = getIntent().getExtras();
                     if(e.getString("Test") != null){
-                        /*
+
                         Intent i = new Intent(this, Test_viewer_elev.class);
                         i.putExtra("hour_ms",e.getString("hour_ms"));
                         startActivity(i);
-                        */
+                        finish();
+
                     }
 
                    else if(e.getString("login") != null){
@@ -121,6 +123,7 @@ public class NFC_detection extends AppCompatActivity {
                             i.putExtra("user_highschool",nfc_data[1]);
 
                             startActivity(i);
+                            finish();
                         }else{
                             connector.upload_highschool_class_and_category(nfc_data[1],nfc_data[0],"0","");
                             startActivity(new Intent(NFC_detection.this, MainActivity.class));
@@ -139,6 +142,7 @@ public class NFC_detection extends AppCompatActivity {
                             Log.i("YYYYYYYYYYYYYEEEEEEEEE","EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                         }else{
                             startActivity(new Intent(NFC_detection.this,MainActivity.class));
+                            finish();
                         }
 
 

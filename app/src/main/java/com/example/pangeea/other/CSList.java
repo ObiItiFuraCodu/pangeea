@@ -38,6 +38,7 @@ public class CSList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 connector.upload_highschool_class_and_category((String) e.get("user_highschool"),"","1",materii.get(position));
                 startActivity(new Intent(CSList.this, ControlRoom.class));
+                finish();
 
             }
         });

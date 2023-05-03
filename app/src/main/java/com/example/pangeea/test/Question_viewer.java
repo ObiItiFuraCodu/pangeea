@@ -83,6 +83,7 @@ public class Question_viewer extends AppCompatActivity {
                 i.putExtra("hour_ms",e.getString("hour_ms"));
                 i.putExtra("teacher",e.getString("teacher"));
                 startActivity(i);
+                finish();
 
             }
         });

@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 auth.signOut();
 
                 startActivity(new Intent(MainActivity.this, Login.class));
+                finish();
                 break;
             }
             case R.id.nav_add_hour: {

@@ -50,6 +50,7 @@ public class NewAccount extends AppCompatActivity {
                    Intent i = new Intent(v.getContext(), NFC_detection.class);
                    i.putExtra("login","yes");
                    startActivity(i);
+                   finish();
                }
 
 
@@ -68,6 +69,7 @@ public class NewAccount extends AppCompatActivity {
         if(currentUser != null){
            Intent i = new Intent(NewAccount.this, ControlRoom.class);
           startActivity(i);
+          finish();
         }
 
 
