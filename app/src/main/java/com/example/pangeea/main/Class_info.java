@@ -29,9 +29,9 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_info);
-        String classname = getIntent().getStringExtra("classname");
+        String classname = getIntent().getStringExtra("class_selected");
         TextView hour = findViewById(R.id.classname);
-        TextView status = findViewById(R.id.number_of_pupils);
+        hour.setText("Class name : " + classname);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view2);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -102,8 +102,10 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
     protected void onStart() {
         super.onStart();
         Bundle bundle = getIntent().getExtras();
+        TextView status = findViewById(R.id.number_of_pupils);
+
         CatalogueBackend connector = new CatalogueBackend(Class_info.this);
         LinearLayout pupil_list = findViewById(R.id.linear_layout);
-        connector.retrieve_class_info(bundle.getString("class_selected"),pupil_list);
+        connector.retrieve_class_info(bundle.getString("class_selected"),pupil_list,status);
     }
 }

@@ -36,11 +36,12 @@ public class CatalogueBackend extends DatabaseConnector{
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
 
+
     public CatalogueBackend(Context context) {
         super(context);
         this.context = context;
     }
-    public void retrieve_class_info(String class_selected, LinearLayout pupil_list){
+    public void retrieve_class_info(String class_selected, LinearLayout pupil_list,TextView num_of_pupils){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -65,6 +66,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                                     context.startActivity(i);
                                                 }
                                             });
+                                            num_of_pupils.setText("Number of pupils : " + i);
                                             pupil_list.addView(button);
                                         }
                                     }
@@ -276,11 +278,12 @@ public class CatalogueBackend extends DatabaseConnector{
                                             List<String> datelist = new ArrayList<>();
                                             for(int i = 0;i< list.size();i++){
                                                 datelist.add(list.get(i).getId());
-                                                absencecontour++;
+                                                ///absencecontour++;
+                                                //absences.setText("Absences : " + i);
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             absence_list.setAdapter(adapter);
-                                            // absences.setText("Absences : " + absencecontour);
+                                            absences.setText("Absences : " + list.size());
 
                                         }
 
@@ -302,12 +305,12 @@ public class CatalogueBackend extends DatabaseConnector{
                                             for(int i = 0;i< list.size();i++){
 
                                                 datelist.add(list.get(i).getString("mark"));
-                                                // mark_contour++;
-                                                /// mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
+                                                mark_contour++;
+                                                mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             mark_list.setAdapter(adapter);
-                                            // absences.setText("Avg mark : " + mark_total / mark_contour);
+                                            avg_mark.setText("Avg mark : " + mark_total / mark_contour);
 
                                         }
 

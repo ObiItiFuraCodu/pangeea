@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@+id/scrollView4"
+            android:id="@+id/scrollView1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline26">
 
             <LinearLayout
-                android:id="@+id/liner3"
+                android:id="@+id/liner1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
@@ -36,12 +36,12 @@
             android:layout_width="176dp"
             android:layout_height="181dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toStartOf="@+id/hs"
-            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/hs"

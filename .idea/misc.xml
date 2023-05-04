@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5475" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3655" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/rounded.xml" value="0.3165" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_hour.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_mark.xml" value="0.5401041666666667" />
@@ -15,6 +16,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_class_info.xml" value="0.25" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_control_room.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_cslist.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_daily_hour_setter.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_dashboard.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_file_viewer.xml" value="0.5385416666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_hour_info.xml" value="0.5" />

@@ -111,7 +111,7 @@ public class HourBackend extends DatabaseConnector {
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                                               //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                                               if(user_category.equals("1")){
-                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                                                  if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("hour " + value.get("class_name"));
@@ -120,12 +120,12 @@ public class HourBackend extends DatabaseConnector {
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("hour "+ value.get("class_name"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
 
                                                                   }
 
                                                               }else{
-                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                                                  if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("hour" + value.get("user_subject"));
@@ -134,7 +134,7 @@ public class HourBackend extends DatabaseConnector {
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("hour "+ value.get("user_subject"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                                   }
                                                               }
                                                               v.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +160,7 @@ public class HourBackend extends DatabaseConnector {
 
                                                                   }
                                                               });
-                                                              if(hour_milisecs > System.currentTimeMillis() - ONE_DAY_IN_MILIS){
+                                                              if(hour_milisecs > System.currentTimeMillis() - ONE_HOUR_IN_MILIS){
                                                                   layout.addView(v);
 
                                                               }else{
@@ -240,7 +240,7 @@ public class HourBackend extends DatabaseConnector {
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
-                        map.put("title",title);
+                        map2.put("title",title);
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
                         ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
                         ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);

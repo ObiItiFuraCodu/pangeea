@@ -95,7 +95,7 @@ public class TaskBackend extends DatabaseConnector{
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
-                        map.put("title",title);
+                        map2.put("title",title);
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
 
 
@@ -105,7 +105,7 @@ public class TaskBackend extends DatabaseConnector{
                 });
 
     }
-    public void import_tasks(LinearLayout layout){
+    public void import_tasks(LinearLayout layout,String from_other){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
 
@@ -141,6 +141,11 @@ public class TaskBackend extends DatabaseConnector{
                                                   @Override
                                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                                      if(from_other == null){
+                                                          layout.removeAllViews();
+                                                          TestBackend backend = new TestBackend(context);
+                                                          backend.import_tests(layout,"ye");
+                                                      }
                                                       Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
                                                       if(map != null){
 
@@ -157,12 +162,12 @@ public class TaskBackend extends DatabaseConnector{
                                                               if(user_category.equals("1")){
                                                                   Button button = (Button) v.getChildAt(0);
                                                                   TextView view = (TextView) v.getChildAt(1);
-                                                                  button.setText(value.get("class_name"));
+                                                                  button.setText("task" + value.get("class_name") + " " + value.get("title"));
                                                                   view.setText("deadline in : " +  Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                               }else{
                                                                   Button button = (Button) v.getChildAt(0);
                                                                   TextView view = (TextView) v.getChildAt(1);
-                                                                  button.setText(value.get("user_subject"));
+                                                                  button.setText("task" + value.get("user_subject") + " " + value.get("title"));
                                                                   view.setText("deadline in : " +  Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                               }
                                                               v.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +193,7 @@ public class TaskBackend extends DatabaseConnector{
 
                                                                   }
                                                               });
-                                                              if(hour_milisecs > System.currentTimeMillis() - ONE_DAY_IN_MILIS){
+                                                              if(hour_milisecs > System.currentTimeMillis()){
                                                                   layout.addView(v);
 
                                                               }else{

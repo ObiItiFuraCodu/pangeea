@@ -9,12 +9,14 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pangeea.backend.CatalogueBackend;
-import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 import com.example.pangeea.backend.HourBackend;
 import com.example.pangeea.backend.TaskBackend;
@@ -42,8 +44,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView username = findViewById(R.id.Username);
-        TextView hs = findViewById(R.id.hs);
+
+        username.setText("Username : " + auth.getCurrentUser().getDisplayName());
         String highschool;
+        ImageView view = findViewById(R.id.imageView);
+        view.setImageResource(R.drawable.ic_launcher_foreground);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"GIGEL FRONE",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -110,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        TextView hs = findViewById(R.id.hs);
+                        hs.setText("Highschool : "+ documentSnapshot.getString("user_highschool"));
                         if(documentSnapshot.getString("user_category").equals("0")){
                             //navigationView.getMenu().findItem(R.id.nav_add_hour).setVisible(false);
                             connector.retrieve_materies((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
@@ -126,8 +139,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         backend1.import_hours(findViewById(R.id.liner2));
-        backend2.import_tasks(findViewById(R.id.liner3));
-        backend3.import_tests(findViewById(R.id.liner3));
+        backend2.import_tasks(findViewById(R.id.liner1),null);
+        ///backend3.import_tests(findViewById(R.id.liner1),null);
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LinearLayout layout = findViewById(R.id.liner1);
+        layout.removeAllViews();
     }
 }

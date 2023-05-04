@@ -25,7 +25,9 @@ public class Materie_info extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        backend.retrieve_pupil_info_elev(findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences),getIntent().getExtras().getString("materie_name"));
+        TextView absences = findViewById(R.id.absences2);
+        TextView avg_mark = findViewById(R.id.avg_mark2);
+        backend.retrieve_pupil_info_elev(findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark2),findViewById(R.id.absences2),getIntent().getExtras().getString("materie_name"));
         TextView do_better = findViewById(R.id.improve_performance);
         do_better.setOnClickListener(new View.OnClickListener() {
             @Override

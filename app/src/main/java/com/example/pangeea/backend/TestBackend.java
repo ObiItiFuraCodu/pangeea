@@ -123,7 +123,7 @@ public class TestBackend extends DatabaseConnector {
                         map2.put("details",details);
                         map2.put("class_name",class_name);
                         map2.put("files",filenames);
-                        map.put("title",title);
+                        map2.put("title",title);
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
                         map.put("questions",questions);
 
@@ -135,7 +135,7 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
-    public void import_tests(LinearLayout layout){
+    public void import_tests(LinearLayout layout,String from_other){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
 
@@ -171,6 +171,11 @@ public class TestBackend extends DatabaseConnector {
                                                   @Override
                                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                                          layout.removeAllViews();
+                                                          TaskBackend backend = new TaskBackend(context);
+                                                          backend.import_tasks(layout,"ye");
+
+
                                                       Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
                                                       if(map != null){
 
@@ -185,29 +190,29 @@ public class TestBackend extends DatabaseConnector {
                                                               Log.i("SYSTEMAMSA",Integer.toString((int)System.currentTimeMillis()));
                                                               //  Log.i("HOURMILIS",Integer.toString(hour_milisecs));
                                                               if(user_category.equals("1")){
-                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                                                  if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("test " + value.get("class_name"));
+                                                                      button.setText("test " + value.get("class_name") + " " + value.get("title"));
                                                                       view.setText("active now");
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("test "+ value.get("class_name"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+                                                                      button.setText("test "+ value.get("class_name") + " " + value.get("title"));
+                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
 
                                                                   }
                                                               }else{
-                                                                  if(hour_milisecs < (System.currentTimeMillis() + ONE_HOUR_IN_MILIS)){
+                                                                  if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("test" + value.get("user_subject"));
+                                                                      button.setText("test" + value.get("user_subject") + " " + value.get("title"));
                                                                       view.setText("active now");
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("test "+ value.get("user_subject"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis() - ONE_HOUR_IN_MILIS ) / 3600000) + " hours");
+                                                                      button.setText("test "+ value.get("user_subject") + " " + value.get("title"));
+                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                                   }                                                              }
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
@@ -232,7 +237,7 @@ public class TestBackend extends DatabaseConnector {
 
                                                                   }
                                                               });
-                                                              if(hour_milisecs > System.currentTimeMillis() - ONE_DAY_IN_MILIS){
+                                                              if(hour_milisecs > System.currentTimeMillis() - ONE_HOUR_IN_MILIS){
                                                                   layout.addView(v);
 
                                                               }else{
