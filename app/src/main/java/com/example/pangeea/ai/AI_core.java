@@ -174,7 +174,7 @@ public class AI_core {
                     requestBody.put("prompt","Un raspuns corect din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
 
                 }else{
-                    requestBody.put("prompt","Un raspuns scurt gresit din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt","Un raspuns gresit din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
 
                 }
             }
@@ -195,9 +195,22 @@ public class AI_core {
                     JSONObject choiceObject = choicesArray.getJSONObject(0);
                     CustomButtonView button = new CustomButtonView(context);
                     if(main){
-                        Button button1 = (Button) button.getChildAt(0);
-                        button1.setText(choiceObject.getString("text"));
-                        list.addView(button);
+                        if (choiceObject.getString("text").contains("Raspuns") || choiceObject.getString("text").contains("Raspunsul") ||
+                                choiceObject.getString("text").contains("raspuns") || choiceObject.getString("text").contains("raspunsul")
+                                  || choiceObject.getString("text").contains("Răspuns") || choiceObject.getString("text").contains("Răspunsul") ||
+                                choiceObject.getString("text").contains("răspuns") || choiceObject.getString("text").contains("răspunsul")){
+                            generate_question(prompt,list,true,null,null);
+
+                        }else{
+                            Button button1 = (Button) button.getChildAt(0);
+                            button1.setText(choiceObject.getString("text"));
+                            list.addView(button);
+                            generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(1));
+                            generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(2));
+                            generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(3));
+
+                        }
+
                     }else{
                         text_unmain.setText(choiceObject.getString("text"));
                         if(valid){
@@ -207,13 +220,6 @@ public class AI_core {
                         }
                     }
 
-                    if(main){
-                        generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(1));
-                        generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(2));
-                        generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(3));
-
-
-                    }
 
                     Log.e("API Response", response.toString());
                     //Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();

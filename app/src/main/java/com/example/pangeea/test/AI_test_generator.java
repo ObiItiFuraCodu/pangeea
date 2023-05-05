@@ -1,8 +1,10 @@
 package com.example.pangeea.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AI_test_generator extends AppCompatActivity {
+
+    ////int redColor = ContextCompat.getColor(this, R.color.red);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +51,58 @@ public class AI_test_generator extends AppCompatActivity {
         good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              for(int i = 0;i< 7;i++){
-                  HashMap<String,Object> question = new HashMap<>();
-                  CustomButtonView button = (CustomButtonView) question_list.getChildAt(i);
-                  Button prompt = (Button)button.getChildAt(0);
-                  TextView a = (TextView) button.getChildAt(1);
-                  TextView b = (TextView) button.getChildAt(2);
-                  TextView c = (TextView) button.getChildAt(3);
-                  question.put("prompt",prompt.getText().toString());
-                  question.put("type","A/B/C");
-                  HashMap<String,String> variants = new HashMap<>();
-                  variants.put("A",a.getText().toString());
-                  variants.put("A_valid","valid");
-                  variants.put("B",b.getText().toString());
-                  variants.put("B_valid","valid");
-                  variants.put("C",c.getText().toString());
-                  variants.put("C_valid","invalid");
-                  question.put("variants",variants);
-                  question_array.add(question);
+                for(int i = 0;i< 7;i++){
+                    HashMap<String,Object> question = new HashMap<>();
+                    CustomButtonView button = (CustomButtonView) question_list.getChildAt(i);
+                    Button prompt = (Button)button.getChildAt(0);
+                    TextView a = (TextView) button.getChildAt(1);
+                    TextView b = (TextView) button.getChildAt(2);
+                    TextView c = (TextView) button.getChildAt(3);
+                    question.put("prompt",prompt.getText().toString());
+                    question.put("type","A/B/C");
+                    HashMap<String,String> variants = new HashMap<>();
+                    variants.put("A",a.getText().toString());
+                    if (a.getBackground() instanceof ColorDrawable) {
+                        int backgroundColor = ((ColorDrawable) a.getBackground()).getColor();
+                        if (backgroundColor == getResources().getColor(R.color.green)) {
+                            variants.put("A_valid", "valid");
+                        } else {
+                            variants.put("A_valid", "invalid");
+                        }
+                    } else {
+                        // Handle the case where the background is not a solid color
+                        variants.put("A_valid", "invalid");
+                    }
+                    variants.put("B",b.getText().toString());
+
+                    if (b.getBackground() instanceof ColorDrawable) {
+                        int backgroundColor = ((ColorDrawable) b.getBackground()).getColor();
+                        if (backgroundColor == getResources().getColor(R.color.green)) {
+                            variants.put("B_valid", "valid");
+                        } else {
+                            variants.put("B_valid", "invalid");
+                        }
+                    } else {
+                        // Handle the case where the background is not a solid color
+                        variants.put("B_valid", "invalid");
+                    }
+                    variants.put("C",c.getText().toString());
+                    if (c.getBackground() instanceof ColorDrawable) {
+                        int backgroundColor = ((ColorDrawable) c.getBackground()).getColor();
+                        if (backgroundColor == getResources().getColor(R.color.green)) {
+                            variants.put("C_valid", "valid");
+                        } else {
+                            variants.put("C_valid", "invalid");
+                        }
+                    } else {
+                        // Handle the case where the background is not a solid color
+                        variants.put("C_valid", "invalid");
+                    }
+                    question.put("variants",variants);
+                    question_array.add(question);
 
 
-              }
+                }
                 TestBackend backend = new TestBackend(AI_test_generator.this);
                 backend.add_test(e.getLong("hour_ms"),e.getString("class_name"),e.getString("details"),files,e.getString("title"),question_array);
                 startActivity(new Intent(AI_test_generator.this, MainActivity.class));
@@ -82,6 +117,9 @@ public class AI_test_generator extends AppCompatActivity {
             public void onClick(View v) {
                 question_list.removeAllViews();
                 Test_AI ai = new Test_AI(AI_test_generator.this,question_list,e.getString("title"),7);
+                ai.generate_test();
+
+
 
 
             }
