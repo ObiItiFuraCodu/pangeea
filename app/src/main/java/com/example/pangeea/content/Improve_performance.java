@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -65,67 +66,44 @@ public class Improve_performance extends AppCompatActivity {
                                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                            @Override
                                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots1) {
-                                                               db.getReference("tests").child(documentSnapshot.getString("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(snapshot.getId())
-                                                                       .addValueEventListener(new ValueEventListener() {
-                                                                           @Override
-                                                                           public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                               HashMap<String,Object> map = (HashMap<String, Object>) snapshot.getValue();
-                                                                               String title = (String) map.get("title");
-                                                                               List<DocumentSnapshot> list = core.recommender_system(queryDocumentSnapshots1.getDocuments(),title);
-                                                                               for(DocumentSnapshot snapshot2 : list){
-                                                                                   Button button = new Button(Improve_performance.this);
-                                                                                   button.setText(snapshot2.getString("title"));
-                                                                                   sorted.addView(button);
+                                                               Log.i("SSADASDSA",snapshot.getId());
+                                                               String title = (String) snapshot.get("title");
+                                                               List<DocumentSnapshot> list = core.recommender_system(queryDocumentSnapshots1.getDocuments(),title);
+                                                               for(DocumentSnapshot snapshot2 : list){
+                                                                   Button button = new Button(Improve_performance.this);
+                                                                   button.setText(snapshot2.getString("title"));
+                                                                   sorted.addView(button);
 
-                                                                               }
+                                                               }
 
-                                                                           }
-
-                                                                           @Override
-                                                                           public void onCancelled(@NonNull DatabaseError error) {
-
-                                                                           }
-                                                                       });
                                                            }
                                                        });
                                                //SORTED END
                                                //GENERATED BEGIN
-                                               db.getReference("tests").child(documentSnapshot.getString("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(snapshot.getId())
-                                                       .addValueEventListener(new ValueEventListener() {
-                                                           @Override
-                                                           public void onDataChange(@NonNull DataSnapshot snapshot1) {
-                                                               HashMap<String,Object> map = (HashMap<String, Object>) snapshot1.getValue();
-                                                               String title = (String) map.get("title");
-                                                               List<String> wrong_answers = new ArrayList<>();
-                                                               List<HashMap<String,Object>> answers = (List<HashMap<String, Object>>) snapshot.get("answers");
-                                                               for(HashMap<String,Object> answer : answers){
-                                                                   if(answer.get("answer").equals("wrong")){
-                                                                       String prompt = (String) answer.get("prompt");
-                                                                       wrong_answers.add(prompt);
+                                               String title = (String) snapshot.get("title");
+                                               List<String> wrong_answers = new ArrayList<>();
+                                               List<HashMap<String,Object>> answers = (List<HashMap<String, Object>>) snapshot.get("answers");
+                                               for(HashMap<String,Object> answer : answers){
+                                                   if(answer.get("answer").equals("wrong")){
+                                                       String prompt = (String) answer.get("prompt");
+                                                       wrong_answers.add(prompt);
 
-                                                                   }
-                                                               }
-                                                               Button button = new Button(Improve_performance.this);
-                                                               button.setText(title);
-                                                               button.setOnClickListener(new View.OnClickListener() {
-                                                                   @Override
-                                                                   public void onClick(View v) {
-                                                                       Intent i = new Intent(Improve_performance.this, Lesson_viewer.class);
-                                                                       i.putExtra("title",title);
-                                                                       i.putExtra("answer_list", (Serializable) wrong_answers);
-                                                                       startActivity(i);
-                                                                       finish();
-                                                                   }
-                                                               });
-                                                               generated.addView(button);
+                                                   }
+                                               }
+                                               Button button = new Button(Improve_performance.this);
+                                               button.setText(title);
+                                               button.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View v) {
+                                                       Intent i = new Intent(Improve_performance.this, Lesson_viewer.class);
+                                                       i.putExtra("title",title);
+                                                       i.putExtra("answer_list", (Serializable) wrong_answers);
+                                                       startActivity(i);
+                                                       finish();
+                                                   }
+                                               });
+                                               generated.addView(button);
 
-                                                           }
-
-                                                           @Override
-                                                           public void onCancelled(@NonNull DatabaseError error) {
-
-                                                           }
-                                                       });
 
 
                                            }

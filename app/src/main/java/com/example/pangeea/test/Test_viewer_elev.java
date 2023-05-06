@@ -2,12 +2,14 @@ package com.example.pangeea.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.pangeea.R;
 import com.example.pangeea.backend.TestBackend;
+import com.example.pangeea.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class Test_viewer_elev extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 backend.correct_test_and_upload(e.getString("hour_ms"),answer_list,e.getString("teacher"));
+                startActivity(new Intent(Test_viewer_elev.this, MainActivity.class));
 
             }
         });

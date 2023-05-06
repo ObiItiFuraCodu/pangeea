@@ -558,8 +558,26 @@ public class TestBackend extends DatabaseConnector {
                         HashMap<String,Object> mapp = new HashMap<>();
                         mapp.put("answers",answers);
                         //mapp.put("size",answers.removeAll(Arrays.asList("",null)).size());
-                        store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("tests").document(hour_ms)
-                                .set(mapp);
+                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(hour_ms).child("title")
+                                        .get()
+                                                .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DataSnapshot dataSnapshot) {
+                                                        String title = dataSnapshot.getValue(String.class);
+                                                        mapp.put("title",title);
+                                                        store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("tests").document(hour_ms)
+                                                                .set(mapp);
+                                                    }
+                                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+
+
+
 
                     }
                 });
