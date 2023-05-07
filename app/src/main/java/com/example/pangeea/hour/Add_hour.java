@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pangeea.backend.DatabaseConnector;
@@ -54,10 +55,10 @@ public class Add_hour extends AppCompatActivity {
         EditText title = findViewById(R.id.lesson_title);
 
 
-        Button select_date = findViewById(R.id.select_date_time);
-        Button upload_lessons = findViewById(R.id.add_lesson);
+        TextView select_date = findViewById(R.id.select_date_time);
+        TextView upload_lessons = findViewById(R.id.add_lesson);
         Spinner support_lessons = findViewById(R.id.support_lessons);
-        Button add = findViewById(R.id.add_button);
+        TextView add = findViewById(R.id.add_button);
         EditText details = findViewById(R.id.details);
 
 
