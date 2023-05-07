@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
 import com.example.pangeea.R;
+import com.example.pangeea.Test_result_info;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.content.Lesson_list;
 import com.example.pangeea.main.MainActivity;
@@ -551,12 +552,7 @@ public class TestBackend extends DatabaseConnector {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
-                                .setValue(answers);
-                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
-                                .setValue(answers);
-                        HashMap<String,Object> mapp = new HashMap<>();
-                        mapp.put("answers",answers);
+
                         //mapp.put("size",answers.removeAll(Arrays.asList("",null)).size());
                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(hour_ms).child("title")
                                         .get()
@@ -564,7 +560,14 @@ public class TestBackend extends DatabaseConnector {
                                                     @Override
                                                     public void onSuccess(DataSnapshot dataSnapshot) {
                                                         String title = dataSnapshot.getValue(String.class);
+                                                        HashMap<String,Object> mapp = new HashMap<>();
+                                                        mapp.put("answers",answers);
                                                         mapp.put("title",title);
+                                                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
+                                                                .setValue(mapp);
+                                                        database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(documentSnapshot.getString("user_class")).child(hour_ms).child("submissions").child(documentSnapshot.getString("Username"))
+                                                                .setValue(mapp);
+
                                                         store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(documentSnapshot.getString("user_class")).collection("pupils").document(documentSnapshot.getString("Username")).collection("tests").document(hour_ms)
                                                                 .set(mapp);
                                                     }
@@ -607,8 +610,16 @@ public class TestBackend extends DatabaseConnector {
                                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                     @Override
                                     public void onSuccess(DataSnapshot dataSnapshot) {
-                                        List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) dataSnapshot.getValue();
-                                        for(int i = 1;i<  question_list.size();i++){
+                                        HashMap<String,Object> mapp = (HashMap<String, Object>) dataSnapshot.getValue();
+
+                                        List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) mapp.get("answers");
+                                        String title = (String) mapp.get("title");
+                                        for(int i = 0;i<  question_list.size();i++){
+                                            if(question_list.get(i) == null){
+                                                i++;
+                                                total_questions++;
+                                                wrong_q++;
+                                            }
 
                                             HashMap<String,Object> question = question_list.get(i);
                                             String type = (String)question.get("type");
@@ -651,6 +662,7 @@ public class TestBackend extends DatabaseConnector {
                                                                         correct_q++;
                                                                         to_be_corrected--;
                                                                         HashMap<String,Object> q_map = new HashMap<>();
+                                                                        q_map.put("title",title);
                                                                         q_map.put("answers",question_list);
                                                                         HashMap<String,Object> final_mark = new HashMap<>();
                                                                         final_mark.put("mark",correct_q/total_questions);
@@ -665,11 +677,13 @@ public class TestBackend extends DatabaseConnector {
                                                                                     .setValue(correct_q/total_questions);
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                                                     .setValue(correct_q/total_questions);
-                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString(correct_q/total_questions*10),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
                                                                             q_map.put("mark",final_mark);
                                                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
                                                                                     .set(q_map);
-                                                                            context.startActivity(new Intent(context, MainActivity.class));
+                                                                            Intent i = new Intent(context, Test_result_info.class);
+                                                                            i.putExtra("mark",String.valueOf(final_mark.get("mark")));
+                                                                            context.startActivity(i);
                                                                         }
                                                                         dialog.dismiss();
 
@@ -685,6 +699,7 @@ public class TestBackend extends DatabaseConnector {
                                                                         wrong_q++;
                                                                         to_be_corrected--;
                                                                         HashMap<String,Object> q_map = new HashMap<>();
+                                                                        q_map.put("title",title);
                                                                         q_map.put("answers",question_list);
 
                                                                         question_list.set(Integer.parseInt(to_correct.getItemAtPosition(position).toString()),answer_map);
@@ -696,17 +711,19 @@ public class TestBackend extends DatabaseConnector {
                                                                                 .set(q_map);
                                                                         if(to_be_corrected == 0){
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
-                                                                                    .setValue(correct_q/total_questions);
+                                                                                    .setValue((int)((float)correct_q/total_questions*100));
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
-                                                                                    .setValue(correct_q/total_questions);
+                                                                                    .setValue((int)((float)correct_q/total_questions*100));
                                                                             HashMap<String,Object> final_mark = new HashMap<>();
-                                                                            final_mark.put("mark",correct_q/total_questions);
+                                                                            final_mark.put("mark",(int)((float)correct_q/total_questions*100));
                                                                             q_map.put("mark",final_mark);
                                                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
                                                                                     .set(q_map);
-                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString(correct_q/total_questions*10),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 
-                                                                            context.startActivity(new Intent(context, MainActivity.class));
+                                                                            Intent i = new Intent(context, Test_result_info.class);
+                                                                            i.putExtra("mark",String.valueOf(final_mark.get("mark")));
+                                                                            context.startActivity(i);
                                                                         }
                                                                         dialog.dismiss();
 
@@ -731,19 +748,22 @@ public class TestBackend extends DatabaseConnector {
                                         }
                                         if(to_be_corrected == 0){
                                             HashMap<String,Object> q_map = new HashMap<>();
+                                            q_map.put("title",title);
                                             q_map.put("answers",question_list);
                                             HashMap<String,Object> final_mark = new HashMap<>();
-                                            final_mark.put("mark",correct_q/total_questions);
+                                            final_mark.put("mark",(int)((float)correct_q/total_questions*10));
                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil).child("final_mark")
-                                                    .setValue(correct_q/total_questions);
+                                                    .setValue((int)((float)correct_q/total_questions*10));
                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
-                                                    .setValue(correct_q/total_questions);
-                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString(correct_q/total_questions*10),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+                                                    .setValue((int)((float)correct_q/total_questions*10));
+                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 
                                             q_map.put("mark",final_mark);
                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
                                                     .set(q_map);
-                                            context.startActivity(new Intent(context, MainActivity.class));
+                                            Intent i = new Intent(context, Test_result_info.class);
+                                            i.putExtra("mark",String.valueOf(final_mark.get("mark")));
+                                            context.startActivity(i);
                                         }
 
                                     }

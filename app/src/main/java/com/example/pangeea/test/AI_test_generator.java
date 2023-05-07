@@ -35,7 +35,7 @@ public class AI_test_generator extends AppCompatActivity {
         List<HashMap<String,Object>> question_array = new ArrayList<>();
 
         Bundle e = getIntent().getExtras();
-        Test_AI ai = new Test_AI(AI_test_generator.this,question_list,e.getString("title"),7);
+        Test_AI ai = new Test_AI(AI_test_generator.this,question_list,e.getString("title"),10);
         List<Uri> files = new ArrayList<>();
 
 
@@ -51,7 +51,7 @@ public class AI_test_generator extends AppCompatActivity {
         good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0;i< 7;i++){
+                for(int i = 0;i< 10;i++){
                     HashMap<String,Object> question = new HashMap<>();
                     CustomButtonView button = (CustomButtonView) question_list.getChildAt(i);
                     Button prompt = (Button)button.getChildAt(0);
