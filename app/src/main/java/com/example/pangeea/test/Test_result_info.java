@@ -1,4 +1,4 @@
-package com.example.pangeea;
+package com.example.pangeea.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pangeea.R;
 import com.example.pangeea.main.MainActivity;
 
 public class Test_result_info extends AppCompatActivity {

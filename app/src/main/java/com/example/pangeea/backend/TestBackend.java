@@ -4,11 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.telecom.CallAudioState;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,11 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
-import com.example.pangeea.R;
-import com.example.pangeea.Test_result_info;
+import com.example.pangeea.test.Test_result_info;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.content.Lesson_list;
-import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.other.Basic_tools;
 import com.example.pangeea.other.FileDownloader;
 import com.example.pangeea.other.FileViewer;
@@ -34,7 +28,6 @@ import com.example.pangeea.test.Question_viewer;
 import com.example.pangeea.test.Question_viewer_ABC;
 import com.example.pangeea.test.Test_info_elev;
 import com.example.pangeea.test.Test_info_prof;
-import com.example.pangeea.test.Test_viewer_elev;
 import com.example.pangeea.test.Test_viewer_proffesor;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,18 +43,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import lombok.Data;
 
 public class TestBackend extends DatabaseConnector {
     Context context;
