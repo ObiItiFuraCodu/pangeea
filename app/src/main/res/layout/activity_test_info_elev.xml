@@ -7,7 +7,7 @@
     tools:context=".test.Test_info_elev">
 
     <TextView
-        android:id="@+id/teacher_tv"
+        android:id="@+id/teacher_tv_b"
         android:layout_width="77dp"
         android:layout_height="32dp"
         android:layout_marginBottom="200dp"

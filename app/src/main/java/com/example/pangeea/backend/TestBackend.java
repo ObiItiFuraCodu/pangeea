@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
+import com.example.pangeea.ai.AI_Preparation;
+import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.test.Test_result_info;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.content.Lesson_list;
@@ -360,7 +362,7 @@ public class TestBackend extends DatabaseConnector {
 
                         }
 
-                        database_reference = database.getReference("tasks").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
+                        database_reference = database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child((String)documentSnapshot.get("user_class")).child(hour_ms);
                         if(Basic_tools.hour_is_active(Long.parseLong(hour_ms))){
                             Intent i = new Intent(context, NFC_detection.class);
                             i.putExtra("Test","ye");
@@ -373,9 +375,11 @@ public class TestBackend extends DatabaseConnector {
                         database_reference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Log.e("VBWBBSWSASWA","WDSAWDAFEA");
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
+                                    teacher.setText(map.get("teacher").toString());
                                     if((List<String>)map.get("files") != null){
                                         List<String> lessons_list = (List<String>)map.get("files");
                                         lesson_network.setOnClickListener(new View.OnClickListener() {
@@ -386,6 +390,14 @@ public class TestBackend extends DatabaseConnector {
                                                 i.putExtra("main_course",map.get("title").toString());
                                                 context.startActivity(i);
 
+                                            }
+                                        });
+                                        ai.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent i = new Intent(v.getContext(), AI_Preparation.class);
+                                                i.putExtra("title",map.get("title").toString());
+                                                context.startActivity(i);
                                             }
                                         });
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
@@ -419,14 +431,9 @@ public class TestBackend extends DatabaseConnector {
                                     }
 
 
-                                    teacher.setText(map.get("teacher").toString());
 
-                                    ai.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            context.startActivity(new Intent(context, AI_generator.class));
-                                        }
-                                    });
+
+
 
 
 

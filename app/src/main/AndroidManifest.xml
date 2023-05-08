@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Pangeea"
         tools:targetApi="31">
         <activity
+            android:name=".ai.AI_Preparation"
+            android:exported="false" />
+        <activity
             android:name=".test.Test_result_info"
             android:exported="false" />
         <activity
