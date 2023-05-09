@@ -43,6 +43,7 @@ public class CatalogueBackend extends DatabaseConnector{
     }
     public void retrieve_class_info(String class_selected, LinearLayout pupil_list,TextView num_of_pupils){
         FirebaseUser user = auth.getCurrentUser();
+        pupil_list.removeAllViews();
 
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -243,12 +244,13 @@ public class CatalogueBackend extends DatabaseConnector{
                                             for(int i = 0;i< list.size();i++){
 
                                                 datelist.add( list.get(i).getString("mark"));
-                                                // mark_contour++;
-                                                // mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
+                                                mark_contour++;
+                                                mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
+                                                absences.setText("Avg mark : " + mark_total / mark_contour);
+
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             mark_list.setAdapter(adapter);
-                                            // absences.setText("Avg mark : " + mark_total / mark_contour);
 
                                         }
 

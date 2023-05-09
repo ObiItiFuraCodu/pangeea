@@ -94,7 +94,7 @@ public class AI_core {
                 return super.parseNetworkResponse(response);
             }
         };
-        int timeoutMs = 25000; // 25 seconds timeout
+        int timeoutMs = 250000; // 25 seconds timeout
         RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         request.setRetryPolicy(policy);
 
@@ -152,7 +152,7 @@ public class AI_core {
                 return super.parseNetworkResponse(response);
             }
         };
-        int timeoutMs = 25000; // 25 seconds timeout
+        int timeoutMs = 250000; // 25 seconds timeout
         RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         request.setRetryPolicy(policy);
 
@@ -246,7 +246,7 @@ public class AI_core {
                 return super.parseNetworkResponse(response);
             }
         };
-        int timeoutMs = 25000; // 25 seconds timeout
+        int timeoutMs = 250000; // 25 seconds timeout
         RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         request.setRetryPolicy(policy);
 

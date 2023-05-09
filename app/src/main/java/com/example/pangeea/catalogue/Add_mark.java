@@ -44,14 +44,15 @@ public class Add_mark extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mark.getText().toString().contains("[a-zA-Z]") == false){
+                if(mark.getText().toString().contains("[a-zA-Z]") == false && datestring != null){
                     connector.upload_mark(e.getString("class"),e.getString("name"),mark.getText().toString(),datestring);
+                    startActivity(new Intent(Add_mark.this, MainActivity.class));
+                    finish();
 
                 }else{
-                    Toast.makeText(Add_mark.this,"Invalid mark",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Add_mark.this,"Invalid mark or date",Toast.LENGTH_SHORT).show();
                 }
-                startActivity(new Intent(Add_mark.this, MainActivity.class));
-                finish();
+
             }
         });
     }
