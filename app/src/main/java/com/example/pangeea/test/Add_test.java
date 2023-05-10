@@ -128,6 +128,8 @@ public class Add_test extends AppCompatActivity {
             public void onClick(View v) {
                 if(date == null && e.get("hour_ms") == null){
                     Toast.makeText(Add_test.this,"you didnt pick a date",Toast.LENGTH_SHORT).show();
+                }else if(questions_list.isEmpty()){
+                    Toast.makeText(Add_test.this,"You didnt add any questions",Toast.LENGTH_LONG).show();
                 }else{
                     if(e.get("hour_ms") != null){
                         connector.add_test(e.getLong("hour_ms"), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list);
