@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.pangeea.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,19 +47,24 @@ public class See_corrected_tests extends AppCompatActivity {
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
                                             Button button = new Button(See_corrected_tests.this);
-                                            button.setText(document.getId());
+                                            button.setText((String) document.get("title"));
                                             button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
                                                     List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) document.get("answers");
                                                     HashMap<String,Object> final_mark = (HashMap<String, Object>) document.get("mark");
-                                                    long final_mark_long = (long)final_mark.get("mark");
-                                                    int final_mark_int = (int)final_mark_long;
-                                                    Intent i = new Intent(v.getContext(),Test_result.class);
-                                                    i.putExtra("question_list", (Serializable) question_list);
-                                                    i.putExtra("final_mark",final_mark_int);
-                                                    startActivity(i);
-                                                    finish();
+                                                    if(final_mark != null){
+                                                        long final_mark_long = (long)final_mark.get("mark");
+                                                        int final_mark_int = (int)final_mark_long;
+                                                        Intent i = new Intent(v.getContext(),Test_result.class);
+                                                        i.putExtra("question_list", (Serializable) question_list);
+                                                        i.putExtra("final_mark",final_mark_int);
+                                                        startActivity(i);
+                                                        finish();
+                                                    }else{
+                                                        Toast.makeText(See_corrected_tests.this,"Not corrected yet",Toast.LENGTH_SHORT).show();
+                                                    }
+
 
 
                                                 }

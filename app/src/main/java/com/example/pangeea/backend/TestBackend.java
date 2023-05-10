@@ -229,7 +229,30 @@ public class TestBackend extends DatabaseConnector {
                                                                   }
                                                               });
                                                               if(hour_milisecs > System.currentTimeMillis() - ONE_HOUR_IN_MILIS){
-                                                                  layout.addView(v);
+
+                                                                      ref.child(String.valueOf(hour_milisecs)).child("submissions").child(user.getDisplayName())
+                                                                              .get()
+                                                                              .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                                                                  @Override
+                                                                                  public void onSuccess(DataSnapshot dataSnapshot) {
+                                                                                      if(!dataSnapshot.exists()){
+                                                                                          layout.addView(v);
+
+                                                                                      }else{
+                                                                                          Log.i("EXPIRED TEST","TSTSTS");
+
+                                                                                      }
+                                                                                  }
+                                                                              })
+                                                                              .addOnFailureListener(new OnFailureListener() {
+                                                                                  @Override
+                                                                                  public void onFailure(@NonNull Exception e) {
+                                                                                      layout.addView(v);
+                                                                                  }
+                                                                              });
+
+
+
 
                                                               }else{
                                                                   Log.i("TF","WTFFFFFFFFFFFFFFFFFF");
