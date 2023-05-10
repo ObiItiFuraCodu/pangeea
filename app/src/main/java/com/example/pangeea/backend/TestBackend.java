@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
-import com.example.pangeea.ai.AI_Preparation;
+
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.test.Test_result_info;
 import com.example.pangeea.ai.AI_generator;
@@ -418,7 +418,7 @@ public class TestBackend extends DatabaseConnector {
                                         ai.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Intent i = new Intent(v.getContext(), AI_Preparation.class);
+                                                Intent i = new Intent(v.getContext(), AI_lesson.class);
                                                 i.putExtra("title",map.get("title").toString());
                                                 context.startActivity(i);
                                             }

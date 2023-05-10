@@ -56,9 +56,13 @@ public class Improve_performance extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                        for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){
+                                          int  mark_int = 110;
                                            HashMap<String,Object> mark = (HashMap<String, Object>) snapshot.get("mark");
-                                           long mark_long = (long)mark.get("mark");
-                                           int mark_int = (int)mark_long;
+                                           if(mark != null){
+                                               long mark_long = (long)mark.get("mark");
+                                               mark_int = (int)mark_long;
+                                           }
+
                                            if(mark_int < 5){
                                                //SORTED BEGIN
                                                store.collection("courses").document(documentSnapshot.getString("user_class").replaceAll("[^\\d.]", "")).collection(documentSnapshot.getString("user_class").replaceAll("[^\\d.]", ""))

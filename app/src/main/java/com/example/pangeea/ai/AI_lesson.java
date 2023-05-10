@@ -47,6 +47,7 @@ public class AI_lesson extends AppCompatActivity {
                 TextView viewq = (TextView) question.getChildAt(1);
                 buttonq.setText(question_editt.getText().toString());
                 core.AI_Text("Raspunsul la intrebarea "+question_editt.getText().toString()+" este:",viewq);
+                question_editt.setText("");
                 linearl.addView(question);
 
 

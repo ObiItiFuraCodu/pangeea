@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
+import com.example.pangeea.hour.Hour_info_elev;
 import com.example.pangeea.test.Test_viewer_elev;
 import com.example.pangeea.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -140,6 +141,10 @@ public class NFC_detection extends AppCompatActivity {
                         if(!e.getBoolean("presence")){
                             connector.make_presence(e.getString("user_class"),nfc_data[0],Long.parseLong(e.getString("hour_ms")),e.getString("teacher"));
                             Log.i("YYYYYYYYYYYYYEEEEEEEEE","EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                            Intent i = new Intent(NFC_detection.this, Hour_info_elev.class);
+                            i.putExtra("hour_milis",e.getString("hour_ms"));
+                            i.putExtra("presence",true);
+                            startActivity(i);
                         }else{
                             startActivity(new Intent(NFC_detection.this,MainActivity.class));
                             finish();

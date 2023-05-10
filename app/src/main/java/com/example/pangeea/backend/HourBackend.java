@@ -18,7 +18,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.pangeea.CustomElements.CustomButtonAnswer;
 import com.example.pangeea.CustomElements.CustomButtonLesson;
-import com.example.pangeea.ai.AI_Preparation;
+
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
@@ -349,6 +349,7 @@ public class HourBackend extends DatabaseConnector {
     public void retrieve_hour_data_elev(String hour_ms, ListView lv, Button questions, boolean presence, TextView ai, TextView lesson_network){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
+        Basic_tools tools = new Basic_tools();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -367,13 +368,25 @@ public class HourBackend extends DatabaseConnector {
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
 
                                 if(map != null){
-                                    if(!presence){
+                                    if(!presence && tools.hour_is_active(Long.parseLong(hour_ms))){
                                         Intent i = new Intent(context, NFC_detection.class);
                                         i.putExtra("teacher",map.get("teacher").toString());
                                         i.putExtra("hour_ms",hour_ms);
                                         i.putExtra("user_class",documentSnapshot.get("user_class").toString());
                                         i.putExtra("presence",presence);
                                         context.startActivity(i);
+                                    }else{
+                                        if(!presence){
+                                            questions.setVisibility(View.INVISIBLE);
+
+                                        }else{
+                                            if(tools.hour_is_active(Long.parseLong(hour_ms))){
+                                                lesson_network.setVisibility(View.INVISIBLE);
+                                                ai.setVisibility(View.INVISIBLE);
+                                            }
+
+                                        }
+
                                     }
 
 
@@ -434,7 +447,7 @@ public class HourBackend extends DatabaseConnector {
                                 ai.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent i = new Intent(v.getContext(), AI_Preparation.class);
+                                        Intent i = new Intent(v.getContext(), AI_lesson.class);
                                         i.putExtra("title",map.get("title").toString());
                                         context.startActivity(i);
                                     }

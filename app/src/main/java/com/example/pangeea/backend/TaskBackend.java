@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
-import com.example.pangeea.ai.AI_Preparation;
+
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
@@ -340,7 +340,7 @@ public class TaskBackend extends DatabaseConnector{
                                         ai.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Intent i = new Intent(v.getContext(), AI_Preparation.class);
+                                                Intent i = new Intent(v.getContext(), AI_lesson.class);
                                                 i.putExtra("title",map.get("title").toString());
                                                 context.startActivity(i);
                                             }

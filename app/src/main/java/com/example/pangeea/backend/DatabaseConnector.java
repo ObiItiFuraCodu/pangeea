@@ -246,7 +246,7 @@ public class DatabaseConnector {
         }
         Intent i = new Intent(context,Hour_info_elev.class);
         i.putExtra("hour_milis",Long.toString(hour_ms));
-        i.putExtra("presence",true);
+        i.putExtra("presence",false);
         context.startActivity(i);
 
     }
