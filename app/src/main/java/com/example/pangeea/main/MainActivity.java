@@ -21,6 +21,7 @@ import com.example.pangeea.R;
 import com.example.pangeea.backend.HourBackend;
 import com.example.pangeea.backend.TaskBackend;
 import com.example.pangeea.backend.TestBackend;
+import com.example.pangeea.other.NFC_detection;
 import com.example.pangeea.test.See_corrected_tests;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -92,9 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
 
             case R.id.nav_logout: {
-                auth.signOut();
-
-                startActivity(new Intent(MainActivity.this, Login.class));
+                connector.log_out();
                 finish();
                 break;
             }
@@ -105,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.see_corrected_tests:{
                 startActivity(new Intent(MainActivity.this, See_corrected_tests.class));
                 finish();
+            }
+            case R.id.pair_device:{
+                Intent i = new Intent(MainActivity.this, NFC_detection.class);
+                i.putExtra("Pair","ye");
+                startActivity(i);
             }
         }
 
@@ -127,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             //navigationView.getMenu().findItem(R.id.nav_add_hour).setVisible(false);
                             connector.retrieve_materies((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
                             navigationView.getMenu().findItem(R.id.nav_add_hour).setTitle("Materies");
-
+                            navigationView.getMenu().findItem(R.id.pair_device).setVisible(false);
 
                         }else{
                             navigationView.getMenu().findItem(R.id.see_corrected_tests).setVisible(false);

@@ -27,6 +27,7 @@ import com.example.pangeea.content.Lesson_list;
 import com.example.pangeea.hour.Hour_info_elev;
 import com.example.pangeea.hour.Hour_info_profesor;
 import com.example.pangeea.main.Class_info;
+import com.example.pangeea.main.Login;
 import com.example.pangeea.other.Basic_tools;
 import com.example.pangeea.other.FileDownloader;
 import com.example.pangeea.other.FileViewer;
@@ -67,6 +68,7 @@ public class DatabaseConnector {
     Context context;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
+    private FirebaseDatabase db = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
@@ -346,6 +348,30 @@ public class DatabaseConnector {
 
                     }
                 });
+    }
+    public void pair_device(){
+        FirebaseUser user = auth.getCurrentUser();
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String username = user.getEmail();
+                        String password = documentSnapshot.getString("Password");
+                        HashMap<String,String> map = new HashMap<>();
+                        map.put("email",username);
+                        map.put("password",password);
+                        db.getReference("rooms").child("CNMEPetro").child("10A")
+                                .setValue(map);
+
+
+                    }
+                });
+    }
+    public void log_out(){
+        auth.signOut();
+        context.startActivity(new Intent(context, Login.class));
+
     }
 
 

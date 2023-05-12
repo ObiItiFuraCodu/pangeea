@@ -126,7 +126,7 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
-    public void import_tests(LinearLayout layout,String from_other){
+    public void import_tests(LinearLayout layout){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
 
@@ -158,13 +158,15 @@ public class TestBackend extends DatabaseConnector {
                                                   ref = dbb.getReference("tests").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
 
                                               }
-                                              ref.addValueEventListener(new ValueEventListener() {
+                                              ref
+                                                      .get()
+                                                      .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                                   @Override
-                                                  public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                  public void onSuccess(@NonNull DataSnapshot snapshot) {
 
-                                                          layout.removeAllViews();
-                                                          TaskBackend backend = new TaskBackend(context);
-                                                          backend.import_tasks(layout,"ye");
+                                                         // layout.removeAllViews();
+                                                          //TaskBackend backend = new TaskBackend(context);
+                                                        ////  backend.import_tasks(layout,"ye");
 
 
                                                       Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
@@ -269,10 +271,6 @@ public class TestBackend extends DatabaseConnector {
 
                                                   }
 
-                                                  @Override
-                                                  public void onCancelled(@NonNull DatabaseError error) {
-
-                                                  }
                                               });
                       /*  ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -403,8 +401,7 @@ public class TestBackend extends DatabaseConnector {
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
                                     teacher.setText(map.get("teacher").toString());
-                                    if((List<String>)map.get("files") != null){
-                                        List<String> lessons_list = (List<String>)map.get("files");
+
                                         lesson_network.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
@@ -423,7 +420,10 @@ public class TestBackend extends DatabaseConnector {
                                                 context.startActivity(i);
                                             }
                                         });
-                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
+                                    if(map.get("files") != null){
+                                        List<String> lessons_list = (List<String>)map.get("files");
+                                      ///  Log.e("ASDSA",lessons_list.get(0));
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,lessons_list);
                                         lessons.setAdapter(adapter);
                                         lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.pangeea.Awaiter;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.R;
 import com.example.pangeea.other.ControlRoom;
@@ -54,6 +55,13 @@ public class Login extends AppCompatActivity {
                            }
                        });
 
+            }
+        });
+        TextView await = findViewById(R.id.awaiter_text);
+        await.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, Awaiter.class));
             }
         });
     }

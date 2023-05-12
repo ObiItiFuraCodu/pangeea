@@ -8,6 +8,15 @@
         <deviceKey>
           <Key>
             <type value="SERIAL_NUMBER" />
+            <value value="R5CN90PJ13Z" />
+          </Key>
+        </deviceKey>
+      </Target>
+      <Target>
+        <type value="RUNNING_DEVICE_TARGET" />
+        <deviceKey>
+          <Key>
+            <type value="SERIAL_NUMBER" />
             <value value="emulator-5554" />
           </Key>
         </deviceKey>

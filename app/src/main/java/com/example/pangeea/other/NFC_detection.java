@@ -21,6 +21,7 @@ import com.example.pangeea.hour.Hour_info_elev;
 import com.example.pangeea.test.Test_viewer_elev;
 import com.example.pangeea.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -38,7 +39,7 @@ public class NFC_detection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_detection);
         Bundle f = getIntent().getExtras();
-        if(f.getString("Test") != null){
+       /* if(f.getString("Test") != null){
                         
                         Intent i = new Intent(this, Test_viewer_elev.class);
                         i.putExtra("hour_ms",f.getString("hour_ms"));
@@ -46,7 +47,7 @@ public class NFC_detection extends AppCompatActivity {
                         startActivity(i);
                         finish();
 
-        }
+        }*/
         mPendingIntent =  PendingIntent.getActivity(this, 0,
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_MUTABLE);
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
@@ -108,7 +109,13 @@ public class NFC_detection extends AppCompatActivity {
 
                  //   nfc_data[3] = new String(mfc.readBlock(25),StandardCharsets.UTF_8);
                     Bundle e = getIntent().getExtras();
-                    if(e.getString("Test") != null){
+                    if(e.getString("Pair") != null){
+                        DatabaseConnector connector = new DatabaseConnector(NFC_detection.this);
+                        connector.pair_device();
+                        finish();
+
+                    }
+                    else if(e.getString("Test") != null){
 
                         Intent i = new Intent(this, Test_viewer_elev.class);
                         i.putExtra("hour_ms",e.getString("hour_ms"));
