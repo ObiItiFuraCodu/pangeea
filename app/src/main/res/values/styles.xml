@@ -3,5 +3,9 @@
     <style name="spinner_style" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner</item>
     </style>
+    <style name="SpinnerTheme">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins_extrabold</item>
 
+    </style>
 </resources>
