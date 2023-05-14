@@ -19,7 +19,5 @@
     <item
         android:id="@+id/see_corrected_tests"
         android:title="My Tests" />
-    <item
-        android:id="@+id/pair_device"
-        android:title="Pair station" />
+
 </menu>
