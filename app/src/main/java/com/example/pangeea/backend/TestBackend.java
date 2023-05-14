@@ -159,10 +159,10 @@ public class TestBackend extends DatabaseConnector {
 
                                               }
                                               ref
-                                                      .get()
-                                                      .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+
+                                                      .addValueEventListener(new ValueEventListener() {
                                                   @Override
-                                                  public void onSuccess(@NonNull DataSnapshot snapshot) {
+                                                  public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                                          // layout.removeAllViews();
                                                           //TaskBackend backend = new TaskBackend(context);
@@ -271,7 +271,12 @@ public class TestBackend extends DatabaseConnector {
 
                                                   }
 
-                                              });
+                                                          @Override
+                                                          public void onCancelled(@NonNull DatabaseError error) {
+
+                                                          }
+
+                                                      });
                       /*  ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
