@@ -243,8 +243,8 @@ public class HourBackend extends DatabaseConnector {
                         map2.put("files",filenames);
                         map2.put("title",title);
                         map2.put("teacher",(String)documentSnapshot.get("Username"));
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
-                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("classes").child(class_name).child(Long.toString(hour_ms)).setValue(map);
+                        ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms)).setValue(map2);
                         store.collection("courses").document(class_name.replaceAll("[^0-9.]", "")).collection(class_name.replaceAll("[^0-9.]", "")).document(title)
                                 .set(map);
                     }
