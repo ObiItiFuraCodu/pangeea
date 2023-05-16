@@ -558,7 +558,7 @@ public class TestBackend extends DatabaseConnector {
             List<Uri> answer_files = (List<Uri>) answer.get("files");
             if(answer_files != null){
                 for(Uri file : answer_files){
-                    storage_ref.child("tests/" + user.getDisplayName() + "/submissions")
+                    storage_ref.child("users/" + user.getDisplayName() + "/submissions/"+file.getLastPathSegment())
                             .putFile(file);
                 }
             }
@@ -658,7 +658,8 @@ public class TestBackend extends DatabaseConnector {
                                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                         List<String> filenames = (List<String>) question.get("filenames");
                                                         for(String file : filenames){
-                                                            storage_ref.child("tests/" + pupil + "/submissions/" + file).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                            Log.i("FILE",file);
+                                                            storage_ref.child("users/" + pupil + "/submissions/" + file).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                 @Override
                                                                 public void onSuccess(Uri uri) {
                                                                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -688,7 +689,7 @@ public class TestBackend extends DatabaseConnector {
                                                                         q_map.put("title",title);
                                                                         q_map.put("answers",question_list);
                                                                         HashMap<String,Object> final_mark = new HashMap<>();
-                                                                        final_mark.put("mark",correct_q/total_questions);
+                                                                        final_mark.put("mark",(int)((float)correct_q/total_questions*10));
                                                                         answer_map.put("answer","correct");
                                                                         question_list.set(Integer.parseInt(to_correct.getItemAtPosition(position).toString()),answer_map);
                                                                         database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(test_ms).child("submissions").child(pupil)

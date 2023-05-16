@@ -1,7 +1,5 @@
 package com.example.pangeea.test;
 
-import static java.sql.Types.NULL;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -12,7 +10,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +18,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.pangeea.R;
-import com.example.pangeea.hour.Add_hour;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -99,7 +95,7 @@ public class Add_test_question extends AppCompatActivity {
                 openFile();
             }
         });
-        Spinner type = findViewById(R.id.spinner2);
+        Spinner type = findViewById(R.id.type);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test_question.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,types);
         type.setAdapter(adapter);
         type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

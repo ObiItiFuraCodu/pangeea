@@ -103,7 +103,7 @@ public class Question_viewer extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
-                        if(question.get("files") == null){
+                        if(answer_map.get("files") == null){
                             List<Uri> files = new ArrayList<>();
                             List<String> filenames = new ArrayList<>();
                             files.add(data.getData());
@@ -113,8 +113,8 @@ public class Question_viewer extends AppCompatActivity {
 
 
                         }else{
-                            List<Uri> files = (List<Uri>) question.get("files");
-                            List<String> filenames = (List<String>) question.get("filenames");
+                            List<Uri> files = (List<Uri>) answer_map.get("files");
+                            List<String> filenames = (List<String>) answer_map.get("filenames");
                             files.add(data.getData());
                             filenames.add(data.getData().getLastPathSegment());
                             answer_map.put("filenames",filenames);
