@@ -637,7 +637,7 @@ public class TestBackend extends DatabaseConnector {
 
                                         List<HashMap<String,Object>> question_list = (List<HashMap<String, Object>>) mapp.get("answers");
                                         String title = (String) mapp.get("title");
-                                        for(int i = 0;i<  question_list.size();i++){
+                                        for(int i = 1;i<  question_list.size();i++){
                                             if(question_list.get(i) == null){
                                                 i++;
                                                 total_questions++;
