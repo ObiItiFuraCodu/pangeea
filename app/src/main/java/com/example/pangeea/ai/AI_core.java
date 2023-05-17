@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
@@ -41,7 +42,12 @@ public class AI_core {
         return Math.random() < 0.5;
         //I tried another approaches here, still the same result
     }
-
+    public static boolean[] generateBooleanVector() {
+        boolean[] vector = new boolean[3];
+        int index = new Random().nextInt(3);
+        vector[index] = true;
+        return vector;
+    }
     public AI_core(Context context){
         this.context = context;
     }
@@ -167,7 +173,7 @@ public class AI_core {
 
             requestBody.put("model", "text-davinci-003");
             if(main){
-                requestBody.put("prompt", "O intrebare legata de lectia '"+prompt+"' este:");
+                requestBody.put("prompt", "O intrebare scurta legata de lectia '"+prompt+"' este:");
 
             }else{
                 if(valid){
@@ -204,10 +210,11 @@ public class AI_core {
                         }else{
                             Button button1 = (Button) button.getChildAt(0);
                             button1.setText(choiceObject.getString("text"));
+                            boolean[] vector = generateBooleanVector();
                             list.addView(button);
-                            generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(1));
-                            generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(2));
-                            generate_question(choiceObject.getString("text"),list,false,getRandomBoolean(), (TextView) button.getChildAt(3));
+                            generate_question(choiceObject.getString("text"),list,false,vector[0], (TextView) button.getChildAt(1));
+                            generate_question(choiceObject.getString("text"),list,false,vector[1], (TextView) button.getChildAt(2));
+                            generate_question(choiceObject.getString("text"),list,false,vector[2], (TextView) button.getChildAt(3));
 
                         }
 
@@ -232,6 +239,7 @@ public class AI_core {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("API Error", error.toString());
+                generate_question(prompt,list,main,valid,text_unmain);
             }
         }) {
             @Override

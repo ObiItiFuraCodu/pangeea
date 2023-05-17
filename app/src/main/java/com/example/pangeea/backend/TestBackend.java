@@ -126,7 +126,7 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
-    public void import_tests(LinearLayout layout,String from_other){
+    public void import_tests(LinearLayout layout){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
 
@@ -161,12 +161,9 @@ public class TestBackend extends DatabaseConnector {
                                               ref.addValueEventListener(new ValueEventListener() {
                                                   @Override
                                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                      layout.removeAllViews();
 
-                                                      if(from_other == null){
-                                                          layout.removeAllViews();
-                                                          TaskBackend backend = new TaskBackend(context);
-                                                          backend.import_tasks(layout,"ye");
-                                                      }
+
 
 
                                                       Map<String,Map<String,String>> map =  (Map<String,Map<String,String>>)snapshot.getValue();
