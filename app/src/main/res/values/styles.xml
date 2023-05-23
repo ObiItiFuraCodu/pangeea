@@ -8,4 +8,12 @@
         <item name="android:fontFamily">@font/poppins_extrabold</item>
 
     </style>
+    <style name="ListView" parent="@android:style/Widget.ListView">
+        <item name="android:background">#5D9CFB</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:divider">#FFFFFF</item>
+        <item name="android:dividerHeight">10dp</item>
+        <item name="android:dividerPadding">60dp</item>
+
+    </style>
 </resources>

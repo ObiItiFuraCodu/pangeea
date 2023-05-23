@@ -6,43 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".test.Add_test_question">
 
-    <TextView
-        android:id="@+id/q_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_extrabold"
-        android:text="ADD TEST \nQUESTION"
-
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
-
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="219dp"
+        android:layout_width="1000dp"
         android:layout_height="114dp"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="183dp" />
+        android:layout_marginEnd="792dp"
+        app:layout_constraintBottom_toTopOf="@+id/q_prompt"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/q_prompt"
-        android:layout_width="374dp"
+        android:layout_width="1000dp"
         android:layout_height="98dp"
+        android:layout_marginTop="125dp"
         android:elevation="2sp"
         android:ems="10"
+        android:fontFamily="@font/poppins_extrabold"
         android:inputType="textPersonName"
         android:text="Prompt"
-        android:fontFamily="@font/poppins_extrabold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="310dp" />
+        app:layout_constraintBottom_toTopOf="@+id/a_prompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <EditText
         android:id="@+id/a_prompt"
-        android:layout_width="374dp"
+        android:layout_width="1000dp"
         android:layout_height="84dp"
+        android:layout_marginTop="241dp"
         android:elevation="2sp"
         android:ems="10"
         android:fontFamily="@font/poppins_extrabold"
@@ -50,15 +44,16 @@
         android:text="A:"
         android:textColor="@color/black"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="466dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <EditText
         android:id="@+id/b_prompt"
-        android:layout_width="374dp"
+        android:layout_width="1000dp"
         android:layout_height="84dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:elevation="2sp"
         android:ems="10"
         android:fontFamily="@font/poppins_extrabold"
@@ -66,14 +61,17 @@
         android:text="B:"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a_prompt" />
+        app:layout_constraintTop_toBottomOf="@+id/a_prompt"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/c_prompt"
-        android:layout_width="374dp"
+        android:layout_width="1000dp"
         android:layout_height="84dp"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
         android:elevation="2sp"
         android:ems="10"
@@ -82,28 +80,34 @@
         android:text="C:"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_prompt" />
+        app:layout_constraintTop_toBottomOf="@+id/b_prompt"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/a_valid"
         android:layout_width="96dp"
-        android:layout_height="44dp"
-        android:background="@drawable/rounded"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/red"
         android:elevation="2sp"
-        android:text=""
+        android:text="a"
+        android:textColor="@color/red"
         app:layout_constraintBottom_toBottomOf="@+id/a_prompt"
         app:layout_constraintEnd_toEndOf="@+id/a_prompt"
         app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="@+id/a_prompt"
         app:layout_constraintTop_toTopOf="@+id/a_prompt" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/b_valid"
         android:layout_width="96dp"
-        android:layout_height="44dp"
-        android:background="@drawable/rounded"
-        android:text=" "
+        android:layout_height="48dp"
+        android:backgroundTint="@color/red"
+        android:text="a"
+        android:textColor="@color/red"
         app:layout_constraintBottom_toBottomOf="@+id/b_prompt"
         app:layout_constraintEnd_toEndOf="@+id/b_prompt"
         app:layout_constraintHorizontal_bias="0.967"
@@ -111,29 +115,33 @@
         app:layout_constraintTop_toTopOf="@+id/b_prompt"
         app:layout_constraintVertical_bias="0.525" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/c_valid"
         android:layout_width="96dp"
-        android:layout_height="44dp"
-        android:background="@drawable/rounded"
-        android:text=" "
+        android:layout_height="48dp"
+        android:backgroundTint="@color/green"
+        android:text="a"
+        android:textColor="@color/green"
         app:layout_constraintBottom_toBottomOf="@+id/c_prompt"
         app:layout_constraintEnd_toEndOf="@+id/c_prompt"
         app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="@+id/c_prompt"
         app:layout_constraintTop_toTopOf="@+id/c_prompt" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_q"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="101dp"
+        android:layout_height="48dp"
         android:layout_marginTop="72dp"
+        android:backgroundTint="#7D68FE"
         android:text="ADD"
+        app:cornerRadius="69dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c_prompt" />
+        app:layout_constraintTop_toBottomOf="@+id/c_prompt"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/question_files"
@@ -150,23 +158,60 @@
     <Button
         android:id="@+id/add_q_file"
         android:layout_width="92dp"
-        android:layout_height="16dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginBottom="9dp"
         android:background="@drawable/rounded"
         android:text="ADD"
         android:textSize="4sp"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="459dp" />
+        app:layout_constraintBottom_toTopOf="@+id/a_prompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/q_prompt" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+
         android:fontFamily="@font/poppins_extrabold"
         android:text="Type:"
-
         android:textColor="@color/black"
         android:textSize="36sp"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="201dp" />
+        app:layout_constraintBottom_toTopOf="@+id/q_prompt"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="1981dp"
+        android:layout_height="395dp"
+        android:layout_marginBottom="724dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/add_test_art" />
+
+    <TextView
+        android:id="@+id/q_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_extrabold"
+
+        android:text="ADD TEST\nQUESTION"
+
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.306" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,69 +7,84 @@
     tools:context=".catalogue.Add_mark">
 
     <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="First:\nSelect a date"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/add_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginBottom="72dp"
         android:fontFamily="@font/poppins_extrabold"
         android:text="Add a mark"
         android:textColor="@color/black"
         android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/add_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_date"
-        android:layout_width="219dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded"
-        android:backgroundTint="#ffffff"
+        android:layout_width="1000dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="204dp"
+        app:cornerRadius="69dp"
+
+        android:backgroundTint="#009FFF"
         android:fontFamily="@font/poppins_extrabold"
         android:text="Select"
+        android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
         android:fontFamily="@font/poppins_extrabold"
         android:text="Then: \nEnter your mark"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/mark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.21" />
+        app:layout_constraintTop_toBottomOf="@+id/add_date" />
 
     <EditText
         android:id="@+id/mark"
-        android:layout_width="229dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="224dp"
-        android:background="@drawable/rounded2"
+        android:layout_width="1000dp"
+        android:layout_height="69dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="w"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/add_date"
+        app:layout_constraintVertical_bias="0.794" />
 
     <TextView
         android:id="@+id/textView12"
@@ -86,33 +101,33 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="477dp"
-        android:layout_height="455dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/wave_add_mark" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_mark"
         android:layout_width="219dp"
         android:layout_height="64dp"
         android:layout_marginTop="152dp"
-        android:background="@drawable/rounded"
-        android:backgroundTint="#ffffff"
+        app:cornerRadius="50sp"
         android:fontFamily="@font/poppins_extrabold"
         android:text="ADD"
+        android:backgroundTint="#009FFF"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mark" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="2023dp"
+        android:layout_height="655dp"
+        android:layout_marginTop="440dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/ui_header_design" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

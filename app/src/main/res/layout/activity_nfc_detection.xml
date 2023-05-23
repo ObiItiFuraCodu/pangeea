@@ -10,9 +10,27 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="PLACE YOUR\nPHONE ON THE\nDOCK"
+        android:textColor="#0057FF"
+        android:textSize="69sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="635dp"
+        android:layout_height="287dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.456"
+        app:srcCompat="@drawable/nfc_clip" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

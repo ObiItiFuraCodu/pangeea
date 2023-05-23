@@ -10,21 +10,23 @@
         android:id="@+id/test_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
-        android:text="TextView"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="pune string frate"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline22"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.755" />
+        app:layout_constraintVertical_bias="0.804" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="639dp" />
+        app:layout_constraintGuide_begin="513dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline22"
@@ -40,6 +42,94 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/guideline21"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline22"></LinearLayout>
+        app:layout_constraintTop_toTopOf="@+id/guideline22"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip">
+
+            <LinearLayout
+                android:layout_width="379dp"
+                android:layout_height="86dp"
+                android:background="@drawable/rounded2">
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip">
+
+            <LinearLayout
+                android:layout_width="379dp"
+                android:layout_height="94dp"
+                android:background="@drawable/rounded2">
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip">
+
+            <LinearLayout
+                android:layout_width="376dp"
+                android:layout_height="93dp"
+                android:background="@drawable/rounded2">
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="TEST RESULT:\n                        YOU GOT A "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="MISTAKES:"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline22"
+        app:layout_constraintEnd_toStartOf="@+id/test_mark"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="716dp"
+        android:layout_height="523dp"
+        android:layout_marginBottom="602dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995"
+        app:srcCompat="@drawable/add_test_art" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
