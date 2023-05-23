@@ -88,11 +88,16 @@ public class Improve_performance extends AppCompatActivity {
                                                List<String> wrong_answers = new ArrayList<>();
                                                List<HashMap<String,Object>> answers = (List<HashMap<String, Object>>) snapshot.get("answers");
                                                for(HashMap<String,Object> answer : answers){
-                                                   if(answer.get("answer").equals("wrong")){
-                                                       String prompt = (String) answer.get("prompt");
-                                                       wrong_answers.add(prompt);
+                                                   try{
+                                                       if(answer.get("answer").equals("wrong")){
+                                                           String prompt = (String) answer.get("prompt");
+                                                           wrong_answers.add(prompt);
+
+                                                       }
+                                                   }catch(Exception e){
 
                                                    }
+
                                                }
                                                Button button = new Button(Improve_performance.this);
                                                button.setText(title);

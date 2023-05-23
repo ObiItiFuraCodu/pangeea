@@ -2,8 +2,34 @@
     <string name="app_name">pangeea</string>
 
     <!-- to toggle the open close button of the navigation drawer -->
-    <string name="nav_open">Open</string>
-    <string name="nav_close">Close</string>
-    <string name="orgenerateai">OR: <font color='#1F78FF'>GENERATE AI</font></string>
+    <string name="nav_open" translatable="false">Open</string>
+    <string name="nav_close" translatable="false">Close</string>
+    <string name="generate_ai" translatable="false">OR: <font color='#1F78FF'>GENERATE AI</font></string>
+    <string name="add_an_hour">ADD AN HOUR</string>
+    <string name="add_some_ndetails">Add some \ndetails</string>
+    <string name="select_a_date_nand_time">SELECT A DATE \nAND TIME</string>
+    <string name="add">ADD</string>
+    <string name="add_a_title">Add a title</string>
+    <string name="add_some_details">Add some details</string>
+    <string name="support_lessons">Support lessons</string>
+    <string name="go">GO</string>
+    <string name="add_a_mark">Add a mark</string>
+    <string name="select">Select</string>
+    <string name="then_nenter_your_mark">Then: \nEnter your mark</string>
+    <string name="add_a_test">ADD A TEST</string>
+    <string name="select_a_date">SELECT A DATE</string>
+    <string name="name">Name</string>
+    <string name="add_q">ADD_Q</string>
+    <string name="add_l">ADD_L</string>
+    <string name="ai" translatable="false">AI</string>
+    <string name="add_test_nquestion">ADD TEST \nQUESTION</string>
+    <string name="prompt">Prompt</string>
+    <string name="type">Type:</string>
+    <string name="got_questions">Got questions?</string>
+    <string name="enter">Enter</string>
+    <string name="accept">ACCEPT</string>
+    <string name="redo">REDO</string>
+    <string name="raise_hand">raise hand</string>
+    <string name="or_create_acc">or create acc</string>
 
 </resources>

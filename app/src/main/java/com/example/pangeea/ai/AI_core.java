@@ -1,6 +1,7 @@
 package com.example.pangeea.ai;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +27,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.tensorflow.lite.Interpreter;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +44,46 @@ public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
     private String accessToken = "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";
     String result = "";
+    Interpreter tflite;
+   // HashMap<String,Integer> ascii = new HashMap<>();
+
+    List<String> modified_ascii =Arrays.asList(new String[]{"e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"}) ;
+    static char[] ascii = "etaoinshrdlcumwfgypbvkjxqz".toCharArray();
+
+    static int countDigit(int n)
+    {
+        if (n/10 == 0)
+            return 1;
+        else
+            return 1 + countDigit(n / 10);
+    }
+    static int modified_ascii_value_of(char c){
+        for(int i = 0;i< ascii.length;i++){
+            if(ascii[i] == c){
+                return i+1;
+            }
+        }
+        return 0;
+    }
+    static String converted_word(String a){
+        a = a.toLowerCase();
+        long s = 0;
+        for(char c : a.toCharArray()){
+            if(Character.isDigit(c) || Character.isLetter(c)){
+                for(int i = 1;i<= countDigit(modified_ascii_value_of(c));i++){
+                    s = s*10;
+                }
+                /// System.out.println((int)c);
+                //System.out.println(countDigit(modified_ascii_value_of(c)));
+                // System.out.println(modified_ascii_value_of(c));
+                System.out.println(s);
+                s = s+modified_ascii_value_of(c);
+            }
+
+        }
+        System.out.println(s);
+        return Long.toString(s);
+    }
     Context context;
     public boolean getRandomBoolean() {
         return Math.random() < 0.5;
@@ -305,7 +352,7 @@ public class AI_core {
         }
     }*/
 
-    private boolean filtering_system(String course_1,String course_2){
+    private boolean filtering_system_nonai(String course_1,String course_2){
         int nr = 0;
         if(course_1 == null || course_2 == null){
             return false;
@@ -325,11 +372,39 @@ public class AI_core {
 
 
     }
+    private boolean filtering_system_ai(String course_1,String course_2){
+        try {
+            tflite = new Interpreter(loadModelFile());
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        if(course_1 != null && course_2 != null){
+            String course_1_words[] = course_1.split(" ");
+            String course_2_words[] = course_2.split(" ");
+
+            for(String course1_word : course_1_words){
+
+                for(String course2_word : course_2_words){
+
+
+
+
+
+                    if(doInference(converted_word(course1_word),converted_word(course2_word)) > 0.5){
+                        return true;
+                    }
+
+                }
+            }
+        }
+
+    return false;
+    }
     public  List<DocumentSnapshot> recommender_system(List<DocumentSnapshot> courses, String course_name){
         List<DocumentSnapshot> output = new ArrayList<>();
 
         for(DocumentSnapshot document : courses){
-            if(filtering_system(document.get("title",String.class),course_name)){
+            if(filtering_system_nonai(document.get("title",String.class),course_name) || filtering_system_ai(document.get("title",String.class),course_name)){
                 output.add(document);
 
             }
@@ -352,6 +427,23 @@ public class AI_core {
 
         }
 
+    }
+    private MappedByteBuffer loadModelFile() throws IOException {
+        AssetFileDescriptor fileDescriptor=context.getAssets().openFd("linearRegressionModel_android.tflite");
+        FileInputStream inputStream=new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel=inputStream.getChannel();
+        long startOffset=fileDescriptor.getStartOffset();
+        long declareLength=fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY,startOffset,declareLength);
+    }
+    private float doInference(String inputString1,String inputString2) {
+        long[] inputVal=new long[2];
+
+        inputVal[0]=Long.parseLong(inputString1);
+        inputVal[1]=Long.parseLong(inputString2);
+        float[][] output=new float[1][1];
+        tflite.run(inputVal,output);
+        return output[0][0];
     }
 
 
