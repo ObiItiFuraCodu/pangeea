@@ -39,16 +39,22 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="240dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="PROGRAMMING"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/lv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="20sp"
+        android:backgroundTint="#5D9CFB"
         android:id="@+id/raise_hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,23 +65,27 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/ai_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="62dp"
-        android:text="TextView"
+        android:text="AI"
+        app:cornerRadius="20sp"
+        android:backgroundTint="#5D9CFB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/raise_hand"
         app:layout_constraintTop_toBottomOf="@+id/lv" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/lesson_net_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="63dp"
-        android:text="TextView"
+        android:backgroundTint="#5D9CFB"
+        android:text="lessonnet"
+        app:cornerRadius="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/raise_hand"
         app:layout_constraintStart_toStartOf="parent"
