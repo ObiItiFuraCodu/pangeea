@@ -64,6 +64,8 @@
         android:fontFamily="@font/poppins_extrabold"
         android:inputType="textPersonName"
         android:text="Add a title"
+        android:autoSizeTextType="uniform"
+
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline52"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +93,8 @@
         android:fontFamily="@font/poppins_extrabold"
         android:inputType="textPersonName"
         android:text="@string/name"
+        android:autoSizeTextType="uniform"
+
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline56"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:autoSizeTextType="uniform"
+
         android:text="@string/add_q"
         app:layout_constraintBottom_toTopOf="@+id/guideline55"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +150,6 @@
         android:background="@drawable/rounded2"
         android:fontFamily="@font/poppins_extrabold"
         android:text="GO"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
