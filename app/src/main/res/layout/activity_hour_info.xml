@@ -20,14 +20,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline119"
         app:layout_constraintTop_toTopOf="@+id/guideline122" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="731dp"
-        app:barrierDirection="top"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="2dp" />
+
 
     <ListView
         android:id="@+id/lv"

@@ -22,7 +22,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_daily_hour_setter.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_dashboard.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_file_viewer.xml" value="0.5385416666666667" />
-        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_hour_info.xml" value="1.0" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_hour_info.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_hour_info_profesor.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_improve_performance.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_lesson_list.xml" value="0.5385416666666667" />
@@ -39,7 +39,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_see_corrected_tests.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_sorted_lesson_list.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_task_info.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_task_info_proffesor.xml" value="0.29747899159663865" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_task_info_proffesor.xml" value="0.33" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_info_elev.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_info_prof.xml" value="0.41822916666666665" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_qexplanation.xml" value="0.42391304347826086" />

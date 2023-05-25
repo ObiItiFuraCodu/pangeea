@@ -8,7 +8,7 @@
 
     <ListView
         android:id="@+id/q_lv"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="565dp"
+        app:layout_constraintGuide_percent="0.7742818"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -33,8 +33,8 @@
         android:text="FINISH"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/q_lv"
-        app:layout_constraintVertical_bias="0.106" />
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
