@@ -21,7 +21,7 @@
     <string name="name">Name</string>
     <string name="add_q">ADD_Q</string>
     <string name="add_l">ADD_L</string>
-    <string name="ai" translatable="false">AI</string>
+    <string name="ai" translatable="false">No time?Let AI help you</string>
     <string name="add_test_nquestion">ADD TEST \nQUESTION</string>
     <string name="prompt">Prompt</string>
     <string name="type">Type:</string>

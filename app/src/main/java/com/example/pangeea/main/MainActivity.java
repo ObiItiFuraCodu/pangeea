@@ -29,6 +29,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     CatalogueBackend connector = new CatalogueBackend(this);
     HourBackend backend1 = new HourBackend(this);
@@ -44,18 +46,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView username = findViewById(R.id.Username);
 
-        username.setText("Username : " + auth.getCurrentUser().getDisplayName());
-        String highschool;
-        ImageView view = findViewById(R.id.imageView);
-        view.setImageResource(R.drawable.ic_launcher_foreground);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),"GIGEL FRONE",Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
+
+        TextView welcome_back = findViewById(R.id.welcome_back);
+        welcome_back.setText("WELCOME BACK \n" + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
+
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -125,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        TextView hs = findViewById(R.id.hs);
-                        hs.setText("Highschool : "+ documentSnapshot.getString("user_highschool"));
+
+
                         if(documentSnapshot.getString("user_category").equals("0")){
                             //navigationView.getMenu().findItem(R.id.nav_add_hour).setVisible(false);
                             connector.retrieve_materies((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
