@@ -11,6 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="TextView"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline160"
         app:layout_constraintEnd_toStartOf="@+id/guideline159"
         app:layout_constraintStart_toStartOf="@+id/guideline158"
@@ -20,10 +23,14 @@
         android:id="@+id/question_files_abc"
         android:layout_width="0dp"
         android:text="TextView"
+        android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline161"
         app:layout_constraintEnd_toStartOf="@+id/guideline159"
         app:layout_constraintStart_toStartOf="@+id/guideline158"
-        app:layout_constraintTop_toTopOf="@+id/guideline163" />
+        app:layout_constraintTop_toTopOf="@+id/guideline163"  />
 
     <Button
         android:id="@+id/a_button"

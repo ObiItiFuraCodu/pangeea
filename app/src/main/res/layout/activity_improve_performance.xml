@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.67"
+        app:layout_constraintGuide_percent="0.65"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -62,19 +62,25 @@
         android:id="@+id/you_can_do_this"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
+        android:text="YOU CAN DO BETTER"
         app:layout_constraintBottom_toTopOf="@+id/guideline138"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/check_out_what_others_did"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
+        android:text="HERE IS A LIST OF LESSONS CAREFULLY PICKED FOR YOU TO IMPROVE YOUR PERFORMANCE"
         app:layout_constraintBottom_toTopOf="@+id/guideline134"
         app:layout_constraintEnd_toEndOf="parent"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline139" />
 
@@ -89,7 +95,10 @@
         android:id="@+id/not_enough"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
+        android:text="Not enough?Let us help you then"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/lessons_generated"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

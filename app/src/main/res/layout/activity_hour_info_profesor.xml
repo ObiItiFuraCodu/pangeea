@@ -83,6 +83,9 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline131"
         app:layout_constraintEnd_toStartOf="@+id/guideline129"
         app:layout_constraintStart_toStartOf="@+id/guideline133"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -92,6 +95,8 @@
         android:backgroundTint="#5D9CFB"
         android:text="Close presence"
         app:cornerRadius="20sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline132"
         app:layout_constraintEnd_toStartOf="@+id/guideline129"
         app:layout_constraintStart_toStartOf="@+id/guideline133"
@@ -135,6 +140,9 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline125"
         app:layout_constraintEnd_toStartOf="@+id/guideline129"
         app:layout_constraintStart_toStartOf="@+id/guideline133"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
@@ -145,6 +153,9 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline126"
         app:layout_constraintEnd_toStartOf="@+id/guideline129"
         app:layout_constraintStart_toStartOf="@+id/guideline133"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
@@ -155,6 +166,9 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline127"
         app:layout_constraintEnd_toStartOf="@+id/guideline129"
         app:layout_constraintStart_toStartOf="@+id/guideline133"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -162,7 +176,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.29" />
+        app:layout_constraintGuide_percent="0.36" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline130"
