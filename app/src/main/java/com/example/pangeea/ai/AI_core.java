@@ -161,7 +161,7 @@ public class AI_core {
         try {
 
             requestBody.put("model", "text-davinci-003");
-            requestBody.put("prompt", "Genereaza o lectie cu titlul"+input+"\n Lectie:");
+            requestBody.put("prompt", context.getString(R.string.generate_a_les)+input+context.getString(R.string.lessondod));
             requestBody.put("max_tokens", 1000);
             requestBody.put("temperature", 1.0);
             requestBody.put("top_p", 1.0);
@@ -220,14 +220,14 @@ public class AI_core {
 
             requestBody.put("model", "text-davinci-003");
             if(main){
-                requestBody.put("prompt", "O intrebare scurta legata de lectia '"+prompt+"' este:");
+                requestBody.put("prompt", context.getString(R.string.AI_QUESTION) +prompt+ context.getString(R.string.is));
 
             }else{
                 if(valid){
-                    requestBody.put("prompt","Un raspuns corect din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt",context.getString(R.string.scientifically_accurate)+prompt+context.getString(R.string.is));                    //question.put("1_isvalid","valid");
 
                 }else{
-                    requestBody.put("prompt","Un raspuns gresit din punct de vedere stiintific la intrebarea'"+prompt+"' este :");                    //question.put("1_isvalid","valid");
+                    requestBody.put("prompt",context.getString(R.string.wrong_sci) +prompt+context.getString(R.string.is));                    //question.put("1_isvalid","valid");
 
                 }
             }
@@ -249,8 +249,8 @@ public class AI_core {
                     CustomButtonView custom_butt = new CustomButtonView(context);
                     LinearLayout button = (LinearLayout) custom_butt.getChildAt(0);
                     if(main){
-                        if (choiceObject.getString("text").contains("Raspuns") || choiceObject.getString("text").contains("Raspunsul") ||
-                                choiceObject.getString("text").contains("raspuns") || choiceObject.getString("text").contains("raspunsul")
+                        if (choiceObject.getString("text").contains(context.getString(R.string.ras)) || choiceObject.getString("text").contains("Raspunsul") ||
+                                choiceObject.getString("text").contains(context.getString(R.string.answe)) || choiceObject.getString("text").contains(context.getString(R.string.theans))
                                   || choiceObject.getString("text").contains("Răspuns") || choiceObject.getString("text").contains("Răspunsul") ||
                                 choiceObject.getString("text").contains("răspuns") || choiceObject.getString("text").contains("răspunsul")){
                             generate_question(prompt,list,true,null,null);
@@ -419,13 +419,13 @@ public class AI_core {
         LinearLayout lesson = (LinearLayout) custom_butt.getChildAt(0);
         Button button = (Button) lesson.getChildAt(0);
         button.setText(title);
-        AI_Text("Genereaza o lectie de 300 de cuvinte legata de " + title + "\n Lectie :", (TextView) lesson.getChildAt(1));
+        AI_Text(context.getString(R.string.generate_l) + title + context.getString(R.string.lessondod), (TextView) lesson.getChildAt(1));
         layout.addView(custom_butt);
         for(String question : questions){
             CustomButtonLesson lesson1 = new CustomButtonLesson(context);
             Button button1 = (Button) lesson1.getChildAt(0);
             button1.setText(question);
-            AI_Text("Genereaza un raspuns de 100 de cuvinte la intrebarea " + question + "\n Raspuns :", (TextView) lesson1.getChildAt(1));
+            AI_Text(context.getString(R.string.generate_r) + question + context.getString(R.string.answerdod), (TextView) lesson1.getChildAt(1));
             layout.addView(lesson1);
 
         }

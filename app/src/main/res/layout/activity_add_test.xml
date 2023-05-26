@@ -92,7 +92,7 @@
         android:elevation="2dp"
         android:ems="10"
         android:fontFamily="@font/poppins_extrabold"
-        android:hint="Add a description"
+        android:hint="@string/add_a_description"
         android:inputType="textPersonName"
 
         android:textColor="@color/black"
@@ -149,7 +149,7 @@
         android:autoSizeTextType="uniform"
         android:background="@drawable/rounded2"
         android:fontFamily="@font/poppins_extrabold"
-        android:text="GO"
+        android:text="@string/go"
         app:layout_constraintBottom_toTopOf="@+id/guideline60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

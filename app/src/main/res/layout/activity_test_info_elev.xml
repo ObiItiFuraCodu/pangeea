@@ -20,9 +20,9 @@
         android:id="@+id/ai_tv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="@string/or_generate_a_lesson"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline16"
         app:layout_constraintEnd_toStartOf="@+id/guideline120"
@@ -34,9 +34,9 @@
         android:id="@+id/lesson_network_tv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="@string/need_help_n_see_what_others_did"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline16"
         app:layout_constraintEnd_toStartOf="@+id/guideline118"
@@ -141,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="645dp" />
+        app:layout_constraintGuide_percent="0.88372093" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"
@@ -151,7 +151,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="715dp"
+        app:layout_constraintGuide_percent="0.97811216"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

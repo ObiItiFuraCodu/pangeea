@@ -29,4 +29,40 @@
     <string name="welcome_back">BINE AI REVENIT</string>
     <string name="to_do">TASK-URI</string>
     <string name="upcoming">TESTE SI ORE VIITOARE</string>
+    <string name="add_a_description">Adauga o descriere</string>
+    <string name="awaiting">Astept</string>
+    <string name="member_list">Membrii</string>
+    <string name="presence">Copii prezenti</string>
+    <string name="raised_hands">Maini ridicate</string>
+    <string name="you_can_do_better">POTI FI MAI BUN</string>
+    <string name="here_is_a_list_of_lessons_carefully_picked_for_you_to_improve_your_performance">TI-AM PREGATIT O LISTA CU LECTII ALESE SPECIAL PENTRU TINE CA SA DEVII MAI BUN</string>
+    <string name="not_enough_let_us_help_you_then">Nu-i destul?Lasa inteligenta artificiala sa te ajute atunci</string>
+    <string name="don_t_have_an_account_create">Nu ai un cont?Creeaza unul</string>
+    <string name="sign_in_your_account">Intra in cont</string>
+    <string name="i_am_a_station">Sunt o statie</string>
+    <string name="absences">Absente</string>
+    <string name="marks">Note</string>
+    <string name="place_your_nphone_on_the_ndock">PUNE-TI TELEFONUL IN STATIA DE DOCKING</string>
+    <string name="upload_question">ADAUGA INTREBARE</string>
+    <string name="upload_files">ADAUGA FISIERE</string>
+    <string name="submissions">Fisiere depuse</string>
+    <string name="need_help_n_see_what_others_did">Ai nevoie de ajutor? Vezi ce au facut altii</string>
+    <string name="or_generate_a_lesson">SAU: <font color="#1F78FF">GENEREAZA O LECTIE AI</font></string>
+    <string name="what_did_you_do_wrong">Unde ai gresit?</string>
+    <string name="nav_open">Deschide</string>
+    <string name="nav_close">Inchide</string>
+    <string name="generate_ai" translatable="false">SAU: <font color="#1F78FF">GENEREAZA AI</font></string>
+    <string name="is">\' este:</string>
+    <string name="scientifically_accurate">Un raspuns corect din punct de vedere stiintific la intrebarea\'</string>
+    <string name="wrong_sci">Un raspuns gresit din punct de vedere stiintific la intrebarea\'</string>
+    <string name="ai">N-ai timp?Lasa IA sa te ajute</string>
+    <string name="AI_QUESTION">O intrebare scurta legata de lectia \'</string>
+    <string name="generate_l">\"Genereaza o lectie de 300 de cuvinte legata de \"</string>
+    <string name="generate_r">\"Genereaza un raspuns de 100 de cuvinte la intrebarea \\</string>
+    <string name="lessondod">Lectie:</string>
+    <string name="answerdod">"  Raspuns :"</string>
+    <string name="generate_a_les">Genereaza o lectie cu titlul</string>
+    <string name="ras">Raspuns</string>
+    <string name="theans">the answer</string>
+    <string name="answe">answer</string>
 </resources>

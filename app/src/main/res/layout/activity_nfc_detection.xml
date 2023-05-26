@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fontFamily="@font/poppins_extrabold"
-        android:text="PLACE YOUR\nPHONE ON THE\nDOCK"
+        android:text="@string/place_your_nphone_on_the_ndock"
         android:textColor="#0057FF"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline150"

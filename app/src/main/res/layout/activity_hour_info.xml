@@ -57,28 +57,28 @@
         android:id="@+id/ai_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="@string/generate_ai"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline120"
         app:layout_constraintStart_toStartOf="@+id/guideline123"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/poppins_extrabold"
-        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/guideline104" />
 
     <TextView
         android:id="@+id/lesson_net_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="le"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline118"
         app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="@+id/guideline119"
         app:layout_constraintTop_toTopOf="@+id/guideline104"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/poppins_extrabold"
-        android:textColor="@color/black"
         app:layout_constraintVertical_bias="0.505" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -95,9 +95,9 @@
         android:layout_marginStart="4dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
-        android:textColor="@color/black"
+        android:text="@string/support_lessons"
 
-        android:text="Lessons"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline116"
         app:layout_constraintEnd_toStartOf="@+id/guideline118"
         app:layout_constraintHorizontal_bias="0.0"

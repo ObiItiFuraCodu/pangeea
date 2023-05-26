@@ -43,13 +43,14 @@ public class AI_lesson extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomButtonLesson question = new CustomButtonLesson(AI_lesson.this);
+                CustomButtonLesson custom_butt = new CustomButtonLesson(AI_lesson.this);
+                LinearLayout question = (LinearLayout) custom_butt.getChildAt(0);
                 Button buttonq = (Button) question.getChildAt(0);
                 TextView viewq = (TextView) question.getChildAt(1);
                 buttonq.setText(question_editt.getText().toString());
                 core.AI_Text("Raspunsul la intrebarea "+question_editt.getText().toString()+" este:",viewq);
                 question_editt.setText("");
-                linearl.addView(question);
+                linearl.addView(custom_butt);
 
 
             }

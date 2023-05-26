@@ -141,7 +141,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/poppins_extrabold"
-            android:text="Member list"
+            android:text="@string/member_list"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline113"
             app:layout_constraintEnd_toStartOf="@+id/guideline109"
