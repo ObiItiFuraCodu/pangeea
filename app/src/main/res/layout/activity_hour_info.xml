@@ -68,11 +68,11 @@
 
     <TextView
         android:id="@+id/lesson_net_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
-        android:text="le"
+        android:text="@string/need_help_n_see_what_others_did"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline118"

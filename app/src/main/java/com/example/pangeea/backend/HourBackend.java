@@ -379,7 +379,7 @@ public class HourBackend extends DatabaseConnector {
                                         i.putExtra("presence",presence);
                                         context.startActivity(i);
                                     }else{
-                                        if(!presence){
+                                        if(!tools.hour_is_active(Long.parseLong(hour_ms))){
                                             questions.setVisibility(View.INVISIBLE);
 
                                         }else{
