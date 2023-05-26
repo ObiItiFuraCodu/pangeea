@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pangeea</string>
+    <string name="add_an_hour">ADAUGA O ORA</string>
+    <string name="add_some_ndetails">ADAUGA DETALII</string>
+    <string name="select_a_date_nand_time">SELECTEAZA O DATA SI O ORA</string>
+    <string name="add">ADAUGA</string>
+    <string name="add_a_title">Adauga un titlu</string>
+    <string name="add_some_details">Adauga detalii</string>
+    <string name="support_lessons">Suport de curs</string>
+    <string name="go">GO</string>
+    <string name="add_a_mark">Adauga nota</string>
+    <string name="select">Selecteaza</string>
+    <string name="then_nenter_your_mark">Dupa;introdu nota</string>
+    <string name="add_a_test">ADAUGA UN TEST</string>
+    <string name="select_a_date">SELECTEAZA O DATA</string>
+    <string name="name">Nume</string>
+    <string name="add_q">ADAUGA INTREBARE</string>
+    <string name="add_l">ADAUGA LECTIE</string>
+    <string name="add_test_nquestion">ADAUGA INTREBARE</string>
+    <string name="prompt">Intrebare</string>
+    <string name="type">Tip:</string>
+    <string name="got_questions">Ai intrebari?</string>
+    <string name="enter">Introdu</string>
+    <string name="accept">ACCEPTA</string>
+    <string name="redo">REFA</string>
+    <string name="raise_hand">ridica mana</string>
+    <string name="or_create_acc">sau creeaza cont</string>
+</resources>
