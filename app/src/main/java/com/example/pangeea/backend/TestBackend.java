@@ -374,7 +374,7 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
-    public void retrieve_test_data_elev(String hour_ms, ListView lessons, TextView ai, TextView lesson_network){
+    public void retrieve_test_data_elev(String hour_ms, ListView lessons, TextView ai, TextView lesson_network,TextView test_title){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -406,6 +406,7 @@ public class TestBackend extends DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
+                                    test_title.setText(map.get("title").toString());
 
 
                                         lesson_network.setOnClickListener(new View.OnClickListener() {
@@ -678,11 +679,9 @@ public class TestBackend extends DatabaseConnector {
                                                                 .setTitle("Is it good?")
                                                                 .setMessage("Is this question good?")
 
-                                                                // Specifying a listener allows you to take an action before dismissing the dialog.
-                                                                // The dialog is automatically dismissed when a dialog button is clicked.
+
                                                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                                                     public void onClick(DialogInterface dialog, int which) {
-                                                                        // Continue with delete operation
                                                                         HashMap<String,Object> answer_map = new HashMap<>();
                                                                         correct_q++;
                                                                         to_be_corrected--;
@@ -715,7 +714,7 @@ public class TestBackend extends DatabaseConnector {
                                                                     }
                                                                 })
 
-                                                                // A null listener allows the button to dismiss the dialog and take no further action.
+
                                                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialog, int which) {

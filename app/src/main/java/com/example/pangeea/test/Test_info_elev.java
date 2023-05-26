@@ -25,7 +25,7 @@ public class Test_info_elev extends AppCompatActivity {
         Bundle e = getIntent().getExtras();
         TestBackend backend = new TestBackend(this);
 
-        backend.retrieve_test_data_elev(e.getString("hour_milis"),findViewById(R.id.lessons_lt),findViewById(R.id.ai_tv),findViewById(R.id.lesson_network_tv));
+        backend.retrieve_test_data_elev(e.getString("hour_milis"),findViewById(R.id.lessons_lt),findViewById(R.id.ai_tv),findViewById(R.id.lesson_network_tv),findViewById(R.id.textView29));
         Basic_tools tools = new Basic_tools();
         Button active_inactive = findViewById(R.id.button3);
         if(tools.hour_is_active(Long.parseLong(e.getString("hour_milis")))){
