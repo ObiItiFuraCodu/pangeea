@@ -199,7 +199,7 @@ public class CatalogueBackend extends DatabaseConnector{
                     }
                 });
     }
-    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list, TextView avg_mark, TextView absences){
+    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -223,7 +223,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             absence_list.setAdapter(adapter);
-                                            absences.setText("Absences : " + absencecontour);
+
 
                                         }
 
@@ -246,7 +246,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                                 datelist.add( list.get(i).getString("mark"));
                                                 mark_contour++;
                                                 mark_total +=  Integer.parseInt(list.get(i).getString("mark"));
-                                                absences.setText("Avg mark : " + mark_total / mark_contour);
+
 
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
@@ -260,7 +260,7 @@ public class CatalogueBackend extends DatabaseConnector{
                 });
 
     }
-    public void retrieve_pupil_info_elev(ListView mark_list,ListView absence_list,TextView avg_mark,TextView absences,String materie){
+    public void retrieve_pupil_info_elev(ListView mark_list,ListView absence_list,String materie){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -285,7 +285,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             absence_list.setAdapter(adapter);
-                                            absences.setText("Absences : " + list.size());
+
 
                                         }
 
@@ -312,7 +312,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                             }
                                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datelist);
                                             mark_list.setAdapter(adapter);
-                                            avg_mark.setText("Avg mark : " + mark_total / mark_contour);
+
 
                                         }
 

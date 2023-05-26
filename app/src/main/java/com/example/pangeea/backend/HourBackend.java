@@ -162,6 +162,7 @@ public class HourBackend extends DatabaseConnector {
                                                                   }
                                                               });
                                                               if(hour_milisecs > System.currentTimeMillis() - ONE_HOUR_IN_MILIS){
+                                                                  v.setElevation(10f);
                                                                   layout.addView(v);
 
                                                               }else{

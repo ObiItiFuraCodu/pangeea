@@ -235,6 +235,7 @@ public class TestBackend extends DatabaseConnector {
                                                                                   @Override
                                                                                   public void onSuccess(DataSnapshot dataSnapshot) {
                                                                                       if(!dataSnapshot.exists()){
+                                                                                          v.setElevation(10f);
                                                                                           layout.addView(v);
 
                                                                                       }else{
@@ -246,6 +247,7 @@ public class TestBackend extends DatabaseConnector {
                                                                               .addOnFailureListener(new OnFailureListener() {
                                                                                   @Override
                                                                                   public void onFailure(@NonNull Exception e) {
+                                                                                      v.setElevation(10f);
                                                                                       layout.addView(v);
                                                                                   }
                                                                               });
@@ -370,7 +372,7 @@ public class TestBackend extends DatabaseConnector {
                 });
 
     }
-    public void retrieve_test_data_elev(String hour_ms, ListView lessons, TextView teacher, TextView ai, TextView lesson_network){
+    public void retrieve_test_data_elev(String hour_ms, ListView lessons, TextView ai, TextView lesson_network){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -402,7 +404,7 @@ public class TestBackend extends DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
-                                    teacher.setText(map.get("teacher").toString());
+
 
                                         lesson_network.setOnClickListener(new View.OnClickListener() {
                                             @Override

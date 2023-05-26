@@ -194,6 +194,7 @@ public class TaskBackend extends DatabaseConnector{
                                                                   }
                                                               });
                                                               if(hour_milisecs > System.currentTimeMillis()){
+                                                                  v.setElevation(10f);
                                                                   layout.addView(v);
 
                                                               }else{

@@ -78,6 +78,7 @@ public class ContentBackend extends DatabaseConnector{
                                         }
                                     }
                                 });
+                                lesson_button.setElevation(10f);
                                 linearl.addView(lesson_button);
                             }
                         }

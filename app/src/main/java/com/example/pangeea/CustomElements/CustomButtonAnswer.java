@@ -1,14 +1,17 @@
 package com.example.pangeea.CustomElements;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
 import com.example.pangeea.R;
 
-public class CustomButtonAnswer extends LinearLayout {
+public class CustomButtonAnswer extends CardView {
     public CustomButtonAnswer(Context context) {
         super(context);/*comentariu lung */
         init();
@@ -25,28 +28,55 @@ public class CustomButtonAnswer extends LinearLayout {
     }
 
     private void init() {
+        LinearLayout rootLayout = new LinearLayout(getContext());
+        rootLayout.setOrientation(LinearLayout.VERTICAL);
+        addView(rootLayout);
 
-        setOrientation(LinearLayout.VERTICAL);
+        GradientDrawable gradientDrawable2 = new GradientDrawable();
+        gradientDrawable2.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable2.setColor(getResources().getColor(R.color.binaryblue));
 
-        setBackgroundColor(getResources().getColor(R.color.gray));
+        float cornerRadiusInPixels2 = 20f;
+        gradientDrawable2.setCornerRadius(cornerRadiusInPixels2);
+
+        setBackground(gradientDrawable2);
 
         Button button = new Button(getContext());
-        button.setText("Your answer:");
+        button.setText("Button");
+        button.setBackgroundColor(getResources().getColor(R.color.white));
 
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setColor(getResources().getColor(R.color.white));
+
+        float cornerRadiusInPixels = 20f;
+        gradientDrawable.setCornerRadius(cornerRadiusInPixels);
+
+        button.setBackground(gradientDrawable);
+        button.setElevation(10f);
+
+        TextView textView1 = new TextView(getContext());
+        textView1.setText("TextView1");
         TextView textView2 = new TextView(getContext());
-        textView2.setText("Question was:");
-
-        TextView textView25 = new TextView(getContext());
-        textView25.setText("Answer was");
-
+        textView2.setText("TextView2");
         TextView textView3 = new TextView(getContext());
-        textView3.setText("Why?:");
+        textView3.setText("TextView3");
 
+        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        buttonLayoutParams.setMargins(16, 16, 16, 0);
 
-        addView(button);
-        addView(textView2);
-        addView(textView25);
-        addView(textView3);
+        LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        textViewLayoutParams.setMargins(16, 16, 16, 16);
 
+        rootLayout.addView(button, buttonLayoutParams);
+        rootLayout.addView(textView1, textViewLayoutParams);
+        rootLayout.addView(textView2, textViewLayoutParams);
+        rootLayout.addView(textView3, textViewLayoutParams);
     }
 }

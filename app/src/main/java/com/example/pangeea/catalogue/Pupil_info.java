@@ -41,7 +41,7 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
         super.onStart();
         Bundle e = getIntent().getExtras();
 
-        connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.avg_mark),findViewById(R.id.absences));
+        connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list));
 
     }
     @Override
