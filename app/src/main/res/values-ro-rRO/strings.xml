@@ -26,4 +26,7 @@
     <string name="redo">REFA</string>
     <string name="raise_hand">ridica mana</string>
     <string name="or_create_acc">sau creeaza cont</string>
+    <string name="welcome_back">BINE AI REVENIT</string>
+    <string name="to_do">TASK-URI</string>
+    <string name="upcoming">TESTE SI ORE VIITOARE</string>
 </resources>

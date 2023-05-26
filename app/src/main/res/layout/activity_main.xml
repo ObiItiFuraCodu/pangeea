@@ -20,7 +20,7 @@
             android:layout_height="0dp"
 
             android:fontFamily="@font/poppins_bold"
-            android:text="UPCOMING HOURS AND TESTS:"
+            android:text="@string/upcoming"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline194"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
             android:layout_height="0dp"
 
             android:fontFamily="@font/poppins_bold"
-            android:text="TO DO LIST:"
+            android:text="@string/to_do"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/scrollView3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/poppins_extrabold"
-            android:text="WELCOME\nBACK"
+            android:text="@string/welcome_back"
             android:textColor="@color/black"
             android:textSize="35dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline195"

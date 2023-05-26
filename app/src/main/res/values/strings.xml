@@ -31,5 +31,8 @@
     <string name="redo">REDO</string>
     <string name="raise_hand">raise hand</string>
     <string name="or_create_acc">or create acc</string>
+    <string name="welcome_back">WELCOME\nBACK</string>
+    <string name="to_do">TO DO LIST:</string>
+    <string name="upcoming">UPCOMING HOURS AND TESTS:</string>
 
 </resources>
