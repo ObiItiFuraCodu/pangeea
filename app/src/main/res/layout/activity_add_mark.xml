@@ -10,10 +10,10 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
         android:text="@string/add_a_mark"
         android:textColor="@color/black"
-        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline40"
         app:layout_constraintEnd_toStartOf="@+id/guideline44"
         app:layout_constraintHorizontal_bias="0.014"
@@ -25,13 +25,14 @@
         android:id="@+id/add_date"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
         android:background="@drawable/rounded"
         android:backgroundTint="#5D9CFB"
         android:fontFamily="@font/poppins_extrabold"
         android:text="@string/select"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guideline42"
+        app:layout_constraintBottom_toTopOf="@+id/guideline197"
         app:layout_constraintEnd_toStartOf="@+id/guideline44"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toTopOf="@+id/guideline43"
@@ -39,9 +40,8 @@
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="210dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/rounded"
         android:backgroundTint="#5D9CFB"
@@ -49,12 +49,10 @@
         android:text="@string/then_nenter_your_mark"
         android:textColor="@color/white"
 
-        app:layout_constraintBottom_toTopOf="@+id/mark"
+        app:layout_constraintBottom_toTopOf="@+id/guideline196"
         app:layout_constraintEnd_toStartOf="@+id/guideline44"
-        app:layout_constraintHorizontal_bias="0.005"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
-        app:layout_constraintTop_toBottomOf="@+id/add_date"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintTop_toTopOf="@+id/guideline42" />
 
     <EditText
         android:id="@+id/mark"
@@ -93,10 +91,10 @@
         android:layout_marginTop="4dp"
         android:autoSizeTextType="uniform"
 
-        android:fontFamily="@font/poppins_extrabold"
-        android:text="ADD"
         android:background="@drawable/rounded"
         android:backgroundTint="#5D9CFB"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="ADD"
         app:layout_constraintBottom_toTopOf="@+id/guideline36"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.447"
@@ -153,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline43"
@@ -175,4 +173,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline196"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.41997263" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline197"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.31053352"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,10 @@
         android:id="@+id/improve_performance"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="improve performance"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_extrabold"
+        android:autoSizeTextType="uniform"
+        android:text="Do you want to get better?\nWe got you!(press this)"
         app:layout_constraintBottom_toTopOf="@+id/guideline142"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintHorizontal_bias="0.929"
@@ -77,10 +80,13 @@
         app:layout_constraintGuide_percent="0.9562243" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/materie_name2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_extrabold"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline147"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintHorizontal_bias="0.029"
@@ -125,20 +131,26 @@
         app:layout_constraintGuide_percent="0.08344733" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/absences_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
+        android:text="Absences"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_extrabold"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/absence_list"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintStart_toStartOf="@+id/guideline144"
         app:layout_constraintTop_toTopOf="@+id/guideline147" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/marks_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_extrabold"
+        android:autoSizeTextType="uniform"
+        android:text="Marks"
         app:layout_constraintBottom_toTopOf="@+id/guideline140"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintStart_toStartOf="@+id/guideline144"

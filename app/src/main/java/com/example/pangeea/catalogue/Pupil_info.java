@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.pangeea.backend.CatalogueBackend;
 import com.example.pangeea.backend.DatabaseConnector;
@@ -42,6 +43,9 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
         Bundle e = getIntent().getExtras();
 
         connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list));
+        TextView pupil_name = findViewById(R.id.textView20);
+        pupil_name.setText(e.getString("pupil_name"));
+
 
     }
     @Override

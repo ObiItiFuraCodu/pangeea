@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
 import com.example.pangeea.other.Basic_tools;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,6 +53,8 @@ public class ContentBackend extends DatabaseConnector{
 
                             for (DocumentSnapshot document : list) {
                                 Button lesson_button = new Button(context);
+                                lesson_button.setBackgroundColor(context.getResources().getColor(R.color.binaryblue));
+                                lesson_button.setElevation(10f);
                                 lesson_button.setText(document.getString("title"));
                                 lesson_button.setOnClickListener(new View.OnClickListener() {
                                     @Override

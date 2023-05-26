@@ -104,7 +104,8 @@ public class HourBackend extends DatabaseConnector {
 
                                                           for(Map.Entry<String,Map<String,String>> set :
                                                                   map.entrySet()){
-                                                              CustomButtonLesson v = new CustomButtonLesson(context);
+                                                              CustomButtonLesson custom_butt = new CustomButtonLesson(context);
+                                                              LinearLayout v = (LinearLayout) custom_butt.getChildAt(0);
                                                               Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
 
@@ -162,8 +163,8 @@ public class HourBackend extends DatabaseConnector {
                                                                   }
                                                               });
                                                               if(hour_milisecs > System.currentTimeMillis() - ONE_HOUR_IN_MILIS){
-                                                                  v.setElevation(10f);
-                                                                  layout.addView(v);
+                                                                  custom_butt.setElevation(10f);
+                                                                  layout.addView(custom_butt);
 
                                                               }else{
                                                                  // snapshot.getRef().child(snapshot.getKey()).removeValue();
@@ -278,7 +279,7 @@ public class HourBackend extends DatabaseConnector {
         ref.child(highschool).child("classes").child(class_name).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map);
         ref.child(highschool).child("teachers").child(user.getDisplayName()).child(Long.toString(hour_ms + ONE_HOUR_IN_MILIS)).setValue(map2);
     }
-    public void retrieve_hour_data_prof(String hour_milis, ListView pupil_present, ListView lessons_sent, ListView question, Button close_presence){
+    public void retrieve_hour_data_prof(String hour_milis, ListView pupil_present, ListView lessons_sent, ListView question, Button close_presence,TextView class_name){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         store.collection("users").document(user.getDisplayName())
@@ -297,6 +298,7 @@ public class HourBackend extends DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
+                                    class_name.setText(map.get("class_name").toString());
 
                                     if((List<String>)map.get("files") != null){
                                         List<String> lessons_list = (List<String>)map.get("files");

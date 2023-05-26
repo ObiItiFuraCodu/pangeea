@@ -84,9 +84,9 @@
         android:id="@+id/lesson_net_button_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="Need help? \n See what others did"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline173"
@@ -97,9 +97,9 @@
         android:id="@+id/ai_button_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="Or generate a lesson"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline170"
@@ -119,16 +119,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
-
-    <Button
-        android:id="@+id/time_remaining"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/guideline167"
-        app:layout_constraintEnd_toStartOf="@+id/guideline173"
-        app:layout_constraintStart_toStartOf="@+id/guideline169"
-        app:layout_constraintTop_toTopOf="@+id/guideline166" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline166"
@@ -207,9 +197,9 @@
         android:id="@+id/textView23"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="Submissions"
         android:textColor="@color/black"
 
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -221,9 +211,9 @@
         android:id="@+id/textView24"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="Support Lessons"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline170"

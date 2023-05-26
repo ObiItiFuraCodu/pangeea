@@ -33,11 +33,11 @@
         android:id="@+id/textView1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fontFamily="@font/poppins_extrabold"
+
         android:text="@string/add_an_hour"
         android:textColor="@color/black"
-
-        android:textSize="25dp"
+        android:fontFamily="@font/poppins_extrabold"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline183"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintHorizontal_bias="0.0"

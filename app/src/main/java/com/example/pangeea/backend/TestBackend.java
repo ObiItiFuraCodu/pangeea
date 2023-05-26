@@ -171,7 +171,8 @@ public class TestBackend extends DatabaseConnector {
 
                                                           for(Map.Entry<String,Map<String,String>> set :
                                                                   map.entrySet()){
-                                                              CustomButtonLesson v = new CustomButtonLesson(context);
+                                                              CustomButtonLesson custom_butt = new CustomButtonLesson(context);
+                                                              LinearLayout v = (LinearLayout) custom_butt.getChildAt(0);
                                                               Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
 
@@ -235,8 +236,8 @@ public class TestBackend extends DatabaseConnector {
                                                                                   @Override
                                                                                   public void onSuccess(DataSnapshot dataSnapshot) {
                                                                                       if(!dataSnapshot.exists()){
-                                                                                          v.setElevation(10f);
-                                                                                          layout.addView(v);
+                                                                                          custom_butt.setElevation(10f);
+                                                                                          layout.addView(custom_butt);
 
                                                                                       }else{
                                                                                           Log.i("EXPIRED TEST","TSTSTS");
@@ -247,8 +248,8 @@ public class TestBackend extends DatabaseConnector {
                                                                               .addOnFailureListener(new OnFailureListener() {
                                                                                   @Override
                                                                                   public void onFailure(@NonNull Exception e) {
-                                                                                      v.setElevation(10f);
-                                                                                      layout.addView(v);
+                                                                                      custom_butt.setElevation(10f);
+                                                                                      layout.addView(custom_butt);
                                                                                   }
                                                                               });
 
@@ -294,7 +295,7 @@ public class TestBackend extends DatabaseConnector {
                                       }
                 );
     }
-    public void retrieve_test_data_proffesor(ListView support_lessons, String deadline_ms,ListView submissions){
+    public void retrieve_test_data_proffesor(ListView support_lessons, String deadline_ms,ListView submissions,TextView class_tested){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FileDownloader downloader = new FileDownloader();
@@ -313,6 +314,7 @@ public class TestBackend extends DatabaseConnector {
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
+                                    class_tested.setText(map.get("class_name").toString());
 
                                     if(map.get("support_lessons") != null){
                                         Map<String,String> questions_map = (Map<String, String>) map.get("support_lessons");

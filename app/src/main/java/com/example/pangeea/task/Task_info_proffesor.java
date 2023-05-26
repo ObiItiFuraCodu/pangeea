@@ -20,6 +20,6 @@ public class Task_info_proffesor extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Bundle e = getIntent().getExtras();
-        connector.retrieve_task_data_proffesor(e.getString("hour_milis"),findViewById(R.id.submissions_list),findViewById(R.id.lessons_list));
+        connector.retrieve_task_data_proffesor(e.getString("hour_milis"),findViewById(R.id.submissions_list),findViewById(R.id.lessons_list),findViewById(R.id.textView27));
     }
 }

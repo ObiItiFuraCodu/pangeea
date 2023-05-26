@@ -15,26 +15,6 @@
         app:layout_constraintGuide_percent="0.53"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/lessons_sorted"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/guideline23"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline134"></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lessons_generated"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline135"></LinearLayout>
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline134"
         android:layout_width="wrap_content"
@@ -62,25 +42,25 @@
         android:id="@+id/you_can_do_this"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
         android:text="YOU CAN DO BETTER"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline138"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/poppins_extrabold"
-        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/check_out_what_others_did"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="HERE IS A LIST OF LESSONS CAREFULLY PICKED FOR YOU TO IMPROVE YOUR PERFORMANCE"
-        app:layout_constraintBottom_toTopOf="@+id/guideline134"
-        app:layout_constraintEnd_toEndOf="parent"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="HERE IS A LIST OF LESSONS CAREFULLY PICKED FOR YOU TO IMPROVE YOUR PERFORMANCE"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline134"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline139" />
 
@@ -95,13 +75,46 @@
         android:id="@+id/not_enough"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Not enough?Let us help you then"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="Not enough?Let us help you then"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/lessons_generated"
+        app:layout_constraintBottom_toTopOf="@+id/guideline135"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline23"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline134">
+
+        <LinearLayout
+            android:id="@+id/lessons_sorted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline135">
+
+        <LinearLayout
+            android:id="@+id/lessons_generated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

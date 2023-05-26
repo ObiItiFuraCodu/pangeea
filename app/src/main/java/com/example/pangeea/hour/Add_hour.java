@@ -49,7 +49,7 @@ public class Add_hour extends AppCompatActivity {
         Bundle e = getIntent().getExtras();
         HourBackend backend1 = new HourBackend(this);
         TaskBackend backend2 = new TaskBackend(this);
-
+        TextView addhour = findViewById(R.id.textView1);
         final View dialogView = View.inflate(this, R.layout.activity_add_hour, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         EditText title = findViewById(R.id.lesson_title);
@@ -63,6 +63,11 @@ public class Add_hour extends AppCompatActivity {
 
 
 
+        if(e.getString("hour/task").equals("hour")){
+            addhour.setText("ADD AN HOUR");
+        }else{
+            addhour.setText("ADD A TASK");
+        }
         select_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

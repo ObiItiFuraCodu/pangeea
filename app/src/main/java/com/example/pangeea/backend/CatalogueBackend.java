@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pangeea.R;
 import com.example.pangeea.catalogue.Materie_info;
 import com.example.pangeea.catalogue.Pupil_info;
 import com.example.pangeea.main.Class_info;
@@ -57,6 +58,8 @@ public class CatalogueBackend extends DatabaseConnector{
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             Button button = new Button(context);
+                                            button.setBackgroundColor(context.getResources().getColor(R.color.binaryblue));
+                                            button.setElevation(10f);
                                             button.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
                                             button.setOnClickListener(new View.OnClickListener() {
                                                 @Override

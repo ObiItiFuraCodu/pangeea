@@ -246,7 +246,8 @@ public class AI_core {
                 try {
                     JSONArray choicesArray = response.getJSONArray("choices");
                     JSONObject choiceObject = choicesArray.getJSONObject(0);
-                    CustomButtonView button = new CustomButtonView(context);
+                    CustomButtonView custom_butt = new CustomButtonView(context);
+                    LinearLayout button = (LinearLayout) custom_butt.getChildAt(0);
                     if(main){
                         if (choiceObject.getString("text").contains("Raspuns") || choiceObject.getString("text").contains("Raspunsul") ||
                                 choiceObject.getString("text").contains("raspuns") || choiceObject.getString("text").contains("raspunsul")
@@ -258,7 +259,8 @@ public class AI_core {
                             Button button1 = (Button) button.getChildAt(0);
                             button1.setText(choiceObject.getString("text"));
                             boolean[] vector = generateBooleanVector();
-                            list.addView(button);
+                            custom_butt.setElevation(10f);
+                            list.addView(custom_butt);
                             generate_question(choiceObject.getString("text"),list,false,vector[0], (TextView) button.getChildAt(1));
                             generate_question(choiceObject.getString("text"),list,false,vector[1], (TextView) button.getChildAt(2));
                             generate_question(choiceObject.getString("text"),list,false,vector[2], (TextView) button.getChildAt(3));

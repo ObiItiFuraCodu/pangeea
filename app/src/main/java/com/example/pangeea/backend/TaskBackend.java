@@ -151,7 +151,8 @@ public class TaskBackend extends DatabaseConnector{
 
                                                           for(Map.Entry<String,Map<String,String>> set :
                                                                   map.entrySet()){
-                                                              CustomButtonLesson v = new CustomButtonLesson(context);
+                                                              CustomButtonLesson custom_butt = new CustomButtonLesson(context);
+                                                              LinearLayout v = (LinearLayout) custom_butt.getChildAt(0);
                                                               Map<String,String> value = (Map<java.lang.String, java.lang.String>)set.getValue();
 
 
@@ -194,8 +195,8 @@ public class TaskBackend extends DatabaseConnector{
                                                                   }
                                                               });
                                                               if(hour_milisecs > System.currentTimeMillis()){
-                                                                  v.setElevation(10f);
-                                                                  layout.addView(v);
+                                                                  custom_butt.setElevation(10f);
+                                                                  layout.addView(custom_butt);
 
                                                               }else{
                                                                   Log.i("TF","WTFFFFFFFFFFFFFFFFFF");
@@ -235,7 +236,7 @@ public class TaskBackend extends DatabaseConnector{
                                       }
                 );
     }
-    public void retrieve_task_data_proffesor(String deadline, ListView submissions, ListView lessons_sent){
+    public void retrieve_task_data_proffesor(String deadline, ListView submissions, ListView lessons_sent,TextView class_tasked){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FileDownloader downloader = new FileDownloader();
@@ -254,6 +255,8 @@ public class TaskBackend extends DatabaseConnector{
 
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
+                                    class_tasked.setText(map.get("class_name").toString());
+
                                     if((List<String>)map.get("files") != null){
                                         List<String> lessons_list = (List<String>)map.get("files");
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
@@ -302,7 +305,7 @@ public class TaskBackend extends DatabaseConnector{
                 });
 
     }
-    public void retrieve_task_data_elev(String hour_ms, ListView lessons, ListView submissions, TextView teacher, TextView ai, TextView lesson_network){
+    public void retrieve_task_data_elev(String hour_ms, ListView lessons, ListView submissions, TextView teacher, TextView ai, TextView lesson_network,TextView task_title){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -326,6 +329,7 @@ public class TaskBackend extends DatabaseConnector{
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
                                 if(map != null){
                                     if((List<String>)map.get("files") != null){
+                                        task_title.setText(map.get("title").toString());
                                         List<String> lessons_list = (List<String>)map.get("files");
                                         lesson_network.setOnClickListener(new View.OnClickListener() {
                                             @Override
