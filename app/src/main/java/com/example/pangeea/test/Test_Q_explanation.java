@@ -33,7 +33,8 @@ public class Test_Q_explanation extends AppCompatActivity {
         HashMap<String,Object> actual_answer1 = (HashMap<String, Object>) map.get("actual_answer");
         HashMap<String,Object> actual_answer = (HashMap<String, Object>) actual_answer1.get("variants");
         if(!map.get("A_valid").equals(actual_answer.get("A_valid"))){
-            CustomButtonAnswer answer = new CustomButtonAnswer(Test_Q_explanation.this);
+            CustomButtonAnswer custom_butt = new CustomButtonAnswer(Test_Q_explanation.this);
+            LinearLayout answer = (LinearLayout) custom_butt.getChildAt(0);
             Button iswrong = (Button) answer.getChildAt(0);
             if(actual_answer.get("A_valid").equals("valid")){
                 iswrong.setText("A era adevarat");
@@ -52,10 +53,11 @@ public class Test_Q_explanation extends AppCompatActivity {
                 TextView explanation = (TextView) answer.getChildAt(3);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("A") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
-            layout.addView(answer);
+            layout.addView(custom_butt);
         }
         if(!map.get("B_valid").equals(actual_answer.get("B_valid"))){
-            CustomButtonAnswer answer = new CustomButtonAnswer(Test_Q_explanation.this);
+            CustomButtonAnswer custom_butt = new CustomButtonAnswer(Test_Q_explanation.this);
+            LinearLayout answer = (LinearLayout) custom_butt.getChildAt(0);
             Button iswrong = (Button) answer.getChildAt(0);
             if(actual_answer.get("B_valid").equals("valid")){
                 iswrong.setText("B era adevarat");
@@ -74,12 +76,13 @@ public class Test_Q_explanation extends AppCompatActivity {
                 TextView explanation = (TextView) answer.getChildAt(3);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("B") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
-            layout.addView(answer);
+            layout.addView(custom_butt);
 
 
         }
         if(!map.get("C_valid").equals(actual_answer.get("C_valid"))){
-            CustomButtonAnswer answer = new CustomButtonAnswer(Test_Q_explanation.this);
+            CustomButtonAnswer custom_butt = new CustomButtonAnswer(Test_Q_explanation.this);
+            LinearLayout answer = (LinearLayout) custom_butt.getChildAt(0);
             Button iswrong = (Button) answer.getChildAt(0);
             if(actual_answer.get("C_valid").equals("valid")){
                 iswrong.setText("C era adevarat");
@@ -98,7 +101,7 @@ public class Test_Q_explanation extends AppCompatActivity {
                 TextView explanation = (TextView) answer.getChildAt(3);
                 core.AI_Text("De ce este gresit raspunsul " + (String)actual_answer.get("C") + "pentru intrebarea" + (String)map.get("prompt") + "?",explanation);
             }
-            layout.addView(answer);
+            layout.addView(custom_butt);
 
 
         }

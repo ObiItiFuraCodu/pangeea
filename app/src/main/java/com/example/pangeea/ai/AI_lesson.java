@@ -33,12 +33,13 @@ public class AI_lesson extends AppCompatActivity {
         Button enter = findViewById(R.id.enter_q_button);
         question_editt.setVisibility(View.INVISIBLE);
         enter.setVisibility(View.INVISIBLE);
-        CustomButtonLesson lesson = new CustomButtonLesson(AI_lesson.this);
+        CustomButtonLesson custom_butt = new CustomButtonLesson(AI_lesson.this);
+        LinearLayout lesson = (LinearLayout) custom_butt.getChildAt(0);
         Button button = (Button) lesson.getChildAt(0);
         button.setText(e.getString("title"));
         TextView view = (TextView) lesson.getChildAt(1);
         core.AI_Lesson(e.getString("title"),view,enter,question_editt);
-        linearl.addView(lesson);
+        linearl.addView(custom_butt);
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -415,11 +415,12 @@ public class AI_core {
         return output;
     }
     public void generate_lessons(LinearLayout layout,List<String> questions,String title){
-        CustomButtonLesson lesson = new CustomButtonLesson(context);
+        CustomButtonLesson custom_butt = new CustomButtonLesson(context);
+        LinearLayout lesson = (LinearLayout) custom_butt.getChildAt(0);
         Button button = (Button) lesson.getChildAt(0);
         button.setText(title);
         AI_Text("Genereaza o lectie de 300 de cuvinte legata de " + title + "\n Lectie :", (TextView) lesson.getChildAt(1));
-        layout.addView(lesson);
+        layout.addView(custom_butt);
         for(String question : questions){
             CustomButtonLesson lesson1 = new CustomButtonLesson(context);
             Button button1 = (Button) lesson1.getChildAt(0);
