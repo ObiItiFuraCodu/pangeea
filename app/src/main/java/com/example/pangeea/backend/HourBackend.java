@@ -92,6 +92,7 @@ public class HourBackend extends DatabaseConnector {
                                                   ref = dbb.getReference("hourss").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
 
                                               }
+                                              //BAZA DE DATE REALTIME DATABASE FUNCTIONEAZA IN TIMP REAL ACEASTA REACTIONAND LA SCHIMBARI IN INTERIORUL ACESTEIA.IN URMA UNEI SCHIMBARI IN BAZA DE DATE,O ACTIUNE SETATA DE PROGRAMATOR POATE AVEA LOC
                                               ref.addValueEventListener(new ValueEventListener() {
                                                   private Object String;
 

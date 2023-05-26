@@ -29,6 +29,7 @@ public class Test_Q_explanation extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.linearl_answer_explanation);
         Bundle e = getIntent().getExtras();
+        //EXPLICATIA TESTULUI
         HashMap<String,Object> map = (HashMap<String, Object>) e.get("question_content");
         HashMap<String,Object> actual_answer1 = (HashMap<String, Object>) map.get("actual_answer");
         HashMap<String,Object> actual_answer = (HashMap<String, Object>) actual_answer1.get("variants");

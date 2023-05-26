@@ -29,7 +29,7 @@ public class CustomButtonLesson extends CardView {
         super(context, attrs, defStyle);
         init();
     }
-
+    //BUTOANELE CUSTOMIZATE PENTRU A OBTINE O INTERFATA CAT MAI BUNA
     private void init() {
         LinearLayout rootLayout = new LinearLayout(getContext());
         rootLayout.setOrientation(LinearLayout.VERTICAL);

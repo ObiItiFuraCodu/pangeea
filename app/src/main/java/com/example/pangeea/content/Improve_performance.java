@@ -62,7 +62,7 @@ public class Improve_performance extends AppCompatActivity {
                                                long mark_long = (long)mark.get("mark");
                                                mark_int = (int)mark_long;
                                            }
-
+                                         //SELECTIA TESTELOR CU NOTA MAI MICA DE 5
                                            if(mark_int < 5){
                                                //SORTED BEGIN
                                                store.collection("courses").document(documentSnapshot.getString("user_class").replaceAll("[^\\d.]", "")).collection(documentSnapshot.getString("user_class").replaceAll("[^\\d.]", ""))
