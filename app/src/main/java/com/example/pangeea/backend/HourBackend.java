@@ -293,6 +293,7 @@ public class HourBackend extends DatabaseConnector {
                         database_reference = database.getReference("hourss").child((String)documentSnapshot.get("user_highschool")).child("teachers").child((String)documentSnapshot.get("Username")).child(hour_milis);
 
                         database_reference.addValueEventListener(new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -329,6 +330,9 @@ public class HourBackend extends DatabaseConnector {
                                             mark_absent((String) map.get("class_name"),presence_list);
                                         }
                                     });
+                                    if(Long.parseLong(hour_milis) + ONE_HOUR_IN_MILIS  -  System.currentTimeMillis() < 1000){
+                                        mark_absent((String) map.get("class_name"),presence_list);
+                                    }
 
                                 }
 
@@ -349,7 +353,7 @@ public class HourBackend extends DatabaseConnector {
                 });
 
     }
-    public void retrieve_hour_data_elev(String hour_ms, ListView lv, Button questions, boolean presence, TextView ai, TextView lesson_network){
+    public void retrieve_hour_data_elev(String hour_ms, ListView lv, Button questions, boolean presence, TextView ai, TextView lesson_network,TextView hour_name){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         Basic_tools tools = new Basic_tools();
@@ -371,6 +375,7 @@ public class HourBackend extends DatabaseConnector {
                                 Map<String,Object> map =  (Map<String,Object>)snapshot.getValue();
 
                                 if(map != null){
+                                    hour_name.setText(map.get("title").toString());
                                     if(!presence && tools.hour_is_active(Long.parseLong(hour_ms))){
                                         Intent i = new Intent(context, NFC_detection.class);
                                         i.putExtra("teacher",map.get("teacher").toString());

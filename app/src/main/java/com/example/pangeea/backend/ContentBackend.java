@@ -23,7 +23,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContentBackend extends DatabaseConnector{
     Context context;
@@ -59,8 +61,9 @@ public class ContentBackend extends DatabaseConnector{
                                 lesson_button.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        List<String> lesson_names = document.get("files", ArrayList.class);
-                                        for(String name : lesson_names){
+                                        HashMap<String,Object> lesson_names = document.get("files", HashMap.class);
+                                        for(int i = 0;i< lesson_names.size();i++){
+                                            String name = (String) lesson_names.get(Integer.toString(i));
                                             FirebaseStorage storage = FirebaseStorage.getInstance();
                                             StorageReference storageRef = storage.getReference();
                                             storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

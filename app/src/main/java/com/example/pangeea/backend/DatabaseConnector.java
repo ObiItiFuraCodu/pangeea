@@ -303,8 +303,7 @@ public class DatabaseConnector {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void mark_absent(String class_marked, List<String> pupils_present){
         FirebaseUser user = auth.getCurrentUser();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
+
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -317,11 +316,13 @@ public class DatabaseConnector {
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             String user_child_name = queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class);
+                                            Map<String,String> absence = new HashMap<String,String>();
+                                            absence.put("absence","absence");
                                             if(!pupils_present.contains(user_child_name)){
                                                 store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user_child_name).collection("absences")
-                                                        .document(documentSnapshot.get("user_subject",String.class)).collection("absences").document(now.toString())
+                                                        .document(documentSnapshot.get("user_subject",String.class)).collection("absences").document(Long.toString(System.currentTimeMillis()))
 
-                                                        .set("absence");
+                                                        .set(absence);
 
                                             }
                                         }

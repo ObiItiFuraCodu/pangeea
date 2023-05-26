@@ -25,9 +25,10 @@ public class Hour_info_elev extends AppCompatActivity {
         Basic_tools tools = new Basic_tools();
 
         HourBackend connector = new HourBackend(Hour_info_elev.this);
-        connector.retrieve_hour_data_elev(e.getString("hour_milis"),findViewById(R.id.lv),findViewById(R.id.raise_hand),e.getBoolean("presence"),findViewById(R.id.ai_button),findViewById(R.id.lesson_net_button));
+        connector.retrieve_hour_data_elev(e.getString("hour_milis"),findViewById(R.id.lv),findViewById(R.id.raise_hand),e.getBoolean("presence"),findViewById(R.id.ai_button),findViewById(R.id.lesson_net_button),findViewById(R.id.textView8));
         Button active_inactive = findViewById(R.id.active_inactive);
-        if(tools.hour_is_active(Long.parseLong(e.getString("hour_milis")))){
+
+        if(!tools.hour_is_active(Long.parseLong(e.getString("hour_milis")))){
 
             active_inactive.setText("inactive");
             active_inactive.setBackgroundColor(getResources().getColor(R.color.red));

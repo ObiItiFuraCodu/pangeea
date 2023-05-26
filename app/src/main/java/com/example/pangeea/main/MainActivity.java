@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         TextView welcome_back = findViewById(R.id.welcome_back);
-        welcome_back.setText("WELCOME BACK \n" + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
+        welcome_back.setText(getResources().getString(R.string.welcome_back) + " " + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
 
 
 
@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             connector.retrieve_materies((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
                             navigationView.getMenu().findItem(R.id.nav_add_hour).setTitle("Materies");
                             navigationView.getMenu().findItem(R.id.pair_device).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.pair_device).setEnabled(false);
 
                         }else{
                             navigationView.getMenu().findItem(R.id.see_corrected_tests).setVisible(false);
