@@ -53,7 +53,8 @@ public class AI_test_generator extends AppCompatActivity {
             public void onClick(View v) {
                 for(int i = 0;i< 10;i++){
                     HashMap<String,Object> question = new HashMap<>();
-                    CustomButtonView button = (CustomButtonView) question_list.getChildAt(i);
+                    CustomButtonView custom_button = (CustomButtonView) question_list.getChildAt(i);
+                    LinearLayout button = (LinearLayout) custom_button.getChildAt(0);
                     Button prompt = (Button)button.getChildAt(0);
                     TextView a = (TextView) button.getChildAt(1);
                     TextView b = (TextView) button.getChildAt(2);
