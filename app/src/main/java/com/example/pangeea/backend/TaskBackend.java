@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
@@ -133,7 +134,7 @@ public class TaskBackend extends DatabaseConnector{
                                               // Log.i("ATENTIE FRAIERE : ",user_class.replaceAll("[^A-Za-z0-9]", ""));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("tasks").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
-
+                                                  layout.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
                                               }else{
                                                   ref = dbb.getReference("tasks").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
 
@@ -164,6 +165,7 @@ public class TaskBackend extends DatabaseConnector{
                                                                   Button button = (Button) v.getChildAt(0);
                                                                   TextView view = (TextView) v.getChildAt(1);
                                                                   button.setText("task" + value.get("class_name") + " " + value.get("title"));
+                                                                  button.setBackgroundColor(context.getResources().getColor(R.color.light_red));
                                                                   view.setText("deadline in : " +  Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                               }else{
                                                                   Button button = (Button) v.getChildAt(0);
@@ -240,6 +242,8 @@ public class TaskBackend extends DatabaseConnector{
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FileDownloader downloader = new FileDownloader();
+        submissions.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+        lessons_sent.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
