@@ -6,146 +6,91 @@
     android:layout_height="match_parent"
     android:id = "@+id/drawer_layout"
     tools:context=".catalogue.Pupil_info">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/mark_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline146"
-            app:layout_constraintEnd_toStartOf="@+id/guideline145"
-            app:layout_constraintStart_toStartOf="@+id/guideline144"
-            app:layout_constraintTop_toTopOf="@+id/guideline140" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/absence_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline137"
-            app:layout_constraintEnd_toStartOf="@+id/guideline145"
-            app:layout_constraintStart_toStartOf="@+id/guideline144"
-            app:layout_constraintTop_toTopOf="@+id/guideline136" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline136"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.16"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ListView
+                android:id="@+id/mark_list"
+                android:layout_width="410dp"
+                android:layout_height="359dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/absence_list" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline137"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.44049248"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline140"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.51846784" />
+            <ListView
+                android:id="@+id/absence_list"
+                android:layout_width="410dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline141"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.84" />
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="PUPIL NAME"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/guideline147"
+                app:layout_constraintEnd_toStartOf="@+id/guideline145"
+                app:layout_constraintHorizontal_bias="0.029"
+                app:layout_constraintStart_toStartOf="@+id/guideline144"
+                app:layout_constraintTop_toTopOf="@+id/guideline143" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline142"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9562243" />
 
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="PUPIL NAME"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/poppins_extrabold"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/guideline147"
-            app:layout_constraintEnd_toStartOf="@+id/guideline145"
-            app:layout_constraintHorizontal_bias="0.029"
-            app:layout_constraintStart_toStartOf="@+id/guideline144"
-            app:layout_constraintTop_toTopOf="@+id/guideline143" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline143"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.02"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/absences_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="@string/absences"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/absence_list"
+                app:layout_constraintEnd_toStartOf="@+id/guideline145"
+                app:layout_constraintStart_toStartOf="@+id/guideline144"
+                app:layout_constraintTop_toTopOf="@+id/guideline147" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline144"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
+            <TextView
+                android:id="@+id/marks_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="@string/marks"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/guideline140"
+                app:layout_constraintEnd_toStartOf="@+id/guideline145"
+                app:layout_constraintStart_toStartOf="@+id/guideline144"
+                app:layout_constraintTop_toTopOf="@+id/guideline137" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline145"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="407dp"
+                android:layout_height="253dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline146"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline147"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08344733" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/absences_text"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/poppins_extrabold"
-            android:text="@string/absences"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/absence_list"
-            app:layout_constraintEnd_toStartOf="@+id/guideline145"
-            app:layout_constraintStart_toStartOf="@+id/guideline144"
-            app:layout_constraintTop_toTopOf="@+id/guideline147" />
-
-        <TextView
-            android:id="@+id/marks_text"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/poppins_extrabold"
-            android:text="@string/marks"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/guideline140"
-            app:layout_constraintEnd_toStartOf="@+id/guideline145"
-            app:layout_constraintStart_toStartOf="@+id/guideline144"
-            app:layout_constraintTop_toTopOf="@+id/guideline137" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
