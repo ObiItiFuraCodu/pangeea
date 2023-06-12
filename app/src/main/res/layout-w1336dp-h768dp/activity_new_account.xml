@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline200"
@@ -118,12 +118,13 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="128dp"
         android:fontFamily="@font/poppins_extrabold"
         android:text="Create account"
 
         android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline200"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline199"
         app:layout_constraintTop_toTopOf="@+id/guideline201" />
 
@@ -141,6 +142,23 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/guideline199"
         app:layout_constraintTop_toBottomOf="@+id/mobile" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline204"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="83dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline202"
+        app:layout_constraintEnd_toStartOf="@+id/guideline199"
+        app:layout_constraintStart_toStartOf="@+id/guideline204"
+        app:layout_constraintTop_toTopOf="@+id/guideline201"
+        app:srcCompat="@drawable/sandu_ciorba" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
