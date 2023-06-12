@@ -29,12 +29,12 @@
 
             <ListView
                 android:id="@+id/absence_list"
-                android:layout_width="410dp"
+                android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/RP_history" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -79,13 +79,39 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline137" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="407dp"
-                android:layout_height="253dp"
+                android:id="@+id/RP_history"
+                android:layout_width="414dp"
+                android:layout_height="472dp"
+                android:layout_marginTop="104dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+            <TextView
+                android:id="@+id/rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/RP_history"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.423" />
+
+            <TextView
+                android:id="@+id/rp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="47dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/RP_history"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.878"
+                app:layout_constraintStart_toEndOf="@+id/rank"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.947" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

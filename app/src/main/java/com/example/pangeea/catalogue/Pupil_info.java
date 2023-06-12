@@ -42,7 +42,7 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
         super.onStart();
         Bundle e = getIntent().getExtras();
 
-        connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list));
+        connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp));
         TextView pupil_name = findViewById(R.id.textView20);
         pupil_name.setText(e.getString("pupil_name"));
 

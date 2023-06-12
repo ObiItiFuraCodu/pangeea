@@ -16,7 +16,6 @@
           android:fillType="evenOdd"/>
       <path
           android:pathData="M31.25,24.09L343.75,24.09L343.75,356.79L31.25,356.79ZM31.25,24.09"
-          android:fillColor="url(#fd183a90d7)"
           android:fillType="evenOdd"/>
     </group>
   </group>

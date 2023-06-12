@@ -202,7 +202,7 @@ public class CatalogueBackend extends DatabaseConnector{
                     }
                 });
     }
-    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list){
+    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list,LinearLayout rank_history,TextView rank,TextView rp){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -210,6 +210,30 @@ public class CatalogueBackend extends DatabaseConnector{
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        store.collection("users").document(pupil_name)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        String ranking_points = documentSnapshot.get("RP",String.class);
+                                        if(ranking_points != null){
+                                            rp.setText(" * " + ranking_points);
+
+
+                                        }
+                                        rp.setTextColor(context.getResources().getColor(R.color.dark_red));
+                                        HashMap<String,Object> ranking_history = documentSnapshot.get("ranking_history",HashMap.class);
+                                        if(ranking_history != null){
+                                            //codare maxima
+                                        }
+                                        rank.setText("mancator de cur maxim");
+                                    }
+                                });
+
+
+
+
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(pupil_class).collection("pupils").document(pupil_name).collection("absences")
                                 .document(documentSnapshot.get("user_subject",String.class)).collection("absences")
                                 .get()
