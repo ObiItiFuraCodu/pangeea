@@ -7,6 +7,11 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/bg_spinner.xml" value="0.5475" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3655" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/rounded.xml" value="0.3165" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/sandu_ciorba.xml" value="0.318" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout-w1336dp-h768dp/activity_login.xml" value="0.35609103078982596" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout-w1336dp-h768dp/activity_new_account.xml" value="0.35609103078982596" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout-w1920dp-h1080dp/activity_login.xml" value="0.16150576806314512" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout-w1920dp-h1080dp/activity_new_account.xml" value="0.16150576806314512" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_hour.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_mark.xml" value="0.5401041666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_test.xml" value="0.5" />
@@ -60,7 +65,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

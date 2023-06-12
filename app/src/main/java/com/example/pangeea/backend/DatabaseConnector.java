@@ -118,6 +118,9 @@ public class DatabaseConnector {
         user_data.put("user_class",user_class.replaceAll("[^A-Za-z0-9]", ""));
         user_data.put("user_category",category.replaceAll("[^A-Za-z0-9]", ""));
         user_data.put("user_subject",class_subject.replaceAll("[^A-Za-z0-9]", ""));
+        if(category.replaceAll("[^A-Za-z0-9]", "").equals("0")){
+            user_data.put("RP","0");
+        }
         filler_data.put("data",user_highschool.replaceAll("[^A-Za-z0-9]", ""));
 
 

@@ -33,10 +33,10 @@ public class NewAccount extends AppCompatActivity {
         // Initialize Firebase Auth
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        Button button = findViewById(R.id.button);
-        EditText email = findViewById(R.id.email);
+        Button button = findViewById(R.id.button2);
+        EditText email = findViewById(R.id.email2);
         EditText password = findViewById(R.id.password);
-        EditText name = findViewById(R.id.fullname);
+        EditText name = findViewById(R.id.username);
 
 
 
