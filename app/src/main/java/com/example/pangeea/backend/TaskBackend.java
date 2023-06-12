@@ -165,7 +165,7 @@ public class TaskBackend extends DatabaseConnector{
                                                                   Button button = (Button) v.getChildAt(0);
                                                                   TextView view = (TextView) v.getChildAt(1);
                                                                   button.setText("task" + value.get("class_name") + " " + value.get("title"));
-                                                                  button.setBackgroundColor(context.getResources().getColor(R.color.light_red));
+                                                                  v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                   view.setText("deadline in : " +  Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                               }else{
                                                                   Button button = (Button) v.getChildAt(0);

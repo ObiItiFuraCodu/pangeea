@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        TextView welcome_back = findViewById(R.id.welcome_back);
-        welcome_back.setText(getResources().getString(R.string.welcome_back) + " " + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
+
+
 
 
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
 
-        backend1.import_hours(findViewById(R.id.liner3));
+        backend1.import_hours(findViewById(R.id.liner3),findViewById(R.id.welcome_back));
         backend2.import_tasks(findViewById(R.id.liner2));
         backend3.import_tests(findViewById(R.id.liner1));
 

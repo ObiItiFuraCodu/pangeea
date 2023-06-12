@@ -187,14 +187,14 @@ public class TestBackend extends DatabaseConnector {
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test " + value.get("class_name") + " " + value.get("title"));
-                                                                      button.setBackgroundColor(context.getResources().getColor(R.color.light_red));
+                                                                      v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                       view.setText("active now");
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test "+ value.get("class_name") + " " + value.get("title"));
                                                                       view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
-                                                                      button.setBackgroundColor(context.getResources().getColor(R.color.light_red));
+                                                                      v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                   }
                                                               }else{
                                                                   if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
