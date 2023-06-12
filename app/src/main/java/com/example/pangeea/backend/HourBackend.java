@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi;
 import com.example.pangeea.CustomElements.CustomButtonAnswer;
 import com.example.pangeea.CustomElements.CustomButtonLesson;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.content.Lesson_list;
@@ -45,6 +46,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class HourBackend extends DatabaseConnector {
@@ -60,7 +62,7 @@ public class HourBackend extends DatabaseConnector {
         this.context = context;
 
     }
-    public void import_hours(LinearLayout layout){
+    public void import_hours(LinearLayout layout,TextView welcome_back){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
 
@@ -85,14 +87,17 @@ public class HourBackend extends DatabaseConnector {
                                               String user_category = documentSnapshot.get("user_category",String.class);
                                               // Log.i("ATENTIE FRAIERE : ",user_highschool.replaceAll("[^A-Za-z0-9]", ""));
                                               // Log.i("ATENTIE FRAIERE : ",user_class.replaceAll("[^A-Za-z0-9]", ""));
+                                              welcome_back.setText(context.getResources().getString(R.string.welcome_back) + " " + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("hourss").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
+                                                  layout.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+                                                  welcome_back.setTextColor(context.getResources().getColor(R.color.dark_red));
+
 
                                               }else{
                                                   ref = dbb.getReference("hourss").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
 
                                               }
-                                              //BAZA DE DATE REALTIME DATABASE FUNCTIONEAZA IN TIMP REAL ACEASTA REACTIONAND LA SCHIMBARI IN INTERIORUL ACESTEIA.IN URMA UNEI SCHIMBARI IN BAZA DE DATE,O ACTIUNE SETATA DE PROGRAMATOR POATE AVEA LOC
                                               ref.addValueEventListener(new ValueEventListener() {
                                                   private Object String;
 
@@ -117,14 +122,16 @@ public class HourBackend extends DatabaseConnector {
                                                                   if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
+                                                                      v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                       button.setText("hour " + value.get("class_name"));
+
                                                                       view.setText("active now");
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("hour "+ value.get("class_name"));
                                                                       view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
-
+                                                                      v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                   }
 
                                                               }else{
@@ -283,6 +290,13 @@ public class HourBackend extends DatabaseConnector {
     public void retrieve_hour_data_prof(String hour_milis, ListView pupil_present, ListView lessons_sent, ListView question, Button close_presence,TextView class_name){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        pupil_present.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+        lessons_sent.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+        question.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+        close_presence.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
+
+
+
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

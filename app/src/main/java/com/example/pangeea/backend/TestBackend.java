@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.CustomElements.CustomButtonLesson;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_lesson;
 import com.example.pangeea.test.Test_result_info;
 import com.example.pangeea.ai.AI_generator;
@@ -153,6 +154,7 @@ public class TestBackend extends DatabaseConnector {
                                               // Log.i("ATENTIE FRAIERE : ",user_class.replaceAll("[^A-Za-z0-9]", ""));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("tests").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
+                                                  layout.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
 
                                               }else{
                                                   ref = dbb.getReference("tests").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
@@ -185,13 +187,14 @@ public class TestBackend extends DatabaseConnector {
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test " + value.get("class_name") + " " + value.get("title"));
+                                                                      v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                       view.setText("active now");
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test "+ value.get("class_name") + " " + value.get("title"));
                                                                       view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
-
+                                                                      v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                   }
                                                               }else{
                                                                   if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
@@ -299,6 +302,8 @@ public class TestBackend extends DatabaseConnector {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         FileDownloader downloader = new FileDownloader();
+        support_lessons.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+        submissions.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

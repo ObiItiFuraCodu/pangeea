@@ -58,7 +58,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             Button button = new Button(context);
-                                            button.setBackgroundColor(context.getResources().getColor(R.color.binaryblue));
+                                            button.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                             button.setElevation(10f);
                                             button.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
                                             button.setOnClickListener(new View.OnClickListener() {
