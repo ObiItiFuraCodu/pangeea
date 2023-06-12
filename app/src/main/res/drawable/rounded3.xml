@@ -6,7 +6,7 @@
         android:color="#FFFFFF"
         android:elevation="10dp"
         />
-    <solid android:color="@color/white"/>
+    <solid android:color="#a1c5ff"/>
     <corners android:radius="35dp"/>
 
 </shape>
