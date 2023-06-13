@@ -53,13 +53,13 @@
             android:fontFamily="@font/poppins_extrabold"
             android:text="@string/welcome_back"
             android:textColor="@color/black"
-            android:textSize="31dp"
+            android:textSize="46dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline212"
             app:layout_constraintEnd_toStartOf="@+id/guideline211"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
             app:layout_constraintTop_toTopOf="@+id/guideline208"
-            app:layout_constraintVertical_bias="0.058" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ScrollView
             android:id="@+id/scrollView2"
@@ -228,15 +228,15 @@
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:text="MR. PULANCURESCU"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline195"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
             app:layout_constraintTop_toTopOf="@+id/welcome_back"
-            app:layout_constraintVertical_bias="0.616" />
+            app:layout_constraintVertical_bias="0.883" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline211"
@@ -250,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="104dp" />
+            app:layout_constraintGuide_begin="139dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
