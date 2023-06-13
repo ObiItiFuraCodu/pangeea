@@ -138,6 +138,23 @@ public class CatalogueBackend extends DatabaseConnector{
 
 
     }
+    public void increase_pupil_score(String name,int score,String test_name,Boolean improvement_test){
+    store.collection("users").document(name)
+            .get()
+            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    HashMap<String,Object> user_info = (HashMap<String, Object>) documentSnapshot.getData();
+                  String RP = documentSnapshot.getString("RP");
+                  int rp = Integer.parseInt(RP);
+                  rp = rp + score;
+                  RP = Integer.toString(rp);
+                  user_info.put("RP",RP);
+                  store.collection("users").document(name)
+                          .set(user_info);
+                }
+            });
+    }
     public void retrieve_materies(Spinner spinner){
         FirebaseUser user = auth.getCurrentUser();
         store.collection("users").document(user.getDisplayName())
@@ -180,13 +197,15 @@ public class CatalogueBackend extends DatabaseConnector{
                 });
 
     }
-    public void upload_mark(String class_marked, String pupil, String mark,String date){
+    public void upload_mark(String class_marked, String pupil, String mark,String date,String test_name){
         FirebaseUser user = auth.getCurrentUser();
 
         Map<String,String> map = new HashMap<>();
         map.put("mark",mark);
         Map<String,String> test = new HashMap<>();
         test.put("didldo","blblblb");
+        increase_pupil_score(pupil,20,test_name,false);
+        //TODO : ADD POINTS AND DETAILS IN A POINT DETAILS COLLECTION FOR RANKING HISTORY THAT INCLUDES THE TITLE,POINTS ADDED AND THE IMPROVEMENT TEST
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
