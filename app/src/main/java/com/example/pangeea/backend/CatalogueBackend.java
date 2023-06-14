@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pangeea.CustomElements.CustomCardElement;
+import com.example.pangeea.CustomElements.CustomPupilCard;
 import com.example.pangeea.R;
 import com.example.pangeea.catalogue.Materie_info;
 import com.example.pangeea.catalogue.Pupil_info;
@@ -138,7 +140,7 @@ public class CatalogueBackend extends DatabaseConnector{
 
 
     }
-    public void increase_pupil_score(String name,int score,String test_name,Boolean improvement_test){
+    public void increase_pupil_score(String name,int score){
     store.collection("users").document(name)
             .get()
             .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -197,15 +199,39 @@ public class CatalogueBackend extends DatabaseConnector{
                 });
 
     }
-    public void upload_mark(String class_marked, String pupil, String mark,String date,String test_name){
+    public void upload_mark(String class_marked, String pupil, String mark,String date,String test_name,boolean improvement_test){
         FirebaseUser user = auth.getCurrentUser();
 
         Map<String,String> map = new HashMap<>();
         map.put("mark",mark);
         Map<String,String> test = new HashMap<>();
-        test.put("didldo","blblblb");
-        increase_pupil_score(pupil,20,test_name,false);
-        //TODO : ADD POINTS AND DETAILS IN A POINT DETAILS COLLECTION FOR RANKING HISTORY THAT INCLUDES THE TITLE,POINTS ADDED AND THE IMPROVEMENT TEST
+        test.put("BLBLBLBL","blblblb");
+        increase_pupil_score(pupil,20);
+        HashMap<String,String> details = new HashMap<>();
+        details.put("name",test_name);
+        details.put("mark",mark);
+        details.put("points","20");
+        if(test_name != null){
+            if(improvement_test){
+                store.collection("users").document(pupil).collection("ranking_history").document(test_name)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Map<String, Object> test_received_details = documentSnapshot.getData();
+                                test_received_details.put("improvement_name",test_name +"_improvement");
+                                test_received_details.put("improvement_points","20");
+                                increase_pupil_score(pupil,20);
+                                store.collection("users").document(pupil).collection("ranking_history").document(test_name)
+                                        .set(test_received_details);
+                            }
+                        });
+            }else{
+                store.collection("users").document(pupil).collection("ranking_history").document(test_name)
+                        .set(details);
+            }
+
+        }
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -243,9 +269,32 @@ public class CatalogueBackend extends DatabaseConnector{
                                         }
                                         rp.setTextColor(context.getResources().getColor(R.color.dark_red));
                                         HashMap<String,Object> ranking_history = documentSnapshot.get("ranking_history",HashMap.class);
-                                        if(ranking_history != null){
-                                            //codare maxima
-                                        }
+                                        store.collection("users").document(pupil_name).collection("ranking_history")
+                                                        .get()
+                                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                                    @Override
+                                                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                                        for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){
+                                                                            HashMap<String,Object> test_details = (HashMap<String, Object>) snapshot.getData();
+                                                                            CustomPupilCard card = new CustomPupilCard(context);
+                                                                            LinearLayout base_layout = (LinearLayout) card.getChildAt(0);
+                                                                            TextView test_name_view = (TextView) base_layout.getChildAt(0);
+                                                                            CustomCardElement first_test = (CustomCardElement) base_layout.getChildAt(1);
+                                                                            CustomCardElement improvement_test = (CustomCardElement) base_layout.getChildAt(2);
+                                                                            test_name_view.setText((String) test_details.get("name"));
+                                                                            LinearLayout first_test_base_layout = (LinearLayout) first_test.getChildAt(0);
+                                                                            TextView first_test_view_name = (TextView) first_test_base_layout.getChildAt(0);
+                                                                            TextView first_test_view_points = (TextView) first_test_base_layout.getChildAt(1);
+                                                                            first_test_view_name.setText("First test mark " + test_details.get("mark"));
+                                                                            first_test_view_points.setText("+" + test_details.get("points"));
+                                                                            if(test_details.get("improvement_test") != null){
+                                                                                //programare nebuna
+                                                                            }
+                                                                            rank_history.addView(card);
+                                                                        }
+                                                                    }
+                                                                });
+
                                         rank.setText("mancator de cur maxim");
                                     }
                                 });

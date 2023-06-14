@@ -36,12 +36,12 @@ public class CustomPupilCard extends CardView {
         gradientDrawable2.setShape(GradientDrawable.RECTANGLE);
         float cornerRadiusInPixels2 = 20f;
         gradientDrawable2.setCornerRadius(cornerRadiusInPixels2);
-        gradientDrawable2.setColor(getResources().getColor(R.color.binaryblue));
+        gradientDrawable2.setColor(getResources().getColor(R.color.light_red));
 
         setBackground(gradientDrawable2);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(16, 16, 16, 16);

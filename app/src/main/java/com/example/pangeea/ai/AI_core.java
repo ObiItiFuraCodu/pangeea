@@ -42,7 +42,7 @@ import java.util.Random;
 
 public class AI_core {
     private String apiUrl = "https://api.openai.com/v1/completions";
-    private String accessToken = "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";
+    private String accessToken = "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";
     String result = "";
     Interpreter tflite;
    // HashMap<String,Integer> ascii = new HashMap<>();
