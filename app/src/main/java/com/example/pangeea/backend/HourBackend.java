@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,7 +63,7 @@ public class HourBackend extends DatabaseConnector {
         this.context = context;
 
     }
-    public void import_hours(LinearLayout layout,TextView welcome_back){
+    public void import_hours(LinearLayout layout, TextView welcome_back, ScrollView hour_view){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
 
@@ -90,7 +91,7 @@ public class HourBackend extends DatabaseConnector {
                                               welcome_back.setText(context.getResources().getString(R.string.welcome_back) + " " + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("hourss").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
-                                                  layout.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
+                                                  hour_view.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
                                                   welcome_back.setTextColor(context.getResources().getColor(R.color.dark_red));
 
 

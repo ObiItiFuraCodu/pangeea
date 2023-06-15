@@ -141,9 +141,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
 
-        backend1.import_hours(findViewById(R.id.liner3),findViewById(R.id.welcome_back));
-        backend2.import_tasks(findViewById(R.id.liner2));
-        backend3.import_tests(findViewById(R.id.liner1));
+        backend1.import_hours(findViewById(R.id.liner3),findViewById(R.id.welcome_back),findViewById(R.id.scrollView1));
+        backend2.import_tasks(findViewById(R.id.liner2),findViewById(R.id.scrollView2));
+        backend3.import_tests(findViewById(R.id.liner1),findViewById(R.id.scrollView3));
 
     }
 
