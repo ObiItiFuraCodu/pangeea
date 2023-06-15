@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.pangeea.Improvement_list;
 import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,6 +47,8 @@ public class Improve_performance extends AppCompatActivity {
         AI_core core = new AI_core(Improve_performance.this);
         LinearLayout generated = findViewById(R.id.lessons_generated);
         LinearLayout sorted = findViewById(R.id.lessons_sorted);
+        List<Object> improvement_list = new ArrayList<>();
+        TextView improvement_test = findViewById(R.id.improvement_test_button);
         store.collection("users").document(auth.getCurrentUser().getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -112,8 +116,20 @@ public class Improve_performance extends AppCompatActivity {
                                                    }
                                                });
                                                generated.addView(button);
+                                           //GENERATED END
+                                           //RETRIEVAL BEGIN
+                                               HashMap<String,Object> test_details = new HashMap<>();
+                                               test_details.put("title",title);
+                                               List<Object> question_list = new ArrayList<>();
+                                               List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) snapshot.get("answers");
+                                               for(HashMap<String,Object> answer : answer_list){
+                                                   if(answer.get("answer").equals("wrong")){
+                                                       question_list.add(answer.get("actual_answer"));
+                                                   }
 
-
+                                               }
+                                               test_details.put("question_list",question_list);
+                                               improvement_list.add(test_details);
 
                                            }
 
@@ -122,6 +138,16 @@ public class Improve_performance extends AppCompatActivity {
                                 });
                     }
                 });
+        improvement_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), Improvement_list.class);
+                i.putExtra("improvement_list", (Serializable) improvement_list);
+                startActivity(i);
+                finish();
+
+            }
+        });
 
     }
 }
