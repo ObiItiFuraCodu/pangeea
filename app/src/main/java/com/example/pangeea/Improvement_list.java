@@ -2,11 +2,13 @@ package com.example.pangeea;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,6 +28,10 @@ public class Improvement_list extends AppCompatActivity {
             title_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(),Improvement_test_viewer.class);
+                    i.putExtra("question_list",(ArrayList)improvement_test.get("question_list"));
+                    startActivity(i);
+                    finish();
 
                 }
             });
