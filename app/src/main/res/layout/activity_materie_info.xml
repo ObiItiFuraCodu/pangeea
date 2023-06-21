@@ -7,23 +7,153 @@
     android:layout_height="match_parent"
     tools:context=".catalogue.Materie_info">
 
-    <ListView
+   <!-- <ListView
         android:id="@+id/mark_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline141"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintStart_toStartOf="@+id/guideline144"
-        app:layout_constraintTop_toTopOf="@+id/guideline140" />
+        app:layout_constraintTop_toTopOf="@+id/guideline140" /> -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline141"
+        app:layout_constraintEnd_toStartOf="@+id/guideline145"
+        app:layout_constraintStart_toStartOf="@+id/guideline144"
+        app:layout_constraintTop_toTopOf="@+id/guideline140"
+        android:background="@drawable/rounded3">
 
-    <ListView
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline217"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="40dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline219"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="30dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline270"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="15dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline266"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="30dp" />
+
+        <ListView
+            android:id="@+id/mark_list"
+            android:layout_width="0dp"
+            android:layout_height="359dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline266"
+            app:layout_constraintStart_toStartOf="@+id/guideline219"
+            app:layout_constraintTop_toTopOf="@+id/guideline217">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="113dp"
+            android:layout_height="27dp"
+            android:fontFamily="@font/poppins_extrabold"
+            android:text="Mark List"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline217"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline270"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.461" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteY="146dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline137"
+        app:layout_constraintEnd_toStartOf="@+id/guideline145"
+        app:layout_constraintStart_toStartOf="@+id/guideline144"
+        app:layout_constraintTop_toTopOf="@+id/guideline136"
+        android:background="@drawable/rounded3">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline218"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="40dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline271"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="15dp" />
+
+        <ListView
+            android:id="@+id/absence_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="697dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline267"
+            app:layout_constraintStart_toStartOf="@+id/guideline221"
+            app:layout_constraintTop_toTopOf="@+id/guideline218"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="200dp"
+            android:layout_height="27dp"
+            android:fontFamily="@font/poppins_extrabold"
+            android:text="Absence List"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline218"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline271"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.461" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline221"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="30dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline267"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="30dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+   <!-- <ListView
         android:id="@+id/absence_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline137"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintStart_toStartOf="@+id/guideline144"
-        app:layout_constraintTop_toTopOf="@+id/guideline136" />
+        app:layout_constraintTop_toTopOf="@+id/guideline136" /> -->
 
     <TextView
         android:id="@+id/improve_performance"
@@ -55,7 +185,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.44049248"
+        app:layout_constraintGuide_percent="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,14 +193,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.51846784" />
+        app:layout_constraintGuide_percent="0.52" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline141"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.84" />
+        app:layout_constraintGuide_percent="0.88" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline142"
@@ -99,7 +229,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02"
+        app:layout_constraintGuide_percent="0.05"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -128,9 +258,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08344733" />
+        app:layout_constraintGuide_percent="0.11" />
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/absences_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -141,9 +271,9 @@
         app:layout_constraintBottom_toTopOf="@+id/absence_list"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintStart_toStartOf="@+id/guideline144"
-        app:layout_constraintTop_toTopOf="@+id/guideline147" />
+        app:layout_constraintTop_toTopOf="@+id/guideline147" /> -->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/marks_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -154,5 +284,5 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline140"
         app:layout_constraintEnd_toStartOf="@+id/guideline145"
         app:layout_constraintStart_toStartOf="@+id/guideline144"
-        app:layout_constraintTop_toTopOf="@+id/guideline137" />
+        app:layout_constraintTop_toTopOf="@+id/guideline137" /> -->
 </androidx.constraintlayout.widget.ConstraintLayout>
