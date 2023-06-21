@@ -1,6 +1,7 @@
 package com.example.pangeea.ai;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pangeea.CustomElements.CustomButtonLesson;
 import com.example.pangeea.CustomElements.CustomButtonView;
+import com.example.pangeea.Improvement_test_viewer;
 import com.example.pangeea.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -49,7 +51,7 @@ public class AI_core {
 
     List<String> modified_ascii =Arrays.asList(new String[]{"e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"}) ;
     static char[] ascii = "etaoinshrdlcumwfgypbvkjxqz".toCharArray();
-
+    String[] ABC = {"A","B","C"};
     static int countDigit(int n)
     {
         if (n/10 == 0)
@@ -353,7 +355,121 @@ public class AI_core {
             e.printStackTrace();
         }
     }*/
+   public void AI_complete_test(String title,ArrayList question_list,int question_index,int answer_no,boolean main,boolean valid,String question_unmain){
+       JSONObject requestBody = new JSONObject();
+       //   final String[] output = {""};
+       if(question_index > 10){
+           Intent i = new Intent(context, Improvement_test_viewer.class);
+           i.putExtra("question_list",(ArrayList)question_list);
+           i.putExtra("title",title);
+           context.startActivity(i);
 
+       }else{
+           try {
+               if(main){
+                   requestBody.put("model", "text-davinci-003");
+                   requestBody.put("prompt", "O intrebare legata de lectia " + title + " este :");
+                   requestBody.put("max_tokens", 1000);
+                   requestBody.put("temperature", 1.0);
+                   requestBody.put("top_p", 1.0);
+                   requestBody.put("stop",null);
+                   requestBody.put("frequency_penalty", 0.0);
+                   requestBody.put("presence_penalty", 0.0);
+               }else{
+                   if(valid){
+                       requestBody.put("model", "text-davinci-003");
+                       requestBody.put("prompt", "un raspuns corect la intrebarea " + question_unmain + " este");
+                       requestBody.put("max_tokens", 1000);
+                       requestBody.put("temperature", 1.0);
+                       requestBody.put("top_p", 1.0);
+                       requestBody.put("stop",null);
+                       requestBody.put("frequency_penalty", 0.0);
+                       requestBody.put("presence_penalty", 0.0);
+                   }else{
+                       requestBody.put("model", "text-davinci-003");
+                       requestBody.put("prompt", "un raspuns gresit la intrebarea " + question_unmain + " este");
+                       requestBody.put("max_tokens", 1000);
+                       requestBody.put("temperature", 1.0);
+                       requestBody.put("top_p", 1.0);
+                       requestBody.put("stop",null);
+                       requestBody.put("frequency_penalty", 0.0);
+                       requestBody.put("presence_penalty", 0.0);
+                   }
+
+               }
+
+
+           } catch (JSONException e) {
+               e.printStackTrace();
+           }
+           JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiUrl, requestBody, new Response.Listener < JSONObject > () {
+               @Override
+               public void onResponse(JSONObject response) {
+                   try {
+                       JSONArray choicesArray = response.getJSONArray("choices");
+                       JSONObject choiceObject = choicesArray.getJSONObject(0);
+                       String text = choiceObject.getString("text");
+                       if(main){
+                           HashMap<String,Object> question = new HashMap<>();
+                           question.put("prompt",text);
+                           question.put("type","A/B/C");
+                           question_list.add(question_index,question);
+                           AI_complete_test(title,question_list,question_index,1,false,getRandomBoolean(),text);
+                       }else{
+                           HashMap<String,Object> main_question = (HashMap<String, Object>) question_list.get(question_index);
+                           HashMap<String,Object> variants;
+                           if(answer_no == 1){
+                               variants = new HashMap<>();
+                           }else{
+                               variants = (HashMap<String, Object>) main_question.get("variants");
+                           }
+                           variants.put(ABC[answer_no-1],text);
+                           if(valid){
+                               variants.put(ABC[answer_no-1] + "_valid","valid");
+                           }else{
+                               variants.put(ABC[answer_no-1] + "_valid","invalid");
+                           }
+                           if(answer_no < 3){
+                               AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
+
+                           }else{
+                               AI_complete_test(title,question_list,question_index+1,1,true,false,null);
+
+                           }
+
+                       }
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
+               }
+           }, new Response.ErrorListener() {
+               @Override
+               public void onErrorResponse(VolleyError error) {
+                   Log.e("API Error", error.toString());
+               }
+           }) {
+               @Override
+               public Map< String, String > getHeaders() throws AuthFailureError {
+                   Map < String, String > headers = new HashMap< >();
+                   headers.put("Content-Type", "application/json");
+                   headers.put("Authorization", "Bearer " + accessToken);
+                   return headers;
+               }
+               @Override
+               protected Response < JSONObject > parseNetworkResponse(NetworkResponse response) {
+                   return super.parseNetworkResponse(response);
+               }
+           };
+           int timeoutMs = 250000; // 25 seconds timeout
+           RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+           request.setRetryPolicy(policy);
+
+           RequestQueue queue = Volley.newRequestQueue(context);
+           queue.add(request);
+       }
+
+
+   }
     private boolean filtering_system_nonai(String course_1,String course_2){
         int nr = 0;
         if(course_1 == null || course_2 == null){

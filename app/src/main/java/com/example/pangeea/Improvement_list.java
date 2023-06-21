@@ -28,8 +28,9 @@ public class Improvement_list extends AppCompatActivity {
             title_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(),Improvement_test_viewer.class);
+                    Intent i = new Intent(v.getContext(),Waiting_room.class);
                     i.putExtra("question_list",(ArrayList)improvement_test.get("question_list"));
+                    i.putExtra("title",title);
                     startActivity(i);
                     finish();
 
