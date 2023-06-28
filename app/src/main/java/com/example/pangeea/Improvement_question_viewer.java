@@ -163,6 +163,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
                 Intent i = new Intent(Improvement_question_viewer.this, Improvement_test_viewer.class);
                 i.putExtra("answer_list", (Serializable) answer_list);
                 i.putExtra("title",e.getString("title"));
+                i.putExtra("question_list", (Serializable) e.get("question_list"));
                 startActivity(i);
                 finish();
             }

@@ -32,7 +32,7 @@ public class Improvement_list extends AppCompatActivity {
                     i.putExtra("question_list",(ArrayList)improvement_test.get("question_list"));
                     i.putExtra("title",title);
                     startActivity(i);
-                    finish();
+                   /// finish();
 
                 }
             });

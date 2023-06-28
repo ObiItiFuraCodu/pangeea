@@ -418,24 +418,38 @@ public class AI_core {
                        }else{
                            HashMap<String,Object> main_question = (HashMap<String, Object>) question_list.get(question_index);
                            HashMap<String,Object> variants;
-                           if(answer_no == 1){
+                           if((HashMap<String, Object>) main_question.get("variants") == null){
                                variants = new HashMap<>();
+                               variants.put(ABC[answer_no-1],text);
+                               if(valid){
+                                   variants.put(ABC[answer_no-1] + "_valid","valid");
+                               }else{
+                                   variants.put(ABC[answer_no-1] + "_valid","invalid");
+                               }
+                               if(answer_no < 3){
+                                   AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
+
+                               }else{
+                                   AI_complete_test(title,question_list,question_index+1,1,true,false,null);
+
+                               }
                            }else{
                                variants = (HashMap<String, Object>) main_question.get("variants");
-                           }
-                           variants.put(ABC[answer_no-1],text);
-                           if(valid){
-                               variants.put(ABC[answer_no-1] + "_valid","valid");
-                           }else{
-                               variants.put(ABC[answer_no-1] + "_valid","invalid");
-                           }
-                           if(answer_no < 3){
-                               AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
+                               variants.put(ABC[answer_no-1],text);
+                               if(valid){
+                                   variants.put(ABC[answer_no-1] + "_valid","valid");
+                               }else{
+                                   variants.put(ABC[answer_no-1] + "_valid","invalid");
+                               }
+                               if(answer_no < 3){
+                                   AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
 
-                           }else{
-                               AI_complete_test(title,question_list,question_index+1,1,true,false,null);
+                               }else{
+                                   AI_complete_test(title,question_list,question_index+1,1,true,false,null);
 
+                               }
                            }
+
 
                        }
                    } catch (JSONException e) {

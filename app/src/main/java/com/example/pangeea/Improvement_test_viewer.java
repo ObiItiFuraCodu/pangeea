@@ -48,11 +48,18 @@ public class Improvement_test_viewer extends AppCompatActivity {
                    @Override
                    public void onClick(View v) {
                        Intent i = new Intent(v.getContext(), Improvement_question_viewer.class);
+                       i.putExtra("question",question);
                        i.putExtra("index", finalQuestion_counter);
                        i.putExtra("prompt",(String) question.get("prompt"));
                        i.putExtra("title",e.getString("title"));
+                       i.putExtra("question_list", (Serializable) e.get("question_list"));
                        if(e.get("answer_list") == null){
-                           i.putExtra("answer_list",new ArrayList<>());
+                           ArrayList<Object> answer_list = new ArrayList<>();
+                           for (int counter = 0; counter < 12; counter++) {
+                               answer_list.add(new HashMap<String,Object>());
+
+                           }
+                           i.putExtra("answer_list",answer_list);
                        }else{
                            i.putExtra("answer_list", (Serializable) e.get("answer_list"));
                        }
