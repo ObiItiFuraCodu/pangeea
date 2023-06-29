@@ -426,10 +426,13 @@ public class AI_core {
                                }else{
                                    variants.put(ABC[answer_no-1] + "_valid","invalid");
                                }
+
                                if(answer_no < 3){
+                                   main_question.put("variants",variants);
                                    AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
 
                                }else{
+                                   main_question.put("variants",variants);
                                    AI_complete_test(title,question_list,question_index+1,1,true,false,null);
 
                                }
@@ -442,9 +445,11 @@ public class AI_core {
                                    variants.put(ABC[answer_no-1] + "_valid","invalid");
                                }
                                if(answer_no < 3){
+                                   main_question.put("variants",variants);
                                    AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
 
                                }else{
+                                   main_question.put("variants",variants);
                                    AI_complete_test(title,question_list,question_index+1,1,true,false,null);
 
                                }

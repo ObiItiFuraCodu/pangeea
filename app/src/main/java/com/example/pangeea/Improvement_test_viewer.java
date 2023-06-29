@@ -43,6 +43,7 @@ public class Improvement_test_viewer extends AppCompatActivity {
                Button button = new Button(this);
                button.setText((String) question.get("prompt"));
 
+
             int finalQuestion_counter = question_counter;
             button.setOnClickListener(new View.OnClickListener() {
                    @Override
