@@ -707,7 +707,7 @@ public class TestBackend extends DatabaseConnector {
                                                                                     .setValue((int)((float)correct_q/total_questions*10));
                                                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                                                     .setValue((int)((float)correct_q/total_questions*10));
-                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()),title,false);
+                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()),title,false,null);
                                                                             q_map.put("mark",final_mark);
                                                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
                                                                                     .set(q_map);
@@ -749,7 +749,7 @@ public class TestBackend extends DatabaseConnector {
                                                                             q_map.put("mark",final_mark);
                                                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)
                                                                                     .set(q_map);
-                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()),title,false);
+                                                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()),title,false,null);
 
                                                                             Intent i = new Intent(context, Test_result_info.class);
                                                                             i.putExtra("mark",String.valueOf(final_mark.get("mark")));
@@ -786,7 +786,7 @@ public class TestBackend extends DatabaseConnector {
                                                     .setValue((int)((float)correct_q/total_questions*10));
                                             database.getReference("tests").child((String)documentSnapshot.get("user_highschool")).child("classes").child(pupil_class).child(test_ms).child("submissions").child(pupil).child("final_mark")
                                                     .setValue((int)((float)correct_q/total_questions*10));
-                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()),title,false);
+                                            catalogue.upload_mark(pupil_class,pupil,Integer.toString((int)((float)correct_q/total_questions*10)),new SimpleDateFormat("dd-MM-yyyy").format(new Date()),title,false,null);
 
                                             q_map.put("mark",final_mark);
                                             store.collection("highschools").document(documentSnapshot.getString("user_highschool")).collection("classes").document(pupil_class).collection("pupils").document(pupil).collection("tests").document(test_ms)

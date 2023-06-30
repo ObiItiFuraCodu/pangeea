@@ -124,7 +124,9 @@ public class Improve_performance extends AppCompatActivity {
                                                List<HashMap<String,Object>> answer_list = (List<HashMap<String, Object>>) snapshot.get("answers");
                                                for(HashMap<String,Object> answer : answer_list){
                                                    if(answer.get("answer").equals("wrong")){
-                                                       question_list.add(answer.get("actual_answer"));
+                                                       HashMap<String,Object> actual_answer = (HashMap<String, Object>) answer.get("actual_answer");
+                                                       actual_answer.remove("answer");
+                                                       question_list.add(actual_answer);
                                                    }
 
                                                }

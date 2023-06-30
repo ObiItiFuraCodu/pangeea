@@ -199,7 +199,7 @@ public class CatalogueBackend extends DatabaseConnector{
                 });
 
     }
-    public void upload_mark(String class_marked, String pupil, String mark,String date,String test_name,boolean improvement_test){
+    public void upload_mark(String class_marked, String pupil, String mark,String date,String test_name,boolean improvement_test,String subject){
         FirebaseUser user = auth.getCurrentUser();
 
         Map<String,String> map = new HashMap<>();
@@ -237,12 +237,18 @@ public class CatalogueBackend extends DatabaseConnector{
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks")
-                                .document(documentSnapshot.get("user_subject",String.class)).collection("marks").document(date)
-                                .set(map);
-                        store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks")
-                                .document(documentSnapshot.get("user_subject",String.class))
-                                .set(test);
+                        if(documentSnapshot.get("user_category").equals("1")){
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document(documentSnapshot.get("user_subject",String.class)).collection("marks").document(date)
+                                    .set(map);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document(documentSnapshot.get("user_subject",String.class))
+                                    .set(test);
+                        }else{
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name).collection("marks").document(date)
+                                    .set(map);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name)
+                                    .set(test);
+                        }
+
 
                     }
                 });

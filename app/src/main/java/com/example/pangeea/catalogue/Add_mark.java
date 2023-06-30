@@ -45,7 +45,7 @@ public class Add_mark extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mark.getText().toString().contains("[a-zA-Z]") == false && datestring != null){
-                    connector.upload_mark(e.getString("class"),e.getString("name"),mark.getText().toString(),datestring,null,false);
+                    connector.upload_mark(e.getString("class"),e.getString("name"),mark.getText().toString(),datestring,null,false,null);
                     startActivity(new Intent(Add_mark.this, MainActivity.class));
                     finish();
 

@@ -82,9 +82,12 @@ public class Improvement_test_viewer extends AppCompatActivity {
                     }
                     for(HashMap<String,Object> answer : answer_list){
                         String result = (String) answer.get("answer");
-                        if(result.equals("correct")){
-                            mark++;
+                        if(result != null){
+                            if(result.equals("correct")){
+                                mark++;
+                            }
                         }
+
 
                     }
                     HashMap<String,Object> improvement_map = new HashMap<>();
@@ -98,7 +101,7 @@ public class Improvement_test_viewer extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                     String class_marked = documentSnapshot.getString("user_class");
-                                                    backend.upload_mark(class_marked,FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),Integer.toString(finalMark),"nu",e.getString("title"),true);
+                                                    backend.upload_mark(class_marked,FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),Integer.toString(finalMark),"nu",e.getString("title"),true,e.getString("subject"));
                                                 }
                                             });
 
