@@ -5,7 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -29,6 +29,8 @@ public class CustomPupilButton extends CardView {
     }
 
     private void init() {
+        RelativeLayout rootLayout = new RelativeLayout(getContext());
+        addView(rootLayout);
 
         GradientDrawable gradientDrawable2 = new GradientDrawable();
         gradientDrawable2.setShape(GradientDrawable.RECTANGLE);
@@ -39,27 +41,30 @@ public class CustomPupilButton extends CardView {
 
         setBackground(gradientDrawable2);
 
-
-        Button button = new Button(getContext());
-        button.setText("Name");
+        TextView text = new TextView(getContext());
+        text.setText("NAME");
+        text.setTextColor(getResources().getColor(R.color.white));
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
         gradientDrawable.setColor(getResources().getColor(R.color.white));
 
         float cornerRadiusInPixels = 20f;
         gradientDrawable.setCornerRadius(cornerRadiusInPixels);
-        button.setBackground(gradientDrawable);
-       // button.setElevation(10f);
-        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+
+        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
         );
-        buttonLayoutParams.setMargins(16, 16, 16, 0);
+        textParams.setMargins(16, 16, 16, 0);
+
         ImageView view = new ImageView(getContext());
-        view.setImageResource(R.drawable.ic_launcher_foreground);
-        addView(button,buttonLayoutParams);
-        addView(view);
+        view.setImageResource(R.drawable.rankhigh);
+        RelativeLayout.LayoutParams viewParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT
+        );
 
-
+        rootLayout.addView(text, textParams);
+        rootLayout.addView(view, viewParams);
     }
 }

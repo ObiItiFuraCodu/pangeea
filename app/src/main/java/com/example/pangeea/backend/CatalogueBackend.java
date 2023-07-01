@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.pangeea.CustomElements.CustomCardElement;
+import com.example.pangeea.CustomElements.CustomPupilButton;
 import com.example.pangeea.CustomElements.CustomPupilCard;
 import com.example.pangeea.R;
 import com.example.pangeea.catalogue.Materie_info;
@@ -59,15 +60,18 @@ public class CatalogueBackend extends DatabaseConnector{
                                     @Override
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
-                                            Button button = new Button(context);
+                                            CustomPupilButton button = new CustomPupilButton(context);
+                                            LinearLayout rootlayout = (LinearLayout) button.getChildAt(0);
+                                            TextView view = (TextView) rootlayout.getChildAt(0);
+
                                             button.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                             button.setElevation(10f);
-                                            button.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
+                                            view.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
                                             button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
                                                     Intent i = new Intent(context, Pupil_info.class);
-                                                    i.putExtra("pupil_name",button.getText().toString());
+                                                    i.putExtra("pupil_name",view.getText().toString());
                                                     i.putExtra("pupil_class",class_selected);
                                                     context.startActivity(i);
                                                 }
