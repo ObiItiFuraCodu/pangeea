@@ -165,7 +165,7 @@ public class NFC_detection extends AppCompatActivity {
 
                    // Toast.makeText(this, "read : " + str, Toast.LENGTH_SHORT).show();
 
-                } else { Log.i("MUIE","GHICI CE (NU MERE AYHAHAHHAHA)");
+                } else { //Log.i("MUIE","GHICI CE (NU MERE AYHAHAHHAHA)");
                     nfc_data[1] = "auth error";
 
                 }

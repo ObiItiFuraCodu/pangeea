@@ -417,7 +417,7 @@ public class HourBackend extends DatabaseConnector {
                                     questions.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            ask_question(hour_ms,(String)map.get("teacher"));
+                                            ask_question(hour_ms,(String)map.get("teacher"),questions);
                                         }
                                     });
                                     if((List<String>)map.get("files") != null){

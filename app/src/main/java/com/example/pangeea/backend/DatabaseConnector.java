@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.catalogue.Materie_info;
@@ -256,7 +257,7 @@ public class DatabaseConnector {
 
     }
 
-    public void ask_question(String hour_ms,String teacher){
+    public void ask_question(String hour_ms,String teacher,Button asked){
 
             FirebaseUser user = auth.getCurrentUser();
             List<String> filenames  = new ArrayList<>();
@@ -272,9 +273,54 @@ public class DatabaseConnector {
 
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
                                     .setValue("question");
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            asked.setBackgroundColor(context.getResources().getColor(R.color.green));
+                                            String text = (String) snapshot.getValue();
+                                            if(text.equals("ready to answer")){
+                                                asked.setText("You may speak");
+                                            }else{
+                                                //TODO:AI
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                         }
                     });
 
+
+    }
+    public void answer_question(String hour_ms,String pupil,boolean ai){
+        FirebaseUser user = auth.getCurrentUser();
+
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
+
+        DatabaseReference ref = dbb.getReference("hourss");
+        store.collection("users").document(user.getDisplayName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(ai){
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
+                                    .setValue("ready to answer");
+                        }else{
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
+                                    .setValue("ai");
+                        }
+
+
+                    }
+                });
 
     }
     public void submit_work(Uri work,Long hour_ms,String teacher){
