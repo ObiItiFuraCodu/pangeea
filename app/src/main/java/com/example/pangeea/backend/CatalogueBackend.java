@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -61,10 +62,10 @@ public class CatalogueBackend extends DatabaseConnector{
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             CustomPupilButton button = new CustomPupilButton(context);
-                                            LinearLayout rootlayout = (LinearLayout) button.getChildAt(0);
+                                            RelativeLayout rootlayout = (RelativeLayout) button.getChildAt(0);
                                             TextView view = (TextView) rootlayout.getChildAt(0);
 
-                                            button.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
+                                            rootlayout.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                             button.setElevation(10f);
                                             view.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
                                             button.setOnClickListener(new View.OnClickListener() {

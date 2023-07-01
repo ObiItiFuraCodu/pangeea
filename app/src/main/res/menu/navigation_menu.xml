@@ -22,5 +22,13 @@
     <item
         android:id="@+id/pair_device"
         android:title="Pair Station" />
+    <item
+        android:id="@+id/my_info"
+        android:title="My info"
+        />
+    <item
+        android:id="@+id/my_class"
+        android:title="My Class"
+        />
 
 </menu>

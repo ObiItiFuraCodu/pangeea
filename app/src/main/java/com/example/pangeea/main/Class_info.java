@@ -32,16 +32,19 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
         String classname = getIntent().getStringExtra("class_selected");
         TextView hour = findViewById(R.id.classname);
         hour.setText("Class name : " + classname);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view2);
-        navigationView.setNavigationItemSelectedListener(this);
+        if(getIntent().getStringExtra("pupil") != null){
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view2);
+            navigationView.setNavigationItemSelectedListener(this);
 
-        drawerLayout = findViewById(R.id.drawer_layout_class_info);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+            drawerLayout = findViewById(R.id.drawer_layout_class_info);
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        }
 
 
 

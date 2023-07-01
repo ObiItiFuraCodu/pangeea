@@ -21,6 +21,7 @@ import com.example.pangeea.R;
 import com.example.pangeea.backend.HourBackend;
 import com.example.pangeea.backend.TaskBackend;
 import com.example.pangeea.backend.TestBackend;
+import com.example.pangeea.catalogue.Pupil_info;
 import com.example.pangeea.other.NFC_detection;
 import com.example.pangeea.test.See_corrected_tests;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -108,6 +109,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 i.putExtra("Pair","ye");
                 startActivity(i);
             }
+            case R.id.my_class:{
+
+                store.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
+                                .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                Intent i = new Intent(MainActivity.this,Class_info.class);
+                                                i.putExtra("class_selected",documentSnapshot.get("user_class").toString());
+                                                i.putExtra("pupil","ye");
+                                                startActivity(i);
+                                                finish();
+
+                                            }
+                                        });
+
+
+            }
+            case R.id.my_info:{
+                store.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Intent i = new Intent(MainActivity.this, Pupil_info.class);
+                                i.putExtra("pupil_class",documentSnapshot.get("user_class").toString());
+                                i.putExtra("pupil_name",FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+                                i.putExtra("pupil","ye");
+                                startActivity(i);
+                                finish();
+
+                            }
+                        });
+
+            }
         }
 
         return true;
@@ -132,8 +169,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             navigationView.getMenu().findItem(R.id.pair_device).setVisible(false);
                             navigationView.getMenu().findItem(R.id.pair_device).setEnabled(false);
 
+
+
+
                         }else{
                             navigationView.getMenu().findItem(R.id.see_corrected_tests).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.my_info).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.my_info).setEnabled(false);
+                            navigationView.getMenu().findItem(R.id.my_class).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.my_class).setEnabled(false);
                             connector.retrieveclasses((Spinner) navigationView.getMenu().findItem(R.id.nav_add_hour).getActionView());
 
                         }

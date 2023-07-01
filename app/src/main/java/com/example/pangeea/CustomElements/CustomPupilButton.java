@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,8 +30,14 @@ public class CustomPupilButton extends CardView {
     }
 
     private void init() {
-        RelativeLayout rootLayout = new RelativeLayout(getContext());
-        addView(rootLayout);
+        RelativeLayout.LayoutParams rootParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        rootParams.setMargins(16, 16, 16, 16);
+        LinearLayout rootLayout = new LinearLayout(getContext());
+        rootLayout.setOrientation(LinearLayout.HORIZONTAL);
+        addView(rootLayout,rootParams);
 
         GradientDrawable gradientDrawable2 = new GradientDrawable();
         gradientDrawable2.setShape(GradientDrawable.RECTANGLE);
@@ -63,8 +70,11 @@ public class CustomPupilButton extends CardView {
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT
         );
-
+        RelativeLayout.LayoutParams viewParams2 = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
         rootLayout.addView(text, textParams);
-        rootLayout.addView(view, viewParams);
+        rootLayout.addView(view, viewParams2);
     }
 }
