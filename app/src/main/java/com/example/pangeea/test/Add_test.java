@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class Add_test extends AppCompatActivity {
     Calendar date;
     Long dateinmillis;
     TestBackend connector = new TestBackend(this);
-
+    Boolean is_public = false;
     Spinner test_questions;
     List<Uri> list = new ArrayList<>();
     List<String> stringlist = new ArrayList<>();
@@ -127,11 +128,22 @@ public class Add_test extends AppCompatActivity {
                 }else if(questions_list.isEmpty()){
                     Toast.makeText(Add_test.this,"You didnt add any questions",Toast.LENGTH_LONG).show();
                 }else{
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Make public")
+                            .setMessage("Do you want the lesson to be public?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    is_public = true;
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
                     if(e.get("hour_ms") != null){
-                        connector.add_test(e.getLong("hour_ms"), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list,details.getText().toString());
+                        connector.add_test(e.getLong("hour_ms"), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list,details.getText().toString(),is_public);
 
                     }else{
-                        connector.add_test(date.getTimeInMillis(), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list,details.getText().toString());
+                        connector.add_test(date.getTimeInMillis(), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list,details.getText().toString(),is_public);
                     }
                     startActivity(new Intent(Add_test.this, MainActivity.class));
 

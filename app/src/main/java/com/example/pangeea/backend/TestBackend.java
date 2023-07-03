@@ -21,6 +21,7 @@ import com.example.pangeea.CustomElements.CustomButtonLesson;
 
 import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_lesson;
+import com.example.pangeea.content.Lesson_viewer_nongenerated;
 import com.example.pangeea.test.Test_result_info;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.content.Lesson_list;
@@ -76,7 +77,7 @@ public class TestBackend extends DatabaseConnector {
         this.context = context;
 
     }
-    public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,Object>> questions,String content){
+    public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,Object>> questions,String content,boolean is_public){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tests");
@@ -104,7 +105,7 @@ public class TestBackend extends DatabaseConnector {
 
 
                         }
-                        save_file(filenames,class_name,title,content);
+                        save_file(filenames,class_name,title,content,is_public);
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",filenames);
@@ -441,27 +442,10 @@ public class TestBackend extends DatabaseConnector {
                                         lessons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                try{
-                                                    FirebaseStorage storage = FirebaseStorage.getInstance();
-                                                    StorageReference storageRef = storage.getReference();
-                                                    storageRef.child("lessons/" + lessons_list.get(position)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                        @Override
-                                                        public void onSuccess(Uri uri) {
-                                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                                            context.startActivity(intent);
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception exception) {
-                                                            // Handle any errors
-                                                        }
-                                                    });
-                                                }catch(Exception e){
-                                                    Intent i = new Intent(context, FileViewer.class);
-                                                    i.putExtra("lesson_name",lessons_list.get(position));
-                                                    context.startActivity(i);
-                                                }
-
+                                                Intent i = new Intent(context, Lesson_viewer_nongenerated.class);
+                                                i.putExtra("grade",(String)((String) documentSnapshot.get("user_class")).replaceAll("[^0-9.]", ""));
+                                                i.putExtra("title",map.get("title").toString());
+                                                context.startActivity(i);
                                             }
                                         });
                                     }

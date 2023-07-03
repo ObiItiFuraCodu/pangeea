@@ -105,7 +105,7 @@ public class AI_test_generator extends AppCompatActivity {
 
                 }
                 TestBackend backend = new TestBackend(AI_test_generator.this);
-                backend.add_test(e.getLong("hour_ms"),e.getString("class_name"),e.getString("details"),files,e.getString("title"),question_array);
+                backend.add_test(e.getLong("hour_ms"),e.getString("class_name"),e.getString("details"),files,e.getString("title"),question_array,null,false);
                 startActivity(new Intent(AI_test_generator.this, MainActivity.class));
                 finish();
 

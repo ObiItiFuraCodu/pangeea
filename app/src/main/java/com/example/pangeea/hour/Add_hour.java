@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class Add_hour extends AppCompatActivity {
     DatabaseConnector connector = new DatabaseConnector(this);
     List<Uri> list = new ArrayList<>();
     List<String> stringlist = new ArrayList<>();
-
+    Boolean is_public = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +50,9 @@ public class Add_hour extends AppCompatActivity {
         Bundle e = getIntent().getExtras();
         HourBackend backend1 = new HourBackend(this);
         TaskBackend backend2 = new TaskBackend(this);
+
         TextView addhour = findViewById(R.id.textView1);
-        final View dialogView = View.inflate(this, R.layout.activity_add_hour, null);
-        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
         EditText title = findViewById(R.id.lesson_title);
 
 
@@ -91,12 +92,23 @@ public class Add_hour extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Make public")
+                        .setMessage("Do you want the lesson to be public?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                is_public = true;
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
                 if(e.getString("hour/task").equals("hour")){
 
-                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString());
+                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
 
                 }else{
-                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString());
+                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
                 }
                 startActivity(new Intent(Add_hour.this, MainActivity.class));
                 finish();
