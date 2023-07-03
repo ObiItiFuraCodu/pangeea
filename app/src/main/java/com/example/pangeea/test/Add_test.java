@@ -1,7 +1,5 @@
 package com.example.pangeea.test;
 
-import static java.sql.Types.NULL;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,20 +13,17 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.backend.TestBackend;
 import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.R;
@@ -74,7 +69,7 @@ public class Add_test extends AppCompatActivity {
         Button add_test_question = findViewById(R.id.add_test_question);
 
         Button add = findViewById(R.id.add_test);
-        EditText details = findViewById(R.id.test_details);
+        EditText details = findViewById(R.id.support_less_content);
 
 
 
@@ -133,10 +128,10 @@ public class Add_test extends AppCompatActivity {
                     Toast.makeText(Add_test.this,"You didnt add any questions",Toast.LENGTH_LONG).show();
                 }else{
                     if(e.get("hour_ms") != null){
-                        connector.add_test(e.getLong("hour_ms"), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list);
+                        connector.add_test(e.getLong("hour_ms"), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list,details.getText().toString());
 
                     }else{
-                        connector.add_test(date.getTimeInMillis(), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list);
+                        connector.add_test(date.getTimeInMillis(), e.getString("class_selected"),details.getText().toString(),list,title.getText().toString(),questions_list,details.getText().toString());
                     }
                     startActivity(new Intent(Add_test.this, MainActivity.class));
 

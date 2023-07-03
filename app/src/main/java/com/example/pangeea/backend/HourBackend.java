@@ -215,7 +215,7 @@ public class HourBackend extends DatabaseConnector {
                                       }
                 );
     }
-    public void add_hour(long hour_ms, String class_name, String details, List<Uri> files, String title){
+    public void add_hour(long hour_ms, String class_name, String details, List<Uri> files, String title,String support_lesson_content){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -241,12 +241,13 @@ public class HourBackend extends DatabaseConnector {
 
 
                         }
-                        save_file(filenames,class_name,title);
+                        save_file(filenames,class_name,title,support_lesson_content);
                         Map<String,Object> map = new HashMap<>();
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",filenames);
                         map.put("title",title);
+                        map.put("content",support_lesson_content);
                         map.put("teacher",(String)documentSnapshot.get("Username"));
                         Map<String,Object> map2 = new HashMap<>();
                         map2.put("details",details);
@@ -272,7 +273,7 @@ public class HourBackend extends DatabaseConnector {
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
         DatabaseReference ref = dbb.getReference("hourss");
-        save_file(filenames,class_name,title);
+       // save_file(filenames,class_name,title);
         Map<String,Object> map = new HashMap<>();
         map.put("details",details);
         map.put("user_subject",title);

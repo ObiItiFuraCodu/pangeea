@@ -57,6 +57,7 @@ public class Add_hour extends AppCompatActivity {
 
         TextView select_date = findViewById(R.id.select_date_time);
         TextView upload_lessons = findViewById(R.id.add_lesson);
+        EditText support_lesson_content = findViewById(R.id.support_lesson_content);
         Spinner support_lessons = findViewById(R.id.support_lessons);
         TextView add = findViewById(R.id.add_button);
         EditText details = findViewById(R.id.details);
@@ -92,10 +93,10 @@ public class Add_hour extends AppCompatActivity {
             public void onClick(View v) {
                 if(e.getString("hour/task").equals("hour")){
 
-                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
+                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString());
 
                 }else{
-                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString());
+                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString());
                 }
                 startActivity(new Intent(Add_hour.this, MainActivity.class));
                 finish();

@@ -76,7 +76,7 @@ public class TestBackend extends DatabaseConnector {
         this.context = context;
 
     }
-    public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,Object>> questions){
+    public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,Object>> questions,String content){
         FirebaseUser user = auth.getCurrentUser();
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference ref = dbb.getReference("tests");
@@ -104,7 +104,7 @@ public class TestBackend extends DatabaseConnector {
 
 
                         }
-                        save_file(filenames,class_name,title);
+                        save_file(filenames,class_name,title,content);
                         map.put("details",details);
                         map.put("user_subject",(String)documentSnapshot.get("user_subject"));
                         map.put("files",filenames);

@@ -85,7 +85,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline53" />
 
     <EditText
-        android:id="@+id/test_details"
+        android:id="@+id/support_less_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"

@@ -381,11 +381,12 @@ public class DatabaseConnector {
                     }
                 });
     }
-    public void save_file(List<String> file_paths,String class_sent,String course_title){
+    public void save_file(List<String> file_paths,String class_sent,String course_title,String course_content){
         FirebaseUser user = auth.getCurrentUser();
         Map<String,Object> map = new HashMap<>();
         map.put("title",course_title);
         map.put("files",file_paths);
+        map.put("content",course_content);
 
         store.collection("users").document(user.getDisplayName())
                 .get()
