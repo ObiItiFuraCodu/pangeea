@@ -32,6 +32,7 @@ public class SpeechRecognition extends AppCompatActivity {
         TextView input_text = findViewById(R.id.input_text);
         TextView output_text = findViewById(R.id.output_text);
         Button end_speech = findViewById(R.id.end_speech);
+        Bundle e = getIntent().getExtras();
         core = new AI_core(SpeechRecognition.this);
 
 
