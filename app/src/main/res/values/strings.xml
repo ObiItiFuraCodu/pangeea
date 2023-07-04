@@ -65,8 +65,11 @@
     <string name="lessondod">Lesson:</string>
     <string name="answerdod">Answer:</string>
     <string name="generate_a_les">Generate a lesson with the title</string>
+    <string name="i_will_answer">I will answer</string>
+    <string name="ai_will_answer">AI will answer</string>
     <string name="ras">Answer</string>
     <string name="answertode" translatable="false">\"Raspunsul la intrebarea \"</string>
     <string name="iz" translatable="false">\" este:\"</string>
+
 
 </resources>

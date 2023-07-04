@@ -65,4 +65,6 @@
     <string name="ras">Raspuns</string>
     <string name="theans">the answer</string>
     <string name="answe">answer</string>
+    <string name="i_will_answer">Eu voi raspunde</string>
+    <string name="ai_will_answer">AI va raspunde</string>
 </resources>

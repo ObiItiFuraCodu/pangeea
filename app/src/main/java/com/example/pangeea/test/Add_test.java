@@ -134,9 +134,15 @@ public class Add_test extends AppCompatActivity {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     is_public = true;
+                                    dialog.dismiss();
                                 }
                             })
-                            .setNegativeButton(android.R.string.no, null)
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                     if(e.get("hour_ms") != null){

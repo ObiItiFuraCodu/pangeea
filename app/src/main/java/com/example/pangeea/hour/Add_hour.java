@@ -98,9 +98,15 @@ public class Add_hour extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 is_public = true;
+                                dialog.dismiss();
                             }
                         })
-                        .setNegativeButton(android.R.string.no, null)
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
                 if(e.getString("hour/task").equals("hour")){

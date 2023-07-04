@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.example.pangeea.R;
+import com.example.pangeea.SpeechRecognition;
 import com.example.pangeea.ai.AI_core;
 import com.example.pangeea.ai.AI_generator;
 import com.example.pangeea.catalogue.Materie_info;
@@ -282,7 +283,9 @@ public class DatabaseConnector {
                                             if(text.equals("ready to answer")){
                                                 asked.setText("You may speak");
                                             }else{
-                                                //TODO:AI
+                                                Intent intent = new Intent(context, SpeechRecognition.class);
+                                                //TODO:complete this
+                                                context.startActivity(intent);
                                             }
 
 
@@ -298,7 +301,7 @@ public class DatabaseConnector {
 
 
     }
-    public void answer_question(String hour_ms,String pupil,boolean ai){
+    public void answer_question(String hour_ms,String pupil,boolean non_ai){
         FirebaseUser user = auth.getCurrentUser();
 
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
@@ -310,7 +313,7 @@ public class DatabaseConnector {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(ai){
+                        if(non_ai){
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
                                     .setValue("ready to answer");
                         }else{

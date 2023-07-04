@@ -1,6 +1,7 @@
 package com.example.pangeea.backend;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.CustomElements.CustomButtonAnswer;
 import com.example.pangeea.CustomElements.CustomButtonLesson;
@@ -341,6 +343,29 @@ public class HourBackend extends DatabaseConnector {
                                         questions.addAll(keys.keySet());
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
                                         question.setAdapter(adapter2);
+                                        question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                new AlertDialog.Builder(context)
+                                                        .setTitle(questions.get(position) + " has a question")
+                                                        .setMessage("How will you answer?")
+                                                        .setPositiveButton(context.getResources().getString(R.string.i_will_answer), new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                answer_question(hour_milis,questions.get(position),true);
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setNegativeButton(context.getResources().getString(R.string.ai_will_answer), new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                answer_question(hour_milis,questions.get(position),false);
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                                        .show();
+                                            }
+                                        });
                                     }
                                     close_presence.setOnClickListener(new View.OnClickListener() {
                                         @RequiresApi(api = Build.VERSION_CODES.O)
