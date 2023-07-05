@@ -91,7 +91,8 @@ public class SpeechRecognition extends AppCompatActivity {
 
             @Override
             public void onEvent(int i, Bundle bundle) {
-
+                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                input_text.setText(data.get(0));
             }
         });
 

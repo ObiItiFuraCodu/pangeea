@@ -23,7 +23,7 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pupil_info);
-        if(getIntent().getStringExtra("pupil") != null){
+        if(getIntent().getStringExtra("pupil") == null){
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 

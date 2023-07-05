@@ -541,7 +541,7 @@ public class AI_core {
         List<DocumentSnapshot> output = new ArrayList<>();
 
         for(DocumentSnapshot document : courses){
-            if(filtering_system_nonai(document.get("title",String.class),course_name) || filtering_system_ai(document.get("title",String.class),course_name)){
+            if((filtering_system_nonai(document.get("title",String.class),course_name) || filtering_system_ai(document.get("title",String.class),course_name)) && (document.get("public") != null && document.get("public").equals(true))){
                 output.add(document);
 
             }

@@ -80,6 +80,15 @@ public class Improve_performance extends AppCompatActivity {
                                                                for(DocumentSnapshot snapshot2 : list){
                                                                    Button button = new Button(Improve_performance.this);
                                                                    button.setText(snapshot2.getString("title"));
+                                                                   button.setOnClickListener(new View.OnClickListener() {
+                                                                       @Override
+                                                                       public void onClick(View v) {
+                                                                           Intent i = new Intent(v.getContext(),Lesson_viewer_nongenerated.class);
+                                                                           i.putExtra("title",snapshot2.getString("title"));
+                                                                           i.putExtra("grade",documentSnapshot.getString("user_class").replaceAll("[^0-9.]", ""));
+                                                                           startActivity(i);
+                                                                       }
+                                                                   });
                                                                    sorted.addView(button);
 
                                                                }

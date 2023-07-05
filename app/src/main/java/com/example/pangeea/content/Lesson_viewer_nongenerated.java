@@ -40,7 +40,7 @@ public class Lesson_viewer_nongenerated extends AppCompatActivity {
                             lesson_content.setText(documentSnapshot.getString("content"));
 
                         }
-                        List<String> filenames = documentSnapshot.get("files", ArrayList.class);
+                        List<String> filenames = (List<String>) documentSnapshot.get("files");
                         for(String file : filenames){
                             Button file_button = new Button(Lesson_viewer_nongenerated.this);
                             file_button.setText(file);
@@ -56,6 +56,7 @@ public class Lesson_viewer_nongenerated extends AppCompatActivity {
                                     });
                                 }
                             });
+                            lesson_files.addView(file_button);
                         }
                     }
                 });

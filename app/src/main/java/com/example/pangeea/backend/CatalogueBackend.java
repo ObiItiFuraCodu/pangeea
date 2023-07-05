@@ -62,7 +62,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             CustomPupilButton button = new CustomPupilButton(context);
-                                            RelativeLayout rootlayout = (RelativeLayout) button.getChildAt(0);
+                                            LinearLayout rootlayout = (LinearLayout) button.getChildAt(0);
                                             TextView view = (TextView) rootlayout.getChildAt(0);
 
                                             rootlayout.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
@@ -247,10 +247,18 @@ public class CatalogueBackend extends DatabaseConnector{
                                     .set(map);
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document(documentSnapshot.get("user_subject",String.class))
                                     .set(test);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document("overall").collection("marks").document(date)
+                                    .set(map);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document("overall")
+                                    .set(test);
                         }else{
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name).collection("marks").document(date)
                                     .set(map);
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name)
+                                    .set(test);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document("overall").collection("marks").document(date)
+                                    .set(map);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document("overall")
                                     .set(test);
                         }
 
@@ -309,12 +317,18 @@ public class CatalogueBackend extends DatabaseConnector{
                                         rank.setText("mancator de cur maxim");
                                     }
                                 });
+                        String user_subject;
+                        if(documentSnapshot.getString("user_category").equals("1")){
+                            user_subject = (String) documentSnapshot.get("user_subject");
+                        }else{
+                            user_subject = "overall";
+                        }
 
 
 
 
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(pupil_class).collection("pupils").document(pupil_name).collection("absences")
-                                .document(documentSnapshot.get("user_subject",String.class)).collection("absences")
+                                .document(user_subject).collection("absences")
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
@@ -337,7 +351,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                 });
 
                         store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(pupil_class).collection("pupils").document(pupil_name).collection("marks")
-                                .document(documentSnapshot.get("user_subject",String.class)).collection("marks")
+                                .document(user_subject).collection("marks")
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
