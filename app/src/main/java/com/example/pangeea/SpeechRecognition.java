@@ -1,5 +1,6 @@
 package com.example.pangeea;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,8 +13,10 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pangeea.ai.AI_core;
 
@@ -67,8 +70,7 @@ public class SpeechRecognition extends AppCompatActivity {
 
             @Override
             public void onEndOfSpeech() {
-                output_text.setText("Thinking...");
-                core.AI_Text(input_text.getText().toString(),output_text);
+
             }
 
             @Override
@@ -81,6 +83,8 @@ public class SpeechRecognition extends AppCompatActivity {
 
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 input_text.setText(data.get(0));
+                output_text.setText("Thinking...");
+                core.AI_Text(data.get(0),output_text);
             }
 
             @Override
@@ -91,16 +95,31 @@ public class SpeechRecognition extends AppCompatActivity {
 
             @Override
             public void onEvent(int i, Bundle bundle) {
-                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                input_text.setText(data.get(0));
+               // ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+               // input_text.setText(data.get(0));
             }
         });
+        recognizer.startListening(speechRecognizerIntent);
 
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        recognizer.destroy();
     }
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int RecordAudioRequestCode = 0;
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        int RecordAudioRequestCode = 1;
+        if (requestCode == RecordAudioRequestCode && grantResults.length > 0 ){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                Toast.makeText(this,"Permission Granted", Toast.LENGTH_SHORT).show();
         }
     }
 }
