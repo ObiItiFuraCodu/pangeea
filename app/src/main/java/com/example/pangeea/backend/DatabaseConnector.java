@@ -282,9 +282,9 @@ public class DatabaseConnector {
                                             String text = (String) snapshot.getValue();
                                             if(text.equals("ready to answer")){
                                                 asked.setText("You may speak");
-                                            }else{
+                                            }else if(text.equals("ai")){
                                                 Intent intent = new Intent(context, SpeechRecognition.class);
-                                                //TODO:complete this
+
                                                 context.startActivity(intent);
                                             }
 
