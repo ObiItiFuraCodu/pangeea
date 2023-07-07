@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pangeea.ai.AI_core;
+import com.example.pangeea.hour.Hour_info_elev;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -85,6 +86,14 @@ public class SpeechRecognition extends AppCompatActivity {
                 input_text.setText(data.get(0));
                 output_text.setText("Thinking...");
                 core.AI_Text(data.get(0),output_text);
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                Intent i = new Intent(SpeechRecognition.this, Hour_info_elev.class);
+                i.putExtra("hour_milis",e.getString("hour_milis"));
+                i.putExtra("presence",e.getString("presence"));
             }
 
             @Override

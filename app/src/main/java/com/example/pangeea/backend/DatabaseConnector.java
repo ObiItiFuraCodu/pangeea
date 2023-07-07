@@ -258,7 +258,7 @@ public class DatabaseConnector {
 
     }
 
-    public void ask_question(String hour_ms,String teacher,Button asked){
+    public void ask_question(String hour_ms,String teacher,Button asked,Boolean presence){
 
             FirebaseUser user = auth.getCurrentUser();
             List<String> filenames  = new ArrayList<>();
@@ -275,15 +275,18 @@ public class DatabaseConnector {
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
                                     .setValue("question");
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    .addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             asked.setBackgroundColor(context.getResources().getColor(R.color.green));
                                             String text = (String) snapshot.getValue();
+                                            Log.e("TEXT",text);
                                             if(text.equals("ready to answer")){
                                                 asked.setText("You may speak");
                                             }else if(text.equals("ai")){
                                                 Intent intent = new Intent(context, SpeechRecognition.class);
+                                                intent.putExtra("hour_milis",hour_ms);
+                                                intent.putExtra("presence",presence);
 
                                                 context.startActivity(intent);
                                             }
