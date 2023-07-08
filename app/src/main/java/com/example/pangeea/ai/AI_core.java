@@ -220,7 +220,7 @@ public class AI_core {
         //   final String[] output = {""};
         try {
 
-            requestBody.put("model", "text-davinci-003");
+            requestBody.put("model", "gpt-3.5-turbo");//TODO:TEST MODELS
             if(main){
                 requestBody.put("prompt", context.getString(R.string.AI_QUESTION) +prompt+ context.getString(R.string.is));
 

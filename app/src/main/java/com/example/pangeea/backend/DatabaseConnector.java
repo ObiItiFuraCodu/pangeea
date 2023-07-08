@@ -2,6 +2,7 @@ package com.example.pangeea.backend;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.pangeea.R;
 import com.example.pangeea.SpeechRecognition;
@@ -71,6 +73,7 @@ public class DatabaseConnector {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
     private FirebaseDatabase db = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+    private CatalogueBackend backend = new CatalogueBackend(context);
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
@@ -283,11 +286,14 @@ public class DatabaseConnector {
                                             Log.e("TEXT",text);
                                             if(text.equals("ready to answer")){
                                                 asked.setText("You may speak");
+                                                ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
+                                                        .setValue("answering");
                                             }else if(text.equals("ai")){
                                                 Intent intent = new Intent(context, SpeechRecognition.class);
                                                 intent.putExtra("hour_milis",hour_ms);
                                                 intent.putExtra("presence",presence);
-
+                                                ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
+                                                        .setValue("answering");
                                                 context.startActivity(intent);
                                             }
 
@@ -319,9 +325,71 @@ public class DatabaseConnector {
                         if(non_ai){
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
                                     .setValue("ready to answer");
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String text = (String) snapshot.getValue();
+                                            if(text.equals("answering")){
+                                                new AlertDialog.Builder(context)
+                                                        .setTitle("How is it going?")
+                                                        .setMessage("Is " + pupil + " answering good?")
+                                                        .setPositiveButton("Good", new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                backend.increase_pupil_score(pupil,5);
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setNegativeButton("Bad", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                                        .show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
                         }else{
                             ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
                                     .setValue("ai");
+                            ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil)
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String text = (String) snapshot.getValue();
+                                            if(text.equals("answering")){
+                                                new AlertDialog.Builder(context)
+                                                        .setTitle("How is it going?")
+                                                        .setMessage("Is " + pupil + " answering good?")
+                                                        .setPositiveButton("Good", new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                backend.increase_pupil_score(pupil,5);
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setNegativeButton("Bad", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                                        .show();                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                         }
 
 
