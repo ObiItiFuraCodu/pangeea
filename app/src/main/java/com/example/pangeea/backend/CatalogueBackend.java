@@ -1,6 +1,7 @@
 package com.example.pangeea.backend;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.pangeea.CustomElements.CustomCardElement;
 import com.example.pangeea.CustomElements.CustomPupilButton;
 import com.example.pangeea.CustomElements.CustomPupilCard;
@@ -21,6 +24,7 @@ import com.example.pangeea.catalogue.Materie_info;
 import com.example.pangeea.catalogue.Pupil_info;
 import com.example.pangeea.main.Class_info;
 import com.example.pangeea.other.Basic_tools;
+import com.example.pangeea.other.CSList;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -153,10 +157,23 @@ public class CatalogueBackend extends DatabaseConnector{
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     HashMap<String,Object> user_info = (HashMap<String, Object>) documentSnapshot.getData();
                   String RP = documentSnapshot.getString("RP");
+                    int rank;
+                  if(documentSnapshot.get("rank") == null){
+                      rank = 1;
+                  }else{
+                      rank = (int) documentSnapshot.get("rank");
+                  }
                   int rp = Integer.parseInt(RP);
                   rp = rp + score;
                   RP = Integer.toString(rp);
+                  HashMap<String,Object> data = tool.ranking_system(rp,context);
+                  int data_rank = (int) data.get("rank");
+                  if(data_rank > rank){
+                      rank = data_rank;
+                      user_info.put("to_be_prized","mark");
+                  }
                   user_info.put("RP",RP);
+                  user_info.put("rank",rank);
                   store.collection("users").document(name)
                           .set(user_info);
                 }
@@ -266,7 +283,7 @@ public class CatalogueBackend extends DatabaseConnector{
                     }
                 });
     }
-    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list,LinearLayout rank_history,TextView rank,TextView rp){
+    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list,LinearLayout rank_history,TextView rank,TextView rp,boolean from_pupil){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -281,6 +298,15 @@ public class CatalogueBackend extends DatabaseConnector{
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         String ranking_points = documentSnapshot.get("RP",String.class);
+                                        int rank_int;
+                                        if(documentSnapshot.get("rank") == null){
+                                            rank_int = 1;
+                                        }else{
+                                            rank_int = (int) documentSnapshot.get("rank");
+
+                                        }
+                                        String rank_string = Integer.toString(rank_int);
+
                                         if(ranking_points != null){
                                             rp.setText(" * " + ranking_points);
 
@@ -314,7 +340,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                                                     }
                                                                 });
 
-                                        rank.setText("mancator de cur maxim");
+                                        rank.setText(rank_string);
                                     }
                                 });
                         String user_subject;
@@ -322,6 +348,34 @@ public class CatalogueBackend extends DatabaseConnector{
                             user_subject = (String) documentSnapshot.get("user_subject");
                         }else{
                             user_subject = "overall";
+                            if(documentSnapshot.contains("to_be_prized")){
+                                HashMap<String,Object> user_data = (HashMap<String, Object>) documentSnapshot.getData();
+                                user_data.remove("to_be_prized");
+                                store.collection("users").document(user.getDisplayName())
+                                        .set(user_data);
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Congratiulations")
+                                        .setMessage("You received a mark,would you like to claim it?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent i = new Intent(context, CSList.class);
+                                                i.putExtra("class_marked",pupil_class);
+                                                i.putExtra("pupil_name",user.getDisplayName());
+
+                                                context.startActivity(i);
+                                                dialog.dismiss();
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        })
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show();
+
+                            };
                         }
 
 
