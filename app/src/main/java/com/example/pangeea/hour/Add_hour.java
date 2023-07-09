@@ -53,6 +53,8 @@ public class Add_hour extends AppCompatActivity {
 
         TextView addhour = findViewById(R.id.textView1);
 
+        TextView generate_ai = findViewById(R.id.generate_ai_lesson);
+
         EditText title = findViewById(R.id.lesson_title);
 
 

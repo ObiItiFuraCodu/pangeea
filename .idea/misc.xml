@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -35,6 +36,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_daily_hour_setter.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_dashboard.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_file_viewer.xml" value="0.5385416666666667" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_generate_ai_lesson_teacher.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_hour_info.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_hour_info_profesor.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_improve_performance.xml" value="0.5541666666666667" />
@@ -78,7 +80,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
