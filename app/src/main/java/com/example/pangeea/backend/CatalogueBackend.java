@@ -228,11 +228,12 @@ public class CatalogueBackend extends DatabaseConnector{
         map.put("mark",mark);
         Map<String,String> test = new HashMap<>();
         test.put("BLBLBLBL","blblblb");
-        increase_pupil_score(pupil,20);
+        int mark_int = Integer.parseInt(mark);
+        increase_pupil_score(pupil,mark_int*2);
         HashMap<String,String> details = new HashMap<>();
         details.put("name",test_name);
         details.put("mark",mark);
-        details.put("points","20");
+        details.put("points",Integer.toString(mark_int*2));
         if(test_name != null){
             if(improvement_test){
                 store.collection("users").document(pupil).collection("ranking_history").document(test_name)
@@ -241,9 +242,12 @@ public class CatalogueBackend extends DatabaseConnector{
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 Map<String, Object> test_received_details = documentSnapshot.getData();
-                                test_received_details.put("improvement_name",test_name +"_improvement");
-                                test_received_details.put("improvement_points","20");
-                                increase_pupil_score(pupil,20);
+                                HashMap<String,Object> improvement = new HashMap<>();
+                                improvement.put("improvement_mark",mark);
+                                improvement.put("improvement_points",Integer.toString(mark_int*2));
+                                test_received_details.put("improvement",improvement);
+
+                                increase_pupil_score(pupil,mark_int*2);
                                 store.collection("users").document(pupil).collection("ranking_history").document(test_name)
                                         .set(test_received_details);
                             }
@@ -328,12 +332,22 @@ public class CatalogueBackend extends DatabaseConnector{
                                                                             CustomCardElement improvement_test = (CustomCardElement) base_layout.getChildAt(2);
                                                                             test_name_view.setText((String) test_details.get("name"));
                                                                             LinearLayout first_test_base_layout = (LinearLayout) first_test.getChildAt(0);
+                                                                            LinearLayout improvement_test_base_layout = (LinearLayout) improvement_test.getChildAt(0);
                                                                             TextView first_test_view_name = (TextView) first_test_base_layout.getChildAt(0);
                                                                             TextView first_test_view_points = (TextView) first_test_base_layout.getChildAt(1);
                                                                             first_test_view_name.setText("First test mark " + test_details.get("mark"));
                                                                             first_test_view_points.setText("+" + test_details.get("points"));
-                                                                            if(test_details.get("improvement_test") != null){
-                                                                                //programare nebuna
+                                                                            if(test_details.get("improvement") != null){
+                                                                                HashMap<String,Object> improvement = (HashMap<String, Object>) test_details.get("improvement");
+                                                                                String improvement_mark = (String) improvement.get("improvement_mark");
+                                                                                String improvement_points = (String)improvement.get("improvement_points");
+
+                                                                                TextView improvement_test_view_name = (TextView) improvement_test_base_layout.getChildAt(0);
+                                                                                TextView improvement_test_view_points = (TextView) improvement_test_base_layout.getChildAt(1);
+                                                                                improvement_test_view_name.setText("Improvement test mark " + improvement_mark);
+                                                                                improvement_test_view_points.setText("+" + improvement_points);
+
+
                                                                             }
                                                                             rank_history.addView(card);
                                                                         }
