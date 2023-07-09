@@ -45,9 +45,9 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
         super.onStart();
         Bundle e = getIntent().getExtras();
         if(getIntent().getStringExtra("pupil") == null){
-            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),false);
+            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),false,findViewById(R.id.progressBar));
         }else{
-            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),true);
+            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),true,findViewById(R.id.progressBar));
 
         }
         TextView pupil_name = findViewById(R.id.rank);

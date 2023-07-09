@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -272,7 +273,7 @@ public class CatalogueBackend extends DatabaseConnector{
                                     .set(map);
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(pupil).collection("marks").document("overall")
                                     .set(test);
-                        }else{
+                        }else if(subject == null){
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name).collection("marks").document(date)
                                     .set(map);
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name)
@@ -281,13 +282,24 @@ public class CatalogueBackend extends DatabaseConnector{
                                     .set(map);
                             store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document("overall")
                                     .set(test);
+                        }else{
+
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name).collection("marks").document(date)
+                                    .set(map);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(test_name)
+                                    .set(test);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(subject).collection("marks").document(date)
+                                    .set(map);
+                            store.collection("highschools").document(documentSnapshot.get("user_highschool",String.class)).collection("classes").document(class_marked).collection("pupils").document(user.getDisplayName()).collection("marks").document(subject)
+                                    .set(test);
+
                         }
 
 
                     }
                 });
     }
-    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list,LinearLayout rank_history,TextView rank,TextView rp,boolean from_pupil){
+    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list, LinearLayout rank_history, TextView rank, TextView rp, boolean from_pupil, ProgressBar progressBar){
         FirebaseUser user = auth.getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -302,6 +314,13 @@ public class CatalogueBackend extends DatabaseConnector{
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         String ranking_points = documentSnapshot.get("RP",String.class);
+                                        int ranking_points_int = Integer.parseInt(ranking_points);
+
+                                        HashMap<String,Object> data = tool.ranking_system(ranking_points_int,context);
+                                        int next_rank = (int) data.get("next_rank_rp");
+                                        progressBar.setMax(next_rank);
+                                        progressBar.setProgress(ranking_points_int);
+
                                         int rank_int;
                                         if(documentSnapshot.get("rank") == null){
                                             rank_int = 1;
