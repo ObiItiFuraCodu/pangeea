@@ -6,4 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".Generate_ai_lesson_teacher">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline245"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.33"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline245"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ListView
+            android:id="@+id/list_view_keywords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline252"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline252"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline245">
+
+        <TextView
+            android:id="@+id/text_view_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/enter_keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Enter"
+        app:layout_constraintStart_toStartOf="@+id/generate_lesson"
+        app:layout_constraintTop_toTopOf="@+id/guideline252" />
+
+    <EditText
+        android:id="@+id/keyword_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="enter_keyword"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline252" />
+
+    <Button
+        android:id="@+id/generate_lesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Generate"
+        app:layout_constraintStart_toStartOf="@+id/lesson_ok"
+        app:layout_constraintTop_toBottomOf="@+id/enter_keyword" />
+
+    <Button
+        android:id="@+id/lesson_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Finish"
+        app:layout_constraintEnd_toStartOf="@+id/keyword_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generate_lesson" />
 </androidx.constraintlayout.widget.ConstraintLayout>

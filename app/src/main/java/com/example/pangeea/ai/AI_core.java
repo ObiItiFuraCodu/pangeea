@@ -215,6 +215,66 @@ public class AI_core {
         queue.add(request);
 
     }
+    public void AI_lesson_teacher(String input, TextView view,List<String> key_words){
+        JSONObject requestBody = new JSONObject();
+        String input_string = "Genereaza o lectie cu titlul" + input +".Lectia va trebui sa contina urmatoarele cuvinte :";
+        for(String word : key_words){
+          input_string =   input_string + "\n" + word;
+        }
+        //   final String[] output = {""};
+        try {
+
+            requestBody.put("model", "text-davinci-003");
+            requestBody.put("prompt", input_string);
+            requestBody.put("max_tokens", 1000);
+            requestBody.put("temperature", 1.0);
+            requestBody.put("top_p", 1.0);
+            requestBody.put("stop",null);
+            requestBody.put("frequency_penalty", 0.0);
+            requestBody.put("presence_penalty", 0.0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiUrl, requestBody, new Response.Listener < JSONObject > () {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray choicesArray = response.getJSONArray("choices");
+                    JSONObject choiceObject = choicesArray.getJSONObject(0);
+                    view.setText(choiceObject.getString("text"));
+                    Log.e("API Response", response.toString());
+                    //Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("API Error", error.toString());
+            }
+        }) {
+            @Override
+            public Map< String, String > getHeaders() throws AuthFailureError {
+                Map < String, String > headers = new HashMap< >();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+            @Override
+            protected Response < JSONObject > parseNetworkResponse(NetworkResponse response) {
+                return super.parseNetworkResponse(response);
+            }
+        };
+        int timeoutMs = 250000; // 25 seconds timeout
+        RetryPolicy policy = new DefaultRetryPolicy(timeoutMs, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+
+    }
     public void generate_question(String prompt, LinearLayout list, Boolean main, Boolean valid,TextView text_unmain){
         JSONObject requestBody = new JSONObject();
         //   final String[] output = {""};

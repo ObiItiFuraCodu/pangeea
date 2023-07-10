@@ -22,7 +22,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.pangeea.Generate_ai_lesson_teacher;
 import com.example.pangeea.backend.DatabaseConnector;
 import com.example.pangeea.backend.HourBackend;
 import com.example.pangeea.backend.TaskBackend;
@@ -91,44 +93,79 @@ public class Add_hour extends AppCompatActivity {
 
             }
         });*/
+        generate_ai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Add_hour.this, Generate_ai_lesson_teacher.class);
+                i.putExtra("hour/task",e.getString("hour/task"));
+                i.putExtra("class_selected",e.getString("class_selected"));
+                if(title.getText().toString().equals("")){
+                    Toast.makeText(v.getContext(),"you didn't enter a title",Toast.LENGTH_LONG).show();
+
+                }else{
+                    i.putExtra("title",title.getText().toString());
+                    startActivity(i);
+                    finish();
+                }
+            }
+        });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(v.getContext())
-                        .setTitle("Make public")
-                        .setMessage("Do you want the lesson to be public?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                is_public = true;
-                                if(e.getString("hour/task").equals("hour")){
+                if(date == null){
+                    Toast.makeText(Add_hour.this,"you didn't pick a time",Toast.LENGTH_LONG).show();
+                }else{
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Make public")
+                            .setMessage("Do you want the lesson to be public?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    is_public = true;
+                                    if(e.getString("hour/task").equals("hour")){
+                                        if(e.getString("lesson_content") != null){
 
-                                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+                                            backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),e.getString("lesson_content"),is_public);
 
-                                }else{
-                                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+                                        }else{
+                                            backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+
+                                        }
+
+
+                                    }else{
+                                        if(e.getString("lesson_content") != null){
+                                            backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),e.getString("lesson_content"),is_public);
+
+                                        }else{
+                                            backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+
+                                        }
+
+                                    }
+                                    startActivity(new Intent(Add_hour.this, MainActivity.class));
+                                    finish();
+                                    dialog.dismiss();
                                 }
-                                startActivity(new Intent(Add_hour.this, MainActivity.class));
-                                finish();
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if(e.getString("hour/task").equals("hour")){
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if(e.getString("hour/task").equals("hour")){
 
-                                    backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+                                        backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
 
-                                }else{
-                                    backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+                                    }else{
+                                        backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
+                                    }
+                                    startActivity(new Intent(Add_hour.this, MainActivity.class));
+                                    finish();
+                                    dialog.dismiss();
                                 }
-                                startActivity(new Intent(Add_hour.this, MainActivity.class));
-                                finish();
-                                dialog.dismiss();
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+
 
 
             }
