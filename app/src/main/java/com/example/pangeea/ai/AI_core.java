@@ -219,8 +219,9 @@ public class AI_core {
         JSONObject requestBody = new JSONObject();
         String input_string = "Genereaza o lectie cu titlul" + input +".Lectia va trebui sa contina urmatoarele cuvinte :";
         for(String word : key_words){
-          input_string =   input_string + "\n" + word;
+          input_string =   input_string + ",\n" + word;
         }
+        input_string = input_string + "Lectie:";
         //   final String[] output = {""};
         try {
 

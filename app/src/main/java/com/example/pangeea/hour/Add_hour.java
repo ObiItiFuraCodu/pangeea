@@ -66,6 +66,10 @@ public class Add_hour extends AppCompatActivity {
         Spinner support_lessons = findViewById(R.id.support_lessons);
         TextView add = findViewById(R.id.add_button);
         EditText details = findViewById(R.id.details);
+        if(e.getString("lesson_content") != null){
+            support_lesson_content.setText(e.getString("lesson_content"));
+            title.setText(e.getString("title"));
+        }
 
 
 
@@ -122,25 +126,9 @@ public class Add_hour extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     is_public = true;
                                     if(e.getString("hour/task").equals("hour")){
-                                        if(e.getString("lesson_content") != null){
-
-                                            backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),e.getString("lesson_content"),is_public);
-
-                                        }else{
-                                            backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
-
-                                        }
-
-
+                                        backend1.add_hour(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
                                     }else{
-                                        if(e.getString("lesson_content") != null){
-                                            backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),e.getString("lesson_content"),is_public);
-
-                                        }else{
-                                            backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
-
-                                        }
-
+                                        backend2.add_task(date.getTimeInMillis(), (String) e.get("class_selected"),details.getText().toString(),list,title.getText().toString(),support_lesson_content.getText().toString(),is_public);
                                     }
                                     startActivity(new Intent(Add_hour.this, MainActivity.class));
                                     finish();

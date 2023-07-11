@@ -11,14 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.pangeea.ai.AI_core;
 import com.example.pangeea.hour.Add_hour;
-import com.example.pangeea.main.MainActivity;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,7 @@ public class Generate_ai_lesson_teacher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         List<String> keyword_list = new ArrayList<>();
         setContentView(R.layout.activity_generate_ai_lesson_teacher);
-        ListView keywords = findViewById(R.id.list_view_keywords);
+        LinearLayout keywords = findViewById(R.id.linear_view_keywords);
         TextView result = findViewById(R.id.text_view_result);
         Button enter_keyword = findViewById(R.id.enter_keyword);
         Button generate = findViewById(R.id.generate_lesson);
@@ -43,21 +41,21 @@ public class Generate_ai_lesson_teacher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 keyword_list.add(keyword_writer.getText().toString());
+                Button keyword_button = new Button(v.getContext());
+                keyword_button.setText(keyword_writer.getText().toString());
                 keyword_writer.setText("");
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,keyword_list);
-                keywords.setAdapter(adapter);
-                keywords.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                keyword_button.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onClick(View v) {
                         new AlertDialog.Builder(v.getContext())
                                 .setTitle("Delete keyword?")
                                 .setMessage("Vrei sa stergi keywordu?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        keyword_list.remove(position);
-                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,keyword_list);
-                                        keywords.setAdapter(adapter);
-                                       dialog.dismiss();
+                                        keyword_list.remove(keyword_button.getText().toString());
+                                        keyword_button.setVisibility(View.GONE);
+                                        keyword_button.setEnabled(false);
+                                        dialog.dismiss();
                                     }
                                 })
                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -68,14 +66,16 @@ public class Generate_ai_lesson_teacher extends AppCompatActivity {
                                 })
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .show();
-
                     }
                 });
+                keywords.addView(keyword_button);
+
             }
         });
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                result.setText("thinking...");
                 core.AI_lesson_teacher(e.getString("title"),result,keyword_list);
             }
         });
@@ -83,10 +83,12 @@ public class Generate_ai_lesson_teacher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Generate_ai_lesson_teacher.this,Add_hour.class);
+                i.putExtra("title",e.getString("title"));
                 i.putExtra("hour/task",e.getString("hour/task"));
                 i.putExtra("class_selected",e.getString("class_selected"));
                 i.putExtra("lesson_content",result.getText().toString());
                 startActivity(i);
+                finish();
 
             }
         });
