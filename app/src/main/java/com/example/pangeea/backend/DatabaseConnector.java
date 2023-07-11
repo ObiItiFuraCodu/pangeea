@@ -73,7 +73,7 @@ public class DatabaseConnector {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
     private FirebaseDatabase db = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
-    private CatalogueBackend backend = new CatalogueBackend(context);
+
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
@@ -82,6 +82,7 @@ public class DatabaseConnector {
     public DatabaseConnector(Context context) {
         this.context = context;
     }
+
 
     public boolean createuser(String username,String password,String email){
         final boolean[] created = {true};
@@ -312,6 +313,7 @@ public class DatabaseConnector {
     }
     public void answer_question(String hour_ms,String pupil,boolean non_ai){
         FirebaseUser user = auth.getCurrentUser();
+        CatalogueBackend backend = new CatalogueBackend(context);
 
         FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();

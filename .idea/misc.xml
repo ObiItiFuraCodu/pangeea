@@ -24,7 +24,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_hour.xml" value="0.5" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_mark.xml" value="0.5401041666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_test.xml" value="0.5" />
-        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_test_question.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_add_test_question.xml" value="0.67" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_ai_generator.xml" value="0.33" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_ai_lesson.xml" value="0.67" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_ai_preparation.xml" value="0.5541666666666667" />
@@ -67,6 +67,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_result_info.xml" value="0.67" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_viewer_elev.xml" value="0.41822916666666665" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_test_viewer_proffesor.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/activity_waiting_room.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/custom_card_layout.xml" value="0.553125" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/custom_list_element.xml" value="0.553125" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/layout/spinner.xml" value="0.553125" />
