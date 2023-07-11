@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
 
             case R.id.nav_logout: {
-                connector.log_out();
+                backend1.log_out();
                 finish();
                 break;
             }

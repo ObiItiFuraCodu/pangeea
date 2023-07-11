@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CatalogueBackend extends DatabaseConnector{
+public class CatalogueBackend {
     Context context;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
@@ -48,7 +48,7 @@ public class CatalogueBackend extends DatabaseConnector{
 
 
     public CatalogueBackend(Context context) {
-        super(context);
+
         this.context = context;
     }
     public void retrieve_class_info(String class_selected, LinearLayout pupil_list,TextView num_of_pupils){
