@@ -51,7 +51,7 @@
     <string name="upload_question">UPLOAD QUESTION</string>
     <string name="upload_files">UPLOAD FILES</string>
     <string name="submissions">Submissions</string>
-    <string name="need_help_n_see_what_others_did">Need help? \n See what others did</string>
+    <string name="need_help_n_see_what_others_did">Need help?\nSee what others did</string>
     <string name="or_generate_a_lesson">OR: <font color="#1F78FF">GENERATE AI</font></string>
     <string name="what_did_you_do_wrong">What did you do wrong?</string>
     <string name="theans">raspunsul</string>
@@ -70,6 +70,10 @@
     <string name="ras">Answer</string>
     <string name="answertode" translatable="false">\"Raspunsul la intrebarea \"</string>
     <string name="iz" translatable="false">\" este:\"</string>
+    <string name="add2">ADD</string>
+    <string name="a_prompt">A:</string>
+    <string name="b_prompt">B:</string>
+    <string name="c_prompt">C:</string>
 
 
 </resources>

@@ -22,25 +22,11 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
-    <ScrollView
-        android:id="@+id/scrollView6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline252"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline245">
-
-        <TextView
-            android:id="@+id/text_view_result"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TextView" />
-    </ScrollView>
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/enter_keyword"
         android:layout_width="wrap_content"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Enter"
@@ -49,44 +35,183 @@
 
     <EditText
         android:id="@+id/keyword_text"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="enter_keyword"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline252" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/generate_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
         android:text="Generate"
         app:layout_constraintStart_toStartOf="@+id/lesson_ok"
         app:layout_constraintTop_toBottomOf="@+id/enter_keyword" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/lesson_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
         android:text="Finish"
         app:layout_constraintEnd_toStartOf="@+id/keyword_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generate_lesson" />
 
-    <LinearLayout
-        android:id="@+id/linear_view_keywords"
-        android:layout_width="409dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="2dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline324"
+        app:layout_constraintEnd_toStartOf="@+id/guideline369"
+        app:layout_constraintStart_toStartOf="@+id/guideline370"
+        app:layout_constraintTop_toTopOf="@+id/guideline323">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline325"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline326"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="223dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline327"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline328"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="365dp" />
+
+        <LinearLayout
+            android:id="@+id/linear_view_keywords"
+            android:layout_width="349dp"
+            android:layout_height="196dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline328"
+            app:layout_constraintStart_toStartOf="@+id/guideline327"
+            app:layout_constraintTop_toTopOf="@+id/guideline325">
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline323"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="26dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline324"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="265dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline370"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+        app:layout_constraintGuide_begin="14dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline369"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="395dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline252"
+        app:layout_constraintEnd_toStartOf="@+id/guideline369"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline370"
+        app:layout_constraintTop_toTopOf="@+id/guideline245"
+        app:layout_constraintVertical_bias="1.0"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp">
+
+        <ScrollView
+            android:id="@+id/scrollView6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline331"
+            app:layout_constraintEnd_toStartOf="@+id/guideline329"
+            app:layout_constraintStart_toStartOf="@+id/guideline330"
+            app:layout_constraintTop_toTopOf="@+id/guideline332">
+
+            <TextView
+                android:id="@+id/text_view_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_extrabold"/>
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline332"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline331"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="314dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline330"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline329"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="365dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

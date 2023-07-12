@@ -32,44 +32,56 @@
         app:layout_constraintStart_toStartOf="@+id/guideline158"
         app:layout_constraintTop_toTopOf="@+id/guideline163"  />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/a_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Button"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
+        android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline156"
         app:layout_constraintEnd_toStartOf="@+id/guideline159"
         app:layout_constraintStart_toStartOf="@+id/guideline158"
         app:layout_constraintTop_toTopOf="@+id/guideline157"
         app:layout_constraintVertical_bias="0.571" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/b_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Button"
+        app:cornerRadius="50dp"
+        android:backgroundTint="@color/binaryblue"
+        android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline154"
         app:layout_constraintEnd_toStartOf="@+id/guideline159"
         app:layout_constraintStart_toStartOf="@+id/guideline158"
         app:layout_constraintTop_toTopOf="@+id/guideline155" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/c_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:text="Button"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
+        android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline152"
         app:layout_constraintEnd_toStartOf="@+id/guideline159"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/guideline158"
         app:layout_constraintTop_toTopOf="@+id/guideline153" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/upload_question_abc"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Button"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
+        android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline151"
         app:layout_constraintEnd_toStartOf="@+id/guideline159"
         app:layout_constraintStart_toStartOf="@+id/guideline158"

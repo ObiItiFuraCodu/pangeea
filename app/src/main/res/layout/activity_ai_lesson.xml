@@ -40,17 +40,21 @@
         android:hint="@string/got_questions"
         android:inputType="textPersonName"
         android:autoSizeTextType="uniform"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
         android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline93"
         app:layout_constraintEnd_toStartOf="@+id/guideline97"
         app:layout_constraintStart_toStartOf="@+id/guideline96"
         app:layout_constraintTop_toTopOf="@+id/guideline92" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/enter_q_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/enter"
+        app:cornerRadius="50dp"
+        app:backgroundTint="@color/binaryblue"
         android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline94"
         app:layout_constraintEnd_toStartOf="@+id/guideline95"

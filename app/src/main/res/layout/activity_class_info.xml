@@ -41,22 +41,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline107"
             app:layout_constraintTop_toTopOf="@+id/guideline112" />
 
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline106"
-            app:layout_constraintEnd_toStartOf="@+id/guideline108"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline107"
-            app:layout_constraintTop_toTopOf="@+id/guideline105">
-
-            <LinearLayout
-                android:id="@+id/linear_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline105"
             android:layout_width="wrap_content"
@@ -149,6 +133,60 @@
             app:layout_constraintStart_toStartOf="@+id/guideline107"
             app:layout_constraintTop_toTopOf="@+id/guideline115"
             app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline106"
+            app:layout_constraintEnd_toStartOf="@+id/guideline108"
+            app:layout_constraintStart_toStartOf="@+id/guideline107"
+            app:layout_constraintTop_toTopOf="@+id/guideline105"
+            android:background="@drawable/roundedmock"
+            android:elevation="10dp">
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline319"
+                app:layout_constraintEnd_toStartOf="@+id/guideline321"
+                app:layout_constraintStart_toStartOf="@+id/guideline320"
+                app:layout_constraintTop_toTopOf="@+id/guideline318">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline318"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline319"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="533dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline320"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline321"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="349dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

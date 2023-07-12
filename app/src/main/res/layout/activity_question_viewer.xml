@@ -10,46 +10,52 @@
         android:id="@+id/question_prompt"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="TextView"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline178"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline362"
+        app:layout_constraintStart_toStartOf="@+id/guideline361"
         app:layout_constraintTop_toTopOf="@+id/guideline182" />
 
     <TextView
         android:id="@+id/q_files"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/guideline177"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="TextView"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline177"
+        app:layout_constraintEnd_toStartOf="@+id/guideline362"
+        app:layout_constraintStart_toStartOf="@+id/guideline361"
         app:layout_constraintTop_toTopOf="@+id/guideline178" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/upload_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/binaryblue"
+        android:fontFamily="@font/poppins_extrabold"
         android:text="@string/upload_question"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline180"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline362"
+        app:layout_constraintStart_toStartOf="@+id/guideline361"
         app:layout_constraintTop_toTopOf="@+id/guideline179" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/upload_q_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/binaryblue"
+        android:fontFamily="@font/poppins_extrabold"
         android:text="@string/upload_files"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline179"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline362"
+        app:layout_constraintStart_toStartOf="@+id/guideline361"
         app:layout_constraintTop_toTopOf="@+id/guideline181" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -97,4 +103,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.047879618" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline361"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03163017" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline362"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96107054" />
 </androidx.constraintlayout.widget.ConstraintLayout>

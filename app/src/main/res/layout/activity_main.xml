@@ -39,12 +39,10 @@
             android:fontFamily="@font/poppins_bold"
             android:text="@string/to_do"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-            app:layout_constraintEnd_toStartOf="@+id/guideline211"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintBottom_toTopOf="@+id/guideline195"
+            app:layout_constraintEnd_toStartOf="@+id/guideline253"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/guideline195"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@+id/guideline268" />
 
         <TextView
             android:id="@+id/welcome_back"
@@ -53,86 +51,13 @@
             android:fontFamily="@font/poppins_extrabold"
             android:text="@string/welcome_back"
             android:textColor="@color/black"
-            android:textSize="31dp"
+            android:textSize="31sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline212"
             app:layout_constraintEnd_toStartOf="@+id/guideline211"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
             app:layout_constraintTop_toTopOf="@+id/guideline208"
             app:layout_constraintVertical_bias="0.058" />
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/rounded3"
-            app:layout_constraintBottom_toTopOf="@+id/guideline29"
-            app:layout_constraintEnd_toStartOf="@+id/guideline211"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/guideline28"
-            app:layout_constraintVertical_bias="0.0">
-
-            <LinearLayout
-                android:id="@+id/liner3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/email" />
-            </LinearLayout>
-        </ScrollView>
-
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/rounded3"
-            app:layout_constraintBottom_toTopOf="@+id/guideline27"
-            app:layout_constraintEnd_toStartOf="@+id/guideline211"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/guideline26"
-            app:layout_constraintVertical_bias="1.0">
-
-            <LinearLayout
-                android:id="@+id/liner1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-
-            </LinearLayout>
-        </ScrollView>
-
-        <ScrollView
-            android:id="@+id/scrollView3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/rounded3"
-            app:layout_constraintBottom_toTopOf="@+id/guideline25"
-            app:layout_constraintEnd_toStartOf="@+id/guideline211"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/guideline34"
-            app:layout_constraintVertical_bias="1.0">
-
-            <LinearLayout
-                android:id="@+id/liner2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp"
-
-
-                />
-        </ScrollView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline25"
@@ -201,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.24" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline207"
@@ -226,17 +151,17 @@
 
         <TextView
             android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MR. PULANCURESCU"
-            app:layout_constraintBottom_toTopOf="@+id/guideline195"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:fontFamily="@font/poppins_regular"
+            android:text="MR. PULANCURESCU"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/guideline268"
+            app:layout_constraintEnd_toStartOf="@+id/guideline253"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/welcome_back"
-            app:layout_constraintVertical_bias="0.616" />
+            app:layout_constraintTop_toTopOf="@+id/guideline212"
+            app:layout_constraintVertical_bias="0.921" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline211"
@@ -252,13 +177,213 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="104dp" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline253"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="148dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded3"
+            app:layout_constraintBottom_toTopOf="@+id/guideline29"
+            app:layout_constraintEnd_toStartOf="@+id/guideline211"
+            app:layout_constraintStart_toStartOf="@+id/guideline207"
+            app:layout_constraintTop_toTopOf="@+id/guideline28"
+            app:layout_constraintVertical_bias="0.975">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline265"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.9047619" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline264"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.0952381" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline263"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline262"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="371dp" />
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/guideline265"
+                app:layout_constraintEnd_toStartOf="@+id/guideline262"
+                app:layout_constraintStart_toStartOf="@+id/guideline263"
+                app:layout_constraintTop_toTopOf="@+id/guideline264"
+                tools:ignore="SpeakableTextPresentCheck">
+
+                <LinearLayout
+                    android:id="@+id/liner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded3"
+            app:layout_constraintBottom_toTopOf="@+id/guideline25"
+            app:layout_constraintEnd_toStartOf="@+id/guideline211"
+            app:layout_constraintStart_toStartOf="@+id/guideline207"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline257"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.91256833" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline256"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.08743169" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline254"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.04134367" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline255"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9586563" />
+
+            <ScrollView
+                android:id="@+id/scrollView3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/guideline257"
+                app:layout_constraintEnd_toStartOf="@+id/guideline255"
+                app:layout_constraintStart_toStartOf="@+id/guideline254"
+                app:layout_constraintTop_toTopOf="@+id/guideline256"
+                tools:ignore="SpeakableTextPresentCheck">
+
+                <LinearLayout
+                    android:id="@+id/liner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+
+
+                    >
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded3"
+            app:layout_constraintBottom_toTopOf="@+id/guideline27"
+            app:layout_constraintEnd_toStartOf="@+id/guideline211"
+            app:layout_constraintStart_toStartOf="@+id/guideline207"
+            app:layout_constraintTop_toTopOf="@+id/guideline26">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline258"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.9006211" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline259"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.099378884" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline260"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.04134367" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline261"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9586563" />
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/guideline258"
+                app:layout_constraintEnd_toStartOf="@+id/guideline261"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline260"
+                app:layout_constraintTop_toTopOf="@+id/guideline259"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SpeakableTextPresentCheck">
+
+                <LinearLayout
+                    android:id="@+id/liner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline268"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="143dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:id = "@+id/nav_view"
-        app:menu="@menu/navigation_menu" />
+        app:menu="@menu/navigation_menu"
+        tools:ignore="VisualLintBounds" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

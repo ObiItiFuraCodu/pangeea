@@ -6,29 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".test.AI_test_generator">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/good"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/accept"
         android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
         android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintBottom_toTopOf="@+id/guideline99"
         app:layout_constraintEnd_toStartOf="@+id/guideline101"
         app:layout_constraintStart_toStartOf="@+id/guideline100"
         app:layout_constraintTop_toTopOf="@+id/guideline98" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/bad"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/redo"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
+        android:text="@string/redo"
+        android:backgroundTint="@color/binaryblue"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline99"
         app:layout_constraintEnd_toStartOf="@+id/guideline103"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline102"
-        app:layout_constraintTop_toTopOf="@+id/guideline98" />
+        app:layout_constraintTop_toTopOf="@+id/guideline98"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
@@ -62,14 +68,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_percent="0.73" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline99"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9562243" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline100"
@@ -83,14 +89,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3362243" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline102"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6562243" />
+        app:layout_constraintGuide_percent="0.53" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline103"
