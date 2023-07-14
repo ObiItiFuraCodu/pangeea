@@ -60,7 +60,7 @@ public class HourBackend extends DatabaseConnector {
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
-
+    String database_string = "https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app";
     public HourBackend(Context context) {
         super(context);
         this.context = context;
@@ -68,7 +68,7 @@ public class HourBackend extends DatabaseConnector {
     }
     public void import_hours(LinearLayout layout, TextView welcome_back, ScrollView hour_view){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(database_string);
 
         Log.i("ATENTIE FRAIERE",user.getDisplayName());
 
@@ -221,7 +221,7 @@ public class HourBackend extends DatabaseConnector {
     public void add_hour(long hour_ms, String class_name, String details, List<Uri> files, String title,String support_lesson_content,boolean is_public){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(database_string);
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
         DatabaseReference ref = dbb.getReference("hourss");
@@ -273,7 +273,7 @@ public class HourBackend extends DatabaseConnector {
     public void add_automated_hour(long hour_ms, String class_name, String details, String title,String teacher,String highschool){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(database_string);
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
         DatabaseReference ref = dbb.getReference("hourss");
@@ -295,7 +295,7 @@ public class HourBackend extends DatabaseConnector {
     }
     public void retrieve_hour_data_prof(String hour_milis, ListView pupil_present, ListView lessons_sent, ListView question, Button close_presence,TextView class_name){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase database = FirebaseDatabase.getInstance(database_string);
         pupil_present.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         lessons_sent.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         question.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
@@ -401,7 +401,7 @@ public class HourBackend extends DatabaseConnector {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         Basic_tools tools = new Basic_tools();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase database = FirebaseDatabase.getInstance(database_string);
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

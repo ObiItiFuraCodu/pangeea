@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.pangeea.R;
@@ -47,7 +48,7 @@ public class Add_test_question extends AppCompatActivity {
         Button a_valid = findViewById(R.id.a_valid);
         Button b_valid = findViewById(R.id.b_valid);
         Button c_valid = findViewById(R.id.c_valid);
-        Button add_q_f = findViewById(R.id.add_q_file);
+        ImageButton add_q_f = findViewById(R.id.add_q_file);
 
         Button enter = findViewById(R.id.add_q);
         a_valid.setOnClickListener(new View.OnClickListener() {

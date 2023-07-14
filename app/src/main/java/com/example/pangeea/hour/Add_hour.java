@@ -1,6 +1,6 @@
 package com.example.pangeea.hour;
 
-import static kotlin.jvm.internal.Intrinsics.checkNotNull;
+
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;

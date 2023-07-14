@@ -53,6 +53,7 @@ public class TaskBackend extends DatabaseConnector{
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
     Basic_tools tool = new Basic_tools();
+    String database_string = "https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app";
     public TaskBackend(Context context) {
         super(context);
         this.context = context;
@@ -62,7 +63,7 @@ public class TaskBackend extends DatabaseConnector{
 
     public void add_task(long test_ms, String class_name, String details, List<Uri> files, String title,String content,boolean is_public){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(database_string);
         DatabaseReference ref = dbb.getReference("tasks");
         List<String> filenames  = new ArrayList<>();
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
@@ -111,7 +112,7 @@ public class TaskBackend extends DatabaseConnector{
     }
     public void import_tasks(LinearLayout layout, ScrollView task_view){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(database_string);
 
         Log.i("ATENTIE FRAIERE",user.getDisplayName());
 
@@ -242,7 +243,7 @@ public class TaskBackend extends DatabaseConnector{
     }
     public void retrieve_task_data_proffesor(String deadline, ListView submissions, ListView lessons_sent,TextView class_tasked){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase database = FirebaseDatabase.getInstance(database_string);
         FileDownloader downloader = new FileDownloader();
         submissions.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         lessons_sent.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
@@ -314,7 +315,7 @@ public class TaskBackend extends DatabaseConnector{
     public void retrieve_task_data_elev(String hour_ms, ListView lessons, ListView submissions, TextView teacher, TextView ai, TextView lesson_network,TextView task_title){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
+        FirebaseDatabase database = FirebaseDatabase.getInstance(database_string);
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
