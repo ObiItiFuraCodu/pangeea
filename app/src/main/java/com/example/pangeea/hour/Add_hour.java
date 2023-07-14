@@ -1,5 +1,7 @@
 package com.example.pangeea.hour;
 
+import static kotlin.jvm.internal.Intrinsics.checkNotNull;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -31,6 +33,7 @@ import com.example.pangeea.backend.TaskBackend;
 import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -170,6 +173,7 @@ public class Add_hour extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
+                        if(!(getExtension(data.getData().toString()).equals("jpg") || getExtension(data.getData().toString()).equals("png") || getExtension(data.getData().toString()).equals("pdf")))
                         list.add(data.getData());
                         stringlist.add(data.getData().getLastPathSegment());
                         Spinner spinner = findViewById(R.id.support_lessons);
@@ -185,6 +189,11 @@ public class Add_hour extends AppCompatActivity {
         intent.setType("*/*");
         intent = Intent.createChooser(intent,"Choose NOW");
         activityResultLauncher.launch(intent);
+    }
+    public static String getExtension(String fullName) {
+        String fileName = new File(fullName).getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
     }
 
     public void showDateTimePicker() {
