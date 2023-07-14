@@ -62,7 +62,7 @@ public class TaskBackend extends DatabaseConnector{
 
     public void add_task(long test_ms, String class_name, String details, List<Uri> files, String title,String content,boolean is_public){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         DatabaseReference ref = dbb.getReference("tasks");
         List<String> filenames  = new ArrayList<>();
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
@@ -111,7 +111,7 @@ public class TaskBackend extends DatabaseConnector{
     }
     public void import_tasks(LinearLayout layout, ScrollView task_view){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
 
         Log.i("ATENTIE FRAIERE",user.getDisplayName());
 
@@ -136,7 +136,7 @@ public class TaskBackend extends DatabaseConnector{
                                               // Log.i("ATENTIE FRAIERE : ",user_class.replaceAll("[^A-Za-z0-9]", ""));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("tasks").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
-                                                  task_view.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
+                                                //  task_view.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
                                               }else{
                                                   ref = dbb.getReference("tasks").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
 
@@ -242,7 +242,7 @@ public class TaskBackend extends DatabaseConnector{
     }
     public void retrieve_task_data_proffesor(String deadline, ListView submissions, ListView lessons_sent,TextView class_tasked){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         FileDownloader downloader = new FileDownloader();
         submissions.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         lessons_sent.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
@@ -314,7 +314,7 @@ public class TaskBackend extends DatabaseConnector{
     public void retrieve_task_data_elev(String hour_ms, ListView lessons, ListView submissions, TextView teacher, TextView ai, TextView lesson_network,TextView task_title){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

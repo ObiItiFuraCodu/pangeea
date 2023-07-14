@@ -41,8 +41,10 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline195"
             app:layout_constraintEnd_toStartOf="@+id/guideline253"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/guideline268" />
+            app:layout_constraintTop_toTopOf="@+id/guideline268"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/welcome_back"
@@ -51,8 +53,10 @@
             android:fontFamily="@font/poppins_extrabold"
             android:text="@string/welcome_back"
             android:textColor="@color/black"
-            android:textSize="31sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline212"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="100sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline268"
             app:layout_constraintEnd_toStartOf="@+id/guideline211"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
@@ -149,20 +153,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="12dp" />
 
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="MR. PULANCURESCU"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/guideline268"
-            app:layout_constraintEnd_toStartOf="@+id/guideline253"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toTopOf="@+id/guideline212"
-            app:layout_constraintVertical_bias="0.921" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline211"
             android:layout_width="wrap_content"
@@ -187,7 +177,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/rounded3"
+            android:background="@drawable/rounded"
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintEnd_toStartOf="@+id/guideline211"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
@@ -213,14 +203,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp" />
+                app:layout_constraintGuide_percent="0.043927647" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline262"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="371dp" />
+                app:layout_constraintGuide_percent="0.9586563" />
 
             <ScrollView
                 android:id="@+id/scrollView2"
@@ -248,11 +238,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/rounded3"
+            android:background="@drawable/rounded"
             app:layout_constraintBottom_toTopOf="@+id/guideline25"
             app:layout_constraintEnd_toStartOf="@+id/guideline211"
             app:layout_constraintStart_toStartOf="@+id/guideline207"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
+            app:layout_constraintTop_toTopOf="@+id/guideline195">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline257"
@@ -310,7 +300,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/rounded3"
+            android:background="@drawable/rounded"
             app:layout_constraintBottom_toTopOf="@+id/guideline27"
             app:layout_constraintEnd_toStartOf="@+id/guideline211"
             app:layout_constraintStart_toStartOf="@+id/guideline207"

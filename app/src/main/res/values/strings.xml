@@ -70,10 +70,13 @@
     <string name="ras">Answer</string>
     <string name="answertode" translatable="false">\"Raspunsul la intrebarea \"</string>
     <string name="iz" translatable="false">\" este:\"</string>
-    <string name="add2">ADD</string>
-    <string name="a_prompt">A:</string>
-    <string name="b_prompt">B:</string>
-    <string name="c_prompt">C:</string>
+    <string name="add2" translatable="false">ADD</string>
+    <string name="a_prompt" translatable="false">A:</string>
+    <string name="b_prompt" translatable="false">B:</string>
+    <string name="c_prompt" translatable="false">C:</string>
+    <string name="FirebaseURL" translatable="false">https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app</string>
+    <string name="openailink" translatable="false">https://api.openai.com/v1/completions</string>
+    <string name="openaikey" translatable="false">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</string>
 
 
 </resources>

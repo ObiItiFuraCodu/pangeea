@@ -72,7 +72,7 @@ public class DatabaseConnector {
     Context context;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore store = FirebaseFirestore.getInstance();
-    private FirebaseDatabase db = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+    private FirebaseDatabase db = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
 
     final long ONE_HOUR_IN_MILIS = 3600000;
     final long ONE_DAY_IN_MILIS = 86400000;
@@ -239,7 +239,7 @@ public class DatabaseConnector {
         }else{
             FirebaseUser user = auth.getCurrentUser();
             List<String> filenames  = new ArrayList<>();
-            FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+            FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
             StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
             DatabaseReference ref = dbb.getReference("hourss");
@@ -266,7 +266,7 @@ public class DatabaseConnector {
 
             FirebaseUser user = auth.getCurrentUser();
             List<String> filenames  = new ArrayList<>();
-            FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+            FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
             StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
             DatabaseReference ref = dbb.getReference("hourss");
@@ -315,7 +315,7 @@ public class DatabaseConnector {
         FirebaseUser user = auth.getCurrentUser();
         CatalogueBackend backend = new CatalogueBackend(context);
 
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
         DatabaseReference ref = dbb.getReference("hourss");
@@ -404,7 +404,7 @@ public class DatabaseConnector {
 
             FirebaseUser user = auth.getCurrentUser();
            // List<String> filenames  = new ArrayList<>();
-            FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+            FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
             StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
             DatabaseReference ref = dbb.getReference("tasks");

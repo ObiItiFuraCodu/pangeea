@@ -421,7 +421,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/poppins_extrabold"
-            android:text="TextView"
             android:text="@string/add_some_details"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline386"

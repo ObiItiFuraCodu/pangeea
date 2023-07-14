@@ -12,6 +12,7 @@
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/rounded2.xml" value="0.5475" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/rounded3.xml" value="0.5475" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/rounded4.xml" value="0.5465" />
+        <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/roundedmock.xml" value="0.5475" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/sandu_ciorba.xml" value="0.318" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/vector_user.xml" value="0.5475" />
         <entry key="..\:/Users/obipe/AndroidStudioProjects/pangeea/app/src/main/res/drawable/vectormobile.xml" value="0.5475" />
@@ -81,7 +82,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

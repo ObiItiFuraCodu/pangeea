@@ -79,7 +79,7 @@ public class TestBackend extends DatabaseConnector {
     }
     public void add_test(long test_ms, String class_name, String details, List<Uri> files, String title, List<HashMap<String,Object>> questions,String content,boolean is_public){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         DatabaseReference ref = dbb.getReference("tests");
         List<String> filenames  = new ArrayList<>();
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
@@ -131,7 +131,7 @@ public class TestBackend extends DatabaseConnector {
     }
     public void import_tests(LinearLayout layout, ScrollView test_scroll){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
 
         Log.i("ATENTIE FRAIERE",user.getDisplayName());
 
@@ -156,7 +156,7 @@ public class TestBackend extends DatabaseConnector {
                                               // Log.i("ATENTIE FRAIERE : ",user_class.replaceAll("[^A-Za-z0-9]", ""));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("tests").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
-                                                  test_scroll.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
+                                                  //test_scroll.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
 
                                               }else{
                                                   ref = dbb.getReference("tests").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("classes").child(user_class.replaceAll("[^A-Za-z0-9]", ""));
@@ -302,7 +302,7 @@ public class TestBackend extends DatabaseConnector {
     }
     public void retrieve_test_data_proffesor(ListView support_lessons, String deadline_ms,ListView submissions,TextView class_tested){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         FileDownloader downloader = new FileDownloader();
         support_lessons.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         submissions.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
@@ -384,7 +384,7 @@ public class TestBackend extends DatabaseConnector {
     public void retrieve_test_data_elev(String hour_ms, ListView lessons, TextView ai, TextView lesson_network,TextView test_title){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -479,7 +479,7 @@ public class TestBackend extends DatabaseConnector {
                 });
     }
     public void retrieve_test_questions_elev(ListView question, String hour_ms, List<HashMap<String,Object>> answer_list){
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         store.collection("users").document(user.getDisplayName())
@@ -543,7 +543,7 @@ public class TestBackend extends DatabaseConnector {
 
     }
     public void correct_test_and_upload(String hour_ms,List<HashMap<String,Object>> answers,String teacher){
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
         for(HashMap<String,Object> answer : answers){
@@ -603,7 +603,7 @@ public class TestBackend extends DatabaseConnector {
     }
     public void retrieve_questions_to_be_corrected(ListView to_correct,String test_ms,String pupil,String pupil_class){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         List<String> question_names = new ArrayList<>();
         List<String> correct_questions = new ArrayList<>();
         CatalogueBackend catalogue = new CatalogueBackend(context);

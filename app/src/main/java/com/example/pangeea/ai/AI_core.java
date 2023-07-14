@@ -43,10 +43,17 @@ import java.util.Map;
 import java.util.Random;
 
 public class AI_core {
-    private String apiUrl = "https://api.openai.com/v1/completions";
-    private String accessToken = "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";
+    Context context;
+    
+    public AI_core(Context context){
+        this.context = context;
+    }
+
+    private String apiUrl = context.getResources().getString(R.string.openailink);
+    private String accessToken = context.getResources().getString(R.string.openaikey);
     String result = "";
     Interpreter tflite;
+    
    // HashMap<String,Integer> ascii = new HashMap<>();
 
     List<String> modified_ascii =Arrays.asList(new String[]{"e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"}) ;
@@ -86,7 +93,7 @@ public class AI_core {
         System.out.println(s);
         return Long.toString(s);
     }
-    Context context;
+    
     public boolean getRandomBoolean() {
         return Math.random() < 0.5;
         //I tried another approaches here, still the same result
@@ -96,9 +103,6 @@ public class AI_core {
         int index = new Random().nextInt(3);
         vector[index] = true;
         return vector;
-    }
-    public AI_core(Context context){
-        this.context = context;
     }
 
     public void AI_Text(String input,TextView view){

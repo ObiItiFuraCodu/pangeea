@@ -68,7 +68,7 @@ public class HourBackend extends DatabaseConnector {
     }
     public void import_hours(LinearLayout layout, TextView welcome_back, ScrollView hour_view){
         FirebaseUser user = auth.getCurrentUser();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
 
         Log.i("ATENTIE FRAIERE",user.getDisplayName());
 
@@ -94,8 +94,8 @@ public class HourBackend extends DatabaseConnector {
                                               welcome_back.setText(context.getResources().getString(R.string.welcome_back) + " " + auth.getCurrentUser().getDisplayName().toUpperCase(Locale.ROOT));
                                               if(user_category.equals("1")){
                                                   ref = dbb.getReference("hourss").child(user_highschool.replaceAll("[^A-Za-z0-9]", "")).child("teachers").child(user.getDisplayName());
-                                                  hour_view.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
-                                                  welcome_back.setTextColor(context.getResources().getColor(R.color.dark_red));
+                                               //   hour_view.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
+                                                 // welcome_back.setTextColor(context.getResources().getColor(R.color.dark_red));
 
 
                                               }else{
@@ -221,7 +221,7 @@ public class HourBackend extends DatabaseConnector {
     public void add_hour(long hour_ms, String class_name, String details, List<Uri> files, String title,String support_lesson_content,boolean is_public){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
         DatabaseReference ref = dbb.getReference("hourss");
@@ -273,7 +273,7 @@ public class HourBackend extends DatabaseConnector {
     public void add_automated_hour(long hour_ms, String class_name, String details, String title,String teacher,String highschool){
         FirebaseUser user = auth.getCurrentUser();
         List<String> filenames  = new ArrayList<>();
-        FirebaseDatabase dbb = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase dbb = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         StorageReference storage_ref = FirebaseStorage.getInstance().getReference();
 
         DatabaseReference ref = dbb.getReference("hourss");
@@ -295,7 +295,7 @@ public class HourBackend extends DatabaseConnector {
     }
     public void retrieve_hour_data_prof(String hour_milis, ListView pupil_present, ListView lessons_sent, ListView question, Button close_presence,TextView class_name){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         pupil_present.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         lessons_sent.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
         question.setBackgroundColor(context.getResources().getColor(R.color.very_light_red));
@@ -401,7 +401,7 @@ public class HourBackend extends DatabaseConnector {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FileDownloader downloader = new FileDownloader();
         Basic_tools tools = new Basic_tools();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(context.getString(R.string.FirebaseURL));
         store.collection("users").document(user.getDisplayName())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
