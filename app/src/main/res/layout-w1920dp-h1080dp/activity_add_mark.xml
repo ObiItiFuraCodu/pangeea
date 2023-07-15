@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".catalogue.Add_mark">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline417"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.74209243" />
-
     <TextView
         android:id="@+id/textView9"
         android:layout_width="0dp"
@@ -32,16 +25,16 @@
         android:id="@+id/add_date"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:textSize="20dp"
-        app:cornerRadius="50dp"
         android:backgroundTint="#5D9CFB"
         android:fontFamily="@font/poppins_extrabold"
         android:text="@string/select"
-
         android:textAlignment="center"
         android:textColor="@color/white"
+
+        android:textSize="20dp"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline197"
-        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+        app:layout_constraintEnd_toStartOf="@+id/guideline236"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toTopOf="@+id/guideline43"
         app:layout_constraintVertical_bias="0.555" />
@@ -69,11 +62,11 @@
         android:text="@string/add"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline36"
-        app:layout_constraintEnd_toStartOf="@+id/guideline417"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="@+id/guideline416"
-        app:layout_constraintTop_toTopOf="@+id/guideline415"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline414"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="@+id/guideline237"
+        app:layout_constraintTop_toTopOf="@+id/guideline37"
+        app:layout_constraintVertical_bias="0.941" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline36"
@@ -183,7 +176,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.42579076" />
+        app:layout_constraintGuide_begin="412dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -192,7 +185,9 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline237"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toTopOf="@+id/guideline42"
-        app:layout_constraintVertical_bias="0.41">
+        app:layout_constraintVertical_bias="0.41"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp">
 
         <EditText
             android:id="@+id/mark"
@@ -200,13 +195,12 @@
             android:layout_height="0dp"
 
 
-
             android:ems="10"
             android:inputType="textPersonName"
             android:text="w"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline413"
             app:layout_constraintHorizontal_bias="0.979"
             app:layout_constraintStart_toStartOf="@+id/guideline238"
             app:layout_constraintTop_toTopOf="parent"
@@ -217,20 +211,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="194dp" />
+            app:layout_constraintGuide_begin="319dp" />
 
         <TextView
             android:id="@+id/textView35"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="Then\nenter your mark:"
-            android:fontFamily="@font/poppins_extrabold"
-            android:textColor="@color/black"
             android:autoSizeTextType="uniform"
+            android:fontFamily="@font/poppins_extrabold"
+            android:text="Then\nenter your mark:"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/mark"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline412"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline412"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_begin="16dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline413"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_begin="524dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -238,19 +250,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96107054" />
+        app:layout_constraintGuide_begin="638dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline415"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8787879" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline416"
+        android:id="@+id/guideline414"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.20924574" />
+        app:layout_constraintGuide_begin="1056dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

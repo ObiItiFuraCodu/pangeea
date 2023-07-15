@@ -14,7 +14,6 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins_extrabold"
         android:textColor="@color/black"
-
         app:layout_constraintBottom_toTopOf="@+id/guideline121"
         app:layout_constraintEnd_toStartOf="@+id/guideline123"
         app:layout_constraintStart_toStartOf="@+id/guideline119"
@@ -111,10 +110,12 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/raise_hand"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#5C7BE9"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/binaryblue"
         android:text="@string/raise_hand"
-        app:cornerRadius="20dp"
+        app:cornerRadius="50dp"
+        android:fontFamily="@font/poppins_extrabold"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline322"
         app:layout_constraintEnd_toStartOf="@+id/guideline123"
         app:layout_constraintStart_toStartOf="@+id/guideline118"
@@ -125,15 +126,15 @@
         android:id="@+id/ai_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
+        android:textSize="50sp"
         android:fontFamily="@font/poppins_extrabold"
         android:text="@string/generate_ai"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline334"
+        app:layout_constraintBottom_toTopOf="@+id/guideline322"
         app:layout_constraintEnd_toStartOf="@+id/guideline120"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline123"
-        app:layout_constraintTop_toTopOf="@+id/guideline322"
+        app:layout_constraintTop_toTopOf="@+id/guideline333"
         app:layout_constraintVertical_bias="0.02" />
 
     <TextView
@@ -143,7 +144,8 @@
         android:fontFamily="@font/poppins_extrabold"
         android:text="@string/need_help_n_see_what_others_did"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline334"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/guideline322"
         app:layout_constraintEnd_toStartOf="@+id/guideline118"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline119"
@@ -210,29 +212,33 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/active_inactive"
-        app:cornerRadius="20dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Button"
         android:backgroundTint="#67DC54"
+        android:text="Button"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textColor="@color/black"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline124"
-        app:layout_constraintEnd_toStartOf="@+id/guideline118"
+        app:layout_constraintEnd_toStartOf="@+id/guideline420"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline119"
-        app:layout_constraintTop_toTopOf="@+id/guideline121" />
+        app:layout_constraintTop_toTopOf="@+id/guideline121"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline124"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
+        app:layout_constraintGuide_percent="0.19" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline322"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8080808" />
+        app:layout_constraintGuide_percent="0.88" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline333"
@@ -246,6 +252,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8338945" />
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline420"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="524dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

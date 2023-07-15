@@ -151,7 +151,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline199"
         app:layout_constraintStart_toStartOf="@+id/guideline205"
         app:layout_constraintTop_toTopOf="@+id/guideline201"
-        app:srcCompat="@drawable/sandu_ciorba" />
+        app:srcCompat="@drawable/pangeea_logo2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline205"
