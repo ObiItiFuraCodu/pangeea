@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.example.pangeea.R;
 import com.example.pangeea.ai.AI_core;
+import com.example.pangeea.content.Lesson_viewer_nongenerated;
 import com.example.pangeea.other.Basic_tools;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -61,27 +62,10 @@ public class ContentBackend extends DatabaseConnector{
                                 lesson_button.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        HashMap<String,Object> lesson_names = document.get("files", HashMap.class);
-                                        for(int i = 0;i< lesson_names.size();i++){
-                                            String name = (String) lesson_names.get(Integer.toString(i));
-                                            FirebaseStorage storage = FirebaseStorage.getInstance();
-                                            StorageReference storageRef = storage.getReference();
-                                            storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                @Override
-                                                public void onSuccess(Uri uri) {
-
-
-                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception exception) {
-                                                    // Handle any errors
-                                                }
-                                            });
-
-                                        }
+                                        Intent i = new Intent(context, Lesson_viewer_nongenerated.class);
+                                        i.putExtra("grade",grade);
+                                        i.putExtra("title",document.getString("title"));
+                                        context.startActivity(i);
                                     }
                                 });
                                 lesson_button.setElevation(10f);
