@@ -90,15 +90,8 @@
         <activity
             android:name=".test.Add_test"
             android:exported="false" />
-        <activity
-            android:name=".other.ModifyTimetable"
-            android:exported="false" />
-        <activity
-            android:name=".other.Dashboard"
-            android:exported="false" />
-        <activity
-            android:name=".other.DailyHourSetter"
-            android:exported="false" />
+
+
         <activity
             android:name=".catalogue.Materie_info"
             android:exported="false" />

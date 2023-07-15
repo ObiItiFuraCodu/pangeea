@@ -2,16 +2,7 @@ package com.example.pangeea.ai;
 
 import android.content.Context;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.pangeea.R;
-import com.example.pangeea.other.T_Q_Adapter;
-import com.example.pangeea.other.Test_Question;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class Test_AI {
