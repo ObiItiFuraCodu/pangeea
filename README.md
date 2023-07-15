@@ -203,30 +203,13 @@ Toate aceste clase trimit si primesc date din baza de date Firebase intr-un mod 
                                 lesson_button.setBackgroundColor(context.getResources().getColor(R.color.binaryblue));
                                 lesson_button.setElevation(10f);
                                 lesson_button.setText(document.getString("title"));//Adaugarea titlurilor si setarea unui OnClickListener pentru accesarea lor
-                                lesson_button.setOnClickListener(new View.OnClickListener() {
+                              lesson_button.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        HashMap<String,Object> lesson_names = document.get("files", HashMap.class);
-                                        for(int i = 0;i< lesson_names.size();i++){
-                                            String name = (String) lesson_names.get(Integer.toString(i));
-                                            FirebaseStorage storage = FirebaseStorage.getInstance();
-                                            StorageReference storageRef = storage.getReference();
-                                            storageRef.child("lessons/" + name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                @Override
-                                                public void onSuccess(Uri uri) {
-
-
-                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception exception) {
-                                                    // Handle any errors
-                                                }
-                                            });
-
-                                        }
+                                        Intent i = new Intent(context, Lesson_viewer_nongenerated.class);
+                                        i.putExtra("grade",grade);
+                                        i.putExtra("title",document.getString("title"));
+                                        context.startActivity(i);
                                     }
                                 });
                                 lesson_button.setElevation(10f);
