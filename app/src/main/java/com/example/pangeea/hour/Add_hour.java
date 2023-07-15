@@ -173,12 +173,16 @@ public class Add_hour extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
-                        if(!(getExtension(data.getData().toString()).equals("jpg") || getExtension(data.getData().toString()).equals("png") || getExtension(data.getData().toString()).equals("pdf")))
-                        list.add(data.getData());
-                        stringlist.add(data.getData().getLastPathSegment());
-                        Spinner spinner = findViewById(R.id.support_lessons);
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_hour.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
-                        spinner.setAdapter(adapter);
+                        if((getExtension(data.getData().toString()).equals("jpg") || getExtension(data.getData().toString()).equals("png") || getExtension(data.getData().toString()).equals("pdf"))){
+                            list.add(data.getData());
+                            stringlist.add(data.getData().getLastPathSegment());
+                            Spinner spinner = findViewById(R.id.support_lessons);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_hour.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
+                            spinner.setAdapter(adapter);
+                        }else{
+                            Toast.makeText(Add_hour.this,"Invalid file",Toast.LENGTH_LONG).show();
+                        }
+
 
 
                     }

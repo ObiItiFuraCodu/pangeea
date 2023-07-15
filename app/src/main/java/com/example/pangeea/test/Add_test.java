@@ -26,9 +26,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.pangeea.backend.TestBackend;
+import com.example.pangeea.hour.Add_hour;
 import com.example.pangeea.main.MainActivity;
 import com.example.pangeea.R;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -202,15 +204,20 @@ public class Add_test extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
-                        list.add(data.getData());
-                        stringlist.add(data.getData().getLastPathSegment());
-                        Spinner spinner = findViewById(R.id.test_support_lessons);
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
-                        spinner.setAdapter(adapter);
+                        if((getExtension(data.getData().toString()).equals("jpg") || getExtension(data.getData().toString()).equals("png") || getExtension(data.getData().toString()).equals("pdf"))){
+                            list.add(data.getData());
+                            stringlist.add(data.getData().getLastPathSegment());
+                            Spinner spinner = findViewById(R.id.support_lessons);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
+                            spinner.setAdapter(adapter);
+                        }else{
+                            Toast.makeText(Add_test.this,"Invalid file",Toast.LENGTH_LONG).show();
+                        }
+
 
 
                     }else{
-                        Log.e("MUIE","aiwsawsa");
+
                     }
                 }
             });
@@ -220,7 +227,11 @@ public class Add_test extends AppCompatActivity {
         intent = Intent.createChooser(intent,"Choose NOW");
         activityResultLauncher.launch(intent);
     }
-
+    public static String getExtension(String fullName) {
+        String fileName = new File(fullName).getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+    }
 
     public void showDateTimePicker() {
         final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
