@@ -82,9 +82,7 @@ public class AI_core {
                 for(int i = 1;i<= countDigit(modified_ascii_value_of(c));i++){
                     s = s*10;
                 }
-                /// System.out.println((int)c);
-                //System.out.println(countDigit(modified_ascii_value_of(c)));
-                // System.out.println(modified_ascii_value_of(c));
+
                 System.out.println(s);
                 s = s+modified_ascii_value_of(c);
             }
@@ -94,9 +92,8 @@ public class AI_core {
         return Long.toString(s);
     }
     
-    public boolean getRandomBoolean() {
+    public boolean random() {
         return Math.random() < 0.5;
-        //I tried another approaches here, still the same result
     }
     public static boolean[] generateBooleanVector() {
         boolean[] vector = new boolean[3];
@@ -479,7 +476,7 @@ public class AI_core {
                            question.put("prompt",text);
                            question.put("type","A/B/C");
                            question_list.add(question_index,question);
-                           AI_complete_test(title,question_list,question_index,1,false,getRandomBoolean(),text);
+                           AI_complete_test(title,question_list,question_index,1,false,random(),text);
                        }else{
                            HashMap<String,Object> main_question = (HashMap<String, Object>) question_list.get(question_index);
                            HashMap<String,Object> variants;
@@ -494,7 +491,7 @@ public class AI_core {
 
                                if(answer_no < 3){
                                    main_question.put("variants",variants);
-                                   AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
+                                   AI_complete_test(title,question_list,question_index,answer_no+1,false,random(),text);
 
                                }else{
                                    main_question.put("variants",variants);
@@ -511,7 +508,7 @@ public class AI_core {
                                }
                                if(answer_no < 3){
                                    main_question.put("variants",variants);
-                                   AI_complete_test(title,question_list,question_index,answer_no+1,false,getRandomBoolean(),text);
+                                   AI_complete_test(title,question_list,question_index,answer_no+1,false,random(),text);
 
                                }else{
                                    main_question.put("variants",variants);
