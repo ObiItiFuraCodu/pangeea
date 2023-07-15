@@ -305,7 +305,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="49dp" />
+                app:layout_constraintGuide_begin="134dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline235"
@@ -313,6 +313,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="356dp" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="57dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline214"
+                app:layout_constraintEnd_toStartOf="@+id/guideline234"
+                app:layout_constraintHorizontal_bias="0.631"
+                app:layout_constraintStart_toStartOf="@+id/guideline213"
+                app:layout_constraintTop_toTopOf="@+id/guideline233"
+                app:layout_constraintVertical_bias="0.705"
+                tools:srcCompat="@tools:sample/avatars" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -323,5 +336,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:id = "@+id/nav_view"
-        app:menu="@menu/navigation_menu_pupil_info" />
+        app:menu="@menu/navigation_menu_pupil_info" >
+
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

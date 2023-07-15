@@ -92,7 +92,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_test"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:backgroundTint="@color/binaryblue"
@@ -100,11 +100,11 @@
         android:text="@string/go"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline60"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline419"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/guideline418"
         app:layout_constraintTop_toTopOf="@+id/guideline61"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
     <TextView
@@ -148,7 +148,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.19" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline50"
@@ -185,7 +185,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50342" />
+        app:layout_constraintGuide_percent="0.52" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline55"
@@ -227,7 +227,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_percent="0.96" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline61"
@@ -394,7 +394,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8442822" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline401"
@@ -479,7 +479,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35"
+            app:layout_constraintGuide_percent="0.27"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -539,7 +539,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.37712896" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline411"
@@ -547,6 +547,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.27222982"
+        app:layout_constraintGuide_percent="0.29"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline418"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="735dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline419"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="1114dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

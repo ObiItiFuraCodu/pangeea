@@ -164,28 +164,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.029143898" />
+                app:layout_constraintGuide_percent="0.06616541" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline319"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.97085613" />
+                app:layout_constraintGuide_percent="0.94285715" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline320"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.043835618" />
+                app:layout_constraintGuide_percent="0.009395185" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline321"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95616436" />
+                app:layout_constraintGuide_percent="0.9906048" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView

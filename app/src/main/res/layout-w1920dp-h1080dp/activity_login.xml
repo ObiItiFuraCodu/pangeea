@@ -125,7 +125,7 @@
         android:layout_height="411dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline203"
         app:layout_constraintStart_toStartOf="@+id/guideline30"
-        app:srcCompat="@drawable/sandu_ciorba"
+        app:srcCompat="@drawable/pangeea_logo2"
         tools:layout_editor_absoluteY="335dp" />
 
     <androidx.constraintlayout.widget.Guideline
