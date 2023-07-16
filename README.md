@@ -1489,7 +1489,7 @@ Tutorial Sidebar - https://www.geeksforgeeks.org/navigation-drawer-in-android/<b
 Algoritmi selectie fisiere - stackoverflow  <br />
 Speech recognition - https://medium.com/voice-tech-podcast/android-speech-to-text-tutorial-8f6fa71606ac<br />
 Alert dialog - https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android <br />
-File extension checker - stack overflow
+File extension checker - stack overflow<br />
 Elemente custom - Canva<br />
 Algoritmii au fost modificati pentru a se potrivi cu nevoie de functionare ale aplicatiei.<br />
 Bibliografie Tehnologii <br />
