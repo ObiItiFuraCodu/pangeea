@@ -1,29 +1,29 @@
-# pangeea
-Despre cod
-Backend:
-Realizator:Habian Denis
-Codul a fost facut in 2 limbaje de programare si anume Java si Python utilizand baza de date Firebase.Aplicatia este formata din numeroase clase impartite in 10 categorii (ai,backend,catalogue,content,custom elements,hour,main,other,task si test).Fiecare categorie se ocupa de cate un aspect al aplicatiei,clasele din folderul backend fiind baza aplicatiei.
-AI:
+# Pangeea
+**Despre cod**<br />
+**Backend**:<br />
+**Realizator:Habian Denis**<br />
+Codul a fost facut in 2 limbaje de programare si anume Java si Python utilizand baza de date Firebase.Aplicatia este formata din numeroase clase impartite in 10 categorii (ai,backend,catalogue,content,custom elements,hour,main,other,task si test).Fiecare categorie se ocupa de cate un aspect al aplicatiei,clasele din folderul backend fiind baza aplicatiei.<br />
+**AI:**<br />
 Clasele din folderul AI se ocupa de functionalitatea aplicatiei numita “IHAI” (implementare hibrida AI).Aceasta se refera la implementarea inteligentei artificiale in aplicatie prin utilizarea API-ului OpenAI alaturi de o retea neuronala realizata in Python.
-IHAI ofera aplicatiei un aspect “viu” aceasta devenind capabila sa ajute elevul si profesorul prin diverse moduri si anume:
--Generare test
-Testele sunt generate in mod recursiv,initial fiind generate intrebarile apoi raspunsurile acestea putand fi corecte sau gresite.
--Generare lectie
-DPDV al profesorului - generarea lectiei este bazata pe titlu alaturi de niste cuvinte cheie alese de profesor
-DPDV al elevului - generarea lectiei este bazata pe titlu iar in urma generarii elevul poate adresa intrebari
--Explicare test
-Testele de tip ABC sunt corectate automat de catre aplicatie iar in urma corectarii elevul isi poate vedea nota alaturi de explicatii la fiecare intrebare.
-Toate functiile de mai sus au fost realizate cu ajutorul API-ului OpenAI apelat prin libraria Volley
--Lectii si teste de imbunatatire (sortate si generate)
-Selectia lectiilor pentru imbunatatirea performantei unui elev este compusa dintr-o retea neuronala si un sistem simplu de selectie care se bazeaza pe secvente similare din titlul altor lectii cu titlul unui test sustinut de catre el la care a obtinut o nota mai mica de 5.
-Acestea functioneaza impreuna pentru a selecta lectiile similare dpdv al titlului nu numai din punct de vedere al familiei lexicale cat si al campului semantic
-Reteaua neuronala:
-Aceasta este formata din 3 straturi,primul format din 10 neuroni(input layer),al doilea din 5 si al treilea din 1 neuron(output layer).
-Aceasta preia 2 cuvinte transformate in numere de tip long printr-un cod ascii modificat si in functie de cat de asemanatoare sunt returneaza o variabila de tip float.Daca variabila este mai mare de 0.5,cuvintele sunt asemanatoare.
-Codul ascii modificat:
-Acesta este constituit din toate literele de la a la z in alfabetul englez sortate in functie de frecventa lor in cuvintele de zi cu zi 
-Algoritmul simplu de selectie:
-Acesta selecteaza cuvintele in functie de numarul de secvente similare gasite in cele 2 titluri.
+IHAI ofera aplicatiei un aspect “viu” aceasta devenind capabila sa ajute elevul si profesorul prin diverse moduri si anume:<br />
+-Generare test<br />
+Testele sunt generate in mod recursiv,initial fiind generate intrebarile apoi raspunsurile acestea putand fi corecte sau gresite.<br />
+-Generare lectie<br />
+DPDV al profesorului - generarea lectiei este bazata pe titlu alaturi de niste cuvinte cheie alese de profesor<br />
+DPDV al elevului - generarea lectiei este bazata pe titlu iar in urma generarii elevul poate adresa intrebari<br />
+-Explicare test<br />
+Testele de tip ABC sunt corectate automat de catre aplicatie iar in urma corectarii elevul isi poate vedea nota alaturi de explicatii la fiecare intrebare.<br />
+Toate functiile de mai sus au fost realizate cu ajutorul API-ului OpenAI apelat prin libraria Volley<br />
+-Lectii si teste de imbunatatire (sortate si generate)<br />
+Selectia lectiilor pentru imbunatatirea performantei unui elev este compusa dintr-o retea neuronala si un sistem simplu de selectie care se bazeaza pe secvente similare din titlul altor lectii cu titlul unui test sustinut de catre el la care a obtinut o nota mai mica de 5.<br />
+Acestea functioneaza impreuna pentru a selecta lectiile similare dpdv al titlului nu numai din punct de vedere al familiei lexicale cat si al campului semantic<br />
+Reteaua neuronala:<br />
+Aceasta este formata din 3 straturi,primul format din 10 neuroni(input layer),al doilea din 5 si al treilea din 1 neuron(output layer).<br />
+Aceasta preia 2 cuvinte transformate in numere de tip long printr-un cod ascii modificat si in functie de cat de asemanatoare sunt returneaza o variabila de tip float.Daca variabila este mai mare de 0.5,cuvintele sunt asemanatoare.<br />
+Codul ascii modificat:<br />
+Acesta este constituit din toate literele de la a la z in alfabetul englez sortate in functie de frecventa lor in cuvintele de zi cu zi <br />
+Algoritmul simplu de selectie:<br />
+Acesta selecteaza cuvintele in functie de numarul de secvente similare gasite in cele 2 titluri.<br />
 
 ```Java
 //Exemplu cod:
@@ -180,9 +180,9 @@ Acesta selecteaza cuvintele in functie de numarul de secvente similare gasite in
     return false;
     }
 ```
-Backend:
-Clasele din folderul backend se ocupa de alimentarea aplicatiei cu date si sincronizarea lor cu aplicatia in timp real.
-Toate aceste clase trimit si primesc date din baza de date Firebase intr-un mod eficient,rapid si sigur.
+**Backend:**<br />
+Clasele din folderul backend se ocupa de alimentarea aplicatiei cu date si sincronizarea lor cu aplicatia in timp real.<br />
+Toate aceste clase trimit si primesc date din baza de date Firebase intr-un mod eficient,rapid si sigur.<br />
 ```Java
 //Exemplu cod
   public void retrieve_lessons(String grade, LinearLayout linearl, String main_course){
@@ -220,9 +220,9 @@ Toate aceste clase trimit si primesc date din baza de date Firebase intr-un mod 
                     }
                 });
 ```
-Catalogue :
-Clasele din folderul catalogue se ocupa de note,absente dar si de cresterea sau scaderea RP-urilor unui elev.RP-urile constituie sistemul de ranking al aplicatiei ce motiveaza fiecare elev sa invete si sa isi imbunatateasca notele.
-Sistemul de ranking are 5 rank-uri iar prin promovarea fiecarui rank elevul va primi cate un 10 la o materie la alegere.
+**Catalogue :**<br />
+Clasele din folderul catalogue se ocupa de note,absente dar si de cresterea sau scaderea RP-urilor unui elev.RP-urile constituie sistemul de ranking al aplicatiei ce motiveaza fiecare elev sa invete si sa isi imbunatateasca notele.<br />
+Sistemul de ranking are 5 rank-uri iar prin promovarea fiecarui rank elevul va primi cate un 10 la o materie la alegere.<br />
 ```Java
 //Exemplu cod
  public void upload_mark(String class_marked, String pupil, String mark,String date,String test_name,boolean improvement_test,String subject){
@@ -305,8 +305,8 @@ Sistemul de ranking are 5 rank-uri iar prin promovarea fiecarui rank elevul va p
                 });
     }
 ```
-Content:
-Clasele din folderul content se ocupa partial de continutul aplicatiei (dpdv al imbunatatirii performantei si al lectiilor).
+**Content:**<br />
+Clasele din folderul content se ocupa partial de continutul aplicatiei (dpdv al imbunatatirii performantei si al lectiilor).<br />
 ```Java
 //Exemplu cod
 public class Lesson_viewer extends AppCompatActivity {
@@ -330,8 +330,8 @@ public class Lesson_viewer extends AppCompatActivity {
 }
 
 ```
-Custom Elements:
-Clasele din acest folder se ocupa de butoanele custom ce ofera aplicatiei o interfata placuta
+**Custom Elements:**<br />
+Clasele din acest folder se ocupa de butoanele custom ce ofera aplicatiei o interfata placuta<br />
 ```Java
 package com.example.pangeea.CustomElements;
 
@@ -417,9 +417,9 @@ public class CustomPupilButton extends CardView {
 }
 ```
 
-Hour:
-Clasele din folderul hour se ocupa de crearea orelor si participarea la acestea utilizand tehnologia IHAI si Smart Dock.
-Smart Dock este o tehnologie ce utilizeaza un dock-ing station fizic si capabilitatea NFC a telefonului pentru a asigura realizarea prezentei intr-un mod mult mai eficient.
+**Hour:**<br />
+Clasele din folderul hour se ocupa de crearea orelor si participarea la acestea utilizand tehnologia IHAI si Smart Dock.<br />
+Smart Dock este o tehnologie ce utilizeaza un dock-ing station fizic si capabilitatea NFC a telefonului pentru a asigura realizarea prezentei intr-un mod mult mai eficient.<br />
 ```Java
 //Exemplu cod
 public class Add_hour extends AppCompatActivity {
@@ -606,8 +606,8 @@ ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResul
 
 }
 ```
-Main:
-Acestea sunt clasele de tip “home” ale aplicatiei de unde profesorul poate accesa capabilitatile aplicatiei
+**Main:**<br />
+Acestea sunt clasele de tip “home” ale aplicatiei de unde profesorul poate accesa capabilitatile aplicatiei<br />
 ```Java
 //Exemplu cod
  //Initializare
@@ -771,10 +771,10 @@ Acestea sunt clasele de tip “home” ale aplicatiei de unde profesorul poate a
     }
 
 ```
-Task:
-Clasele din acest folder sunt similare cu Hour diferenta fiind ca task nu dispune de Smart Dock
-Test:
-Aceste clase permit adaugarea unui test sau generarea lui,sustinerea unui test,corectarea lui automata sau manuala (in functie de tipul intrebarii) si explicarea lui in urma atribuirii notei.
+**Task:**<br />
+Clasele din acest folder sunt similare cu Hour diferenta fiind ca task nu dispune de Smart Dock<br />
+**Test:**<br />
+Aceste clase permit adaugarea unui test sau generarea lui,sustinerea unui test,corectarea lui automata sau manuala (in functie de tipul intrebarii) si explicarea lui in urma atribuirii notei.<br />
 ```Java
 //Exemplu cod
 //generarea unei intrebari cu ajutorul AI
@@ -878,8 +878,8 @@ Aceste clase permit adaugarea unui test sau generarea lui,sustinerea unui test,c
     }
 
 ```
-Other:
-Clasele de tip other sunt clase care nu intra in nici o categorie,acestea asigurand anumite functionalitati ale aplicatiei cum ar fi Smart Dock.
+**Other:**<br />
+Clasele de tip other sunt clase care nu intra in nici o categorie,acestea asigurand anumite functionalitati ale aplicatiei cum ar fi Smart Dock.<br />
 ```Java
 //Exemplu cod
  //Smart Dock
@@ -943,21 +943,23 @@ Clasele de tip other sunt clase care nu intra in nici o categorie,acestea asigur
 ```
 
 
-Interfata:
-Realizator: Haiduc Darius
+**Interfata:**<br />
+Realizator: Haiduc Darius<br />
 Interfata a fost realizata in cadrul aplicatiei Android Studio, in fisiere de resursa XML. Interfata este compusa din numeroase clase, fiecare dintre acestea fiind folosite pentru a face aplicatia cat mai prietenoasa cu utilizatorul, fiind construite in mod intuitiv. Fiecare clasa a fost construita pe modelul Constraint Layout cu nested Constraint Layouts, pentru a permite adaptarea acesteia la cat mai multe tipuri de display, acestea incluzand de la telefoane, tablete la monitoare de calculator. Orice implementare de text a fost facuta pentru a scala pe fiecare tip de display, astfel pastrandu-si lizibiltatea in orice mediu. Interfata suporta Engleza si Romana, astfel aceasta aplicatie poate fi indreptata spre mediul intern (Romania) sau cel extern.
 
 
-Bibliografie
-Tensorflow Tutorial - https://www.youtube.com/watch?v=FQ_0RBXM7_8 
-NFC - http://mifareclassicdetectiononandroid.blogspot.com/2011/04/reading-mifare-classic-1k-from-android.html 
-Volley API - https://www.c-sharpcorner.com/article/how-to-implement-chatgpt-in-android-application/
-Tutorial Sidebar - https://www.geeksforgeeks.org/navigation-drawer-in-android/
-Algoritmi selectie fisiere - stackoverflow  
-Speech recognition - https://medium.com/voice-tech-podcast/android-speech-to-text-tutorial-8f6fa71606ac
-Elemente custom - Canva
-Algoritmii au fost modificati pentru a se potrivi cu nevoie de functionare ale aplicatiei.
-Bibliografie Tehnologii 
-Android Studio - https://developer.android.com/studio
-OpenAi - https://openai.com/
-Firebase - https://firebase.google.com
+**Bibliografie**<br />
+Tensorflow Tutorial - https://www.youtube.com/watch?v=FQ_0RBXM7_8 <br />
+NFC - http://mifareclassicdetectiononandroid.blogspot.com/2011/04/reading-mifare-classic-1k-from-android.html <br />
+Volley API - https://www.c-sharpcorner.com/article/how-to-implement-chatgpt-in-android-application/<br />
+Tutorial Sidebar - https://www.geeksforgeeks.org/navigation-drawer-in-android/<br />
+Algoritmi selectie fisiere - stackoverflow  <br />
+Speech recognition - https://medium.com/voice-tech-podcast/android-speech-to-text-tutorial-8f6fa71606ac<br />
+Alert dialog - https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android <br />
+File extension checker - stack overflow
+Elemente custom - Canva<br />
+Algoritmii au fost modificati pentru a se potrivi cu nevoie de functionare ale aplicatiei.<br />
+Bibliografie Tehnologii <br />
+Android Studio - https://developer.android.com/studio<br />
+OpenAi - https://openai.com/<br />
+Firebase - https://firebase.google.com<br />
