@@ -229,7 +229,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="MR. PULANCURESCU"
+            android:text="MR. ALEXANDRESCU"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline195"
             app:layout_constraintEnd_toEndOf="parent"
