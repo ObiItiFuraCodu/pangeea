@@ -150,13 +150,14 @@
                 app:layout_constraintBottom_toTopOf="@+id/guideline319"
                 app:layout_constraintEnd_toStartOf="@+id/guideline321"
                 app:layout_constraintStart_toStartOf="@+id/guideline320"
-                app:layout_constraintTop_toTopOf="@+id/guideline318">
+                app:layout_constraintTop_toTopOf="@+id/guideline318"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:orientation="horizontal" />
             </ScrollView>
 
             <androidx.constraintlayout.widget.Guideline
