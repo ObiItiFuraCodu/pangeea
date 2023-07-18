@@ -97,17 +97,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_add_hour: {
-
+                break;
 
             }
             case R.id.see_corrected_tests:{
                 startActivity(new Intent(MainActivity.this, See_corrected_tests.class));
                 finish();
+                break;
             }
             case R.id.pair_device:{
                 Intent i = new Intent(MainActivity.this, NFC_detection.class);
                 i.putExtra("Pair","ye");
                 startActivity(i);
+                break;
             }
             case R.id.my_class:{
 
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             }
                                         });
 
-
+                break;
             }
             case R.id.my_info:{
                 store.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
@@ -143,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             }
                         });
-
+                break;
             }
         }
 

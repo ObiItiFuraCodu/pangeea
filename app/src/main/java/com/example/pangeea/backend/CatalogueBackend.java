@@ -321,14 +321,14 @@ public class CatalogueBackend {
                                         progressBar.setMax(next_rank);
                                         progressBar.setProgress(ranking_points_int);
 
-                                        int rank_int;
+                                        long rank_int;
                                         if(documentSnapshot.get("rank") == null){
                                             rank_int = 1;
                                         }else{
-                                            rank_int = (int) documentSnapshot.get("rank");
+                                            rank_int = (long) documentSnapshot.get("rank");
 
                                         }
-                                        String rank_string = Integer.toString(rank_int);
+                                        String rank_string = Long.toString(rank_int);
 
                                         if(ranking_points != null){
                                             rp.setText(" * " + ranking_points);
@@ -367,6 +367,9 @@ public class CatalogueBackend {
                                                                                 improvement_test_view_points.setText("+" + improvement_points);
 
 
+                                                                            }else{
+                                                                                TextView improvement_test_view_name = (TextView) improvement_test_base_layout.getChildAt(0);
+                                                                                improvement_test_view_name.setText("Improvement test mark not yet held");
                                                                             }
                                                                             rank_history.addView(card);
                                                                         }
