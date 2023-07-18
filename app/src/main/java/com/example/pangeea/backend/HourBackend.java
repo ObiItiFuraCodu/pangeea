@@ -364,6 +364,9 @@ public class HourBackend extends DatabaseConnector {
                                                         })
                                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                                         .show();
+                                                questions.remove(position);
+                                                map.put("questions",questions);
+                                                ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
                                             }
                                         });
                                     }
@@ -448,10 +451,18 @@ public class HourBackend extends DatabaseConnector {
                                             ask_question(hour_ms,(String)map.get("teacher"),questions,presence);
                                         }
                                     });
-                                    if((List<String>)map.get("files") != null){
-                                        List<String> lessons_list = (List<String>)map.get("files");
+                                    if(map.get("content") != null){
+                                        List<String> lessons_list;
+                                        if(map.get("files") != null){
+                                            lessons_list = (List<String>)map.get("files");
+                                        }else{
+                                            lessons_list = new ArrayList<>();
+                                            lessons_list.add("View content");
+                                        }
+
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lessons_list);
                                         lv.setAdapter(adapter);
+
                                         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

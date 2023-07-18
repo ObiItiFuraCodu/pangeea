@@ -158,11 +158,11 @@ public class CatalogueBackend {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     HashMap<String,Object> user_info = (HashMap<String, Object>) documentSnapshot.getData();
                   String RP = documentSnapshot.getString("RP");
-                    int rank;
+                    long rank;
                   if(documentSnapshot.get("rank") == null){
                       rank = 1;
                   }else{
-                      rank = (int) documentSnapshot.get("rank");
+                      rank = (Long) documentSnapshot.get("rank");
                   }
                   int rp = Integer.parseInt(RP);
                   rp = rp + score;

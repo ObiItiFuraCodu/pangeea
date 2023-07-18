@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Generate_ai_lesson_teacher extends AppCompatActivity {
-    AI_core core = new AI_core(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AI_core core = new AI_core(Generate_ai_lesson_teacher.this);
         List<String> keyword_list = new ArrayList<>();
         setContentView(R.layout.activity_generate_ai_lesson_teacher);
         LinearLayout keywords = findViewById(R.id.linear_view_keywords);

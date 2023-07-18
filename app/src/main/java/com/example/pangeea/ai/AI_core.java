@@ -44,13 +44,16 @@ import java.util.Random;
 
 public class AI_core {
     Context context;
+    String apiUrl,accessToken;
     
     public AI_core(Context context){
         this.context = context;
+        apiUrl = context.getResources().getString(R.string.openailink);
+        accessToken = context.getResources().getString(R.string.openaikey);
+
     }
 
-    private String apiUrl = context.getResources().getString(R.string.openailink);
-    private String accessToken = context.getResources().getString(R.string.openaikey);
+
     String result = "";
     Interpreter tflite;
     

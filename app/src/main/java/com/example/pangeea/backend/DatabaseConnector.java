@@ -288,6 +288,7 @@ public class DatabaseConnector {
                                             Log.e("TEXT",text);
                                             if(text.equals("ready to answer")){
                                                 asked.setText("You may speak");
+                                                asked.setBackgroundColor(context.getResources().getColor(R.color.teal_200));
                                                 ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
                                                         .setValue("answering");
                                             }else if(text.equals("ai")){
@@ -429,6 +430,7 @@ public class DatabaseConnector {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void mark_absent(String class_marked, List<String> pupils_present){
         FirebaseUser user = auth.getCurrentUser();
+
 
         store.collection("users").document(user.getDisplayName())
                 .get()
