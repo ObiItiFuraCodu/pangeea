@@ -10,23 +10,23 @@
     tools:context=".hour.Add_hour">
 
 
-    <TextView
+    <ImageButton
         android:id="@+id/add_lesson"
         android:layout_width="51dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:autoSizeTextType="uniform"
-        android:background="@drawable/rounded"
-        android:backgroundTint="#5D9CFB"
+        android:background="@drawable/spinner"
+
         android:fontFamily="@font/poppins_extrabold"
         android:maxLines="1"
-        android:text="+"
+
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline190"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline188" />
 
     <TextView
@@ -84,8 +84,8 @@
         android:id="@+id/textView5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="none"
-        android:fontFamily="@font/poppins_bold"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins_extrabold"
         android:gravity="bottom"
         android:hint="@string/add_some_details"
         android:inputType="textPersonName"
@@ -93,7 +93,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline189"
-        app:layout_constraintEnd_toStartOf="@+id/guideline191"
+        app:layout_constraintEnd_toStartOf="@+id/guideline272"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline396"
         app:layout_constraintTop_toTopOf="@+id/guideline187"
@@ -529,7 +529,7 @@
         android:layout_marginStart="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.018229166"
+        app:layout_constraintGuide_percent="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -538,6 +538,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="274dp" />
+        app:layout_constraintGuide_percent="0.2611111" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.94" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
