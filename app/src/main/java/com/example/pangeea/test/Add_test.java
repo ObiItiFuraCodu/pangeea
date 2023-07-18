@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -63,13 +64,13 @@ public class Add_test extends AppCompatActivity {
         test_questions = findViewById(R.id.test_questions);
 
         Button select_date = findViewById(R.id.select_test_date);
-        Button upload_lessons = findViewById(R.id.add_test_support_lesson);
+        ImageButton upload_lessons = findViewById(R.id.add_test_support_lesson);
         TextView ai_generator = findViewById(R.id.ai_generator);
 
         Spinner support_lessons = findViewById(R.id.test_support_lessons);
         Spinner questions = findViewById(R.id.test_questions);
 
-        Button add_test_question = findViewById(R.id.add_test_question);
+        ImageButton add_test_question = findViewById(R.id.add_test_question);
 
         Button add = findViewById(R.id.add_test);
         EditText details = findViewById(R.id.support_less_content);
