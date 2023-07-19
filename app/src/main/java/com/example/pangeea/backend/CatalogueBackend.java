@@ -33,7 +33,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -194,8 +197,16 @@ public class CatalogueBackend {
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         List<String> keys = new ArrayList<>();
                                         keys.add("");
+                                        List<String> materii = new ArrayList<>();
+                                        materii.add("Matematica");
+                                        materii.add("Fizica");
+                                        materii.add("Biolgie");
+                                        materii.add("Informatica");
                                         for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
-                                            keys.add(document.getId());
+                                            if(materii.contains(document.getId())){
+                                                keys.add(document.getId());
+                                            }
+
                                         }
                                         ArrayAdapter adapter = new ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,keys);
                                         spinner.setAdapter(adapter);
@@ -301,6 +312,8 @@ public class CatalogueBackend {
     }
     public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list, LinearLayout rank_history, TextView rank, TextView rp, boolean from_pupil, ProgressBar progressBar){
         FirebaseUser user = auth.getCurrentUser();
+        DateFormat formatter = new SimpleDateFormat(
+                "dd MMM yyyy");
 
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -350,12 +363,28 @@ public class CatalogueBackend {
                                                                             CustomCardElement first_test = (CustomCardElement) base_layout.getChildAt(1);
                                                                             CustomCardElement improvement_test = (CustomCardElement) base_layout.getChildAt(2);
                                                                             test_name_view.setText((String) test_details.get("name"));
+                                                                            Boolean number;
+
+                                                                            try{
+                                                                                Long date_long = Long.parseLong((String)test_details.get("name"));
+                                                                                Date date = new Date(date_long);
+                                                                                test_name_view.setText(formatter.format(date));
+                                                                                number = true;
+                                                                            }catch(Exception e){
+                                                                                number = false;
+                                                                            }
                                                                             LinearLayout first_test_base_layout = (LinearLayout) first_test.getChildAt(0);
                                                                             LinearLayout improvement_test_base_layout = (LinearLayout) improvement_test.getChildAt(0);
                                                                             TextView first_test_view_name = (TextView) first_test_base_layout.getChildAt(0);
                                                                             TextView first_test_view_points = (TextView) first_test_base_layout.getChildAt(1);
-                                                                            first_test_view_name.setText("First test mark " + test_details.get("mark"));
-                                                                            first_test_view_points.setText("+" + test_details.get("points"));
+                                                                            if (number) {
+                                                                                first_test_view_name.setText("Mark " + test_details.get("mark"));
+                                                                                first_test_view_points.setText("+" + test_details.get("points"));
+                                                                            }else{
+                                                                                first_test_view_name.setText("First test mark " + test_details.get("mark"));
+                                                                                first_test_view_points.setText("+" + test_details.get("points"));
+                                                                            }
+
                                                                             if(test_details.get("improvement") != null){
                                                                                 HashMap<String,Object> improvement = (HashMap<String, Object>) test_details.get("improvement");
                                                                                 String improvement_mark = (String) improvement.get("improvement_mark");
@@ -369,7 +398,15 @@ public class CatalogueBackend {
 
                                                                             }else{
                                                                                 TextView improvement_test_view_name = (TextView) improvement_test_base_layout.getChildAt(0);
-                                                                                improvement_test_view_name.setText("Improvement test mark not yet held");
+                                                                                TextView improvement_test_view_points = (TextView) improvement_test_base_layout.getChildAt(1);
+                                                                                if(number){
+                                                                                    improvement_test_view_name.setText("");
+                                                                                    improvement_test_view_points.setText("");
+                                                                                }else{
+                                                                                    improvement_test_view_name.setText("Improvement test mark : not yet held");
+                                                                                    improvement_test_view_points.setText("");
+                                                                                }
+
                                                                             }
                                                                             rank_history.addView(card);
                                                                         }
