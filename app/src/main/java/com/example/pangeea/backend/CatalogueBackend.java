@@ -314,12 +314,12 @@ public class CatalogueBackend {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         String ranking_points = documentSnapshot.get("RP",String.class);
-                                        int ranking_points_int = Integer.parseInt(ranking_points);
+                                       int  ranking_points_long = (int) Long.parseLong(ranking_points);
 
-                                        HashMap<String,Object> data = tool.ranking_system(ranking_points_int,context);
+                                        HashMap<String,Object> data = tool.ranking_system(ranking_points_long,context);
                                         int next_rank = (int) data.get("next_rank_rp");
                                         progressBar.setMax(next_rank);
-                                        progressBar.setProgress(ranking_points_int);
+                                        progressBar.setProgress(ranking_points_long);
 
                                         long rank_int;
                                         if(documentSnapshot.get("rank") == null){
@@ -397,6 +397,7 @@ public class CatalogueBackend {
                                                 Intent i = new Intent(context, CSList.class);
                                                 i.putExtra("class_marked",pupil_class);
                                                 i.putExtra("pupil_name",user.getDisplayName());
+                                                i.putExtra("prize","yes");
 
                                                 context.startActivity(i);
                                                 dialog.dismiss();

@@ -46,7 +46,7 @@ public class CSList extends AppCompatActivity {
                 }else{
                     String date = Long.toString(System.currentTimeMillis());
 
-                backend.upload_mark(e.getString("class_marked"),e.getString("pupil_name"),"10",date,null,false,materii.get(position));
+                backend.upload_mark(e.getString("class_marked"),e.getString("pupil_name"),"10",date,Long.toString(System.currentTimeMillis()),false,materii.get(position));
                 }
                 startActivity(new Intent(CSList.this, ControlRoom.class));
                 finish();
