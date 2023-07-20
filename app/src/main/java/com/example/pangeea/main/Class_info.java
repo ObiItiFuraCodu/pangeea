@@ -109,6 +109,11 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
 
         CatalogueBackend connector = new CatalogueBackend(Class_info.this);
         LinearLayout pupil_list = findViewById(R.id.linear_layout);
-        connector.retrieve_class_info(bundle.getString("class_selected"),pupil_list,status);
+        if(bundle.getString("pupil") == null){
+            connector.retrieve_class_info(bundle.getString("class_selected"),pupil_list,status,false);
+        }else{
+            connector.retrieve_class_info(bundle.getString("class_selected"),pupil_list,status,true);
+        }
+
     }
 }

@@ -3,11 +3,14 @@ package com.example.pangeea.backend;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -54,9 +57,10 @@ public class CatalogueBackend {
 
         this.context = context;
     }
-    public void retrieve_class_info(String class_selected, LinearLayout pupil_list,TextView num_of_pupils){
+    public void retrieve_class_info(String class_selected, LinearLayout pupil_list,TextView num_of_pupils,boolean pupil){
         FirebaseUser user = auth.getCurrentUser();
         pupil_list.removeAllViews();
+        Basic_tools tool = new Basic_tools();
 
         store.collection("users").document(user.getDisplayName())
                 .get()
@@ -71,11 +75,31 @@ public class CatalogueBackend {
                                         for(int i = 0;i< queryDocumentSnapshots.size();i++){
                                             CustomPupilButton button = new CustomPupilButton(context);
                                             LinearLayout rootlayout = (LinearLayout) button.getChildAt(0);
-                                            TextView view = (TextView) rootlayout.getChildAt(0);
+                                            TextView view = (TextView) rootlayout.getChildAt(1);
+                                            ImageView rank = (ImageView) rootlayout.getChildAt(0);
+                                            if(!pupil){
+                                                button.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
+                                            }
 
-                                            rootlayout.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
+
                                             button.setElevation(10f);
                                             view.setText(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class));
+                                            store.collection("users").document(queryDocumentSnapshots.getDocuments().get(i).get("Username",String.class))
+                                                            .get()
+                                                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                            HashMap<String,Object> ranking_data = new HashMap<>();
+                                                                            if(documentSnapshot.contains("RP")){
+                                                                                long rp = Long.parseLong((String) documentSnapshot.get("RP"));
+                                                                                ranking_data =  tool.ranking_system(rp,context);
+
+                                                                            }else{
+                                                                                ranking_data =  tool.ranking_system(0,context);
+                                                                            }
+                                                                            rank.setImageDrawable((Drawable) ranking_data.get("icon"));
+                                                                        }
+                                                                    });
                                             button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -85,7 +109,7 @@ public class CatalogueBackend {
                                                     context.startActivity(i);
                                                 }
                                             });
-                                            num_of_pupils.setText("Number of pupils : " + i);
+                                            num_of_pupils.setText("Number of pupils : " + i+1);
                                             pupil_list.addView(button);
                                         }
                                     }

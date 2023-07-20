@@ -3,7 +3,7 @@ package com.example.pangeea.CustomElements;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.widget.Button;
+import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,6 +30,15 @@ public class CustomPupilButton extends CardView {
     }
 
     private void init() {
+        int cardMargin = 16;
+        setLayoutParams(new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        ));
+        setCardElevation(8);
+        setRadius(20);
+        RelativeLayout.LayoutParams cardParams = (RelativeLayout.LayoutParams) getLayoutParams();
+        cardParams.setMargins(cardMargin, cardMargin, cardMargin, cardMargin);
         RelativeLayout.LayoutParams rootParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -37,7 +46,7 @@ public class CustomPupilButton extends CardView {
         rootParams.setMargins(16, 16, 16, 16);
         LinearLayout rootLayout = new LinearLayout(getContext());
         rootLayout.setOrientation(LinearLayout.HORIZONTAL);
-        addView(rootLayout,rootParams);
+        addView(rootLayout, rootParams);
 
         GradientDrawable gradientDrawable2 = new GradientDrawable();
         gradientDrawable2.setShape(GradientDrawable.RECTANGLE);
@@ -51,30 +60,22 @@ public class CustomPupilButton extends CardView {
         TextView text = new TextView(getContext());
         text.setText("NAME");
         text.setTextColor(getResources().getColor(R.color.white));
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setColor(getResources().getColor(R.color.white));
 
-        float cornerRadiusInPixels = 20f;
-        gradientDrawable.setCornerRadius(cornerRadiusInPixels);
-
-        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
+        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
         );
         textParams.setMargins(16, 16, 16, 0);
 
         ImageView view = new ImageView(getContext());
-        view.setImageResource(R.drawable.rankhigh);
-        RelativeLayout.LayoutParams viewParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT
+        view.setImageResource(R.drawable.ic__rank_1);
+        LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        RelativeLayout.LayoutParams viewParams2 = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
+        viewParams.gravity = Gravity.END; // Set the layout_gravity to end (right)
+        rootLayout.addView(view, viewParams);
         rootLayout.addView(text, textParams);
-        rootLayout.addView(view, viewParams2);
+
     }
 }
