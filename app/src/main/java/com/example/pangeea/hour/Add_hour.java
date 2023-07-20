@@ -9,13 +9,17 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -169,11 +173,34 @@ public class Add_hour extends AppCompatActivity {
     }
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
             , new ActivityResultCallback<ActivityResult>() {
+                @SuppressLint("Range")
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
-                        if((getExtension(data.getData().toString()).equals("jpg") || getExtension(data.getData().toString()).equals("png") || getExtension(data.getData().toString()).equals("pdf"))){
+                        Uri uri = data.getData();
+
+                        String fileName = null;
+                        if (uri.getScheme().equals("content")) {
+                            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+                            try {
+                                if (cursor != null && cursor.moveToFirst()) {
+                                    fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                                }
+                            } finally {
+                                cursor.close();
+                            }
+                        }
+                        if (fileName == null){
+                            fileName = uri.getPath();
+                            int mark = fileName.lastIndexOf("/");
+                            if (mark != -1){
+                                fileName = fileName.substring(mark + 1);
+                            }
+                        }
+                        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+                        if((extension.equals("pdf") || extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg"))){
                             list.add(data.getData());
                             stringlist.add(data.getData().getLastPathSegment());
                             Spinner spinner = findViewById(R.id.support_lessons);
@@ -181,6 +208,7 @@ public class Add_hour extends AppCompatActivity {
                             spinner.setAdapter(adapter);
                         }else{
                             Toast.makeText(Add_hour.this,"Invalid file",Toast.LENGTH_LONG).show();
+                            Log.e("Extension",extension);
                         }
 
 
@@ -194,11 +222,7 @@ public class Add_hour extends AppCompatActivity {
         intent = Intent.createChooser(intent,"Choose NOW");
         activityResultLauncher.launch(intent);
     }
-    public static String getExtension(String fullName) {
-        String fileName = new File(fullName).getName();
-        int dotIndex = fileName.lastIndexOf('.');
-        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
-    }
+
 
     public void showDateTimePicker() {
         final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));

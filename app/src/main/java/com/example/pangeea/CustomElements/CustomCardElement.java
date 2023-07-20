@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -29,6 +30,15 @@ public class CustomCardElement extends CardView {
     }
 
     private void init() {
+        int cardMargin = 16;
+        setLayoutParams(new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        ));
+        setCardElevation(8);
+        setRadius(20);
+        RelativeLayout.LayoutParams cardParams = (RelativeLayout.LayoutParams) getLayoutParams();
+        cardParams.setMargins(cardMargin, cardMargin, cardMargin, cardMargin);
 
         LinearLayout rootLayout = new LinearLayout(getContext());
         rootLayout.setOrientation(LinearLayout.HORIZONTAL);

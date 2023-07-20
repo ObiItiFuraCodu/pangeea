@@ -78,7 +78,7 @@ public class CatalogueBackend {
                                             TextView view = (TextView) rootlayout.getChildAt(1);
                                             ImageView rank = (ImageView) rootlayout.getChildAt(0);
                                             if(!pupil){
-                                                button.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
+                                                button.setBackground(context.getResources().getDrawable(R.drawable.rounded4));
                                             }
 
 
