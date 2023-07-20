@@ -77,6 +77,53 @@
     <string name="FirebaseURL" translatable="false">https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app</string>
     <string name="openailink" translatable="false">https://api.openai.com/v1/completions</string>
     <string name="openaikey" translatable="false">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</string>
+    <string name="question_related">\"O intrebare legata de lectia \"</string>
+    <string name="mark">\"Mark \"</string>
+    <string name="first_test_mark">\"First test mark \"</string>
+    <string name="not_yet_held">Improvement test mark : not yet held</string>
+    <string name="improvement_test_mark">\"Improvement test mark \"</string>
+    <string name="congrats">Congratiulations</string>
+    <string name="received_mark">You received a mark,would you like to claim it?</string>
+    <string name="ye">Yes</string>
+    <string name="no">No</string>
+    <string name="you_may_speak">You may speak</string>
+    <string name="hows_goin">How is it going?</string>
+    <string name="rasp">\"Is \"</string>
+    <string name="answering_good">\" answering good?\"</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string name="ora">\"hour \"</string>
+    <string name="active">active now</string>
+    <string name="has_a_q">\" has a question\"</string>
+    <string name="how_will_ans">How will you answer?</string>
+    <string name="hours">\" hours\"</string>
+    <string name="starts_in">\" starts in \"</string>
+    <string name="invalid_mark">Invalid mark or date</string>
+    <string name="no_title">you didn\'t enter a title</string>
+    <string name="no_time">you didn\'t pick a time</string>
+    <string name="make_public">Make public</string>
+    <string name="want_to_be_public">Do you want the lesson to be public?</string>
+    <string name="invalid_file">Invalid file</string>
+    <string name="class_name">\"Class name : \"</string>
+    <string name="addh">ADD AN HOUR</string>
+    <string name="addt">ADD A TASK</string>
+    <string name="no_q">You didnt add any questions</string>
+    <string name="a_was_true">\"Intrebarea era : \"</string>
+    <string name="a_was">\"A era : \"</string>
+    <string name="a_was_true_">A era adevarat</string>
+    <string name="why_is_true">\"De ce este adevarat raspunsul \"</string>
+    <string name="for_q">pentru intrebarea</string>
+    <string name="a_was_wrong">A era gresit</string>
+    <string name="q_was">\"Intrebarea era : \"</string>
+    <string name="why_is_wrong">\"De ce este gresit raspunsul \"</string>
+    <string name="b_was_true">B era adevarat</string>
+    <string name="b_was">\"B era : \"</string>
+    <string name="b_was_wrong">B era gresit</string>
+    <string name="c_was_true">C era adevarat</string>
+    <string name="c_was">\"C era : \"</string>
+    <string name="c_was_wrong">C era gresit</string>
+    <string name="you_got">\"You got a \"</string>
+    <string name="want_to_delete">Vrei sa stergi keywordu?</string>
 
 
 </resources>

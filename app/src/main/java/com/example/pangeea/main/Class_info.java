@@ -31,7 +31,7 @@ public class Class_info extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.activity_class_info);
         String classname = getIntent().getStringExtra("class_selected");
         TextView hour = findViewById(R.id.classname);
-        hour.setText("Class name : " + classname);
+        hour.setText(getResources().getString(R.string.class_name) + classname);
         if(getIntent().getStringExtra("pupil") == null){
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view2);
             navigationView.setNavigationItemSelectedListener(this);

@@ -53,7 +53,7 @@ public class Test_result extends AppCompatActivity {
         }
 
         String final_mark_string = Integer.toString(e.getInt("final_mark"));
-        mark.setText("You got a " + final_mark_string + "!");
+        mark.setText(getString(R.string.you_got) + final_mark_string + "!");
 
     }
 }

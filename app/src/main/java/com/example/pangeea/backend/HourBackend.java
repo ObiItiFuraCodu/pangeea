@@ -127,14 +127,14 @@ public class HourBackend extends DatabaseConnector {
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
-                                                                      button.setText("hour " + value.get("class_name"));
+                                                                      button.setText(context.getResources().getString(R.string.ora) + value.get("class_name"));
 
-                                                                      view.setText("active now");
+                                                                      view.setText(context.getResources().getString(R.string.active));
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("hour "+ value.get("class_name"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
+                                                                      button.setText(context.getResources().getString(R.string.ora)+ value.get("class_name"));
+                                                                      view.setText(context.getResources().getString(R.string.starts_in) + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                                       v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                   }
 
@@ -142,12 +142,12 @@ public class HourBackend extends DatabaseConnector {
                                                                   if(System.currentTimeMillis() < (hour_milisecs + ONE_HOUR_IN_MILIS) && System.currentTimeMillis() > hour_milisecs){
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("hour" + value.get("user_subject"));
-                                                                      view.setText("active now");
+                                                                      button.setText(context.getResources().getString(R.string.ora) + value.get("user_subject"));
+                                                                      view.setText(context.getResources().getString(R.string.active));
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
-                                                                      button.setText("hour "+ value.get("user_subject"));
+                                                                      button.setText(context.getResources().getString(R.string.ora) + value.get("user_subject"));
                                                                       view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                                   }
                                                               }
@@ -347,8 +347,8 @@ public class HourBackend extends DatabaseConnector {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 new AlertDialog.Builder(context)
-                                                        .setTitle(questions.get(position) + " has a question")
-                                                        .setMessage("How will you answer?")
+                                                        .setTitle(questions.get(position) + context.getResources().getString(R.string.has_a_q))
+                                                        .setMessage(R.string.how_will_ans)
                                                         .setPositiveButton(context.getResources().getString(R.string.i_will_answer), new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),true);

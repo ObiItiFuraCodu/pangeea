@@ -190,12 +190,12 @@ public class TestBackend extends DatabaseConnector {
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test " + value.get("class_name") + " " + value.get("title"));
                                                                       v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
-                                                                      view.setText("active now");
+                                                                      view.setText(context.getResources().getString(R.string.active));
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test "+ value.get("class_name") + " " + value.get("title"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
+                                                                      view.setText(context.getResources().getString(R.string.starts_in) + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                                       v.setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                                                                   }
                                                               }else{
@@ -203,12 +203,12 @@ public class TestBackend extends DatabaseConnector {
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test" + value.get("user_subject") + " " + value.get("title"));
-                                                                      view.setText("active now");
+                                                                      view.setText(context.getResources().getString(R.string.active));
                                                                   }else{
                                                                       Button button = (Button) v.getChildAt(0);
                                                                       TextView view = (TextView) v.getChildAt(1);
                                                                       button.setText("test "+ value.get("user_subject") + " " + value.get("title"));
-                                                                      view.setText(" starts in " + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
+                                                                      view.setText(context.getResources().getString(R.string.starts_in) + Long.toString ((hour_milisecs - System.currentTimeMillis()) / 3600000) + " hours");
                                                                   }                                                              }
                                                               v.setOnClickListener(new View.OnClickListener() {
                                                                   @Override

@@ -50,7 +50,7 @@ public class Add_mark extends AppCompatActivity {
                     finish();
 
                 }else{
-                    Toast.makeText(Add_mark.this,"Invalid mark or date",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Add_mark.this, getResources().getString(R.string.invalid_mark),Toast.LENGTH_SHORT).show();
                 }
 
             }

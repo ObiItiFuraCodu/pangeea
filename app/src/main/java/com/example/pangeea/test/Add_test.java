@@ -130,13 +130,13 @@ public class Add_test extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(date == null && e.get("hour_ms") == null){
-                    Toast.makeText(Add_test.this,"you didnt pick a date",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Add_test.this,getResources().getString(R.string.no_time),Toast.LENGTH_SHORT).show();
                 }else if(questions_list.isEmpty()){
-                    Toast.makeText(Add_test.this,"You didnt add any questions",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Add_test.this, getResources().getString(R.string.no_q),Toast.LENGTH_LONG).show();
                 }else{
                     new AlertDialog.Builder(v.getContext())
-                            .setTitle("Make public")
-                            .setMessage("Do you want the lesson to be public?")
+                            .setTitle(R.string.make_public)
+                            .setMessage(R.string.want_to_be_public)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     is_public = true;
@@ -238,7 +238,7 @@ public class Add_test extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_test.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
                             spinner.setAdapter(adapter);
                         }else{
-                            Toast.makeText(Add_test.this,"Invalid file",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Add_test.this,getResources().getString(R.string.invalid_file),Toast.LENGTH_LONG).show();
                             Log.e("Extension",extension);
                         }
 

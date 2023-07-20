@@ -50,7 +50,7 @@ public class Generate_ai_lesson_teacher extends AppCompatActivity {
                     public void onClick(View v) {
                         new AlertDialog.Builder(v.getContext())
                                 .setTitle("Delete keyword?")
-                                .setMessage("Vrei sa stergi keywordu?")
+                                .setMessage(R.string.want_to_delete)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         keyword_list.remove(keyword_button.getText().toString());

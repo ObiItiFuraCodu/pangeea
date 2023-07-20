@@ -402,10 +402,10 @@ public class CatalogueBackend {
                                                                             TextView first_test_view_name = (TextView) first_test_base_layout.getChildAt(0);
                                                                             TextView first_test_view_points = (TextView) first_test_base_layout.getChildAt(1);
                                                                             if (number) {
-                                                                                first_test_view_name.setText("Mark " + test_details.get("mark"));
+                                                                                first_test_view_name.setText(context.getResources().getString(R.string.mark) + test_details.get("mark"));
                                                                                 first_test_view_points.setText("+" + test_details.get("points"));
                                                                             }else{
-                                                                                first_test_view_name.setText("First test mark " + test_details.get("mark"));
+                                                                                first_test_view_name.setText(context.getResources().getString(R.string.first_test_mark) + test_details.get("mark"));
                                                                                 first_test_view_points.setText("+" + test_details.get("points"));
                                                                             }
 
@@ -416,7 +416,7 @@ public class CatalogueBackend {
 
                                                                                 TextView improvement_test_view_name = (TextView) improvement_test_base_layout.getChildAt(0);
                                                                                 TextView improvement_test_view_points = (TextView) improvement_test_base_layout.getChildAt(1);
-                                                                                improvement_test_view_name.setText("Improvement test mark " + improvement_mark);
+                                                                                improvement_test_view_name.setText(context.getResources().getString(R.string.improvement_test_mark) + improvement_mark);
                                                                                 improvement_test_view_points.setText("+" + improvement_points);
 
 
@@ -427,7 +427,7 @@ public class CatalogueBackend {
                                                                                     improvement_test_view_name.setText("");
                                                                                     improvement_test_view_points.setText("");
                                                                                 }else{
-                                                                                    improvement_test_view_name.setText("Improvement test mark : not yet held");
+                                                                                    improvement_test_view_name.setText(R.string.not_yet_held);
                                                                                     improvement_test_view_points.setText("");
                                                                                 }
 
@@ -451,9 +451,9 @@ public class CatalogueBackend {
                                 store.collection("users").document(user.getDisplayName())
                                         .set(user_data);
                                 new AlertDialog.Builder(context)
-                                        .setTitle("Congratiulations")
-                                        .setMessage("You received a mark,would you like to claim it?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        .setTitle(R.string.congrats)
+                                        .setMessage(R.string.received_mark)
+                                        .setPositiveButton(R.string.ye, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent i = new Intent(context, CSList.class);
                                                 i.putExtra("class_marked",pupil_class);
@@ -464,7 +464,7 @@ public class CatalogueBackend {
                                                 dialog.dismiss();
                                             }
                                         })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();

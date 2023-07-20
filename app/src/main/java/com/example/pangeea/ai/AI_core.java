@@ -433,7 +433,7 @@ public class AI_core {
            try {
                if(main){
                    requestBody.put("model", "text-davinci-003");
-                   requestBody.put("prompt", "O intrebare legata de lectia " + title + " este :");
+                   requestBody.put("prompt", context.getString(R.string.question_related) + title + context.getString(R.string.is));
                    requestBody.put("max_tokens", 1000);
                    requestBody.put("temperature", 1.0);
                    requestBody.put("top_p", 1.0);
@@ -443,7 +443,7 @@ public class AI_core {
                }else{
                    if(valid){
                        requestBody.put("model", "text-davinci-003");
-                       requestBody.put("prompt", "un raspuns corect la intrebarea " + question_unmain + " este");
+                       requestBody.put("prompt", context.getString(R.string.scientifically_accurate)+ question_unmain + context.getString(R.string.is));
                        requestBody.put("max_tokens", 1000);
                        requestBody.put("temperature", 1.0);
                        requestBody.put("top_p", 1.0);
@@ -452,7 +452,7 @@ public class AI_core {
                        requestBody.put("presence_penalty", 0.0);
                    }else{
                        requestBody.put("model", "text-davinci-003");
-                       requestBody.put("prompt", "un raspuns gresit la intrebarea " + question_unmain + " este");
+                       requestBody.put("prompt", context.getString(R.string.wrong_sci) + question_unmain + context.getString(R.string.is));
                        requestBody.put("max_tokens", 1000);
                        requestBody.put("temperature", 1.0);
                        requestBody.put("top_p", 1.0);

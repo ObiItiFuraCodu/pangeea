@@ -81,9 +81,9 @@ public class Add_hour extends AppCompatActivity {
 
 
         if(e.getString("hour/task").equals("hour")){
-            addhour.setText("ADD AN HOUR");
+            addhour.setText(R.string.addh);
         }else{
-            addhour.setText("ADD A TASK");
+            addhour.setText(R.string.addt);
         }
         select_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +111,7 @@ public class Add_hour extends AppCompatActivity {
                 i.putExtra("hour/task",e.getString("hour/task"));
                 i.putExtra("class_selected",e.getString("class_selected"));
                 if(title.getText().toString().equals("")){
-                    Toast.makeText(v.getContext(),"you didn't enter a title",Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), getResources().getString(R.string.no_title),Toast.LENGTH_LONG).show();
 
                 }else{
                     i.putExtra("title",title.getText().toString());
@@ -124,11 +124,11 @@ public class Add_hour extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(date == null){
-                    Toast.makeText(Add_hour.this,"you didn't pick a time",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Add_hour.this, getResources().getString(R.string.no_time),Toast.LENGTH_LONG).show();
                 }else{
                     new AlertDialog.Builder(v.getContext())
-                            .setTitle("Make public")
-                            .setMessage("Do you want the lesson to be public?")
+                            .setTitle(R.string.make_public)
+                            .setMessage(R.string.want_to_be_public)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     is_public = true;
@@ -207,7 +207,7 @@ public class Add_hour extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(Add_hour.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringlist);
                             spinner.setAdapter(adapter);
                         }else{
-                            Toast.makeText(Add_hour.this,"Invalid file",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Add_hour.this, getResources().getString(R.string.invalid_file),Toast.LENGTH_LONG).show();
                             Log.e("Extension",extension);
                         }
 
