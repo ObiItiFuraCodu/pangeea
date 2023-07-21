@@ -61,17 +61,17 @@
 
     <ImageButton
         android:id="@+id/add_test_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/spinner"
         android:text="@string/add_q"
-        app:layout_constraintBottom_toTopOf="@+id/guideline401"
+        app:layout_constraintBottom_toTopOf="@+id/guideline55"
         app:layout_constraintEnd_toStartOf="@+id/guideline377"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline400"
         app:layout_constraintTop_toTopOf="@+id/guideline54"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.177"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
@@ -111,15 +111,15 @@
         android:id="@+id/ai_generator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_extrabold"
         android:text="@string/ai"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline59"
         app:layout_constraintTop_toTopOf="@+id/guideline60"
-        android:autoSizeTextType="uniform"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -246,12 +246,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline52"
         app:layout_constraintEnd_toStartOf="@+id/guideline377"
         app:layout_constraintStart_toStartOf="@+id/guideline59"
-        app:layout_constraintTop_toTopOf="@+id/guideline50"
-        android:background="@drawable/roundedmock"
-        android:elevation="10dp">
+        app:layout_constraintTop_toTopOf="@+id/guideline50">
 
         <EditText
             android:id="@+id/test_title"
@@ -303,9 +303,9 @@
             android:id="@+id/textView38"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@string/add_a_title"
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/poppins_extrabold"
+            android:text="@string/add_a_title"
             android:textColor="@color/black"
 
             app:layout_constraintBottom_toTopOf="@+id/guideline394"
@@ -344,14 +344,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline54"
         app:layout_constraintEnd_toStartOf="@+id/guideline377"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline59"
         app:layout_constraintTop_toTopOf="@+id/guideline53"
-        app:layout_constraintVertical_bias="1.0"
-        android:background="@drawable/roundedmock"
-        android:elevation="10dp">
+        app:layout_constraintVertical_bias="1.0">
 
         <Spinner
             android:id="@+id/test_questions"
@@ -406,14 +406,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline56"
         app:layout_constraintEnd_toStartOf="@+id/guideline377"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline59"
         app:layout_constraintTop_toTopOf="@+id/guideline55"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@drawable/roundedmock"
-        android:elevation="10dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/support_less_content"
@@ -497,12 +497,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/roundedmock"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline58"
         app:layout_constraintEnd_toStartOf="@+id/guideline377"
         app:layout_constraintStart_toStartOf="@+id/guideline59"
-        app:layout_constraintTop_toTopOf="@+id/guideline57"
-        android:background="@drawable/roundedmock"
-        android:elevation="10dp">
+        app:layout_constraintTop_toTopOf="@+id/guideline57">
 
         <Spinner
             android:id="@+id/test_support_lessons"

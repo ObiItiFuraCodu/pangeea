@@ -352,6 +352,8 @@ public class HourBackend extends DatabaseConnector {
                                                         .setPositiveButton(context.getResources().getString(R.string.i_will_answer), new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),true);
+                                                                questions.remove(position);
+                                                                map.put("questions",questions);
                                                                 dialog.dismiss();
                                                             }
                                                         })
@@ -359,13 +361,14 @@ public class HourBackend extends DatabaseConnector {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),false);
+                                                                questions.remove(position);
+                                                                map.put("questions",questions);
                                                                 dialog.dismiss();
                                                             }
                                                         })
                                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                                         .show();
-                                                questions.remove(position);
-                                                map.put("questions",questions);
+
                                                 ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
                                             }
                                         });
