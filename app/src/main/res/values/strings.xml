@@ -77,7 +77,6 @@
     <string name="FirebaseURL" translatable="false">https://pangeea-835fb-default-rtdb.europe-west1.firebasedatabase.app</string>
     <string name="openailink" translatable="false">https://api.openai.com/v1/completions</string>
     <string name="openaikey" translatable="false">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</string>
-    <string name="question_related">\"O intrebare legata de lectia \"</string>
     <string name="mark">\"Mark \"</string>
     <string name="first_test_mark">\"First test mark \"</string>
     <string name="not_yet_held">Improvement test mark : not yet held</string>
@@ -108,22 +107,23 @@
     <string name="addh">ADD AN HOUR</string>
     <string name="addt">ADD A TASK</string>
     <string name="no_q">You didnt add any questions</string>
-    <string name="a_was_true">\"Intrebarea era : \"</string>
-    <string name="a_was">\"A era : \"</string>
-    <string name="a_was_true_">A era adevarat</string>
-    <string name="why_is_true">\"De ce este adevarat raspunsul \"</string>
-    <string name="for_q">pentru intrebarea</string>
-    <string name="a_was_wrong">A era gresit</string>
-    <string name="q_was">\"Intrebarea era : \"</string>
-    <string name="why_is_wrong">\"De ce este gresit raspunsul \"</string>
-    <string name="b_was_true">B era adevarat</string>
-    <string name="b_was">\"B era : \"</string>
-    <string name="b_was_wrong">B era gresit</string>
-    <string name="c_was_true">C era adevarat</string>
-    <string name="c_was">\"C era : \"</string>
-    <string name="c_was_wrong">C era gresit</string>
+    <string name="a_was_true">Question was</string>
+    <string name="a_was">A was</string>
+    <string name="a_was_true_">A was true</string>
+    <string name="why_is_true">Why is this answer true</string>
+    <string name="for_q">for the question</string>
+    <string name="a_was_wrong">A was wrong</string>
+    <string name="q_was">Question was</string>
+    <string name="why_is_wrong">Why is this answer wrong</string>
+    <string name="b_was_true">B was true</string>
+    <string name="b_was">B was</string>
+    <string name="b_was_wrong">B was wrong</string>
+    <string name="c_was_true">C was true</string>
+    <string name="c_was">C was</string>
+    <string name="c_was_wrong">C was wrong</string>
     <string name="you_got">\"You got a \"</string>
-    <string name="want_to_delete">Vrei sa stergi keywordu?</string>
+    <string name="want_to_delete">Do you want to delete the keyword?</string>
+    <string name="question_related">\"A question related to the lesson\"</string>
 
 
 </resources>
