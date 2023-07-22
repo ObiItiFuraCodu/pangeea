@@ -300,6 +300,9 @@ public class DatabaseConnector {
                                                             .setValue("answering");
                                                     context.startActivity(intent);
                                                 }
+                                            }else{
+                                                asked.setText("Raise hand");
+                                                asked.setBackgroundColor(context.getResources().getColor(R.color.binaryblue));
                                             }
 
 
@@ -376,24 +379,28 @@ public class DatabaseConnector {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String text = (String) snapshot.getValue();
-                                            if(text.equals("answering")){
-                                                new AlertDialog.Builder(context)
-                                                        .setTitle(R.string.hows_goin)
-                                                        .setMessage(context.getResources().getString(R.string.rasp) + pupil + context.getResources().getString(R.string.answering_good))
-                                                        .setPositiveButton(R.string.good, new DialogInterface.OnClickListener() {
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                backend.increase_pupil_score(pupil,5);
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .setNegativeButton(R.string.bad, new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .setIcon(android.R.drawable.ic_dialog_alert)
-                                                        .show();                                            }
+                                            if(text != null){
+                                                if(text.equals("answering")){
+                                                    new AlertDialog.Builder(context)
+                                                            .setTitle(R.string.hows_goin)
+                                                            .setMessage(context.getResources().getString(R.string.rasp) + pupil + context.getResources().getString(R.string.answering_good))
+                                                            .setPositiveButton(R.string.good, new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    backend.increase_pupil_score(pupil,5);
+                                                                    dialog.dismiss();
+                                                                }
+                                                            })
+                                                            .setNegativeButton(R.string.bad, new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.dismiss();
+                                                                }
+                                                            })
+                                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                                            .show();
+                                                }
+                                            }
+
                                         }
 
                                         @Override
