@@ -67,8 +67,8 @@
     <string name="answe">answer</string>
     <string name="i_will_answer">Eu voi raspunde</string>
     <string name="ai_will_answer">AI va raspunde</string>
-    <string name="question_related">\"O intrebare legata de lectia \"</string>
-    <string name="mark">\"Nota\"</string>
+    <string name="question_related">"O intrebare legata de lectia "</string>
+    <string name="mark">Nota</string>
     <string name="first_test_mark">Nota de la primul test</string>
     <string name="not_yet_held">Nota de la testul de imbunatatire : testul nu a fost sustinut inca</string>
     <string name="improvement_test_mark">Nota de la testul de imbunatatire</string>
@@ -98,7 +98,7 @@
     <string name="addh">ADAUGA O ORA</string>
     <string name="addt">ADAUGA UN TASK</string>
     <string name="no_q">Nu ai adaugat nici o intrebare</string>
-    <string name="a_was_true">\"Intrebarea era : \"</string>
+    <string name="a_was_true">"Intrebarea era : "</string>
     <string name="a_was">A era</string>
     <string name="a_was_true_">A era adevarat</string>
     <string name="why_is_true">De ce este corect raspunsul</string>
