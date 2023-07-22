@@ -198,13 +198,9 @@
             android:id="@+id/mark"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
-
-
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="w"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.979"

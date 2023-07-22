@@ -258,12 +258,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:autoSizeTextType="uniform"
-            android:backgroundTint="@android:color/transparent"
-
             android:ems="10"
             android:fontFamily="@font/poppins_extrabold"
-
-
             android:inputType="textPersonName"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -289,7 +285,7 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.96"
+            app:layout_constraintGuide_percent="0.93"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -420,12 +416,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:autoSizeTextType="uniform"
-            android:backgroundTint="@android:color/transparent"
-
             android:ems="10"
-
             android:inputType="textPersonName"
-
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline403"
@@ -448,7 +440,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintGuide_percent="0.9574468"
+            app:layout_constraintGuide_percent="0.93"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

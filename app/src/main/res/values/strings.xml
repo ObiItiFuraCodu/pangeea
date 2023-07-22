@@ -33,7 +33,8 @@
     <string name="or_create_acc">or create acc</string>
     <string name="welcome_back">WELCOME\nBACK</string>
     <string name="to_do">TO DO LIST:</string>
-    <string name="upcoming">UPCOMING HOURS AND TESTS:</string>
+    <string name="upcoming_hours">UPCOMING HOURS:</string>
+    <string name="upcoming_tests">UPCOMING TESTS:</string>
     <string name="add_a_description">Add a description</string>
     <string name="awaiting">Awaiting</string>
     <string name="member_list">Member list</string>
@@ -50,6 +51,7 @@
     <string name="place_your_nphone_on_the_ndock">PLACE YOUR\nPHONE ON THE\nDOCK</string>
     <string name="upload_question">UPLOAD QUESTION</string>
     <string name="upload_files">UPLOAD FILES</string>
+    <string name="upcoming">UPCOMING HOURS AND TESTS:</string>
     <string name="submissions">Submissions</string>
     <string name="need_help_n_see_what_others_did">Need help?\nSee what others did</string>
     <string name="or_generate_a_lesson">OR: <font color="#1F78FF">GENERATE AI</font></string>
