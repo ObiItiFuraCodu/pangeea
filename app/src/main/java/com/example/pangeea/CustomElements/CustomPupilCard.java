@@ -31,8 +31,8 @@ public class CustomPupilCard extends CardView {
 
         int cardMargin = 16;
         setLayoutParams(new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT
         ));
         setCardElevation(8);
         setRadius(20);

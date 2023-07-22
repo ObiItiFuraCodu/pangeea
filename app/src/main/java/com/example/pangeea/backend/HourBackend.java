@@ -352,8 +352,10 @@ public class HourBackend extends DatabaseConnector {
                                                         .setPositiveButton(context.getResources().getString(R.string.i_will_answer), new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),true);
-                                                                questions.remove(position);
-                                                                map.put("questions",questions);
+                                                                adapter2.remove(questions.get(position));
+                                                                adapter2.notifyDataSetChanged();
+
+
                                                                 dialog.dismiss();
                                                             }
                                                         })
@@ -361,8 +363,10 @@ public class HourBackend extends DatabaseConnector {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),false);
-                                                                questions.remove(position);
-                                                                map.put("questions",questions);
+                                                                adapter2.remove(questions.get(position));
+                                                                adapter2.notifyDataSetChanged();
+
+
                                                                 dialog.dismiss();
                                                             }
                                                         })
