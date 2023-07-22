@@ -285,20 +285,23 @@ public class DatabaseConnector {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             asked.setBackgroundColor(context.getResources().getColor(R.color.green));
                                             String text = (String) snapshot.getValue();
-                                            Log.e("TEXT",text);
-                                            if(text.equals("ready to answer")){
-                                                asked.setText(R.string.you_may_speak);
-                                                asked.setBackgroundColor(context.getResources().getColor(R.color.teal_200));
-                                                ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
-                                                        .setValue("answering");
-                                            }else if(text.equals("ai")){
-                                                Intent intent = new Intent(context, SpeechRecognition.class);
-                                                intent.putExtra("hour_milis",hour_ms);
-                                                intent.putExtra("presence",presence);
-                                                ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
-                                                        .setValue("answering");
-                                                context.startActivity(intent);
+                                           // Log.e("TEXT",text);
+                                            if(text != null){
+                                                if(text.equals("ready to answer")){
+                                                    asked.setText(R.string.you_may_speak);
+                                                    asked.setBackgroundColor(context.getResources().getColor(R.color.teal_200));
+                                                    ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
+                                                            .setValue("answering");
+                                                }else if(text.equals("ai")){
+                                                    Intent intent = new Intent(context, SpeechRecognition.class);
+                                                    intent.putExtra("hour_milis",hour_ms);
+                                                    intent.putExtra("presence",presence);
+                                                    ref.child((String)documentSnapshot.get("user_highschool")).child("teachers").child(teacher).child(hour_ms).child("questions").child(documentSnapshot.getString("Username"))
+                                                            .setValue("answering");
+                                                    context.startActivity(intent);
+                                                }
                                             }
+
 
 
                                         }
@@ -334,24 +337,28 @@ public class DatabaseConnector {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String text = (String) snapshot.getValue();
-                                            if(text.equals("answering")){
-                                                new AlertDialog.Builder(context)
-                                                        .setTitle(R.string.hows_goin)
-                                                        .setMessage(context.getResources().getString(R.string.rasp) + pupil + context.getResources().getString(R.string.answering_good))
-                                                        .setPositiveButton(R.string.good, new DialogInterface.OnClickListener() {
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                backend.increase_pupil_score(pupil,5);
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .setNegativeButton(R.string.bad, new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .setIcon(android.R.drawable.ic_dialog_alert)
-                                                        .show();
+                                            if(text != null) {
+                                                if (text.equals("answering")) {
+                                                    new AlertDialog.Builder(context)
+                                                            .setTitle(R.string.hows_goin)
+                                                            .setMessage(context.getResources().getString(R.string.rasp) + pupil + context.getResources().getString(R.string.answering_good))
+                                                            .setPositiveButton(R.string.good, new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    backend.increase_pupil_score(pupil, 5);
+                                                                    ref.child((String) documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil).removeValue();
+                                                                    dialog.dismiss();
+                                                                }
+                                                            })
+                                                            .setNegativeButton(R.string.bad, new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    ref.child((String) documentSnapshot.get("user_highschool")).child("teachers").child(user.getDisplayName()).child(hour_ms).child("questions").child(pupil).removeValue();
+                                                                    dialog.dismiss();
+                                                                }
+                                                            })
+                                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                                            .show();
+                                                }
                                             }
                                         }
 

@@ -340,7 +340,13 @@ public class HourBackend extends DatabaseConnector {
                                     if(map.get("questions") != null){
                                         Map<String,String> keys = (Map<String, String>) map.get("questions");
                                         List<String> questions = new ArrayList<>();
+
                                         questions.addAll(keys.keySet());
+                                        for(String key : keys.keySet()){
+                                            if(!keys.get(key).equals("question")){
+                                               questions.remove(key);
+                                            }
+                                        }
                                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,questions);
                                         question.setAdapter(adapter2);
                                         question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -352,10 +358,6 @@ public class HourBackend extends DatabaseConnector {
                                                         .setPositiveButton(context.getResources().getString(R.string.i_will_answer), new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),true);
-                                                                adapter2.remove(questions.get(position));
-                                                                adapter2.notifyDataSetChanged();
-
-
                                                                 dialog.dismiss();
                                                             }
                                                         })
@@ -363,10 +365,6 @@ public class HourBackend extends DatabaseConnector {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 answer_question(hour_milis,questions.get(position),false);
-                                                                adapter2.remove(questions.get(position));
-                                                                adapter2.notifyDataSetChanged();
-
-
                                                                 dialog.dismiss();
                                                             }
                                                         })
