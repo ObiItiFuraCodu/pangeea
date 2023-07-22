@@ -45,9 +45,9 @@ public class Pupil_info extends AppCompatActivity implements NavigationView.OnNa
         super.onStart();
         Bundle e = getIntent().getExtras();
         if(getIntent().getStringExtra("pupil") == null){
-            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),false,findViewById(R.id.progressBar));
+            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),false,findViewById(R.id.progressBar),findViewById(R.id.rank_image));
         }else{
-            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),true,findViewById(R.id.progressBar));
+            connector.retrieve_pupil_info(e.getString("pupil_name"),e.getString("pupil_class"),findViewById(R.id.mark_list),findViewById(R.id.absence_list),findViewById(R.id.RP_history),findViewById(R.id.rank),findViewById(R.id.rp),true,findViewById(R.id.progressBar),findViewById(R.id.rank_image));
 
         }
         TextView pupil_name = findViewById(R.id.rank);

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
@@ -334,8 +337,9 @@ public class CatalogueBackend {
                     }
                 });
     }
-    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list, LinearLayout rank_history, TextView rank, TextView rp, boolean from_pupil, ProgressBar progressBar){
+    public void retrieve_pupil_info(String pupil_name, String pupil_class, ListView mark_list, ListView absence_list, LinearLayout rank_history, TextView rank, TextView rp, boolean from_pupil, ProgressBar progressBar,ImageView rank_image){
         FirebaseUser user = auth.getCurrentUser();
+
         DateFormat formatter = new SimpleDateFormat(
                 "dd MMM yyyy");
 
@@ -368,7 +372,13 @@ public class CatalogueBackend {
                                         String rank_string = Long.toString(rank_int);
 
                                         if(ranking_points != null){
-                                            rp.setText(" * " + ranking_points);
+                                            rp.setText(" * " + ranking_points + "/" + Integer.toString(next_rank));
+                                            Drawable icon = (Drawable) data.get("icon");
+                                            PorterDuffColorFilter blue_color = new PorterDuffColorFilter(Color.BLUE,
+                                                    PorterDuff.Mode.SRC_ATOP);
+                                            icon.setColorFilter(blue_color);
+
+                                            rank_image.setImageDrawable(icon);
 
 
                                         }
@@ -437,7 +447,7 @@ public class CatalogueBackend {
                                                                     }
                                                                 });
 
-                                        rank.setText(rank_string);
+                                        rank.setText("Rank :" + rank_string);
                                     }
                                 });
                         String user_subject;
