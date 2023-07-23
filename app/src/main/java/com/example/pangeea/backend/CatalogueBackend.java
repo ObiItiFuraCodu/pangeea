@@ -112,7 +112,7 @@ public class CatalogueBackend {
                                                     context.startActivity(i);
                                                 }
                                             });
-                                            num_of_pupils.setText("Number of pupils : " + i+1);
+                                            num_of_pupils.setText("");
                                             pupil_list.addView(button);
                                         }
                                     }

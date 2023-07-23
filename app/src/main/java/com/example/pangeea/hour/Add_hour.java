@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -68,7 +69,7 @@ public class Add_hour extends AppCompatActivity {
 
 
         TextView select_date = findViewById(R.id.select_date_time);
-        TextView upload_lessons = findViewById(R.id.add_lesson);
+        ImageButton upload_lessons = findViewById(R.id.add_lesson);
         EditText support_lesson_content = findViewById(R.id.support_lesson_content);
         Spinner support_lessons = findViewById(R.id.support_lessons);
         TextView add = findViewById(R.id.add_button);

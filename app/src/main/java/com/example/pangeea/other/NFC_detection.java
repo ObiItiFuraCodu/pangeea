@@ -38,8 +38,8 @@ public class NFC_detection extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_detection);
-        Bundle f = getIntent().getExtras();
-          if(f.getString("Test") != null){
+       // Bundle f = getIntent().getExtras();
+       /*   if(f.getString("Test") != null){
                         
                         Intent i = new Intent(this, Test_viewer_elev.class);
                         i.putExtra("hour_ms",f.getString("hour_ms"));
@@ -57,7 +57,7 @@ public class NFC_detection extends AppCompatActivity {
                   i.putExtra("presence",true);
                   startActivity(i);
               }
-          }
+          }*/
 
         mPendingIntent =  PendingIntent.getActivity(this, 0,
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_MUTABLE);
