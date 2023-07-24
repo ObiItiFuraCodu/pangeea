@@ -34,9 +34,9 @@ public class Question_viewer_ABC extends AppCompatActivity {
         Button upload_question = findViewById(R.id.upload_question_abc);
 
 
-        Button A = findViewById(R.id.a_button);
-        Button B = findViewById(R.id.b_button);
-        Button C = findViewById(R.id.c_button);
+        TextView A = findViewById(R.id.a_button);
+        TextView B = findViewById(R.id.b_button);
+        TextView C = findViewById(R.id.c_button);
         answer_map.put("A_valid","invalid");
         answer_map.put("B_valid","invalid");
         answer_map.put("C_valid","invalid");

@@ -33,51 +33,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline163"  />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/a_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Button"
-        android:autoSizeTextType="uniform"
-        android:backgroundTint="@color/binaryblue"
-        app:cornerRadius="50dp"
-        android:fontFamily="@font/poppins_extrabold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline156"
-        app:layout_constraintEnd_toStartOf="@+id/guideline159"
-        app:layout_constraintStart_toStartOf="@+id/guideline158"
-        app:layout_constraintTop_toTopOf="@+id/guideline157"
-        app:layout_constraintVertical_bias="0.571" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Button"
-        app:cornerRadius="50dp"
-        android:autoSizeTextType="uniform"
-        android:backgroundTint="@color/binaryblue"
-        android:fontFamily="@font/poppins_extrabold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline154"
-        app:layout_constraintEnd_toStartOf="@+id/guideline159"
-        app:layout_constraintStart_toStartOf="@+id/guideline158"
-        app:layout_constraintTop_toTopOf="@+id/guideline155" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/c_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
-        android:autoSizeTextType="uniform"
-        android:backgroundTint="@color/binaryblue"
-        app:cornerRadius="50dp"
-        android:fontFamily="@font/poppins_extrabold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline152"
-        app:layout_constraintEnd_toStartOf="@+id/guideline159"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/guideline158"
-        app:layout_constraintTop_toTopOf="@+id/guideline153" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/upload_question_abc"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -112,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6621067" />
+        app:layout_constraintGuide_percent="0.68" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline153"
@@ -147,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35704514" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline158"
@@ -155,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="18dp"
+        app:layout_constraintGuide_percent="0.04622871"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -165,7 +120,7 @@
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="395dp" />
+        app:layout_constraintGuide_end="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline160"
@@ -179,20 +134,96 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="223dp" />
+        app:layout_constraintGuide_percent="0.30506155" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline162"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="43dp" />
+        app:layout_constraintGuide_percent="0.05882353" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline163"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="150dp" />
+        app:layout_constraintGuide_percent="0.20519836" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline156"
+        app:layout_constraintEnd_toStartOf="@+id/guideline159"
+        app:layout_constraintStart_toStartOf="@+id/guideline158"
+        app:layout_constraintTop_toTopOf="@+id/guideline157">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/a_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/rounded2"
+                android:backgroundTint="@color/binaryblue"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="Button" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline154"
+        app:layout_constraintEnd_toStartOf="@+id/guideline159"
+        app:layout_constraintStart_toStartOf="@+id/guideline158"
+        app:layout_constraintTop_toTopOf="@+id/guideline155">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/b_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/rounded2"
+                android:backgroundTint="@color/binaryblue"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="Button" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline152"
+        app:layout_constraintEnd_toStartOf="@+id/guideline159"
+        app:layout_constraintStart_toStartOf="@+id/guideline158"
+        app:layout_constraintTop_toTopOf="@+id/guideline153">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/c_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/rounded2"
+                android:backgroundTint="@color/binaryblue"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="Button" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
