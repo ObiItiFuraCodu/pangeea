@@ -67,7 +67,6 @@
         android:hint="Email"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
-        android:textColor="#C8C8C8"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline276"
         app:layout_constraintEnd_toStartOf="@+id/guideline200"
