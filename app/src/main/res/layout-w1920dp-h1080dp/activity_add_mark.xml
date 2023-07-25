@@ -186,8 +186,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toTopOf="@+id/guideline42"
         app:layout_constraintVertical_bias="0.41"
-        android:background="@drawable/roundedmock"
-        android:elevation="10dp">
+        >
 
         <EditText
             android:id="@+id/mark"

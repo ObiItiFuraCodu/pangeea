@@ -20,7 +20,7 @@ public class Test_result_info extends AppCompatActivity {
         TextView result = findViewById(R.id.test_result_info);
         Button ok = findViewById(R.id.button_ok);
         Bundle e = getIntent().getExtras();
-        result.setText(e.getString("mark"));
+        result.setText("Final mark : " + e.getString("mark") + "/10");
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
