@@ -26,9 +26,9 @@ public class Improvement_question_viewer extends AppCompatActivity {
         setContentView(R.layout.activity_improvement_question_viewer);
         Bundle e = getIntent().getExtras();
         TextView prompt = findViewById(R.id.improvement_prompt);
-        Button A = findViewById(R.id.improvement_a);
-        Button B = findViewById(R.id.improvement_b);
-        Button C = findViewById(R.id.improvement_c);
+        TextView A = findViewById(R.id.improvement_a);
+        TextView B = findViewById(R.id.improvement_b);
+        TextView C = findViewById(R.id.improvement_c);
         Button upload_question = findViewById(R.id.improvement_upload_question);
         HashMap<String,Object> question = (HashMap<String,Object>)e.get("question");
         HashMap<String, Object> answer_map = new HashMap<String, Object>();
