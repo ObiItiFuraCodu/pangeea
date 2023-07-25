@@ -110,16 +110,6 @@
         android:background="@drawable/roundedmock"
         android:elevation="10dp">
 
-        <LinearLayout
-            android:id="@+id/test_mistakes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/guideline460"
-            app:layout_constraintEnd_toStartOf="@+id/guideline458"
-            app:layout_constraintStart_toStartOf="@+id/guideline457"
-            app:layout_constraintTop_toTopOf="@+id/guideline459"></LinearLayout>
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline457"
             android:layout_width="wrap_content"
@@ -147,5 +137,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9677419" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline460"
+            app:layout_constraintEnd_toStartOf="@+id/guideline458"
+            app:layout_constraintStart_toStartOf="@+id/guideline457"
+            app:layout_constraintTop_toTopOf="@+id/guideline459">
+
+            <LinearLayout
+                android:id="@+id/test_mistakes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

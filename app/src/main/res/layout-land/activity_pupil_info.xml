@@ -72,10 +72,11 @@
                 <ScrollView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toTopOf="@+id/guideline513"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline533"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline532"
                     app:layout_constraintTop_toTopOf="@+id/guideline512"
                     tools:ignore="SpeakableTextPresentCheck">
 
@@ -93,14 +94,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="16dp" />
+                    app:layout_constraintGuide_percent="0.033755273" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline513"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="458dp" />
+                    app:layout_constraintGuide_percent="0.96413505" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline532"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.02" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline533"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.98" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
