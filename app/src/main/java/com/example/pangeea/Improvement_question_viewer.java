@@ -52,7 +52,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
             public void onClick(View v) {
                 if(a_pressed == false){
                     a_pressed = true;
-                    A.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                    A.setTextColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("A_valid","valid");
                     if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
@@ -64,7 +64,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
 
                 }else{
                     a_pressed = false;
-                    A.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    A.setTextColor(getResources().getColor(R.color.white));
                     answer_map.put("A_valid","invalid");
                     if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
@@ -84,7 +84,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
             public void onClick(View v) {
                 if(b_pressed == false){
                     b_pressed = true;
-                    B.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                    B.setTextColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("B_valid","valid");
                     if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
@@ -98,7 +98,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
 
                 }else{
                     b_pressed = false;
-                    B.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    B.setTextColor(getResources().getColor(R.color.white));
                     answer_map.put("B_valid","invalid");
                     if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");
@@ -116,7 +116,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
             public void onClick(View v) {
                 if(c_pressed == false){
                     c_pressed = true;
-                    C.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                    C.setTextColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("C_valid","valid");
 
                     if(answer_map.equals(variants)){
@@ -129,7 +129,7 @@ public class Improvement_question_viewer extends AppCompatActivity {
 
                 }else{
                     c_pressed = false;
-                    C.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                    C.setTextColor(getResources().getColor(R.color.teal_700));
                     answer_map.put("C_valid","invalid");
                     if(answer_map.equals(variants)){
                         answer_map.put("answer","correct");

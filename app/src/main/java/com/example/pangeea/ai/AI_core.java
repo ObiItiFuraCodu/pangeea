@@ -622,10 +622,12 @@ public class AI_core {
         AI_Text(context.getString(R.string.generate_l) + title + context.getString(R.string.lessondod), (TextView) lesson.getChildAt(1));
         layout.addView(custom_butt);
         for(String question : questions){
+
             CustomButtonLesson lesson1 = new CustomButtonLesson(context);
-            Button button1 = (Button) lesson1.getChildAt(0);
+            LinearLayout root_layout = (LinearLayout) lesson1.getChildAt(0);
+            Button button1 = (Button) root_layout.getChildAt(0);
             button1.setText(question);
-            AI_Text(context.getString(R.string.generate_r) + question + context.getString(R.string.answerdod), (TextView) lesson1.getChildAt(1));
+            AI_Text(context.getString(R.string.generate_r) + question + context.getString(R.string.answerdod), (TextView) root_layout.getChildAt(1));
             layout.addView(lesson1);
 
         }
