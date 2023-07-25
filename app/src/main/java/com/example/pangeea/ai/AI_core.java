@@ -221,7 +221,7 @@ public class AI_core {
     }
     public void AI_lesson_teacher(String input, TextView view,List<String> key_words){
         JSONObject requestBody = new JSONObject();
-        String input_string = "Genereaza o lectie cu titlul" + input +".Lectia va trebui sa contina urmatoarele cuvinte :";
+        String input_string = "Generate a lesson with the title" + input +".The lesson must contain the following words :";
         for(String word : key_words){
           input_string =   input_string + ",\n" + word;
         }
